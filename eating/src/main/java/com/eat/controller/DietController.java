@@ -1,12 +1,12 @@
-package com.eat.controller.suggestion;
+package com.eat.controller;
 
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 
-import com.eat.dao.suggestion.DietDAO;
-import com.eat.vo.suggestion.DietVO;
+import com.eat.dao.DietDAO;
+import com.eat.vo.DietVO;
 
 @Controller
 public class DietController {

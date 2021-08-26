@@ -1,6 +1,6 @@
-package com.eat.service.suggestion;
+package com.eat.dao;
 
-public class RandomServiceImpl {
+public interface RandomDAO {
 //	public RecipVO showRecipe(Long recipeId);
 //	public EateryVO showEatery(Long eateryId);
 }
