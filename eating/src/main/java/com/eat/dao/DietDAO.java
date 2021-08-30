@@ -1,9 +1,9 @@
-package com.eat.dao.suggestion;
+package com.eat.dao;
 
 import java.util.Date;
 import java.util.List;
 
-import com.eat.vo.suggestion.DietVO;
+import com.eat.vo.DietVO;
 
 public interface DietDAO {
 	public void insertDiet(DietVO dietVO);

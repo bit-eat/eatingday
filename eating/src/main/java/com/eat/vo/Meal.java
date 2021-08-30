@@ -1,4 +1,4 @@
-package com.eat.vo.suggestion;
+package com.eat.vo;
 
 public enum Meal {
 	BLACKFAST("아침"),

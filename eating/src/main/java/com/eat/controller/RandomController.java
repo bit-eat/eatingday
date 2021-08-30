@@ -1,4 +1,4 @@
-package com.eat.controller.suggestion;
+package com.eat.controller;
 
 import java.util.List;
 
