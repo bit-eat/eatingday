@@ -5,11 +5,26 @@
         
 <mapper namespace="com.eat.dao.DietDAO">
 	<insert id="insertDiet" parameterType="com.eat.vo.DietVO">
-		
+		insert into suggestion(id, meal, menu, date, memberId, categoryId)
+		values(#{id}, #{meal}, #{menu}, #{date}, #{memberId}, #{categoryId})
 	</insert>
 	
 	<select id="showDietList" resultType="com.eat.vo.DietVO">
         SELECT * FROM suggestion
     </select>
+
+	<select id="selectDietListDate" parameterType="date"
+		resultType="com.eat.vo.DietVO">
+		SELECT * FROM suggestion WHERE date =#{date}
+	</select>
+
+	<update id="updateDiet" parameterType="com.eat.vo.DietVO">
+		UPDATE suggestion SET meal =#{meal}, menu =#{menu}, categoryId=#{categoryId}
+		WHERE id =#{id}
+	</update>
+    
+    <delete id="deleteDiet" parameterType="Long">
+        DELETE FROM suggestion WHERE id =#{id}
+    </delete>
 	
 </mapper>

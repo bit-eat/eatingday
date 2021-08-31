@@ -5,9 +5,17 @@
 
 <mapper namespace="com.eat.dao.CategoryDAO">
 
+    <insert id="insertCategory" parameterType="com.eat.vo.CategoryVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into category(id, name)
+        values(#{id}, #{name})
+    </insert>
+
 	<select id="categoryList" resultType="CategoryVO">
 		select * from category
 	</select>
 
+    <delete id="deleteCategory" parameterType="Long">
+        DELETE FROM category WHERE id =#{id}
+    </delete>
 
 </mapper>
