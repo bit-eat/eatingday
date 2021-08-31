@@ -14,6 +14,11 @@
 		select * from category
 	</select>
 
+	<update id="categoryList" parameterType="com.eat.vo.CategoryVO">
+		UPDATE category SET name =#{name}
+		WHERE id =#{id}
+	</update>
+
     <delete id="deleteCategory" parameterType="Long">
         DELETE FROM category WHERE id =#{id}
     </delete>
