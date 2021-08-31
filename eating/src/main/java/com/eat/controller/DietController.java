@@ -27,7 +27,7 @@ public class DietController {
 	public void updateDiet(DietVO dietVO) {
 		
 	};
-	public void deleteDiet(DietVO dietVO) {
+	public void deleteDiet(Long id) {
 		
 	};
 	
