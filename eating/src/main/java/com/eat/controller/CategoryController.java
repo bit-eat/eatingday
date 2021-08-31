@@ -14,17 +14,17 @@ public class CategoryController {
 
 	@Autowired
 	private CategoryDAO categoryDAO;
-	
-	@GetMapping("/")
-	public String main() {
-		return "/main";
-	}
-	
-	
-	@GetMapping("/main")
-	public List<CategoryVO> categoryList() {
-		System.out.println(categoryDAO.categoryList());
-		return categoryDAO.categoryList();
-	}
+//	
+//	@GetMapping("/")
+//	public String main() {
+//		return "/main";
+//	}
+//	
+//	
+//	@GetMapping("/aa")
+//	public List<CategoryVO> categoryList() {
+//		System.out.println(categoryDAO.categoryList());
+//		return categoryDAO.categoryList();
+//	}
 
 }

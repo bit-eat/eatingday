@@ -7,4 +7,9 @@
 	<insert id="insertDiet" parameterType="com.eat.vo.DietVO">
 		
 	</insert>
+	
+	<select id="showDietList" resultType="com.eat.vo.DietVO">
+        SELECT * FROM suggestion
+    </select>
+	
 </mapper>
