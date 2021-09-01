@@ -46,6 +46,7 @@
 <body>
 	<h1>식단 리스트</h1>
 
+	<!-- 테이블 시작 -->
 	<div>
 		<table border="1">
 			<thead>
@@ -57,42 +58,69 @@
 					<th>메뉴</th>
 				</tr>
 			</thead>
-			<tr th:each="  suggestion : ${showDietList}">
-				<td th:text="${suggestion.id}"></td>
+			<tr th:each="suggestion, index : ${showDietList}">
+				<td th:text="${index.count}"></td>
 				<td th:text="${suggestion.date}"></td>
-				<td th:text="${suggestion.meal}"></td>
+				<td th:if="${suggestion.meal}" th:text="${T(com.eat.vo.Meal).values()}"></td>
 				<td th:text="${suggestion.categoryId}"></td>
 				<td th:text="${suggestion.menu}"></td>
 			</tr>
 		</table>
+		<!-- 테이블 종료 -->
+		
+		<!-- 테이블버튼 -->
 		<button type="button" id="modal_opne_btn" style="font-weight: 900;">등록</button>
 		<button type="button" id="updateDiet" style="font-weight: 900;">수정</button>
 		<button type="button" id="deleteDiet" style="font-weight: 900;">삭제</button>
+		
+		
 	</div>
 
+
+
+	<!-- modal 시작 -->
 	<div id="modal">
 		<div class="modal_content">
+		
 			<h2>식단 등록</h2>
 
-			<span>날짜</span><input type="date" max=""><br> <span>끼
-				니</span> <select>
+			<!-- 날짜 -->
+			<span>날짜</span><input type="date" max=""> <br> 
+			
+			<!-- 끼니 -->
+			<span>끼니</span>
+			<select>
 				<option th:each=" meal : ${T(com.eat.vo.Meal).values()}">
-					<span th:text="${meal.getKrName()}"></span>
+					<span th:value="meal.id" th:text="${meal.getKrName()}"></span>
 				</option>
-			</select><br> <span>카테고리</span> <select>
+			</select> <br> 
+			
+			<!-- 카테고리 -->
+			<span>카테고리</span> 
+			<select>
 				<option th:each="  categoty : ${categoryList}">
 					<span th:text="${categoty.name}"></span>
 				</option>
-			</select><br> <span>메 뉴</span><input type="text"><br>
+			</select> <br> 
 			
-			<button type="button" id="insertDiet">등록</button>
+			<!-- 메뉴 -->
+			<span>메 뉴</span><input type="text"><br>
+			
+			
+			<!-- 버튼 -->
+			<button type="submit" id="insertDiet">등록</button>
 			<button type="button" id="modal_close_btn">닫기 창</button>
 
 		</div>
 
 		<div class="modal_layer"></div>
+		
 	</div>
+	<!-- modal 종료 -->
 
+
+
+	<!-- 스크립트 -->
 	<script type="text/javascript">
 		document.getElementById("modal_opne_btn").onclick = function() {
 			document.getElementById("modal").style.display = "block";
@@ -102,6 +130,7 @@
 			document.getElementById("modal").style.display = "none";
 		}
 	</script>
+
 
 </body>
 
