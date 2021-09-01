@@ -3,13 +3,18 @@ package com.eat.service;
 import java.lang.reflect.Member;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eat.dao.MemberDAO;
 import com.eat.vo.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
+	@Autowired
+	MemberDAO memberdao;
+	
 	@Override
 	public void insertMember(MemberVO member) {
 		// TODO Auto-generated method stub
@@ -29,33 +34,33 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<MemberVO> selectOne(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberdao.selectOne(id);
 	}
 
 	@Override
 	public List<MemberVO> selectGrade(String grade) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberdao.selectGrade(grade);
 	}
 
 	@Override
 	public List<MemberVO> selectMemberId(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberdao.selectMemberId(id);
 	}
 
 	@Override
 	public boolean validateDuplicateMember(Member member) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<MemberVO> selectAll() {
+		// TODO Auto-generated method stub
+		return memberdao.selectAll();
 	}
 
 	

@@ -35,10 +35,9 @@ public class MemberController {
 	
 	
 	@GetMapping("/Test")
-	public List<MemberVO> selectAll(Model model){
+	public void selectAll(Model model){
 		System.out.println(memberservice.selectAll());
 		model.addAttribute("selectAll", memberservice.selectAll());
-		return memberservice.selectAll();
 	}
 	
 	@GetMapping("/main")
