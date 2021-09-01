@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eat.dao.CategoryDAO;
 import com.eat.dao.DietDAO;
 import com.eat.vo.DietVO;
+import com.eat.vo.Meal;
 
 @Controller
 public class DietController {
@@ -20,6 +22,9 @@ public class DietController {
 	}
 	@Autowired
 	DietDAO dietDAO; 
+	
+	@Autowired
+	private CategoryDAO categoryDAO;
 
 	public void insertDiet(DietVO dietVO) {
 		
@@ -31,10 +36,12 @@ public class DietController {
 		
 	};
 	
-	@GetMapping("/main")
-	public List<DietVO> showDietList(){
+	@GetMapping("/dietList")
+	public void showDietList(Model model){
 		System.out.println(dietDAO.showDietList());
-		return dietDAO.showDietList();
+		model.addAttribute( "showDietList"  , dietDAO.showDietList());
+		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
+		model.addAttribute("mealList", Meal.values());
 	}
 
 	public List<DietVO> selectDietList(Date date){

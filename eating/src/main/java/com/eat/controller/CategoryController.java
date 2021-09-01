@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.eat.dao.CategoryDAO;
 import com.eat.vo.CategoryVO;
-import com.eat.vo.DietVO;
 
 @Controller
 public class CategoryController {
@@ -22,7 +22,7 @@ public class CategoryController {
 	public void updateCategory(CategoryVO CategoryVO) {
 		
 	};
-	public void deleteCategory(CategoryVO CategoryVO) {
+	public void deleteCategory(Long id) {
 		
 	};
 	
@@ -34,10 +34,10 @@ public class CategoryController {
 //	}
 //	
 //	
-//	@GetMapping("/aa")
-//	public List<CategoryVO> categoryList() {
+//	@GetMapping("/dietList")
+//	public void categoryList(Model model) {
 //		System.out.println(categoryDAO.categoryList());
-//		return categoryDAO.categoryList();
+//		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
 //	}
 
 }
