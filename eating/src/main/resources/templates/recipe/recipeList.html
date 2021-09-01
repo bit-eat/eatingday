@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>번호</th>
+        <th>요리이름</th>
+        <th>요리재료</th>
+        <th>요리인원</th>
+        <th>작성시각</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="recipeList : ${recipeList}">
+        <td th:text="${recipeList.id}"></td>
+        <td th:text="${recipeList.name}"></td>
+        <td th:text="${recipeList.ingredient}"></td>
+        <td th:text="${recipeList.people}"></td>
+        <td th:text="${recipeList.createDate}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

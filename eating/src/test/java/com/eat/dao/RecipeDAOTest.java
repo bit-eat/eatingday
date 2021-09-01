@@ -31,7 +31,6 @@ public class RecipeDAOTest {
 
         System.out.println(findRecipe.getPeople());
         Assertions.assertEquals(recipeVO.getId(), findRecipe.getId());
-        //assertEquals(recipeVO.getId(), findRecipe.getId());
 
     }
 
