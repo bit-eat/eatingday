@@ -1,0 +1,18 @@
+#server:
+#port: 8083
+
+spring:
+  datasource:
+   url: jdbc:mysql://localhost/eating?characterEncoding=utf8
+   username: root
+   password: alswn8134
+   driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  type-aliases-package: com.eat.vo
+  mapper-locations: mybatis/mapper/*.xml
+  type-handlers-package: com.eat.dao
+ 
+
+
+
