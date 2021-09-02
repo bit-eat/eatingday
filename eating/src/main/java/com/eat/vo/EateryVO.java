@@ -6,7 +6,7 @@ import lombok.Data;
 public class EateryVO {
 	
     private Long id;
-    private Long categoryId;
+    private String category;
     private String name;
     private String content;
     private String address;
