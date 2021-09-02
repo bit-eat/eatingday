@@ -19,13 +19,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 		    public String insert() {
 		    	return "/insert";
 		    }
+		@GetMapping("/detail")
+	    public String deatail() {
+	    	return "/detail";
+	    }
+		@GetMapping("/menu")
+	    public String menu() {
+	    	return "/menu";
+	    }
+		
 	    @Autowired
 	    private EateryService eateryservice;
 	    
 	    @GetMapping("/insert")
-	    public List<EateryVO> getEatery(){
+	    public void selectAll(Model model){
 	    	System.out.println(eateryservice.selectAll());
-	        return eateryservice.selectAll();
+	        model.addAttribute("selectAll", eateryservice.selectAll());
+	      
+	        
 	    }
 
 	}
