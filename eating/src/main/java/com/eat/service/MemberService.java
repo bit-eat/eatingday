@@ -23,6 +23,7 @@ public interface MemberService {
 	List<MemberVO> selectGrade(@Param("grade")String grade);
 	List<MemberVO> selectMemberId(@Param("id")Long id);
 	
+	
 
 	 
 	

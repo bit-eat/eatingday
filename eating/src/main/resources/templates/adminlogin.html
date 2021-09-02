@@ -2,9 +2,14 @@
 <html xmlns : th ="http://www.thymeLeaf.org">
 	<head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>관리자 로그인</title>
 	</head>
 	<body>
+	<h3>관리자로그인페이지</h3>
+	<input type = "text" id = "userId" name = "userId" placeholder ="아이디"><br>
+	<input type = "password" id = "userPw" name = "userPw" placeholder ="비밀번호"><br>
+	<button id = "loginProcess">로그인</button>
+	
 	
 	<table border = "1">
 	<thead>
@@ -13,6 +18,7 @@
 			<th>비밀번호</th>
 			<th>이름</th>
 			<th>전화번호</th>
+			<th>등급</th>
 		</tr>
 		</thead>
 		
@@ -21,12 +27,9 @@
 			<td th:text="${member.userPw}"></td>
 			<td th:text="${member.userName}"></td>
 			<td th:text="${member.phoneNumber}"></td>
+			<td th:text="${member.grade}"></td>
 		</tr>
 		
 	</table>
-
-	
-	
-	
 	</body>
 </html>

@@ -1,9 +1,13 @@
 package com.eat.vo;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+
 public class MemberVO {
+
 
 	private Long id;
 	private String userId;
