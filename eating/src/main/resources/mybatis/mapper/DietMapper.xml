@@ -10,7 +10,7 @@
 	</insert>
 	
 	<select id="showDietList" resultType="com.eat.vo.DietVO">
-        SELECT * FROM suggestion
+        select s.*, c.name from suggestion as s right join category as c on s.categoryId = c.id where c.id = s.categoryId
     </select>
     <select id="categoryList" resultType="com.eat.vo.CategoryVO">
 		select * from category

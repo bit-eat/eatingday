@@ -3,6 +3,8 @@ package com.eat.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.sound.midi.VoiceStatus;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,8 @@ public class DietController {
 	
 	@Autowired
 	private CategoryDAO categoryDAO;
-
+	
+	
 	public void insertDiet(DietVO dietVO) {
 		
 	}
@@ -38,10 +41,8 @@ public class DietController {
 	
 	@GetMapping("/dietList")
 	public void showDietList(Model model){
-		System.out.println(dietDAO.showDietList());
 		model.addAttribute( "showDietList"  , dietDAO.showDietList());
 		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
-		model.addAttribute("mealList", Meal.values());
 	}
 
 	public List<DietVO> selectDietList(Date date){

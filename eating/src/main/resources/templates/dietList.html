@@ -60,9 +60,10 @@
 			</thead>
 			<tr th:each="suggestion, index : ${showDietList}">
 				<td th:text="${index.count}"></td>
-				<td th:text="${suggestion.date}"></td>
-				<td th:if="${suggestion.meal}" th:text="${T(com.eat.vo.Meal).values()}"></td>
-				<td th:text="${suggestion.categoryId}"></td>
+				<td th:text="${suggestion.date}" id="date"></td>
+				<!-- <td  th:text="${suggestion.meal}"></td> -->
+				<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
+				<td th:text="${suggestion.name}"></td>
 				<td th:text="${suggestion.menu}"></td>
 			</tr>
 		</table>
@@ -91,7 +92,7 @@
 			<span>끼니</span>
 			<select>
 				<option th:each=" meal : ${T(com.eat.vo.Meal).values()}">
-					<span th:value="meal.id" th:text="${meal.getKrName()}"></span>
+					<span th:id="${meal.values()}" th:text="${meal.getKrName()}"></span>
 				</option>
 			</select> <br> 
 			
