@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eat.dao.EateryBookmarkDAO">
+
+<insert id="insertEateryBookmark" parameterType="com.eat.vo.EateryBookmarkVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO eatery_bookmark(id, memberId, eateryId)
+        VALUES(#{id}, #{memberId}, #{eateryId})
+    </insert>
+
+    <select id="select" resultType="EateryMenuVO">
+        SELECT * FROM eatery_menu WHERE eateryId = #{eateryId}
+    </select>
+
+    <delete id="deleteEateryBookmark" parameterType="Long">
+        DELETE FROM eatery_bookmark WHERE id =#{id}
+    </delete>
+
+</mapper>

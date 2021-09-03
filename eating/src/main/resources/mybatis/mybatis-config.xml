@@ -10,6 +10,8 @@
         <mapper resource="CategoryMapper.xml" />
         <mapper resource="DietMapper.xml" />
         <mapper resource="RandomMapper.xml" />
+        <mapper resource="EateryMapper.xml"/>
+        <mapper resource="EateryMenuMapper.xml"/>
 
     </mappers>
 </configuration>

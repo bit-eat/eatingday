@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eat.dao.EateryDAO">
+
+<insert id="insertEatery" parameterType="com.eat.vo.EateryVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into eatery(name, content, address, phoneNumber, area)
+        values(#{name}, #{content},#{address},#{phoneNumber},#{area})
+    </insert>
+
+<select id="selectAll" resultType="EateryVO">
+        SELECT * FROM eatery
+    </select>
+
+<select id="selectName" parameterType="String" resultType="com.eat.vo.EateryVO">
+        SELECT * FROM eatery WHERE name like CONCAT('%',#{name},'%')
+    </select>
+
+    <select id="selectArea" parameterType="String" resultType="com.eat.vo.EateryVO">
+        SELECT * FROM eatery WHERE  eatery=#{eatery}
+    </select>
+
+    <select id="selectCategory" parameterType="String" resultType="com.eat.vo.EateryVO">
+        SELECT * FROM eatery WHERE category = #{category}
+    </select>
+
+    <update id="updateEatery" parameterType="com.eat.vo.EateryVO">
+        UPDATE eatery SET name =#{name}, content =#{content}, address=#{address}, phoneNumber=#{phoneNumber}, area=#{area}
+        WHERE id =#{id}
+    </update>
+
+    <delete id="deleteEatery" parameterType="Long">
+        DELETE FROM eatery WHERE id =#{id}
+    </delete>
+ 
+</mapper>
