@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#modal {
+#modal, #modal2 {
 	display: none;
 	position: relative;
 	width: 100%;
@@ -13,17 +13,17 @@
 	position: relative;
 }
 
-#modal h2 {
+#modal h2, #modal2 h2 {
 	margin: 0;
 }
 
-#modal button {
+#modal button, #modal2 button {
 	display: inline-block;
 	width: 100px;
 	margin-left: calc(100% - 100px - 10px);
 }
 
-#modal .modal_content {
+#modal .modal_content, #modal2 .modal_content {
 	width: 300px;
 	margin: 100px auto;
 	padding: 20px 10px;
@@ -31,7 +31,7 @@
 	border: 2px solid #666;
 }
 
-#modal .modal_layer {
+#modal .modal_layer, #modal2 .modal_layer {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -79,7 +79,7 @@
 
 
 
-	<!-- modal 시작 -->
+	<!-- insert modal 시작 -->
 	<div id="modal">
 		<div class="modal_content">
 				
@@ -112,7 +112,61 @@
 		<div class="modal_layer"></div>
 		
 	</div>
-	<!-- modal 종료 -->
+	<!-- insert modal 종료 -->
+	
+	
+	
+	<!-- update modal 시작 -->
+	<div id="modal2">
+		<div class="modal_content">
+		
+			<h2>식단 수정</h2>
+			<form action="updateDiet" method="post">
+				<!-- 날짜 -->
+				<label for="date">날짜</label><input id="date" name="date" type="date" value="#strings.toString(date)"> <br> 
+				
+				<!-- 끼니 -->
+				<label>끼니</label>
+				<select for="meal" th:name="meal">
+					<option th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:text="${meal.getKrName()}" th:value="${meal.name()}"/>
+				</select> <br> 
+				
+				<!-- 카테고리 -->
+				<label>카테고리</label> 
+				<select for="categoryId" th:name="categoryId">
+					<option th:each="category,index : ${categoryList}" th:if="${category.id==index.count}" th:text="${category.name}" id="categoryId" th:value="${category.id}"/>
+				</select> <br> 
+				
+				<!-- 메뉴 -->
+				<label for="menu">메 뉴</label><input id="menu" name="menu" type="text"><br>
+				
+				
+				<!-- 버튼 -->
+				<input type="submit"><input type="reset">
+				<button type="button" id="modal_close_btn2">닫기 창</button>
+				
+				
+			</form>
+			
+			<div class="modal_layer"></div>
+			
+		</div>
+	</div>
+	<!-- update modal 종료 -->
+	
+	
+	
+	<!-- delete modal 시작 -->
+	<div id="modal">
+		<div class="modal_content">
+		
+			<h2>식단 수정</h2>
+			<form action="deleteDiet" method="post">
+			
+			</form>
+		</div>
+	</div>
+	<!-- delete modal 종료 -->
 
 
 
@@ -125,6 +179,15 @@
 		document.getElementById("modal_close_btn").onclick = function() {
 			document.getElementById("modal").style.display = "none";
 		}
+		
+		document.getElementById("updateDiet").onclick = function() {
+			document.getElementById("modal2").style.display = "block";
+		}
+
+		document.getElementById("modal_close_btn2").onclick = function() {
+			document.getElementById("modal2").style.display = "none";
+		}
+		
 	</script>
 
 
