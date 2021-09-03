@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 spring:
   datasource:
     url: jdbc:mysql://localhost/eating?characterEncoding=utf8

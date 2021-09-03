@@ -21,7 +21,7 @@ public class RecipeController {
 
     private final RecipeDAO recipeDAO;
 
-    @GetMapping("/")
+    @GetMapping("/recipe")
     public String home(){
         return "index";
     }

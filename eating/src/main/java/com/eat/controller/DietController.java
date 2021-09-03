@@ -14,7 +14,7 @@ import com.eat.vo.DietVO;
 
 @Controller
 public class DietController {
-	@GetMapping("/")
+	@GetMapping("/diet")
 	public String main() {
 		return "dietMain";
 	}

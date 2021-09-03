@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 	@Controller
 	
 	public class EateryController {
-		@GetMapping("/")
+		@GetMapping("/eatery")
 		    public String insert() {
 		    	return "/insert";
 		    }

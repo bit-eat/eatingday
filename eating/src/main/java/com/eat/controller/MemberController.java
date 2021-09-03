@@ -11,7 +11,7 @@ import com.eat.service.MemberService;
 public class MemberController {
 	
 	
-	@GetMapping("/")
+	@GetMapping("/member")
 	public String Test() {
 		return "dietMain";
 	}
