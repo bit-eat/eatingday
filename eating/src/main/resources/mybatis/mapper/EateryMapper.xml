@@ -11,7 +11,7 @@
     </insert>
 
 <select id="selectAll" resultType="EateryVO">
-        SELECT * FROM eatery
+        SELECT * FROM eatery WHERE eaterty=#{eatery}
     </select>
 
 <select id="selectName" parameterType="String" resultType="com.eat.vo.EateryVO">
