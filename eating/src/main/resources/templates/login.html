@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns : th ="http://www.thymeLeaf.org">
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+	
+	<h3>로그인페이지</h3>
+	
+	<form action="/login" method="selectAll">
+	<div>
+	<label for ="userId">아이디</label> 
+	<input id ="userId" name="userId" type="text">
+	</div>
+	<div>
+	<label for ="password">비밀번호</label> 
+	<input id ="userPw" name="userPw" type="userPw">
+	</div>
+	<input type="submit" value="로그인하기">
+	</form>
+	<a href ="/findid">아이디찾기  </a><a href ="/findpw">비밀번호찾기   </a><a href ="/register">회원가입   </a>
+	
+	
+	
+	
+
+	
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+	<script>
+	$(member).ready(function(){
+		$("loginProccess").click(function(){
+			var json ={
+					userId : $("#userId").val(),
+					userPw : $("#userPw").val()};
+			})
+		})
+	
+	
+	</script>
+	
+	<table border = "1">
+	<thead>
+		<tr>
+			<th>아이디</th>
+			<th>비밀번호</th>
+			<th>이름</th>
+			<th>전화번호</th>
+			<th>등급</th>
+		</tr>
+		</thead>
+		
+	    <tr th:each ="member : ${selectAll }">			
+			<td th:text="${member.userId}"></td>
+			<td th:text="${member.userPw}"></td>
+			<td th:text="${member.userName}"></td>
+			<td th:text="${member.phoneNumber}"></td>
+			<td th:text="${member.grade}"></td>
+		</tr>
+		
+	</table>
+
+	
+	
+	
+	</body>
+</html>
