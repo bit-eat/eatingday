@@ -90,14 +90,14 @@
 				
 				<!-- 끼니 -->
 				<label>끼니</label>
-				<select for="meal">
-					<option th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:text="${meal.getKrName()}"/>
+				<select for="meal" th:name="meal">
+					<option th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:text="${meal.getKrName()}" th:value="${meal.name()}"/>
 				</select> <br> 
 				
 				<!-- 카테고리 -->
 				<label>카테고리</label> 
-				<select for="category">
-					<option th:each="category,index : ${categoryList}" th:if="${category.id==index.count}" th:text="${category.name}" name="${category.id}"/>
+				<select for="categoryId" th:name="categoryId">
+					<option th:each="category,index : ${categoryList}" th:if="${category.id==index.count}" th:text="${category.name}" id="categoryId" th:value="${category.id}"/>
 				</select> <br> 
 				
 				<!-- 메뉴 -->

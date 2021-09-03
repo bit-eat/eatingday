@@ -1,5 +1,7 @@
 package com.eat.controller;
 
+import java.util.Locale.Category;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -36,14 +38,12 @@ public class DietController {
 	public void showDietList(Model model){
 		model.addAttribute( "showDietList"  , dietDAO.showDietList());
 		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
-		System.out.println(categoryDAO.categoryList());
 	}
 
 	@PostMapping("insertDiet")
 	public String insertDiet(DietVO dietVO) {
-		CategoryVO categoryVO = new CategoryVO();
-		System.out.println(categoryVO.getId());
-		System.out.println(dietVO.getCategoryId());
+		System.out.println(dietVO.getMeal());
+		System.out.println(dietVO);
 		dietDAO.insertDiet(dietVO);
 		return "redirect:/dietList";
 	}
