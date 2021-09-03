@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eat.dao.CategoryDAO;
 import com.eat.dao.DietDAO;
+import com.eat.vo.CategoryVO;
 import com.eat.vo.DietVO;
 
 @Controller
@@ -40,6 +41,9 @@ public class DietController {
 
 	@PostMapping("insertDiet")
 	public String insertDiet(DietVO dietVO) {
+		CategoryVO categoryVO = new CategoryVO();
+		System.out.println(categoryVO.getId());
+		System.out.println(dietVO.getCategoryId());
 		dietDAO.insertDiet(dietVO);
 		return "redirect:/dietList";
 	}

@@ -12,9 +12,7 @@
 	<select id="showDietList" resultType="com.eat.vo.DietVO">
         select s.*,  c.name as "categoryName" from suggestion as s right join category as c on s.categoryId = c.id where c.id = s.categoryId
     </select>
-    <select id="categoryList" resultType="com.eat.vo.CategoryVO">
-		select * from category
-	</select>
+   
 
 	<select id="selectDietListDate" parameterType="date"
 		resultType="com.eat.vo.DietVO">

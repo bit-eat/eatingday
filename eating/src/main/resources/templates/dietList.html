@@ -97,7 +97,7 @@
 				<!-- 카테고리 -->
 				<label>카테고리</label> 
 				<select for="category">
-					<option th:each="categoty : ${categoryList}" th:text="${categoty.name}"/>
+					<option th:each="category,index : ${categoryList}" th:if="${category.id==index.count}" th:text="${category.name}" name="${category.id}"/>
 				</select> <br> 
 				
 				<!-- 메뉴 -->
