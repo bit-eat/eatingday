@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>test</title>
+  </head>
+  <body>
+	<h1>test</h1>
+	hello<br>
+	<tabel>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>날짜</th>
+				<th>끼니</th>
+				<th>카테고리</th>
+				<th>메뉴</th>
+			</tr>
+		</thead>
+		<tr th:each="list : ${showDietList}">
+			<td><span th:text="${list.id}"></span></td>
+			<td><span th:text="${list.date}"></span></td>
+			<td><span th:text="${list.meal}"></span></td>
+			<td><span th:text="${list.categoryId}"></span></td>
+			<td><span th:text="${list.menu}"></span></td>
+		</tr>
+	</tabel>
+  </body>
+</html>
