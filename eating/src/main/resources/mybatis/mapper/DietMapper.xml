@@ -6,11 +6,11 @@
 <mapper namespace="com.eat.dao.DietDAO">
 	<insert id="insertDiet" parameterType="com.eat.vo.DietVO">
 		insert into suggestion(id, meal, menu, date, memberId, categoryId)
-		values(#{id}, #{meal}, #{menu}, #{date}, #{memberId}, #{categoryId})
+		values(4, #{meal}, #{menu}, #{date}, 1, #{categoryId})
 	</insert>
 	
 	<select id="showDietList" resultType="com.eat.vo.DietVO">
-        select s.*, c.name from suggestion as s right join category as c on s.categoryId = c.id where c.id = s.categoryId
+        select s.*,  c.name as "categoryName" from suggestion as s right join category as c on s.categoryId = c.id where c.id = s.categoryId
     </select>
     <select id="categoryList" resultType="com.eat.vo.CategoryVO">
 		select * from category

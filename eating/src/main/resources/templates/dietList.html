@@ -63,7 +63,7 @@
 				<td th:text="${suggestion.date}" id="date"></td>
 				<!-- <td  th:text="${suggestion.meal}"></td> -->
 				<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
-				<td th:text="${suggestion.name}"></td>
+				<td th:text="${suggestion.categoryName}"></td>
 				<td th:text="${suggestion.menu}"></td>
 			</tr>
 		</table>
@@ -82,36 +82,31 @@
 	<!-- modal 시작 -->
 	<div id="modal">
 		<div class="modal_content">
-		
+				
 			<h2>식단 등록</h2>
-
-			<!-- 날짜 -->
-			<span>날짜</span><input type="date" max=""> <br> 
-			
-			<!-- 끼니 -->
-			<span>끼니</span>
-			<select>
-				<option th:each=" meal : ${T(com.eat.vo.Meal).values()}">
-					<span th:id="${meal.values()}" th:text="${meal.getKrName()}"></span>
-				</option>
-			</select> <br> 
-			
-			<!-- 카테고리 -->
-			<span>카테고리</span> 
-			<select>
-				<option th:each="  categoty : ${categoryList}">
-					<span th:text="${categoty.name}"></span>
-				</option>
-			</select> <br> 
-			
-			<!-- 메뉴 -->
-			<span>메 뉴</span><input type="text"><br>
-			
-			
-			<!-- 버튼 -->
-			<button type="submit" id="insertDiet">등록</button>
-			<button type="button" id="modal_close_btn">닫기 창</button>
-
+			<form action="insertDiet" method="post">
+				<!-- 날짜 -->
+				<label for="date">날짜</label><input id="date" name="date" type="date" value="#strings.toString(date)"> <br> 
+				
+				<!-- 끼니 -->
+				<label>끼니</label>
+				<select for="meal">
+					<option th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:text="${meal.getKrName()}"/>
+				</select> <br> 
+				
+				<!-- 카테고리 -->
+				<label>카테고리</label> 
+				<select for="category">
+					<option th:each="categoty : ${categoryList}" th:text="${categoty.name}"/>
+				</select> <br> 
+				
+				<!-- 메뉴 -->
+				<label for="menu">메 뉴</label><input id="menu" name="menu" type="text"><br>
+								
+				<!-- 버튼 -->
+				<input type="submit"><input type="reset">
+				<button type="button" id="modal_close_btn">닫기 창</button>
+			</form>
 		</div>
 
 		<div class="modal_layer"></div>
