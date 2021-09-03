@@ -8,18 +8,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+
 	@Controller
 	
 	public class EateryController {
-		@GetMapping("/")
-		    public String insert() {
-		    	return "/insert";
+		@GetMapping("/eatery")
+		public String insert() {
+		    return "/insert";
 		    }
-		@GetMapping("/detail")
+		@GetMapping("/eatery/eateryMain")
+	    public String eateryMain() {
+	    	return "/eateryMain";
+	    }
+		@GetMapping("/eatery/detail")
 	    public String deatail() {
 	    	return "/detail";
 	    }
-		@GetMapping("/menu")
+		@GetMapping("/eatery/menu")
 	    public String menu() {
 	    	return "/menu";
 	    }
