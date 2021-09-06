@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<thead>
+      <tr>
+         <th>음식점 이름</th>
+         <th>지역</th>
+         <th>메뉴 카테고리</th>
+         <th>음식점 내용</th>
+      </tr>
+      </thead>
+
+<tr th:each ="eatery : ${selectAll}">         
+         <td th:text="${eatery.name}"></td>
+         <td th:text="${eatery.area}"></td>
+         <td th:text="${eatery.category}"></td>
+         <td th:text="${eatery.content}"></td>
+      </tr>
+
+</body>
+</html>

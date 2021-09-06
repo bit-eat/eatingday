@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 	@Controller
@@ -34,12 +34,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 	    @Autowired
 	    private EateryService eateryservice;
 	    
-	    @PostMapping("/insert")
+	    @RequestMapping(value="/insertPost")
 	    public void selectAll(Model model){
 	    	System.out.println(eateryservice.selectAll());
 	        model.addAttribute("selectAll", eateryservice.selectAll());
 	      
-	        
 	    }
 
 	}

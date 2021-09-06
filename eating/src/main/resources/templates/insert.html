@@ -8,17 +8,25 @@
 <body>
 	<h3>맛집 등록</h3>
 
-	<form action="/insert" method="selectAll">
-
-		<button>이미지</button>
-		<br>
-		<thead>
+	<form action="/insertPost" method="selectAll">
+    <table with=1000 border="1" cellpadding=5>
+   
+   <tr>
+   <td colspan="2">
+   <div style="text-align:center;">
+   <input type="submit" value="이미지">
+   </div>
+   </td>
+   
+		</tr>
 			<tr>
 				<th>음식점 이름</th> 
-				<input type="text" name="eateryName" size="10" value=""
-					maxlength="7"> 
-					<br>
+				<td> <input type="text" name="name"></td> 
+				</tr>
+				
+				<tr>
 				<th>지역</th>
+				<td>
 				<select name="Area">
 					<option value="none">== 선택 ==</option>
 					<option value="인천">인천</option>
@@ -35,8 +43,12 @@
 					<option value="부산">부산</option>
 					<option value="경상">경상</option>
 				</select>
-				<br>
+				</td>
+				</tr>
+				
+				<tr>
 				<th>메뉴카테고리</th>
+				<td>
 				<select name="Menu">
 					<option value="none">== 선택 ==</option>
 					<option value="한식">한식</option>
@@ -49,17 +61,22 @@
 					<option value="뷔페">뷔페</option>
 					<option value="카페/주점">카페/주점</option>
 				</select>
-				<br> 
-				<th>음식점 설명</th>
-				<input type="text" name="eateryContent" size="10" value=""
-					maxlength="7">
-				<br>
+				</td>
 				</tr>
-				</thead>
+				
+				<tr>
+				<th>음식점 설명</th>
+				<td>
+				<textarea name="memo" style="width:100px; height:300px;"></textarea>
+			    </td>
+				</tr>
+
+<td>
 
 		<button>등록</button>
 		<button>취소</button>
-
+</td>
 	</form>
+</table>
 </body>
 </html>

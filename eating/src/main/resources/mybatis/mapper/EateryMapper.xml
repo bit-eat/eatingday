@@ -11,7 +11,7 @@
     </insert>
 
 <select id="selectAll" resultType="EateryVO">
-        SELECT * FROM eatery WHERE eaterty=#{eatery}
+        SELECT * FROM eatery WHERE eatery=#{eatery}
     </select>
 
 <select id="selectName" parameterType="String" resultType="com.eat.vo.EateryVO">
@@ -19,7 +19,7 @@
     </select>
 
     <select id="selectArea" parameterType="String" resultType="com.eat.vo.EateryVO">
-        SELECT * FROM eatery WHERE  eatery=#{eatery}
+        SELECT * FROM eatery WHERE  area=#{area}
     </select>
 
     <select id="selectCategory" parameterType="String" resultType="com.eat.vo.EateryVO">
