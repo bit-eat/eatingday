@@ -1,19 +1,17 @@
 package com.eat.controller;
 
-import java.util.Locale.Category;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eat.dao.CategoryDAO;
 import com.eat.dao.DietDAO;
-import com.eat.vo.CategoryVO;
 import com.eat.vo.DietVO;
+import com.eat.vo.Meal;
 
 @Controller
 public class DietController {
@@ -30,8 +28,12 @@ public class DietController {
 	public void updateDiet(DietVO dietVO) {
 		
 	};
-	public void deleteDiet(Long id) {
-		
+	
+	@PostMapping("deleteDiet")
+	public String deleteDiet(DietVO dietVO) {
+		System.out.println(dietVO.getDate()+""+dietVO.getMeal());
+		dietDAO.deleteDiet(dietVO);
+		return "redirect:/dietList";
 	};
 	
 	@GetMapping("/dietList")
@@ -42,7 +44,6 @@ public class DietController {
 
 	@PostMapping("insertDiet")
 	public String insertDiet(DietVO dietVO) {
-		System.out.println(dietVO.getMeal());
 		System.out.println(dietVO);
 		dietDAO.insertDiet(dietVO);
 		return "redirect:/dietList";

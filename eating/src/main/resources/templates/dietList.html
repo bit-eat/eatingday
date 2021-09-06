@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#modal, #modal2 {
+#modalInsert, #modalUpdate, #modalDelete {
 	display: none;
 	position: relative;
 	width: 100%;
@@ -13,25 +13,25 @@
 	position: relative;
 }
 
-#modal h2, #modal2 h2 {
+#modalInsert h2, #modalUpdate h2, #modalDelete h2 {
 	margin: 0;
 }
 
-#modal button, #modal2 button {
+#modalInsert button, #modalUpdate button, #modalDelete button {
 	display: inline-block;
 	width: 100px;
 	margin-left: calc(100% - 100px - 10px);
 }
 
-#modal .modal_content, #modal2 .modal_content {
-	width: 300px;
+#modalInsert .modal_content, #modalUpdate .modal_content, #modalDelete .modal_content {
+	width: 500px;
 	margin: 100px auto;
 	padding: 20px 10px;
 	background: #fff;
 	border: 2px solid #666;
 }
 
-#modal .modal_layer, #modal2 .modal_layer {
+#modalInsert .modal_layer, #modalUpdate .modal_layer, #modalDelete .modal_layer {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -70,9 +70,9 @@
 		<!-- 테이블 종료 -->
 		
 		<!-- 테이블버튼 -->
-		<button type="button" id="modal_opne_btn" style="font-weight: 900;">등록</button>
-		<button type="button" id="updateDiet" style="font-weight: 900;">수정</button>
-		<button type="button" id="deleteDiet" style="font-weight: 900;">삭제</button>
+		<button type="button" id="insertDietOpen" style="font-weight: 900;">등록</button>
+		<button type="button" id="updateDietOpen" style="font-weight: 900;">수정</button>
+		<button type="button" id="deleteDietOpen" style="font-weight: 900;">삭제</button>
 		
 		
 	</div>
@@ -80,11 +80,11 @@
 
 
 	<!-- insert modal 시작 -->
-	<div id="modal">
+	<div id="modalInsert">
 		<div class="modal_content">
 				
 			<h2>식단 등록</h2>
-			<form action="insertDiet" method="post">
+			<form action="insertDiet" method="post" autocomplete="off">
 				<!-- 날짜 -->
 				<label for="date">날짜</label><input id="date" name="date" type="date" value="#strings.toString(date)"> <br> 
 				
@@ -105,7 +105,7 @@
 								
 				<!-- 버튼 -->
 				<input type="submit"><input type="reset">
-				<button type="button" id="modal_close_btn">닫기 창</button>
+				<button type="button" id="insertModalClose">닫기 창</button>
 			</form>
 		</div>
 
@@ -117,7 +117,7 @@
 	
 	
 	<!-- update modal 시작 -->
-	<div id="modal2">
+	<div id="modalUpdate">
 		<div class="modal_content">
 		
 			<h2>식단 수정</h2>
@@ -143,7 +143,7 @@
 				
 				<!-- 버튼 -->
 				<input type="submit"><input type="reset">
-				<button type="button" id="modal_close_btn2">닫기 창</button>
+				<button type="button" id="updateModalClose">닫기 창</button>
 				
 				
 			</form>
@@ -157,13 +157,26 @@
 	
 	
 	<!-- delete modal 시작 -->
-	<div id="modal">
+	<div id="modalDelete">
 		<div class="modal_content">
 		
-			<h2>식단 수정</h2>
+			<h2>식단 삭제</h2>
 			<form action="deleteDiet" method="post">
-			
+				<!-- 날짜 -->
+				<label for="date">날짜</label><input id="date" name="date" type="date" value="#strings.toString(date)"> <br> 
+				
+				<!-- 끼니 -->
+				<label>끼니</label>
+				<select for="meal" th:name="meal">
+					<option th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:text="${meal.getKrName()}" th:value="${meal.name()}"/>
+				</select> <br> 
+				
+				<!-- 버튼 -->
+				<input type="submit"><input type="reset">
+				<button type="button" id="deleteModalClose">닫기 창</button>
+				
 			</form>
+			<div class="modal_layer"></div>
 		</div>
 	</div>
 	<!-- delete modal 종료 -->
@@ -172,20 +185,25 @@
 
 	<!-- 스크립트 -->
 	<script type="text/javascript">
-		document.getElementById("modal_opne_btn").onclick = function() {
-			document.getElementById("modal").style.display = "block";
+		document.getElementById("insertDietOpen").onclick = function() {
+			document.getElementById("modalInsert").style.display = "block";
 		}
-
-		document.getElementById("modal_close_btn").onclick = function() {
-			document.getElementById("modal").style.display = "none";
+		document.getElementById("insertModalClose").onclick = function() {
+			document.getElementById("modalInsert").style.display = "none";
 		}
 		
-		document.getElementById("updateDiet").onclick = function() {
-			document.getElementById("modal2").style.display = "block";
+		document.getElementById("updateDietOpen").onclick = function() {
+			document.getElementById("modalUpdate").style.display = "block";
 		}
-
-		document.getElementById("modal_close_btn2").onclick = function() {
-			document.getElementById("modal2").style.display = "none";
+		document.getElementById("updateModalClose").onclick = function() {
+			document.getElementById("modalUpdate").style.display = "none";
+		}
+		
+		document.getElementById("deleteDietOpen").onclick = function() {
+			document.getElementById("modalDelete").style.display = "block";
+		}
+		document.getElementById("deleteModalClose").onclick = function() {
+			document.getElementById("modalDelete").style.display = "none";
 		}
 		
 	</script>

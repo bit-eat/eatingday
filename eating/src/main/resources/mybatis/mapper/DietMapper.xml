@@ -5,8 +5,8 @@
         
 <mapper namespace="com.eat.dao.DietDAO">
 	<insert id="insertDiet" parameterType="com.eat.vo.DietVO">
-		insert into suggestion(id, meal, menu, date, memberId, categoryId)
-		values(4, #{meal}, #{menu}, #{date}, 1, #{categoryId})
+		insert into suggestion(meal, menu, date, memberId, categoryId)
+		values(#{meal}, #{menu}, #{date}, 1, #{categoryId})
 	</insert>
 	
 	<select id="showDietList" resultType="com.eat.vo.DietVO">
@@ -24,8 +24,8 @@
 		WHERE id =#{id}
 	</update>
     
-    <delete id="deleteDiet" parameterType="Long">
-        DELETE FROM suggestion WHERE id =#{id}
+    <delete id="deleteDiet" parameterType="com.eat.vo.DietVO">
+        DELETE FROM suggestion WHERE date =#{date} and meal=#{meal}
     </delete>
 	
 </mapper>
