@@ -14,6 +14,7 @@ public interface RecipeTagDAO {
     RecipeTagVO selectOne(@Param("id") Long id);
     RecipeTagVO selectOneByRecipe(@Param("recipeId") Long recipeId, @Param("name") String name);
     List<RecipeTagVO> selectByRecipe(@Param("recipeId") Long recipeId);
+    List<RecipeTagVO> selectByName(@Param("name") String name);
 
     void updateRecipeTag(RecipeTagVO tag);
     void updateTagByRecipe(@Param("recipeId")Long recipeId, @Param("name") String name);

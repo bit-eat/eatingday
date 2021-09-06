@@ -23,7 +23,7 @@ public class RecipeController {
 
     @GetMapping("/recipe")
     public String home(){
-        return "index";
+        return "/recipeMain";
     }
 
     @GetMapping(value="/recipe/new")

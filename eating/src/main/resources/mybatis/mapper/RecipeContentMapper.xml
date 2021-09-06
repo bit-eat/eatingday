@@ -15,7 +15,7 @@
     </select>
 
     <select id="selectByRecipe" resultType="RecipeContentVO">
-        SELECT * FROM recipe_content WHERE recipeId = #{recipeId}
+        SELECT * FROM recipe_content WHERE recipeId = #{recipeId} ORDER BY turn ASC
     </select>
 
     <update id="updateRecipeContent" parameterType="com.eat.vo.RecipeContentVO">
@@ -23,7 +23,7 @@
         WHERE id =#{id}
     </update>
 
-    <delete id="deleteByRecipe" parameterType="map">
+    <delete id="deleteTurn" parameterType="map">
         DELETE FROM recipe_content WHERE recipeId = #{recipeId} AND turn =#{turn}
     </delete>
 
