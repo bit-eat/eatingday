@@ -48,6 +48,11 @@
 
 	<!-- 테이블 시작 -->
 	<div>
+		<form action="selectDietList" method="Post" >
+			<input for="date" type="date" id="date" name="date" value="date"/>
+			<input for="date2" type="date" id="date2" name="date2" value="date2"/>
+			<button type="submit" id="change">조회</button>
+		</form>
 		<table border="1">
 			<thead>
 				<tr>
@@ -61,7 +66,13 @@
 			<tr th:each="suggestion, index : ${showDietList}">
 				<td th:text="${index.count}"></td>
 				<td th:text="${suggestion.date}" id="date"></td>
-				<!-- <td  th:text="${suggestion.meal}"></td> -->
+				<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
+				<td th:text="${suggestion.categoryName}"></td>
+				<td th:text="${suggestion.menu}"></td>
+			</tr>
+			<tr th:each="suggestion, index : ${selectDietList}">
+				<td th:text="${index.count}"></td>
+				<td th:text="${suggestion.date}" id="date"></td>
 				<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
 				<td th:text="${suggestion.categoryName}"></td>
 				<td th:text="${suggestion.menu}"></td>
@@ -185,6 +196,7 @@
 
 	<!-- 스크립트 -->
 	<script type="text/javascript">
+
 		document.getElementById("insertDietOpen").onclick = function() {
 			document.getElementById("modalInsert").style.display = "block";
 		}

@@ -14,6 +14,8 @@ public class DietVO {
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate date;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private LocalDate date2;
 	private Meal meal;
 	private String menu;
 	private String categoryName;
