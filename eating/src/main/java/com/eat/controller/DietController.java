@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import org.apache.ibatis.annotations.Param;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.eat.dao.CategoryDAO;
 import com.eat.dao.DietDAO;
 import com.eat.vo.DietVO;
-import com.eat.vo.Meal;
 
 @Controller
 public class DietController {
@@ -25,6 +25,7 @@ public class DietController {
 	@GetMapping("/")
 	public String main() {
 		return "/dietList";
+
 	}
 	
 	@Autowired

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eat.dao.RecipeDAO">
+
+    <insert id="insertRecipe" parameterType="com.eat.vo.RecipeVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into recipe(name, thumb, ingredient, people, recommend, createDate)
+        values(#{name}, #{thumb},#{ingredient},#{people},#{recommend},#{createDate})
+    </insert>
+
+    <select id="selectOne" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+    SELECT * FROM recipe WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="RecipeVO">
+        SELECT * FROM recipe
+    </select>
+
+    <select id="selectName" parameterType="String" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipe WHERE name like CONCAT('%',#{name},'%')
+    </select>
+
+    <select id="selectPeople" parameterType="String" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipe WHERE people =#{people}
+    </select>
+
+    <select id="selectIngredient" parameterType="String" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipe WHERE ingrdient like CONCAT('%',#{ingredient},'%')
+    </select>
+
+    <select id="selectCategory" parameterType="String" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipe WHERE category = #{category}
+    </select>
+
+    <update id="updateRecipe" parameterType="com.eat.vo.RecipeVO">
+        UPDATE recipe SET name =#{name}, thumb =#{thumb}, ingredient=#{ingredient}, people=#{people},modifydate=now()
+        WHERE id =#{id}
+    </update>
+
+    <delete id="deleteRecipe" parameterType="Long">
+        DELETE FROM recipe WHERE id =#{id}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns : th ="http://www.thymeLeaf.org">
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+	<div layout:fragment="content" class="content">
+		<h1>main page</h1>
+		<hr>
+		<table border ="1">
+		<tr>
+			<th>id</th>
+			<th>userName</th>
+			<th>phoneNumber</th>
+			</tr>
+			<th:block th:each="member : $ {memberList}">
+			<tr>
+			<td th:text="${member.id}"></td>
+			<td th:text="${member.userName}"></td>
+			<td th:text="${member.phoneNumber}"></td>
+			</tr>
+			</th:block>
+		</table>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+package com.eat.vo;
+
+public enum Area {
+  INCHEON,
+  GANGBUK,
+  GANGNAM,
+  GYEONGBUK,
+  GYEONGNAM,
+  GANGWON,
+  CHUNGCHEONG,
+  DAEJEON,
+  JEOLLA,
+  GWANGJU,
+  DAEGU,
+  ULSAN,
+  BUSAN,
+  GYEONGSANG	
+}

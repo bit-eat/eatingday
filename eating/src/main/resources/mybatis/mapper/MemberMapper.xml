@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eat.dao.MemberDAO">
+
+	
+
+	<insert id="insertMember" parameterType="com.eat.vo.MemberVO">
+		insert into
+		member(userId,userPw,userName,phoneNumber,grade)
+		values(#{userId}),#{userPw},#{userName},#{phoneNumber},#{grade})
+	</insert>
+
+	<update id="updateMember" parameterType="com.eat.vo.MemberVO">
+		UPDATE member SET userPw
+		= #{userPw}, userName=#{userName},
+		phoneNumber=#{phoneNumber}
+		WHERE id
+		=#{id}
+	</update>
+
+	<delete id="deleteMember" parameterType="Long">
+		DELETE FROM member WHERE
+		id=#{id}
+	</delete>
+
+	<select id="selectOne" parameterType="Long">
+		SELECT * FROM member WHERE
+		id = #{id}
+	</select>
+
+	<select id="selectMemberId" parameterType="Long">
+		SELECT * FROM member
+		WHERE id = #{id}
+	</select>
+
+	<select id="selectGrade" parameterType="String">
+		SELECT * FROM member
+		WHERE id = #{grade}
+	</select>
+
+	<select id="selectAll" resultType="MemberVO">
+		SELECT * FROM member
+	</select>
+
+
+
+</mapper>
