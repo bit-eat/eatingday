@@ -16,7 +16,7 @@ public interface RecipeContentDAO {
 
     void updateRecipeContent(RecipeContentVO content);
 
-    void deleteByRecipe(@Param("recipeId")Long recipeId, @Param("turn") int turn);
+    void deleteTurn(@Param("recipeId")Long recipeId, @Param("turn") int turn);
     void deleteRecipeContent(@Param("id") Long id);
 
 }

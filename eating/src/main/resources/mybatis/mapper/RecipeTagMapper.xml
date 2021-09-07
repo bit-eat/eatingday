@@ -22,6 +22,10 @@
         SELECT * FROM recipe_tag WHERE recipeId = #{recipeId}
     </select>
 
+    <select id="selectByName" parameterType="String" resultType="com.eat.vo.RecipeTagVO">
+        SELECT * FROM recipe_tag WHERE name = #{name}
+    </select>
+
     <update id="updateRecipeTag" parameterType="com.eat.vo.RecipeTagVO">
         UPDATE recipe_tag SET name =#{name} WHERE id = #{id}
     </update>

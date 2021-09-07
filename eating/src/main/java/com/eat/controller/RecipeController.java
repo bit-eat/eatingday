@@ -23,13 +23,13 @@ public class RecipeController {
 
     @GetMapping("/recipe")
     public String home(){
-        return "index";
+        return "/recipeMain";
     }
 
     @GetMapping(value="/recipe/new")
     public String createRecipe(Model model){
         model.addAttribute("recipeForm", new RecipeForm());
-        return "/recipe/createRecipeForm";
+        return "/createRecipeForm";
     }
 
     @PostMapping(value="/recipe/new")
@@ -47,7 +47,7 @@ public class RecipeController {
     public String recipeList(Model model){
         List<RecipeVO> recipeList = recipeDAO.selectAll();
         model.addAttribute("recipeList",recipeList);
-        return "/recipe/recipeList";
+        return "/recipeList";
     }
 
 

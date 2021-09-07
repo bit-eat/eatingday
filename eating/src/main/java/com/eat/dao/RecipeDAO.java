@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface RecipeDAO {
 
-    void insertRecipe(RecipeVO recipe);
+    Long insertRecipe(RecipeVO recipe);
 
     RecipeVO selectOne(@Param("id") Long id);
     List<RecipeVO> selectAll();

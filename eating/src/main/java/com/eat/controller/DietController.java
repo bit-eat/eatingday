@@ -22,11 +22,11 @@ import com.eat.vo.DietVO;
 @Controller
 public class DietController {
 	
-	@GetMapping("/")
-	public String main() {
-		return "/dietList";
-
-	}
+//	@GetMapping("/")
+//	public String main() {
+//		return "/suggestion/dietList";
+//
+//	}
 	
 	@Autowired
 	DietDAO dietDAO; 
@@ -41,10 +41,10 @@ public class DietController {
 								@RequestParam("date2")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern="yyyy-MM-dd")LocalDate date2, Model model) {
 		model.addAttribute( "selectDietList"  , dietDAO.selectDietList(date, date2));
 		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
-		return "dietList";
+		return "/suggestion/dietList";
 	}
 	
-	@GetMapping("/dietList")
+	@GetMapping("/suggestion/dietList")
 	public void showDietList(Model model){
 		model.addAttribute( "showDietList"  , dietDAO.showDietList());
 		System.out.println(model);
@@ -55,19 +55,19 @@ public class DietController {
 	public String insertDiet(DietVO dietVO) {
 		System.out.println(dietVO);
 		dietDAO.insertDiet(dietVO);
-		return "redirect:/dietList";
+		return "redirect:/suggestion/dietList";
 	}
 	
 	@PostMapping("updateDiet")
 	public String updateDiet(DietVO dietVO) {
 		dietDAO.updateDiet(dietVO);
-		return "redirect:/dietList";
+		return "redirect:/suggestion/dietList";
 	};
 	
 	@PostMapping("deleteDiet")
 	public String deleteDiet(DietVO dietVO) {
 		dietDAO.deleteDiet(dietVO);
-		return "redirect:/dietList";
+		return "redirect:/suggestion/dietList";
 	};
 	
 
