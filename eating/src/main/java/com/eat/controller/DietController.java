@@ -21,10 +21,12 @@ import com.eat.vo.Meal;
 
 @Controller
 public class DietController {
+	
 	@GetMapping("/")
 	public String main() {
-		return "/main";
+		return "/dietList";
 	}
+	
 	@Autowired
 	DietDAO dietDAO; 
 	
@@ -32,20 +34,21 @@ public class DietController {
 	private CategoryDAO categoryDAO;
 	
 	
-	@GetMapping("/dietList")
-	public void showDietList(Model model){
-		model.addAttribute( "showDietList"  , dietDAO.showDietList());
-		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
-	}
 	
 	@PostMapping("selectDietList")
 	public String selectDietList(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern="yyyy-MM-dd")LocalDate date,
 								@RequestParam("date2")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern="yyyy-MM-dd")LocalDate date2, Model model) {
 		model.addAttribute( "selectDietList"  , dietDAO.selectDietList(date, date2));
 		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
-		return "/dietList";
+		return "dietList";
 	}
 	
+	@GetMapping("/dietList")
+	public void showDietList(Model model){
+		model.addAttribute( "showDietList"  , dietDAO.showDietList());
+		System.out.println(model);
+		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
+	}
 
 	@PostMapping("insertDiet")
 	public String insertDiet(DietVO dietVO) {

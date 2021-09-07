@@ -7,7 +7,7 @@
   <body>
 	<h1>test</h1>
 	hello<br>
-	<tabel>
+	<table>
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -17,13 +17,13 @@
 				<th>메뉴</th>
 			</tr>
 		</thead>
-		<tr th:each="list : ${showDietList}">
-			<td><span th:text="${list.id}"></span></td>
-			<td><span th:text="${list.date}"></span></td>
-			<td><span th:text="${list.meal}"></span></td>
-			<td><span th:text="${list.categoryId}"></span></td>
-			<td><span th:text="${list.menu}"></span></td>
-		</tr>
-	</tabel>
+		<tr th:each="suggestion, index : ${showDietList}">
+				<td th:text="${index.count}"></td>
+				<td th:text="${suggestion.date}" id="date"></td>
+				<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
+				<td th:text="${suggestion.categoryName}"></td>
+				<td th:text="${suggestion.menu}"></td>
+			</tr>
+	</table>
   </body>
 </html>
