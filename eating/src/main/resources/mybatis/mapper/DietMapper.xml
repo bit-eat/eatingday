@@ -5,29 +5,31 @@
         
 <mapper namespace="com.eat.dao.DietDAO">
 	<insert id="insertDiet" parameterType="com.eat.vo.DietVO">
-		insert into suggestion(id, meal, menu, date, memberId, categoryId)
-		values(#{id}, #{meal}, #{menu}, #{date}, #{memberId}, #{categoryId})
+		insert into suggestion(meal, menu, date, memberId, categoryId)
+		values(#{meal}, #{menu}, #{date}, 1, #{categoryId})
 	</insert>
 	
 	<select id="showDietList" resultType="com.eat.vo.DietVO">
-        select s.*, c.name from suggestion as s right join category as c on s.categoryId = c.id where c.id = s.categoryId
+        select s.*,  c.name as "categoryName" from suggestion as s 
+        right join category as c on s.categoryId = c.id 
+        where c.id = s.categoryId ORDER BY date
     </select>
-    <select id="categoryList" resultType="com.eat.vo.CategoryVO">
-		select * from category
-	</select>
+   
 
-	<select id="selectDietListDate" parameterType="date"
+	<select id="selectDietList" parameterType="com.eat.vo.DietVO"
 		resultType="com.eat.vo.DietVO">
-		SELECT * FROM suggestion WHERE date =#{date}
+		select s.*,  c.name as "categoryName" from suggestion as s 
+        right join category as c on s.categoryId = c.id 
+        where c.id = s.categoryId and date(date) between #{date} and #{date2} ORDER BY date
 	</select>
 
 	<update id="updateDiet" parameterType="com.eat.vo.DietVO">
 		UPDATE suggestion SET meal =#{meal}, menu =#{menu}, categoryId=#{categoryId}
-		WHERE id =#{id}
+		WHERE date = #{date} and meal=#{meal}
 	</update>
     
-    <delete id="deleteDiet" parameterType="Long">
-        DELETE FROM suggestion WHERE id =#{id}
+    <delete id="deleteDiet" parameterType="com.eat.vo.DietVO">
+        DELETE FROM suggestion WHERE date =#{date} and meal=#{meal}
     </delete>
 	
 </mapper>
