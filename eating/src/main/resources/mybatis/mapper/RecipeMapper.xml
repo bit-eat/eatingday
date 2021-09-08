@@ -30,8 +30,12 @@
         SELECT * FROM recipe WHERE ingrdient like CONCAT('%',#{ingredient},'%')
     </select>
 
-    <select id="selectCategory" parameterType="String" resultType="com.eat.vo.RecipeVO">
-        SELECT * FROM recipe WHERE category = #{category}
+    <select id="selectCategoryId" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipe WHERE categoryid = #{categoryId}
+    </select>
+
+    <select id="selectMemberId" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipe WHERE memberid = #{memberId}
     </select>
 
     <update id="updateRecipe" parameterType="com.eat.vo.RecipeVO">

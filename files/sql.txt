@@ -1,0 +1,100 @@
+
+CREATE TABLE `member` (
+  `id` int NOT NULL,
+  `userId` varchar(20) DEFAULT NULL,
+  `userPw` varchar(20) DEFAULT NULL,
+  `userName` varchar(20) DEFAULT NULL,
+  `phoneNumber` varchar(100) DEFAULT NULL,
+  `grade` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `category` (
+  `id` int NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `recipe` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `thumb` VARCHAR(45) NULL DEFAULT 'null',
+  `ingredient` VARCHAR(45) NOT NULL,
+  `people` VARCHAR(45) NOT NULL,
+  `recommend` INT NULL DEFAULT 0,
+  `createDate` DATE NULL DEFAULT NULL,
+  `modifyDate` DATE NULL DEFAULT NULL, 
+  `categoryid` INT NULL,
+  `memberid` INT NULL,
+  FOREIGN KEY (`categoryid`) REFERENCES `category`(`id`) ON DELETE SET NULL,
+  FOREIGN KEY (`memberid`) REFERENCES `member`(`id`)  ON DELETE CASCADE,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+
+CREATE TABLE `recipe_content` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `img` VARCHAR(45) NULL DEFAULT 'null',
+  `content` VARCHAR(45) NULL DEFAULT 'null',
+  `turn` INT NULL,
+  `recipeid` INT NOT NULL,
+  FOREIGN KEY (`recipeid`) REFERENCES `recipe`(`id`) ON DELETE CASCADE,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+
+CREATE TABLE `recipe_tag` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `recipeid` INT NOT NULL,
+ FOREIGN KEY (`recipeid`) REFERENCES `recipe`(`id`) ON DELETE CASCADE,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+
+CREATE TABLE `eatery` (
+  `id` int NOT NULL,
+  `name` varchar(25) DEFAULT NULL,
+  `content` varchar(800) DEFAULT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `phoneNumber` varchar(10) DEFAULT NULL,
+  `area` varchar(10) DEFAULT NULL,
+  `category` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+CREATE TABLE `eaterybookmark` (
+  `id` int NOT NULL,
+  `memberId` int DEFAULT NULL,
+  `eateryId` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+CREATE TABLE `eaterymenu` (
+  `id` int NOT NULL,
+  `img` varchar(10) DEFAULT NULL,
+  `content` varchar(800) DEFAULT NULL,
+  `name` varchar(25) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `eateryId` int DEFAULT NULL,
+  `categoryId` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+CREATE TABLE random (
+  `id` int NOT NULL,
+  `recipeId` int DEFAULT NULL,
+  `eateryId` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `suggestion` (
+  id int NOT NULL,
+  meal varchar(20) DEFAULT NULL,
+  menu varchar(100) DEFAULT NULL,
+  date date DEFAULT NULL,
+  memberId int DEFAULT NULL,
+  categoryId int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_category_id` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`)
+);

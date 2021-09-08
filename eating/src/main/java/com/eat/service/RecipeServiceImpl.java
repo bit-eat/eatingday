@@ -1,12 +1,7 @@
 package com.eat.service;
 
-import com.eat.dao.RecipeContentDAO;
-import com.eat.dao.RecipeDAO;
-import com.eat.dao.RecipeTagDAO;
-import com.eat.vo.People;
-import com.eat.vo.RecipeContentVO;
-import com.eat.vo.RecipeTagVO;
-import com.eat.vo.RecipeVO;
+import com.eat.dao.*;
+import com.eat.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +16,8 @@ public class RecipeServiceImpl implements RecipeService{
     private final RecipeDAO recipeDAO;
     private final RecipeContentDAO contentDAO;
     private final RecipeTagDAO tagDAO;
+    private final CategoryDAO categoryDAO;
+    private final MemberDAO memberDAO;
 
     @Override
     public Long saveRecipe(RecipeVO recipe) {
@@ -83,17 +80,22 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     public List<RecipeVO> selectIngredient(String ingredient) {
-        return null;
+        return recipeDAO.selectIngredient(ingredient);
     }
 
     @Override
-    public List<RecipeVO> selectUser(String userId) {
-        return null;
+    public List<RecipeVO> selectMember(String memberId) {
+        MemberVO memberVO = memberDAO.selectName(memberId);
+        List<RecipeVO> recipeList = recipeDAO.selectMemberId(memberVO.getId());
+        return recipeList;
     }
 
     @Override
     public List<RecipeVO> selectCategory(String category) {
-        return null;
+        CategoryVO categoryVO = categoryDAO.selectName(category);
+        List<RecipeVO> recipeList = recipeDAO.selectCategoryId(categoryVO.getId());
+
+        return recipeList;
     }
 
     @Override

@@ -14,6 +14,14 @@
 		select * from category
 	</select>
 
+    <select id="selectName" resultType="com.eat.vo.CategoryVO" parameterType="String">
+        select * from category where name =#{name}
+    </select>
+
+    <select id="categoryList" resultType="com.eat.vo.CategoryVO" parameterType="Long">
+        select * from category where id =#{id}
+    </select>
+
 	<update id="updateCategory" parameterType="com.eat.vo.CategoryVO">
 		UPDATE category SET name =#{name}
 		WHERE id =#{id}

@@ -25,7 +25,7 @@ public interface RecipeService {
     List<RecipeVO> selectPeople(People p);
     List<RecipeVO> selectIngredient(String ingredient);
 
-    List<RecipeVO> selectUser(String userId);
+    List<RecipeVO> selectMember(String memberId);
     List<RecipeVO> selectCategory(String category);
     List<RecipeVO> selectTag(String tagName);
 
