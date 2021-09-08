@@ -35,12 +35,14 @@
 			<thead>
 				<tr>
 					<th>요리이름</th>
+					<th>카테고리</th>
 					<th>재료</th>
 					<th>날짜</th>
 				</tr>
 			</thead>
 			<tr th:each="recipe : ${showRecipe}">
 				<td th:text="${recipe.name}"></td>
+				<td th:text="${eatery.categoryName}"></td>
 				<td th:text="${recipe.ingredient}"></td>
 				<td th:text="${recipe.createDate}"></td>
 			</tr>
