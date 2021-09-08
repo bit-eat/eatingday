@@ -31,22 +31,31 @@ public class DietController {
 	@Autowired
 	DietDAO dietDAO; 
 	
-	@PostMapping("selectDietList")
+	@Autowired
+	CategoryDAO categoryDAO;
+
+	@GetMapping("/suggestion/ladder")
+	public String ladder() {
+		return "/suggestion/ladder";
+	}
+	
+	@PostMapping("/suggestion/selectDietList")
 	public String selectDietList(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern="yyyy-MM-dd")LocalDate date,
 								@RequestParam("date2")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern="yyyy-MM-dd")LocalDate date2, Model model) {
 		model.addAttribute( "selectDietList"  , dietDAO.selectDietList(date, date2));
+
 		return "/suggestion/dietList";
 	}
 	
 	@GetMapping("/suggestion/dietList")
 	public void showDietList(Model model){
 		model.addAttribute( "showDietList"  , dietDAO.showDietList());
+		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
 		System.out.println(model);
 	}
 
 	@PostMapping("insertDiet")
 	public String insertDiet(DietVO dietVO) {
-		System.out.println(dietVO);
 		dietDAO.insertDiet(dietVO);
 		return "redirect:/suggestion/dietList";
 	}

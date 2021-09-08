@@ -42,7 +42,7 @@
 			</thead>
 			<tr th:each="recipe : ${showRecipe}">
 				<td th:text="${recipe.name}"></td>
-				<td th:text="${eatery.categoryName}"></td>
+				<td th:text="${recipe.categoryName}"></td>
 				<td th:text="${recipe.ingredient}"></td>
 				<td th:text="${recipe.createDate}"></td>
 			</tr>
