@@ -18,7 +18,7 @@
         select * from category where name =#{name}
     </select>
 
-    <select id="categoryList" resultType="com.eat.vo.CategoryVO" parameterType="Long">
+    <select id="selectId" resultType="com.eat.vo.CategoryVO" parameterType="Long">
         select * from category where id =#{id}
     </select>
 
