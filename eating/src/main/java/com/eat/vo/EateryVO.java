@@ -6,11 +6,12 @@ import lombok.Data;
 public class EateryVO {
 	
     private Long id;
-    private String category;
+    private Long categoryId;
     private String name;
     private String content;
     private String address;
     private String phoneNumber;
     private Area area;
+    private String categoryName;
     
 }

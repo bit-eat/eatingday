@@ -5,4 +5,16 @@
         
 <mapper namespace="com.eat.dao.RandomDAO">
 
+	<select id="showEatery" resultType="com.eat.vo.EateryVO" parameterType="Long">
+		select e.name, e.phoneNumber, c.name as "categoryName" from eatery as e
+		right join category as c on e.categoryId = c.id 
+		where c.id = e.categoryId and e.id = #{eateryId}
+	</select>
+	
+	<select id="showRecipe" resultType="com.eat.vo.RecipeVO" parameterType="Long">
+		select r.name, r.ingredient, r.createDate, c.name as "categoryName" from recipe as r
+		inner join category as c on r.categoryId = c.id 
+		where c.id = r.categoryId and r.id = #{recipeId}
+	</select>
+
 </mapper>
