@@ -17,7 +17,7 @@ public class EateryController {
 	@Autowired
 	private EateryService eateryservice;
 
-	@GetMapping("/")
+	@GetMapping("/eateryTest")
 	public String eateryTest() {
 		return "/eateryTest";
 	}
