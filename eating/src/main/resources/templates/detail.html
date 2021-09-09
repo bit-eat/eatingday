@@ -5,56 +5,32 @@
 <title>맛집 상세 페이지</title>
 </head>
 <body>
-   <thead>
-      <tr>
-         <th>음식점 이름</th> <input type="text" name="eateryName" size="10" value="" maxlength="7"> <br>
-         <th>지역</th>
-         <select name="Area">
-    <option value="">선택</option>
-    <option value="인천">인천</option>
-    <option value="강북">강북</option>
-    <option value="강남">강남</option>
-    <option value="경남">경남</option>
-    <option value="강원">강원</option>
-    <option value="충청">충청</option>
-    <option value="대전">대전</option>
-    <option value="전라">전라</option>
-    <option value="광주">광주</option>
-    <option value="대구">대구</option>
-    <option value="울산">울산</option>
-    <option value="부산">부산</option>  
-    <option value="경상">경상</option> 
-       </select> <br>
-         <th>메뉴 카테고리</th>
-        <select name="Menu">
-    <option value="">선택</option>
-    <option value="한식">한식</option>
-    <option value="양식">양식</option>
-    <option value="일식">일식</option>
-    <option value="중식">중식</option>
-    <option value="패스트푸드">패스트푸드</option>
-    <option value="베이커리">베이커리</option>
-    <option value="퓨전푸드">퓨전푸드</option>
-    <option value="뷔페">뷔페</option>
-    <option value="카페/주점">카페/주점</option>
-      </select> <br>
-      </tr>
-      </thead>
-       <tr th:each ="eatery : ${selectAll }">         
-         <td th:text="${eatery.name}"></td>
-         <td th:text="${eatery.area}"></td>
-         <td th:text="${eatery.category}"></td>
-      </tr>
-      
-<button>추천</button>
-<button>즐겨찾기</button>
-<br>
-<thead>
-<tr>
-<th>음식점 설명</th><br>
-<input type="text" name="eateryContent" size="70" value="" maxlength="500">
-</tr>
-</thead>
 
+	<table border="1">
+		<thead>
+			<th>음식점 이름</th>
+			<th>카테고리</th>
+			<th>지역</th>
+			<th>주소</th>
+			<th>전화</th>
+			<th>음식점 설명</th>
+			
+
+		</thead>
+
+		<tr th:each="eatery : ${selectName }">
+			<td th:text="${eatery.name}"></td>
+			<td th:text="${eatery.categoryName}"></td>
+			<td th:each=" area : ${T(com.eat.vo.Area).values()}" th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}" th:text="${area.getKrName}"></td>
+			<td th:text="${eatery.address}"></td>
+			<td th:text="${eatery.phoneNumber}"></td>
+			<td th:text="${eatery.content}"></td>
+		</tr>
+
+	</table>
+	<div>
+		<button>추천</button>
+		<button>즐겨찾기</button>
+</div>
 </body>
 </html>

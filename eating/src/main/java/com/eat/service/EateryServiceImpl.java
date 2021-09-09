@@ -16,9 +16,9 @@ public class EateryServiceImpl implements EateryService {
 	EateryDAO eaterydao;
 
 	@Override
-	public void insertEatery(EateryVO eatery) {
+	public void insertEatery(EateryVO eateryvo) {
 		// TODO Auto-generated method stub
-		
+	  eaterydao.insertEatery(eateryvo);
 	}
 
 	@Override
@@ -46,9 +46,9 @@ public class EateryServiceImpl implements EateryService {
 	}
 
 	@Override
-	public List<EateryVO> selectCategory(String category) {
+	public List<EateryVO> selectCategoryId(Long categoryId) {
 		// TODO Auto-generated method stub
-		return eaterydao.selectCategory(category);
+		return eaterydao.selectCategoryId(categoryId);
 	}
 
 	@Override

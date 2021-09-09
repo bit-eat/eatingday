@@ -5,21 +5,25 @@
 
 <mapper namespace="com.eat.dao.EateryDAO">
 
-<insert id="insertEatery" parameterType="com.eat.vo.EateryVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into eatery(name, content, address, phoneNumber, area)
-        values(#{name}, #{content},#{address},#{phoneNumber},#{area})
+<insert id="insertEatery" parameterType="com.eat.vo.EateryVO" >
+        insert into 
+        eatery(name, content, area, categoryId)
+        values(#{name}, #{content},#{area},#{categoryId})
     </insert>
 
 <select id="selectAll" resultType="EateryVO">
-        SELECT * FROM eatery
+        SELECT e.*, c.name as categoryName FROM eatery as e right join category as c on e.categoryId = c.id 
+        where c.id = e.categoryId
+        
     </select>
 
 <select id="selectName" parameterType="String" resultType="com.eat.vo.EateryVO">
-        SELECT * FROM eatery WHERE name like CONCAT('%',#{name},'%')
+        SELECT e.*, c.name as categoryName FROM eatery as e right join category as c on e.categoryId = c.id 
+        where c.id = e.categoryId and e.name like CONCAT('%',#{name},'%')
     </select>
 
     <select id="selectArea" parameterType="String" resultType="com.eat.vo.EateryVO">
-        SELECT * FROM eatery WHERE  eatery=#{eatery}
+        SELECT * FROM eatery WHERE  area=#{area}
     </select>
 
     <select id="selectCategory" parameterType="String" resultType="com.eat.vo.EateryVO">
