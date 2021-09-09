@@ -1,6 +1,5 @@
 package com.eat.service;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,50 +15,30 @@ public class MemberServiceImpl implements MemberService {
 	MemberDAO memberdao;
 
 	@Override
-	public void selectMember(MemberVO membervo) {
-		memberdao.selectMember(membervo);
-	}
-
-	@Override
 	public void insertMember(MemberVO membervo) {
+		if(validateDuplicateMember(membervo)) {
+			memberdao.insertMember(membervo);
+		}
 		// TODO Auto-generated method stub
-		memberdao.insertMember(membervo);
+		throw new IllegalStateException("이미 존재하는 아이디입니다.");
 	}
 
 	@Override
-	public void updateMember(MemberVO member) {
+	public void updateMember(MemberVO membervo) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void deleteMember(MemberVO member) {
+	public void deleteMember(MemberVO membervo) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public List<MemberVO> selectOne(Long id) {
+	public MemberVO selectMember(String userName, String phoneNumber) {
 		// TODO Auto-generated method stub
-		return memberdao.selectOne(id);
-	}
-
-	@Override
-	public List<MemberVO> selectGrade(String grade) {
-		// TODO Auto-generated method stub
-		return memberdao.selectGrade(grade);
-	}
-
-	@Override
-	public List<MemberVO> selectMemberId(Long id) {
-		// TODO Auto-generated method stub
-		return memberdao.selectMemberId(id);
-	}
-
-	@Override
-	public boolean validateDuplicateMember(Member member) {
-		// TODO Auto-generated method stub
-		return false;
+		return memberdao.selectMember(userName, phoneNumber);
 	}
 
 	@Override
@@ -67,5 +46,35 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberdao.selectAll();
 	}
+
+	@Override
+	public MemberVO selectOne(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberVO> selectGrade(String grade) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberVO> selectMemberId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean validateDuplicateMember(MemberVO membervo) {
+		// TODO Auto-generated method stub
+		MemberVO member = memberdao.selectMemberId(membervo.getUserId());
+		if(member==null) {
+			return true; //중복 아님
+		}
+		return false;
+	}
+
+	
 
 }

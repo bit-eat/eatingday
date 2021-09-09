@@ -7,16 +7,35 @@
 	<body>
 	<h3>아이디찾기</h3>
 	
-	<form action ="selectMember" method="post">
+	<form action ="/findid" method="post" th:object = "${selectMember}">
 	<div>
 	<label for ="userName">이름</label> 
-	<input id ="userName" name="userName" type="text">
+	<input id ="userName" name="userName" type="text" th:field = "*{userName}">
 	</div>
 	<div>
 	<label for ="phoneNumber">전화번호</label> 
-	<input id ="phoneNumber" name="phoneNumber" type="text">
+	<input id ="phoneNumber" name="phoneNumber" type="text" th:field ="*{phoneNumber}">
 	</div>
 	<input type="submit" value="아이디찾기">
 	</form>
+	
+	
+	<table border = "1">
+	<thead>
+		<tr>
+			<th>아이디</th>
+			
+		</tr>
+		</thead>
+		
+	    <tr th:each ="member : ${selectMember}">			
+			<td th:text="${member.userId}"></td>
+			<td ></td>
+			
+			
+		</tr>
+		
+	</table>
 	</body>
+	
 </html>

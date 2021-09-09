@@ -13,14 +13,12 @@ public interface MemberDAO {
 	void insertMember(MemberVO membervo);
 	void updateMember(MemberVO membervo);
 	void deleteMember(MemberVO membervo);
-	void selectMember(MemberVO membervo);
+	MemberVO selectMember(@Param("userName")String userName,@Param("phoneNumber")String phoneNumber);
 	List<MemberVO> selectAll();
 	
-	List<MemberVO> selectOne(@Param("id")Long id);
+	MemberVO selectOne(@Param("id")Long id);
 	List<MemberVO> selectGrade(@Param("grade")String grade);
-	List<MemberVO> selectMemberId(@Param("id")Long id);
-	Object memberList();
-		
+	MemberVO selectMemberId(@Param("userId")String userId);
 	
 
 }
