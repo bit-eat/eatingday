@@ -28,9 +28,10 @@ public class EateryController {
 	}
 
 	@PostMapping("insertEatery")
-	public void insertEatery(EateryVO eateryvo) {
+	public String insertEatery(EateryVO eateryvo) {
 		System.out.println(eateryvo);
 		eateryservice.insertEatery(eateryvo);
+		return "redirect:/eateryTest";
 	}
 
 	@RequestMapping(value = "/insertPost")

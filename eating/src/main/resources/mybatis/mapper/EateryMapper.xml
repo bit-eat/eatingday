@@ -7,8 +7,8 @@
 
 <insert id="insertEatery" parameterType="com.eat.vo.EateryVO" >
         insert into 
-        eatery(id, name, content, area)
-        values(3,#{name}, #{content},#{area})
+        eatery(name, content, area)
+        values(#{name}, #{content},#{area})
     </insert>
 
 <select id="selectAll" resultType="EateryVO">
