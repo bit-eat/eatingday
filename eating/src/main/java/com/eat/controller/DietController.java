@@ -51,22 +51,21 @@ public class DietController {
 	public void showDietList(Model model){
 		model.addAttribute( "showDietList"  , dietDAO.showDietList());
 		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
-		System.out.println(model);
 	}
 
-	@PostMapping("insertDiet")
+	@PostMapping("/suggestion/insertDiet")
 	public String insertDiet(DietVO dietVO) {
 		dietDAO.insertDiet(dietVO);
 		return "redirect:/suggestion/dietList";
 	}
 	
-	@PostMapping("updateDiet")
+	@PostMapping("/suggestion/updateDiet")
 	public String updateDiet(DietVO dietVO) {
 		dietDAO.updateDiet(dietVO);
 		return "redirect:/suggestion/dietList";
 	};
 	
-	@PostMapping("deleteDiet")
+	@PostMapping("/suggestion/deleteDiet")
 	public String deleteDiet(DietVO dietVO) {
 		dietDAO.deleteDiet(dietVO);
 		return "redirect:/suggestion/dietList";
