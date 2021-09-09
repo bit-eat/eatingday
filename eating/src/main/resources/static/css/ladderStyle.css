@@ -173,3 +173,8 @@ html, body{
     top: 0;
     left: 0;
 }
+
+.resetLadder{
+	text-align : center;
+	margin : auto;
+}
