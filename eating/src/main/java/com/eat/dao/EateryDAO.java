@@ -10,21 +10,18 @@ import java.util.List;
 @Mapper
 public interface EateryDAO {
 
-    static void insertEatery(EateryVO eatery) {
-		// TODO Auto-generated method stub
-		
-	}
+	void insertEatery(EateryVO eateryvo);
 
-    List<EateryVO> selectAll();
-    List<EateryVO> selectName(@Param("name") String name);
-    List<EateryVO> selectArea(@Param("area") Area a);
-    List<EateryVO> selectCategory(@Param("category") String category);
+	void updateEatery(EateryVO eateryvo);
 
-    void updateEatery(EateryVO eatery);
-    void deleteEatery(@Param("id") Long id);
+	void deleteEatery(@Param("id") Long id);
 
+	List<EateryVO> selectAll();
+
+	List<EateryVO> selectName(@Param("name") String name);
+
+	List<EateryVO> selectArea(@Param("area") Area a);
+
+	List<EateryVO> selectCategoryId(@Param("categoryId") Long category);
 
 }
-
-
-	   

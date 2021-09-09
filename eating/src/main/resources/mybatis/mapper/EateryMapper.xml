@@ -5,9 +5,10 @@
 
 <mapper namespace="com.eat.dao.EateryDAO">
 
-<insert id="insertEatery" parameterType="com.eat.vo.EateryVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into eatery(name, content, address, phoneNumber, area)
-        values(#{name}, #{content},#{address},#{phoneNumber},#{area})
+<insert id="insertEatery" parameterType="com.eat.vo.EateryVO" >
+        insert into 
+        eatery(id, name, content, area)
+        values(3,#{name}, #{content},#{area})
     </insert>
 
 <select id="selectAll" resultType="EateryVO">
