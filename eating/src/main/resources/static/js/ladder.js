@@ -20,7 +20,7 @@ $(function(){
             return alert('최소 2명 이상 선택하세요.')
         }
 
-        if(member > 20){
+        if(member > 10){ 
             return alert('너무 많아요.. ㅠㅠ')   
         }
         $('#landing').css({
@@ -49,7 +49,7 @@ $(function(){
         setDefaultRowLine();
         setRandomNodeData();
         drawDefaultLine();
-        drawNodeLine();
+        //drawNodeLine(); //가로선
         userSetting();
         resultSetting();
         
