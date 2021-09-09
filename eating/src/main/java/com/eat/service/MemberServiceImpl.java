@@ -14,23 +14,28 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberDAO memberdao;
-	
+
 	@Override
-	public void insertMember(MemberVO member) {
+	public void selectMember(MemberVO membervo) {
+		memberdao.selectMember(membervo);
+	}
+
+	@Override
+	public void insertMember(MemberVO membervo) {
 		// TODO Auto-generated method stub
-		
+		memberdao.insertMember(membervo);
 	}
 
 	@Override
 	public void updateMember(MemberVO member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteMember(MemberVO member) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -62,8 +67,5 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberdao.selectAll();
 	}
-
-	
-	
 
 }

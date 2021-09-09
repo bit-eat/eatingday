@@ -8,7 +8,7 @@
 	
 	<h3>로그인페이지</h3>
 	
-	<form action="/login" method="selectAll">
+	<form action="logincheck" method="post">
 	<div>
 	<label for ="userId">아이디</label> 
 	<input id ="userId" name="userId" type="text">
@@ -21,21 +21,7 @@
 	</form>
 	<a href ="/findid">아이디찾기  </a><a href ="/findpw">비밀번호찾기   </a><a href ="/register">회원가입   </a>
 	
-	
-	
-	
 
-	
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-	<script>
-	$(member).ready(function(){
-		$("loginProccess").click(function(){
-			var json ={
-					userId : $("#userId").val(),
-					userPw : $("#userPw").val()};
-			})
-		})
-	
 	
 	</script>
 	
