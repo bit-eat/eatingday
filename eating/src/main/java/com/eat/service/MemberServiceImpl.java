@@ -15,11 +15,10 @@ public class MemberServiceImpl implements MemberService {
 	MemberDAO memberdao;
 
 	@Override
-	public void insertMember(MemberVO membervo) {
+	public void insertMember(MemberVO membervo) {  //아이디 중복 검사
 		if (validateDuplicateMember(membervo)) {
 			memberdao.insertMember(membervo);
 		}
-		// TODO Auto-generated method stub
 		throw new IllegalStateException("이미 존재하는 아이디입니다.");
 	}
 
@@ -30,48 +29,43 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void deleteMember(MemberVO membervo) {
+	public void deleteMember(MemberVO membervo) {  //회원탈퇴 
 		 memberdao.deleteMember(membervo);
 	}
 
 	@Override
-	public List<MemberVO> findId(String userName, String phoneNumber) {
+	public List<MemberVO> findId(String userName, String phoneNumber) {  //아이디찾기
 		return memberdao.findId(userName, phoneNumber);
 	}
 
 	@Override
 	public MemberVO selectMember(String userName, String phoneNumber) {
-		// TODO Auto-generated method stub
 		return memberdao.selectMember(userName, phoneNumber);
 	}
 
 	@Override
-	public List<MemberVO> selectAll() {
-		// TODO Auto-generated method stub
+	public List<MemberVO> selectAll() {   //회원목록
 		return memberdao.selectAll();
 	}
 
 	@Override
 	public MemberVO selectOne(Long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<MemberVO> selectGrade(String grade) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public List<MemberVO> selectMemberId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return null; 
 	}
 
 	@Override
-	public boolean validateDuplicateMember(MemberVO membervo) {
-		// TODO Auto-generated method stub
+	public boolean validateDuplicateMember(MemberVO membervo) {  //중복검사
 		MemberVO member = memberdao.selectMemberId(membervo.getUserId());
 		if (member == null) {
 			return true; // 중복 아님
@@ -79,10 +73,20 @@ public class MemberServiceImpl implements MemberService {
 		return false;
 	}
 
-	@Override
-	public List<MemberVO> findPw(String userName, String phoneNumber, String userId) {
-		// TODO Auto-generated method stub
+	@Override  
+	public List<MemberVO> findPw(String userName, String phoneNumber, String userId) {   //비밀번호찾기
 		return memberdao.findPw(userName, userId, phoneNumber);
+	}
+
+	@Override    
+	public List<MemberVO> logincheck(String userId, String userPw) {  //로그인 
+		MemberVO membervo = memberdao.selectMember(userId, userPw);
+		if(membervo.getUserId()==userId && membervo.getUserPw()==userPw) {
+			return memberdao.logincheck(userId, userPw); 
+		}else if(membervo==null) {
+			return ;
+		}
+		//return memberdao.logincheck(userId, userPw);
 	}
 
 

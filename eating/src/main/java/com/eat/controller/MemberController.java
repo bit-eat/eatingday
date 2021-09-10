@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eat.dao.MemberDAO;
 import com.eat.service.MemberService;
 import com.eat.vo.MemberVO;
 
@@ -58,9 +59,9 @@ public class MemberController {
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
 
-	@GetMapping("logincheck") // 로그인 완료 ->메인페이지로 띄우기
-	public String logincheck(MemberVO membervo) {
-		System.out.println(membervo);
+	@GetMapping("logincheck") // 로그인 ->메인페이지로 띄우기
+	public String logincheck(String userId, String userPw) {
+		memberservice.logincheck(userId, userPw);
 		return "redirect:/";
 	}
 
@@ -69,18 +70,22 @@ public class MemberController {
 		memberservice.updateMember(membervo);
 	}
 
-	@GetMapping("/delete")
-	public String deleteMember(MemberVO membervo) { // 삭제(회원탈퇴)
+	@GetMapping("/delete") // 회원탈퇴 ,페이지 불러오기
+	public String delete() {
+		return "delete";
+	}
+	
+	@PostMapping("/delete")
+	public String deleteMember(MemberVO membervo) { // 삭제(회원탈퇴) , 정보전달 받은거 처리하기
 		memberservice.deleteMember(membervo);
 		return "/Login";
 	}
 	
 
 	@GetMapping("/adminlogin") // 관리자 로그인
-	public void adminLogin(Model model) {
-		model.addAttribute("selectAll", memberservice.selectAll());
-		List<MemberVO> memberList = memberservice.selectAll();
-		System.out.println(memberList.size());
+	public String adminLogin(MemberVO membervo) {
+		System.out.println(membervo);
+		return "redirect:/";
 	}
 
 	@GetMapping("/memberList") // 회원관리
