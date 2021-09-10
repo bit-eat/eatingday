@@ -6,13 +6,16 @@
 <mapper namespace="com.eat.dao.MemberDAO">
 
 
-	<select id="selectMember" parameterType="String" resultType="MemberVO">
-	select * from member
-	where userName=#{userName} and phoneNumber=#{phoneNumber}
-	
+	<select id="selectMember" parameterType="String"
+		resultType="MemberVO">
+		select * from member
+		where userName=#{userName} and
+		phoneNumber=#{phoneNumber}
+
 	</select>
 
-	<insert id="insertMember" parameterType="com.eat.vo.MemberVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	<insert id="insertMember" parameterType="com.eat.vo.MemberVO"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 		insert into
 		member(userId,userPw,userName,phoneNumber)
 		values(#{userId},#{userPw},#{userName},#{phoneNumber})
@@ -23,22 +26,26 @@
 		DELETE FROM member WHERE
 		userId=#{userId} and userPw=#{userPw}
 	</delete>
-	
-	<select id="logincheck" parameterType="com.eat.vo.MemberVO">   
+
+	<select id="logincheck" parameterType="com.eat.vo.MemberVO">
 		SELECT *
 		FROM member
-		WHERE userId=#{userId} and userPw=#{userPw} and userName=#{userName}
-	
-	
+		WHERE
+		userId=#{userId} and userPw=#{userPw} and
+		userName=#{userName}
+
+
 	</select>
 
 	<select id="selectOne" parameterType="Long">
-		SELECT * 
-		FROM member 
-		WHERE id = #{id}
+		SELECT *
+		FROM member
+		WHERE id
+		= #{id}
 	</select>
 
-	<select id="selectMemberId" parameterType="String" resultType="com.eat.vo.MemberVO">
+	<select id="selectMemberId" parameterType="String"
+		resultType="com.eat.vo.MemberVO">
 		SELECT * FROM member
 		WHERE userId = #{userId}
 	</select>
@@ -52,6 +59,19 @@
 		SELECT * FROM member
 	</select>
 
+	<select id="findId" parameterType="String" resultType="MemberVO">
+		SELECT *
+		FROM member
+		WHERE userName = #{userName} and phoneNumber =
+		#{phoneNumber}
+	</select>
+
+	<select id="findPw" parameterType="String" resultType="MemberVO">
+		SELECT *
+		FROM member
+		WHERE userName = #{userName} and phoneNumber =
+		#{phoneNumber} and #{userId}
+	</select>
 
 
 </mapper>

@@ -9,16 +9,26 @@ import com.eat.vo.MemberVO;
 
 @Mapper
 public interface MemberDAO {
-	
+
 	void insertMember(MemberVO membervo);
+
 	void updateMember(MemberVO membervo);
+
 	void deleteMember(MemberVO membervo);
-	MemberVO selectMember(@Param("userName")String userName,@Param("phoneNumber")String phoneNumber);
+
+	MemberVO selectMember(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber);
+
 	List<MemberVO> selectAll();
-	
-	MemberVO selectOne(@Param("id")Long id);
-	List<MemberVO> selectGrade(@Param("grade")String grade);
-	MemberVO selectMemberId(@Param("userId")String userId);
-	
+
+	List<MemberVO> findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber);
+
+	List<MemberVO> findPw(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber,
+			@Param("userId") String userId);
+
+	MemberVO selectOne(@Param("id") Long id);
+
+	List<MemberVO> selectGrade(@Param("grade") String grade);
+
+	MemberVO selectMemberId(@Param("userId") String userId);
 
 }

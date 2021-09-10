@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void insertMember(MemberVO membervo) {
-		if(validateDuplicateMember(membervo)) {
+		if (validateDuplicateMember(membervo)) {
 			memberdao.insertMember(membervo);
 		}
 		// TODO Auto-generated method stub
@@ -26,13 +26,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateMember(MemberVO membervo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteMember(MemberVO membervo) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public List<MemberVO> findId(String userName, String phoneNumber) {
+		return memberdao.findId(userName, phoneNumber);
 	}
 
 	@Override
@@ -69,12 +74,16 @@ public class MemberServiceImpl implements MemberService {
 	public boolean validateDuplicateMember(MemberVO membervo) {
 		// TODO Auto-generated method stub
 		MemberVO member = memberdao.selectMemberId(membervo.getUserId());
-		if(member==null) {
-			return true; //중복 아님
+		if (member == null) {
+			return true; // 중복 아님
 		}
 		return false;
 	}
 
-	
+	@Override
+	public List<MemberVO> findPw(String userName, String phoneNumber, String userId) {
+		// TODO Auto-generated method stub
+		return memberdao.findPw(userName, userId, phoneNumber);
+	}
 
 }
