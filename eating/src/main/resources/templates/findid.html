@@ -6,21 +6,23 @@
 	</head>
 	<body>
 	<h3>아이디찾기</h3>
-	
-	<form action ="findid" method="selectAll">
-	<div>
-	<label for ="userName">이름</label> 
-	<input id ="userName" name="userName" type="text">
-	</div>
-	<div>
-	<label for ="phoneNumber">전화번호</label> 
-	<input id ="phoneNumber" name="phoneNumber" type="text">
-	</div>
-	<div>
-	<label for ="userPw">인증번호</label> 
-	<input id ="userPw" name="userPw" type="text">
-	</div>
-	<input type="submit" value="아이디찾기">
+
+	<form action="findId" method="post">
+		<div>
+			<label>이름</label> <input for="userName" id="userName" name="userName"
+				type="text" >
+		</div>
+		<div>
+			<label>전화번호</label> <input for="phoneNumber" id="phoneNumber"
+				name="phoneNumber" type="text">
+		</div>
+		<input type="submit" value="아이디찾기">
 	</form>
+
+	<label>아이디</label>
+	<input th:each="member : ${findId}" th:value="${member.userId}" type="text" readonly>
+	
+	
 	</body>
+	
 </html>

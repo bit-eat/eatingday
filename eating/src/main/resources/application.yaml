@@ -12,7 +12,3 @@ mybatis:
   type-aliases-package: com.eat.vo
   mapper-locations: mybatis/mapper/*.xml
   type-handlers-package: com.eat.dao
- 
-
-
-

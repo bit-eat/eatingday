@@ -1,26 +1,34 @@
 package com.eat.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.eat.vo.MemberVO;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
-import java.util.List;
+import com.eat.vo.MemberVO;
 
 @Mapper
 public interface MemberDAO {
-	
-	void insertMember(MemberVO member);
-	void updateMember(MemberVO member);
-	void deleteMember(MemberVO member);
-	
+
+	void insertMember(MemberVO membervo);
+
+	void updateMember(MemberVO membervo);
+
+	void deleteMember(MemberVO membervo);
+
+	MemberVO selectMember(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber);
+
 	List<MemberVO> selectAll();
-	
-	List<MemberVO> selectOne(@Param("id")Long id);
-	List<MemberVO> selectGrade(@Param("grade")String grade);
-	List<MemberVO> selectMemberId(@Param("id")Long id);
-	Object memberList();
-		
-	
+
+	List<MemberVO> findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber);
+
+	List<MemberVO> findPw(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber,
+			@Param("userId") String userId);
+
+	MemberVO selectOne(@Param("id") Long id);
+
+	List<MemberVO> selectGrade(@Param("grade") String grade);
+
+	MemberVO selectMemberId(@Param("userId") String userId);
 
 }

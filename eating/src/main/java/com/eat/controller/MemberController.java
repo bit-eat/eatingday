@@ -5,7 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 import com.eat.service.MemberService;
+import com.eat.vo.MemberVO;
+import java.util.List;
 
 @Controller
 public class MemberController {
@@ -15,54 +21,74 @@ public class MemberController {
 	public String Test() {
 		return "dietMain";
 	}
-	
-	@Autowired
-	private MemberService memberservice;
-	//private MemberDAO memberdao;
-	
-	
-	@Autowired
-	
-	public void insertMember(MemberService memberservice) {}
-	public void updateMember(MemberService memberservice) {}
-	public void deleteMember(MemberService memberservice) {}
-	
-	
-/*	@RequestMapping(value ="/login",method=RequestMethod.POST)
-	public String login(MemberVO vo,Model model) {
-		System.out.println("vo="+vo);
-		//MemberVO membervo = MemberService(vo.getUserId(),vo.getUserPw()); 
-		return "test.html";
-	}*/
-	
 
-	
-	@GetMapping("/Login")
-	public void selectAll(Model model){
-		System.out.println(memberservice.selectAll());
-		model.addAttribute("selectAll", memberservice.selectAll());
-		if(model==null) {
-			model.addAttribute("loginMessage","아이디 혹은 비밀번호가 일치하지 않습니다.");
-			
-		}
+	@GetMapping("/Login") // 로그인
+	public void Login() {
 	}
-	
-	@GetMapping("/adminlogin")
-	public void selectGrade(Model model){
-		System.out.println(memberservice.selectGrade("grade"));
-		model.addAttribute("selectGrade", memberservice.selectGrade("grade"));
-	}
-	
-	@GetMapping("/register")
+
+	@GetMapping("/register") // 회원가입
 	public String register() {
 		return "register";
 	}
-		@GetMapping("/findid")
-		public String login() {
-			return "findid";
-}
-		@GetMapping("/findpw")
-		public String findpw() {
-			return "findpw";
-}
+
+	@PostMapping("insertMember") // 회원가입
+	public String insertMember(MemberVO membervo) {
+		System.out.println(membervo);
+		memberservice.insertMember(membervo);
+		return "/Login";
+	}
+
+	@GetMapping("/findid") // 아이디찾기
+	public String findid() {
+		return "/findid";
+	}
+
+	@PostMapping("findId") // 아이디찾기
+	public void findId(Model model, @RequestParam("userName") String userName,
+			@RequestParam("phoneNumber") String phoneNumber) {
+		model.addAttribute("findId", memberservice.findId(userName, phoneNumber));
+		System.out.println(model);
+	}
+
+	@GetMapping("/findpw") // 비밀번호찾기
+	public String findpw() {
+		return "/findpw";
+	}
+
+	@PostMapping("/findPw") // 비밀번호찾기
+	public void findPw(Model model, @RequestParam("userName") String userName, @RequestParam("userId") String userId,
+			@RequestParam("phoneNumber") String phoneNumber) {
+		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
+	}
+
+	@GetMapping("logincheck") // 로그인 완료
+	public String logincheck(MemberVO membervo) {
+		System.out.println(membervo);
+		return "/logindo";
+	}
+
+	public void updateMember(MemberVO membervo) { // 수정
+		System.out.println(membervo);
+		memberservice.updateMember(membervo);
+	}
+
+	public void deleteMember(MemberVO membervo) { // 삭제
+		System.out.println(membervo);
+		memberservice.deleteMember(membervo);
+	}
+
+	@GetMapping("/adminlogin") // 관리자 로그인
+	public void adminLogin(Model model) {
+		model.addAttribute("selectAll", memberservice.selectAll());
+		List<MemberVO> memberList = memberservice.selectAll();
+		System.out.println(memberList.size());
+	}
+
+	@GetMapping("/memberList") // 회원목록
+	public void selectAll(Model model) {
+		model.addAttribute("selectAll", memberservice.selectAll());
+		List<MemberVO> memberList = memberservice.selectAll();
+		System.out.println(memberList.size());
+	}
+
 }

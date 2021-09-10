@@ -8,7 +8,6 @@ import lombok.Setter;
 
 public class MemberVO {
 
-
 	private Long id;
 	private String userId;
 	private String userPw;
