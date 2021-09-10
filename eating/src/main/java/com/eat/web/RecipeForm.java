@@ -16,5 +16,6 @@ public class RecipeForm {
     private People people;
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
+    private String originTag;
 
 }

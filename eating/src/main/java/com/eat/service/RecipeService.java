@@ -12,7 +12,6 @@ public interface RecipeService {
 
     Long saveRecipe(RecipeVO recipe);
     void saveContent(Long id, RecipeContentVO content);
-    void saveTag(Long id, RecipeTagVO tag);
     void updateRecipe(RecipeVO recipe);
     void updateContent(RecipeContentVO content);
     void updateTag(RecipeTagVO tag);
@@ -28,6 +27,9 @@ public interface RecipeService {
     List<RecipeVO> selectMember(String memberId);
     List<RecipeVO> selectCategory(String category);
     List<RecipeVO> selectTag(String tagName);
+
+    void manufactureTag(Long recipeId, String originTag);
+
 
 
 }

@@ -6,7 +6,7 @@
   <title>레시피</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="/css/bootstrap.css">
-<script type="text/javascript" src="/js/recipeTag.js"></script>
+<!--<script type="text/javascript" src="/js/recipeTag.js"></script>-->
 </head>
 
 <body>
@@ -37,10 +37,9 @@
 <!--    #로 태그입력-->
     <div class="form-group">
 
-      <lable th:for="tag" class="form-label mt-r">태그 입력</lable>
-      <input type="text" id="tagList" class="form-control" onkeyup="tag()"
+      <lable th:for="originTag" class="form-label mt-r">태그 입력</lable>
+      <input type="text" th:field="*{originTag}" class="form-control"
              placeholder="태그를 입력하세요 #로 구분할 수 있습니다. 최대 10개 입력 가능">
-      <div id="tagResult"></div>
     </div>
 <br/><br/>
   <button type="submit" class="btn btn-primary">등록하기</button>

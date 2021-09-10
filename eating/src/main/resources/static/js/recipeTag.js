@@ -1,18 +1,20 @@
+let tagModify = new Array();
+
 function tag(){
-    //tagList의 텍스트창에 있는 문자열ㅇ르 가져옴
-    const tagOrigin = document.getElementById("tagList").value;
+    var tagOrigin = document.getElementById("tagList").value;
+    var tagDelete = tagOrigin.replace(/(\s*)/g,"");
+    tagModify = tagDelete.split('#',10);
 
-    //공백제거
-    const tagDelete = tagOrigin.replace(/(\s*)/g,"");
-    //#로 분리해서 리스트로 나눔
-    const tagModify = tagDelete.split('#',10);
+    $.ajax({
+        url:"/recipe/new",
+        type: "post",
+        data : {tagList : tagModify},
+        success:function (data){
+        console.log('성공');
+        }, error :function (e){
+            console.log(e);
+        }
+    })
 
-    // for(var i in tagModify)
-    //  console.log(tagModify[i]);
-
-
-    document.getElementById("tagResult").innerText = tagModify;
-
-    // document.getElementById("tagResult").value = tagModify;
 
 }

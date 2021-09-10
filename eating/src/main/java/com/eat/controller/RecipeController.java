@@ -1,6 +1,7 @@
 package com.eat.controller;
 
 import com.eat.dao.RecipeDAO;
+import com.eat.service.RecipeService;
 import com.eat.vo.RecipeVO;
 import com.eat.web.RecipeForm;
 import com.eat.web.RecipeTagForm;
@@ -23,6 +24,7 @@ import java.util.List;
 public class RecipeController {
 
     private final RecipeDAO recipeDAO;
+    private final RecipeService recipeService;
 
     @GetMapping("/recipe")
     public String home(){
@@ -36,17 +38,16 @@ public class RecipeController {
     }
 
     @PostMapping(value="/recipe/new")
-    @ResponseBody
-    public String create(@Validated RecipeForm recipeForm,
-                         @RequestParam(value="tagResult")List<RecipeTagForm> tagResult){
+    public String create(@Validated RecipeForm recipeForm){
         RecipeVO recipe = new RecipeVO();
         recipe.setName(recipeForm.getName());
         recipe.setIngredient(recipeForm.getIngredient());
         recipe.setPeople(recipeForm.getPeople());
         recipe.setCreateDate(LocalDateTime.now());
-        recipeDAO.insertRecipe(recipe);
-        for(RecipeTagForm i : tagResult)
-            System.out.println(i.getName());
+
+        Long recipeId = recipeService.saveRecipe(recipe);
+        recipeService.manufactureTag(recipeId, recipeForm.getOriginTag());
+
         return "redirect:/";
     }
 

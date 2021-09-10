@@ -31,11 +31,6 @@ public class RecipeServiceImpl implements RecipeService{
         contentDAO.insertRecipeContent(content);
     }
 
-    @Override
-    public void saveTag(Long id, RecipeTagVO tag) {
-        tag.setRecipeId(id);
-        tagDAO.insertRecipeTag(tag);
-    }
 
     @Override
     public void updateRecipe(RecipeVO recipe) {
@@ -108,5 +103,24 @@ public class RecipeServiceImpl implements RecipeService{
         }
 
         return recipeList;
+    }
+
+    @Override
+    public void manufactureTag(Long recipeId, String originTag) {
+        String manufactTag = originTag.replace(" ","");
+        String tagList[] = manufactTag.split("#");
+
+        int max = 11;
+
+        if(!(tagList.length > max))
+            max = tagList.length;
+
+       for(int i=1;i<max; i++){
+           RecipeTagVO tagVO = new RecipeTagVO();
+           tagVO.setRecipeId(recipeId);
+           tagVO.setName(tagList[i]);
+           tagDAO.insertRecipeTag(tagVO);
+       }
+
     }
 }
