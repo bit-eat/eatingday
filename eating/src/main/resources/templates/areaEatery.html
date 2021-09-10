@@ -2,14 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>맛집 메인 페이지</title>
-
+<title>지역별 맛집 페이지</title>
 </head>
-
 <body>
-
-
-<h3>지역별 맛집</h3>
+<h3>지역</h3>
 <table border = "1">
 		<tr>
 			<th colspan="5">지역</th>
@@ -37,56 +33,41 @@
 			<td onclick="location.href='#'">제주</td>
 		</tr>
 	</table>
-
-
-    <h3>메뉴별 맛집</h3>
-
-	<table border = "1">
-		<tr>
-			<th colspan="3">메뉴</th>
-		</tr>
-		<tr>
-			<td onclick="location.href='#'">한식</td>
-			<td onclick="location.href='#'">중식</td>
-			<td onclick="location.href='#'">일식</td>
-		</tr>
-		<tr>
-			<td onclick="location.href='#'">양식</td>
-			<td onclick="location.href='#'">분식</td>
-			<td onclick="location.href='#'">패스트푸드</td>
-		</tr>
-		<tr>
-			<td onclick="location.href='#'">베이커리</td>
-			<td onclick="location.href='#'">치킨</td>
-			<td onclick="location.href='#'">기타</td>
-		</tr>
-	</table>
 	<br>
-<h3>신규 맛집</h3>
-
-<table border="1">
+	<table border="1">
 		<thead>
-	
+		<h3>지역별 인기 맛집</h3>
 			<th>음식점 이름</th>
 			<th>지역</th>
 			<th>추천수</th>
 		</thead>
 
-		<tr th:each="eatery : ${selectAll }">
+		<tr th:each="eatery : ${selectArea }">
 			<td th:text="${eatery.name}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>
-			<td></td>
+			
 		</tr>
 
 	</table>
+	<br>
+	<table border="1">
+		<thead>
+		<h3>지역별 맛집</h3>
+			<th>음식점 이름</th>
+			<th>지역</th>
+			<th>추천수</th>
+		</thead>
 
-	<select name="selectbox">
-		<option value="">==선택==</option>
-		<option value="추천수">추천수</option>
-		<option value="최신순">최신순</option>
-	</select>
+		<tr th:each="eatery : ${selectArea }">
+			<td th:text="${eatery.name}"></td>
+			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
+				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
+				th:text="${area.getKrName}"></td>
+			
+		</tr>
 
+	</table>
 </body>
 </html>

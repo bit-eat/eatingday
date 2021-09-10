@@ -52,7 +52,7 @@ public class EateryServiceImpl implements EateryService {
 	}
 
 	@Override
-	public List<EateryVO> selectArea(Area area) {
+	public List<EateryVO> selectArea(String area) {
 		// TODO Auto-generated method stub
 		return eaterydao.selectArea(area);
 	}

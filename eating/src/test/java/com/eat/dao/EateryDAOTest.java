@@ -15,7 +15,7 @@ import java.util.List;
 public class EateryDAOTest {
 
     @Autowired
-    private EateryDAO eateryDAO;
+    private EateryDAO eaterydao;
 
     @Test
     public void 맛집등록(){
@@ -26,7 +26,7 @@ public class EateryDAOTest {
         eateryVO.setPhoneNumber("222-2222");
         eateryVO.setArea(Area.BUSAN);
 
-        EateryDAO.insertEatery(eateryVO);
+        eaterydao.insertEatery(eateryVO);
 
     }
 
@@ -39,9 +39,9 @@ public class EateryDAOTest {
         eateryVO.setPhoneNumber("222-2222");
         eateryVO.setArea(Area.BUSAN);
 
-        EateryDAO.insertEatery(eateryVO);
+        eaterydao.insertEatery(eateryVO);
 
-        List<EateryVO> findEatery = eateryDAO.selectName("에그드랍");
+        List<EateryVO> findEatery = eaterydao.selectName("에그드랍");
 
         Assertions.assertFalse(findEatery.isEmpty());
     }

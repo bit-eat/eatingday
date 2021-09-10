@@ -2,6 +2,7 @@ package com.eat.controller;
 
 import com.eat.dao.CategoryDAO;
 import com.eat.service.EateryService;
+import com.eat.vo.Area;
 import com.eat.vo.EateryVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,20 @@ public class EateryController {
 		return "/detail";
 	}
 	@GetMapping("/eateryMain")
-	public void eateryMain() {
+	public void eateryMain(Model model) {
+		model.addAttribute("selectAll",eateryservice.selectAll());
+		System.out.println(model);
 	}
+	@GetMapping("/menuEatery")
+	public String menu(Model model) {
+		String name = "유가";
+		model.addAttribute("selectName",eateryservice.selectName(name));
+		return "/menuEatery";
 	}
+	@GetMapping("/areaEatery")
+	public String areaEatery(Model model) {
+		String area = "GYEONGNAM";
+		model.addAttribute("selectArea",eateryservice.selectArea(area));
+		return "/areaEatery";
+	}
+}

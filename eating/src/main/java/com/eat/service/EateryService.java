@@ -20,7 +20,7 @@ public interface EateryService {
    
    public List<EateryVO> selectCategoryId(@Param("categoryId")Long categoryId);
    
-   public List<EateryVO> selectArea(@Param("area")Area area);
+   public List<EateryVO> selectArea(@Param("area")String area);
    
    public boolean validateDuplicateEatery(EateryVO eatery);
    

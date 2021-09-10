@@ -20,7 +20,7 @@ public interface EateryDAO {
 
 	List<EateryVO> selectName(@Param("name") String name);
 
-	List<EateryVO> selectArea(@Param("area") Area a);
+	List<EateryVO> selectArea(@Param("area") String area);
 
 	List<EateryVO> selectCategoryId(@Param("categoryId") Long category);
 

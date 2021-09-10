@@ -23,7 +23,7 @@
     </select>
 
     <select id="selectArea" parameterType="String" resultType="com.eat.vo.EateryVO">
-        SELECT * FROM eatery WHERE  area=#{area}
+        SELECT * FROM eatery WHERE area = #{area}
     </select>
 
     <select id="selectCategory" parameterType="String" resultType="com.eat.vo.EateryVO">
