@@ -31,8 +31,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void deleteMember(MemberVO membervo) {
-		// TODO Auto-generated method stub
-
+		 memberdao.deleteMember(membervo);
 	}
 
 	@Override
@@ -85,5 +84,7 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberdao.findPw(userName, userId, phoneNumber);
 	}
+
+
 
 }

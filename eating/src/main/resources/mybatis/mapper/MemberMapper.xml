@@ -23,8 +23,7 @@
 
 
 	<delete id="deleteMember" parameterType="com.eat.vo.MemberVO">
-		DELETE FROM member WHERE
-		userId=#{userId} and userPw=#{userPw}
+		DELETE FROM member WHERE userId=#{userId} and userPw=#{userPw}
 	</delete>
 
 	<select id="logincheck" parameterType="com.eat.vo.MemberVO">
