@@ -1,26 +1,23 @@
 package com.eat.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import com.eat.service.MemberService;
 import com.eat.vo.MemberVO;
-import java.util.List;
 
 @Controller
 public class MemberController {
-	
-	
-	@GetMapping("/member")
-	public String Test() {
-		return "dietMain";
-	}
+
+	@Autowired
+	private MemberService memberservice;
+
 
 	@GetMapping("/Login") // 로그인
 	public void Login() {
@@ -61,21 +58,23 @@ public class MemberController {
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
 
-	@GetMapping("logincheck") // 로그인 완료
+	@GetMapping("logincheck") // 로그인 완료 ->메인페이지로 띄우기
 	public String logincheck(MemberVO membervo) {
 		System.out.println(membervo);
-		return "/logindo";
+		return "redirect:/";
 	}
 
-	public void updateMember(MemberVO membervo) { // 수정
+	public void updateMember(MemberVO membervo) { // 수정(개인정보수정)
 		System.out.println(membervo);
 		memberservice.updateMember(membervo);
 	}
 
-	public void deleteMember(MemberVO membervo) { // 삭제
-		System.out.println(membervo);
+	@GetMapping("/delete")
+	public String deleteMember(MemberVO membervo) { // 삭제(회원탈퇴)
 		memberservice.deleteMember(membervo);
+		return "/Login";
 	}
+	
 
 	@GetMapping("/adminlogin") // 관리자 로그인
 	public void adminLogin(Model model) {
@@ -84,11 +83,13 @@ public class MemberController {
 		System.out.println(memberList.size());
 	}
 
-	@GetMapping("/memberList") // 회원목록
+	@GetMapping("/memberList") // 회원관리
 	public void selectAll(Model model) {
 		model.addAttribute("selectAll", memberservice.selectAll());
 		List<MemberVO> memberList = memberservice.selectAll();
 		System.out.println(memberList.size());
 	}
+	
+	
 
 }

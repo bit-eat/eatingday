@@ -12,7 +12,6 @@ public interface MemberService {
 
 	void updateMember(MemberVO membervo);
 
-	void deleteMember(MemberVO membervo);
 
 	MemberVO selectMember(String userName, String phoneNumber);
 
@@ -25,6 +24,8 @@ public interface MemberService {
 	List<MemberVO> selectMemberId(Long id);
 
 	List<MemberVO> findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber);
+
+	void deleteMember(MemberVO membervo);
 
 	List<MemberVO> findPw(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber,
 			@Param("userId") String userId);
