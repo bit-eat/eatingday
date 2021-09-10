@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>맛집 상세 페이지</title>
+<title>Eatery Bookmark List</title>
 </head>
 <body>
+<div id="content">
+		<h1>EateryBookmark List</h1>
 
-<h3>상세 페이지</h3>
-
-	<table border="1">
+		<table border="1">
 		<thead>
 			<th>음식점 이름</th>
 			<th>카테고리</th>
@@ -17,10 +17,9 @@
 			<th>전화</th>
 			<th>음식점 설명</th>
 			
-
 		</thead>
 
-		<tr th:each="eatery : ${selectName }">
+		<tr th:each="eatery : ${selectEateryBookmark}">
 			<td th:text="${eatery.name}"></td>
 			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}" th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}" th:text="${area.getKrName}"></td>
@@ -30,10 +29,7 @@
 		</tr>
 
 	</table>
-	<div>
-		<button>추천</button>
-		
-		<button>즐겨찾기</button>
-</div>
+	
+	</div>
 </body>
 </html>

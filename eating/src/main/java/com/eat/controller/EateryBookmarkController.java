@@ -1,0 +1,22 @@
+package com.eat.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.eat.dao.EateryBookmarkDAO;
+
+@Controller
+public class EateryBookmarkController {
+	@Autowired
+	private EateryBookmarkDAO eateryBookmarkdao;
+
+	@GetMapping("/eateryBookmarkList")
+	public String eateryBookmarkList(Model model, Long id) {
+		id=(long) 1;
+		model.addAttribute("selectEateryBookmark",eateryBookmarkdao.selectEateryBookmark(id));
+		return "/eateryBookmarkList";
+	}
+
+}
