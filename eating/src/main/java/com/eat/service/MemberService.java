@@ -22,7 +22,7 @@ public interface MemberService {
 	List<MemberVO> selectOne(@Param("id")Long id);
 	List<MemberVO> selectGrade(@Param("grade")String grade);
 	List<MemberVO> selectMemberId(@Param("id")Long id);
-	
+	List<MemberVO> findId(@Param("userName")String userName, @Param("phoneNumber")String phoneNumber);
 	
 
 	 

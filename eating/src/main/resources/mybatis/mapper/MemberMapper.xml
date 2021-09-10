@@ -5,7 +5,7 @@
 
 <mapper namespace="com.eat.dao.MemberDAO">
 
-	
+
 
 	<insert id="insertMember" parameterType="com.eat.vo.MemberVO">
 		insert into
@@ -45,6 +45,9 @@
 		SELECT * FROM member
 	</select>
 
-
+	<select id="findId" parameterType="String" resultType="MemberVO">
+		SELECT * FROM member
+		WHERE userName = #{userName} and phoneNumber = #{phoneNumber}
+	</select>
 
 </mapper>

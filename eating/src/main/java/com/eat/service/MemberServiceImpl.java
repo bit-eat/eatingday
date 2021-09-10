@@ -63,6 +63,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberdao.selectAll();
 	}
 
+	@Override
+	public List<MemberVO> findId(String userName, String phoneNumber) {
+		return memberdao.findId(userName,phoneNumber);
+	}
+
 	
 	
 
