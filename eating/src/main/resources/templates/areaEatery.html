@@ -5,13 +5,13 @@
 <title>지역별 맛집 페이지</title>
 </head>
 <body>
-<h3>지역</h3>
-<table border = "1">
+	<h3>지역</h3>
+	<table border="1">
 		<tr>
 			<th colspan="5">지역</th>
 		</tr>
 		<tr>
-			
+
 			<td onclick="location.href='#'">강북</td>
 			<td onclick="location.href='#'">강남</td>
 			<td onclick="location.href='#'">경북</td>
@@ -36,7 +36,7 @@
 	<br>
 	<table border="1">
 		<thead>
-		<h3>지역별 인기 맛집</h3>
+			<h3>지역별 인기 맛집</h3>
 			<th>음식점 이름</th>
 			<th>지역</th>
 			<th>추천수</th>
@@ -47,14 +47,15 @@
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>
-			
+			<td></td>
+
 		</tr>
 
 	</table>
 	<br>
 	<table border="1">
 		<thead>
-		<h3>지역별 맛집</h3>
+			<h3>지역별 맛집</h3>
 			<th>음식점 이름</th>
 			<th>지역</th>
 			<th>추천수</th>
@@ -65,7 +66,7 @@
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>
-			
+			<td></td>
 		</tr>
 
 	</table>

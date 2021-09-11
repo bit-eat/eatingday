@@ -36,7 +36,6 @@ public class EateryController {
 
 	@PostMapping("/insertEatery")
 	public String insertEatery(EateryVO eateryvo) {
-		System.out.println(eateryvo);
 		eateryservice.insertEatery(eateryvo);
 		return "redirect:/eateryTest";
 	}
@@ -50,8 +49,21 @@ public class EateryController {
 	@GetMapping("/eateryMain")
 	public void eateryMain(Model model) {
 		model.addAttribute("selectAll",eateryservice.selectAll());
-		System.out.println(model);
+		
 	}
+	
+	@PostMapping("selectEateryList")
+	public String selectEateryList (Model model, String checking) {
+		if(checking.equals("추천순")) {
+			return "/eateryMain"; 
+		} else if(checking.equals("최신순")) {
+			model.addAttribute("LatestEateryList",eateryservice.LatestEateryList());
+			return "/eateryMain";
+		} else {
+			return "/eateryMain";
+		}
+	}
+	
 	@GetMapping("/menuEatery")
 	public String menu(Model model) {
 		String name = "유가";

@@ -56,7 +56,12 @@ public class EateryServiceImpl implements EateryService {
 		// TODO Auto-generated method stub
 		return eaterydao.selectArea(area);
 	}
-
+	
+	@Override
+	public List<EateryVO> LatestEateryList() {
+		return eaterydao.LatestEateryList();
+	}
+	
 	@Override
 	public boolean validateDuplicateEatery(EateryVO eatery) {
 		// TODO Auto-generated method stub

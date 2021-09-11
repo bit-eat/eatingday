@@ -22,6 +22,8 @@ public interface EateryService {
    
    public List<EateryVO> selectArea(@Param("area")String area);
    
+   public List<EateryVO> LatestEateryList();
+   
    public boolean validateDuplicateEatery(EateryVO eatery);
    
 }
