@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -46,6 +47,14 @@ public class EateryController {
 		model.addAttribute("selectName",eateryservice.selectName(name));
 		return "/detail";
 	}
+	
+	@PostMapping("recommend")
+	public String Recommend(Long id) {
+		System.out.println(id);
+		eateryservice.updateEateryRecommend(id);
+		return "redirect:/detail";
+	}
+	
 	@GetMapping("/eateryMain")
 	public void eateryMain(Model model) {
 		model.addAttribute("selectAll",eateryservice.selectAll());

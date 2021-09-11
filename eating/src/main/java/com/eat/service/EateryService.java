@@ -10,7 +10,10 @@ import com.eat.vo.EateryVO;
 public interface EateryService {
    public void insertEatery(EateryVO eatery);
    
+   
    public void updateEatery(EateryVO eatery);
+   
+   void updateEateryRecommend(@Param("id") Long id);
    
    public void deleteEatery(Long id);
    

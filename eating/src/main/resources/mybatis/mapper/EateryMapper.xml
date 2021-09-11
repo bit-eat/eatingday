@@ -10,6 +10,10 @@
 		eatery(name, content, area, categoryId)
 		values(#{name}, #{content},#{area},#{categoryId})
 	</insert>
+	<insert id="insertEateryRecommend" parameterType="com.eat.vo.EateryVO">
+		insert into eateryRecommend(eateryid,recommend)
+		values((select id from eatery order by id desc limit 1),0);
+	</insert>
 
 	<select id="selectAll" resultType="EateryVO">
 		SELECT e.*, c.name as categoryName FROM eatery as e right join category as c
@@ -50,4 +54,12 @@
 		DELETE FROM eatery WHERE id =#{id}
 	</delete>
 
+
+	<!-- 추천수 증가 -->
+	<update id="updateEateryRecommend" parameterType="Long" >
+		update eateryRecommend
+		set recommend = recommend+1
+		where eateryid = #{id}
+	</update>
+	
 </mapper>

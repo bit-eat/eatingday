@@ -19,14 +19,20 @@ public class EateryServiceImpl implements EateryService {
 	public void insertEatery(EateryVO eateryvo) {
 		// TODO Auto-generated method stub
 	  eaterydao.insertEatery(eateryvo);
+	  eaterydao.insertEateryRecommend(eateryvo);
 	}
-
+	
 	@Override
 	public void updateEatery(EateryVO eatery) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public void updateEateryRecommend(Long id) {
+		// TODO Auto-generated method stub
+		eaterydao.updateEateryRecommend(id);
+	}
+	
 	@Override
 	public void deleteEatery(Long id) {
 		// TODO Auto-generated method stub
@@ -67,6 +73,8 @@ public class EateryServiceImpl implements EateryService {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
 
 
 
