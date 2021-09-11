@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService {
 	MemberDAO memberdao;
 
 	@Override
-	public void insertMember(MemberVO membervo) {  //아이디 중복 검사
+	public void insertMember(MemberVO membervo) { // 아이디 중복 검사
 		if (validateDuplicateMember(membervo)) {
 			memberdao.insertMember(membervo);
 		}
@@ -23,18 +23,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updateMember(MemberVO membervo) {
-		// TODO Auto-generated method stub
-
+	public void updateMember(MemberVO membervo) { // 개인정보수정
+		memberdao.updateMember(membervo);
 	}
 
 	@Override
-	public void deleteMember(MemberVO membervo) {  //회원탈퇴 
-		 memberdao.deleteMember(membervo);
+	public void deleteMember(MemberVO membervo) { // 회원탈퇴
+		memberdao.deleteMember(membervo);
 	}
 
 	@Override
-	public List<MemberVO> findId(String userName, String phoneNumber) {  //아이디찾기
+	public List<MemberVO> findId(String userName, String phoneNumber) { // 아이디찾기
 		return memberdao.findId(userName, phoneNumber);
 	}
 
@@ -44,7 +43,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO> selectAll() {   //회원목록
+	public List<MemberVO> selectAll() { // 회원목록
 		return memberdao.selectAll();
 	}
 
@@ -61,11 +60,11 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<MemberVO> selectMemberId(Long id) {
-		return null; 
+		return null;
 	}
 
 	@Override
-	public boolean validateDuplicateMember(MemberVO membervo) {  //중복검사
+	public boolean validateDuplicateMember(MemberVO membervo) { // 중복검사
 		MemberVO member = memberdao.selectMemberId(membervo.getUserId());
 		if (member == null) {
 			return true; // 중복 아님
@@ -73,18 +72,15 @@ public class MemberServiceImpl implements MemberService {
 		return false;
 	}
 
-	@Override  
-	public List<MemberVO> findPw(String userName, String phoneNumber, String userId) {   //비밀번호찾기
+	@Override
+	public List<MemberVO> findPw(String userName, String phoneNumber, String userId) { // 비밀번호찾기
 		return memberdao.findPw(userName, userId, phoneNumber);
 	}
 
 	@Override
-	public int logincheck(String userId, String userPw) {
-		
+	public int logincheck(String userId, String userPw) { // 로그인
+
 		return memberdao.logincheck(userId, userPw);
 	}
-
-
-
 
 }

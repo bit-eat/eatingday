@@ -29,7 +29,7 @@
 	<!-- 개인정보수정 -->
 	<delete id="updateMember" parameterType="com.eat.vo.MemberVO">
 		UPDATE member SET userPw=#{userPw}, phoneNumber=#{phoneNumber}
-		WHERE userPw=#{userPw} and phoneNumber=#{phoneNumber}
+		WHERE userId=1 and userName=1
 	</delete>
 
 
@@ -75,6 +75,11 @@
 	<select id="findPw" parameterType="String" resultType="MemberVO">
 		SELECT * FROM member WHERE userName=#{userName} and phoneNumber=#{phoneNumber} and #{userId}
 	</select>
+	
+	<!-- 즐겨찾기 -->
+<!-- 	<select id="favorite" parameterType="com.eat.vo.eatryVO" resultType="String">
+		SELECT * FROM eatery WHERE name=#{name} and area=#{area}
+	</select> -->
 
 
 </mapper>
