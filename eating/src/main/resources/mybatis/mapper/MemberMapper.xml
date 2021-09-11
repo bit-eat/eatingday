@@ -24,6 +24,13 @@
 	<delete id="deleteMember" parameterType="com.eat.vo.MemberVO">
 		DELETE FROM member WHERE userId=#{userId} and userPw=#{userPw}
 	</delete>
+	
+	
+	<!-- 개인정보수정 -->
+	<delete id="updateMember" parameterType="com.eat.vo.MemberVO">
+		UPDATE member SET userPw=#{userPw}, phoneNumber=#{phoneNumber}
+		WHERE userPw=#{userPw} and phoneNumber=#{phoneNumber}
+	</delete>
 
 
 	<!-- 로그인 -->

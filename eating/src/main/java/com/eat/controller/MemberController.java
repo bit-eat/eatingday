@@ -69,7 +69,15 @@ public class MemberController {
 			return "/Login";
 		}
 	}
-
+	
+	@GetMapping("update")    //수정(개인정보수정)
+	public String update(MemberVO membervo) {
+		System.out.println(membervo);
+		memberservice.updateMember(membervo);
+		return "update";
+	}
+	
+	@PostMapping("update")
 	public void updateMember(MemberVO membervo) { // 수정(개인정보수정)
 		System.out.println(membervo);
 		memberservice.updateMember(membervo);
