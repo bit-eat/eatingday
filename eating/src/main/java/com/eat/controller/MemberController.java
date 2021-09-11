@@ -59,10 +59,15 @@ public class MemberController {
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
 
-	@GetMapping("logincheck") // 로그인 ->메인페이지로 띄우기
-	public String logincheck(String userId, String userPw) {
-		memberservice.logincheck(userId, userPw);
-		return "redirect:/";
+	@PostMapping("logincheck") // 로그인 완료 ->메인페이지로 띄우기
+	public String logincheck(Model model, String userId, String userPw) {
+		model.addAttribute("logincheck", memberservice.logincheck(userId, userPw));
+		int check = memberservice.logincheck(userId, userPw);
+		if(check==1) {
+			return "redirect:/";
+		} else {
+			return "/Login";
+		}
 	}
 
 	public void updateMember(MemberVO membervo) { // 수정(개인정보수정)

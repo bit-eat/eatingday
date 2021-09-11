@@ -78,16 +78,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberdao.findPw(userName, userId, phoneNumber);
 	}
 
-	@Override    
-	public List<MemberVO> logincheck(String userId, String userPw) {  //로그인 
-		MemberVO membervo = memberdao.selectMember(userId, userPw);
-		if(membervo.getUserId()==userId && membervo.getUserPw()==userPw) {
-			return memberdao.logincheck(userId, userPw); 
-		}else if(membervo==null) {
-			return ;
-		}
-		//return memberdao.logincheck(userId, userPw);
+	@Override
+	public int logincheck(String userId, String userPw) {
+		
+		return memberdao.logincheck(userId, userPw);
 	}
+
 
 
 

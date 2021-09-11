@@ -16,7 +16,7 @@ public interface MemberService {
 
 	MemberVO selectMember(String userName, String phoneNumber);
 	
-	List<MemberVO> logincheck(@Param("userId") String userId,@Param("userPw") String userPw);    //로그인
+	int logincheck(@Param("userId") String userId, @Param("userPw") String userPw);   //로그인
 
 	List<MemberVO> selectAll();
 

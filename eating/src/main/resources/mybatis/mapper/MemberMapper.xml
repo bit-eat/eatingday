@@ -27,8 +27,9 @@
 
 
 	<!-- 로그인 -->
-	<select id="logincheck" parameterType="com.eat.vo.MemberVO" resultType="com.eat.vo.MemberVO">
-		SELECT * FROM member WHERE userId=#{userId} and userPw=#{userPw} 
+	<select id="logincheck" parameterType="String" resultType="int">
+		SELECT count(*) FROM member
+		WHERE userId = #{userId} and userPw = #{userPw}
 	</select>
 
 
