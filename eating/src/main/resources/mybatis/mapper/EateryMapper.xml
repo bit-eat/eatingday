@@ -5,51 +5,61 @@
 
 <mapper namespace="com.eat.dao.EateryDAO">
 
-<insert id="insertEatery" parameterType="com.eat.vo.EateryVO" >
-        insert into 
-        eatery(name, content, area, categoryId)
-        values(#{name}, #{content},#{area},#{categoryId})
-    </insert>
+	<insert id="insertEatery" parameterType="com.eat.vo.EateryVO">
+		insert into
+		eatery(name, content, area, categoryId)
+		values(#{name}, #{content},#{area},#{categoryId})
+	</insert>
+	<insert id="insertEateryRecommend" parameterType="com.eat.vo.EateryVO">
+		insert into eateryRecommend(eateryid,recommend)
+		values((select id from eatery order by id desc limit 1),0);
+	</insert>
 
-<select id="selectAll" resultType="EateryVO">
-        SELECT e.*, c.name as categoryName FROM eatery as e right join category as c on e.categoryId = c.id 
-        where c.id = e.categoryId
-        
-    </select>
+	<select id="selectAll" resultType="EateryVO">
+		SELECT e.*, c.name as categoryName FROM eatery as e right join category as c
+		on e.categoryId = c.id
+		where c.id = e.categoryId
 
-<select id="selectName" parameterType="String" resultType="com.eat.vo.EateryVO">
-        SELECT e.*, c.name as categoryName FROM eatery as e right join category as c on e.categoryId = c.id 
-        where c.id = e.categoryId and e.name like CONCAT('%',#{name},'%')
-    </select>
-
-    <select id="selectArea" parameterType="String" resultType="com.eat.vo.EateryVO">
-        SELECT * FROM eatery WHERE area = #{area}
-    </select>
-
-    <select id="selectCategory" parameterType="String" resultType="com.eat.vo.EateryVO">
-        SELECT * FROM eatery WHERE category = #{category}
-    </select>
-
-<select id="showEateryList" resultType="com.eat.vo.EateryVO">
-        select s.*,  c.name as "categoryName" from eatery as e 
-        right join category as c on e.categoryId = c.id 
-        where c.id = e.categoryId ORDER BY memberId DESC;
-    </select>
-
-<select id="selectEateryList" parameterType="com.eat.vo.EateryVO"
-		resultType="com.eat.vo.EateryVO">
-		select s.*,  c.name as "categoryName" from eatery as e 
-        right join category as c on e.categoryId = c.id 
-        where c.id = e.categoryId and ORDER BY memberId DESC;
 	</select>
-	
-    <update id="updateEatery" parameterType="com.eat.vo.EateryVO">
-        UPDATE eatery SET name =#{name}, content =#{content}, address=#{address}, phoneNumber=#{phoneNumber}, area=#{area}
-        WHERE id =#{id}
-    </update>
 
-    <delete id="deleteEatery" parameterType="Long">
-        DELETE FROM eatery WHERE id =#{id}
-    </delete>
- 
+	<select id="selectName" parameterType="String"
+		resultType="com.eat.vo.EateryVO">
+		SELECT e.*, c.name as categoryName FROM eatery as e right join category as c
+		on e.categoryId = c.id
+		where c.id = e.categoryId and e.name like CONCAT('%',#{name},'%')
+	</select>
+
+	<select id="selectArea" parameterType="String"
+		resultType="com.eat.vo.EateryVO">
+		SELECT * FROM eatery WHERE area = #{area}
+	</select>
+
+	<select id="selectCategory" parameterType="String"
+		resultType="com.eat.vo.EateryVO">
+		SELECT * FROM eatery WHERE category = #{category}
+	</select>
+
+	<select id="LatestEateryList" resultType="com.eat.vo.EateryVO">
+		select * FROM eatery
+		ORDER BY id DESC
+	</select>
+
+	<update id="updateEatery" parameterType="com.eat.vo.EateryVO">
+		UPDATE eatery SET name =#{name}, content =#{content}, address=#{address},
+		phoneNumber=#{phoneNumber}, area=#{area}
+		WHERE id =#{id}
+	</update>
+
+	<delete id="deleteEatery" parameterType="Long">
+		DELETE FROM eatery WHERE id =#{id}
+	</delete>
+
+
+	<!-- 추천수 증가 -->
+	<update id="updateEateryRecommend" parameterType="Long" >
+		update eateryRecommend
+		set recommend = recommend+1
+		where eateryid = #{id}
+	</update>
+	
 </mapper>

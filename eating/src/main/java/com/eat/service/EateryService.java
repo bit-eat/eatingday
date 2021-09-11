@@ -10,7 +10,10 @@ import com.eat.vo.EateryVO;
 public interface EateryService {
    public void insertEatery(EateryVO eatery);
    
+   
    public void updateEatery(EateryVO eatery);
+   
+   void updateEateryRecommend(@Param("id") Long id);
    
    public void deleteEatery(Long id);
    
@@ -21,6 +24,8 @@ public interface EateryService {
    public List<EateryVO> selectCategoryId(@Param("categoryId")Long categoryId);
    
    public List<EateryVO> selectArea(@Param("area")String area);
+   
+   public List<EateryVO> LatestEateryList();
    
    public boolean validateDuplicateEatery(EateryVO eatery);
    

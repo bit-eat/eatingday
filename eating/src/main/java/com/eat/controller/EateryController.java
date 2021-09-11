@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -36,7 +37,6 @@ public class EateryController {
 
 	@PostMapping("/insertEatery")
 	public String insertEatery(EateryVO eateryvo) {
-		System.out.println(eateryvo);
 		eateryservice.insertEatery(eateryvo);
 		return "redirect:/eateryTest";
 	}
@@ -47,11 +47,32 @@ public class EateryController {
 		model.addAttribute("selectName",eateryservice.selectName(name));
 		return "/detail";
 	}
+	
+	@PostMapping("recommend")
+	public String Recommend(Long id) {
+		System.out.println(id);
+		eateryservice.updateEateryRecommend(id);
+		return "redirect:/detail";
+	}
+	
 	@GetMapping("/eateryMain")
 	public void eateryMain(Model model) {
 		model.addAttribute("selectAll",eateryservice.selectAll());
-		System.out.println(model);
+		
 	}
+	
+	@PostMapping("selectEateryList")
+	public String selectEateryList (Model model, String checking) {
+		if(checking.equals("추천순")) {
+			return "/eateryMain"; 
+		} else if(checking.equals("최신순")) {
+			model.addAttribute("LatestEateryList",eateryservice.LatestEateryList());
+			return "/eateryMain";
+		} else {
+			return "/eateryMain";
+		}
+	}
+	
 	@GetMapping("/menuEatery")
 	public String menu(Model model) {
 		String name = "유가";
