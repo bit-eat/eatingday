@@ -4,27 +4,29 @@
 <meta charset="UTF-8">
 <title>Bookmark List</title>
 </head>
-	<body>
-		<div id="content">
-			<h1>Bookmark List</h1>
-	
-			<table border="1">
+<body>
+	<div id="content">
+		<h1>Bookmark List</h1>
+
+		<table border="1">
 			<thead>
 				<th>이미지</th>
 				<th>상호명</th>
 				<th>지역</th>
 				<th>추천수</th>
 			</thead>
-	
+
 			<tr th:each="eatery : ${selectEateryBookmark}">
 				<td th:text="${eatery.name}"></td>
 				<td th:text=""></td>
-				<td th:each=" area : ${T(com.eat.vo.Area).values()}" th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}" th:text="${area.getKrName}"></td>
+				<td th:each=" area : ${T(com.eat.vo.Area).values()}"
+					th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
+					th:text="${area.getKrName}"></td>
 				<td th:text=""></td>
 			</tr>
-	
+
 		</table>
-		
-		</div>
-	</body>
+
+	</div>
+</body>
 </html>

@@ -31,6 +31,11 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteMember(MemberVO membervo) { // 회원탈퇴
 		memberdao.deleteMember(membervo);
 	}
+	
+	@Override
+	public void admindelete(MemberVO membervo) { // 회원탈퇴
+		memberdao.deleteMember(membervo);
+	}
 
 	@Override
 	public List<MemberVO> findId(String userName, String phoneNumber) { // 아이디찾기
@@ -83,4 +88,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberdao.logincheck(userId, userPw);
 	}
 
+	@Override
+	public int admincheck(String userId, String userPw) { // 관리자 로그인
+
+		return memberdao.admincheck(userId, userPw);
+	}
+	
+	@Override
+	public void delete(String no) {
+		memberdao.delete(no);
+	}
 }

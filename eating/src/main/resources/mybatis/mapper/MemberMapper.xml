@@ -25,6 +25,11 @@
 		DELETE FROM member WHERE userId=#{userId} and userPw=#{userPw}
 	</delete>
 	
+	<!-- 관리자 회원 삭제 -->
+	<delete id="admindelete" parameterType="com.eat.vo.MemberVO">
+		DELETE FROM member WHERE userId=#{userId} and userPw=#{userPw}
+	</delete>
+	
 	
 	<!-- 개인정보수정 -->
 	<delete id="updateMember" parameterType="com.eat.vo.MemberVO">
@@ -37,6 +42,12 @@
 	<select id="logincheck" parameterType="String" resultType="int">
 		SELECT count(*) FROM member
 		WHERE userId = #{userId} and userPw = #{userPw}
+	</select>
+	
+	<!-- 관리자 로그인 -->
+	<select id="admincheck" parameterType="String" resultType="int">
+	SELECT count(*) FROM member
+	WHERE grade=1 and userId=#{userId} and userPw=#{userPw}
 	</select>
 
 
@@ -52,16 +63,11 @@
 	</select>
 	
 
-	<!-- 관리자로그인 -->
-	<select id="selectGrade" parameterType="String">
-		SELECT * FROM member
-		WHERE userId=#{userId} and userPw=#{userPw} and grade=#{grade}
-	</select>
-
 
 	<!-- 회원목록 다가져오기 -->
 	<select id="selectAll" resultType="com.eat.vo.MemberVO">
 		SELECT * FROM member
+		where grade=0
 	</select>
 
 

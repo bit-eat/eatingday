@@ -14,4 +14,6 @@ public class MemberVO {
 	private String grade;
 	private Data regisDate;
 	private Data modifiDate;
+	
+	
 }
