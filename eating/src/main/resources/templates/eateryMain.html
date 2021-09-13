@@ -10,57 +10,59 @@
 
 
 	<h3>지역별 맛집</h3>
-	<table border="1">
-		<tr>
-			<th colspan="5">지역</th>
-		</tr>
-		<tr>
-
-			<td onclick="location.href='#'">강북</td>
-			<td onclick="location.href='#'">강남</td>
-			<td onclick="location.href='#'">경북</td>
-			<td onclick="location.href='#'">경남</td>
-			<td onclick="location.href='#'">강원</td>
-		</tr>
-		<tr>
-			<td onclick="location.href='#'">인천</td>
-			<td onclick="location.href='#'">충청</td>
-			<td onclick="location.href='#'">대전</td>
-			<td onclick="location.href='#'">대구</td>
-			<td onclick="location.href='#'">울산</td>
-		</tr>
-		<tr>
-			<td onclick="location.href='#'">전라</td>
-			<td onclick="location.href='#'">광주</td>
-			<td onclick="location.href='#'">부산</td>
-			<td onclick="location.href='#'">경상</td>
-			<td onclick="location.href='#'">제주</td>
-		</tr>
-	</table>
-
-
+	<form action="areaEatery" method="get" id="selectArea">
+		<table border="1">
+			<tr>
+				<th colspan="5">지역</th>
+			</tr>
+			<tr>
+				<td><input type="submit" name="area" value="강북"></td>
+				<td><input type="submit" name="area" value="강남"></td>
+				<td><input type="submit" name="area" value="경북"></td>
+				<td><input type="submit" name="area" value="경남"></td>
+				<td><input type="submit" name="area" value="강원"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="area" value="인천"></td>
+				<td><input type="submit" name="area" value="충청"></td>
+				<td><input type="submit" name="area" value="대전"></td>
+				<td><input type="submit" name="area" value="대구"></td>
+				<td><input type="submit" name="area" value="울산"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="area" value="전라"></td>
+				<td><input type="submit" name="area" value="광주"></td>
+				<td><input type="submit" name="area" value="부산"></td>
+				<td><input type="submit" name="area" value="경상"></td>
+				<td><input type="submit" name="area" value="제주"></td>
+			</tr>
+		</table>
+	</form>
+	
 	<h3>메뉴별 맛집</h3>
+	<form action="menuEatery" method="get" id="selectCategory">
+		<table border="1">
+			<tr>
+				<th colspan="3">메뉴</th>
+			</tr>
+			<tr>
+				<td><input type="submit" name="categoryName" value="한식"></td>
+				<td><input type="submit" name="categoryName" value="중식"></td>
+				<td><input type="submit" name="categoryName" value="일식"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="categoryName" value="양식"></td>
+				<td><input type="submit" name="categoryName" value="분식"></td>
+				<td><input type="submit" name="categoryName" value="패스트푸드"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="categoryName" value="베이커리"></td>
+				<td><input type="submit" name="categoryName" value="치킨"></td>
+				<td><input type="submit" name="categoryName" value="기타"></td>
+			</tr>
+		</table>
+	</form>
 
-	<table border="1">
-		<tr>
-			<th colspan="3">메뉴</th>
-		</tr>
-		<tr>
-			<td onclick="location.href='#'">한식</td>
-			<td onclick="location.href='#'">중식</td>
-			<td onclick="location.href='#'">일식</td>
-		</tr>
-		<tr>
-			<td onclick="location.href='#'">양식</td>
-			<td onclick="location.href='#'">분식</td>
-			<td onclick="location.href='#'">패스트푸드</td>
-		</tr>
-		<tr>
-			<td onclick="location.href='#'">베이커리</td>
-			<td onclick="location.href='#'">치킨</td>
-			<td onclick="location.href='#'">기타</td>
-		</tr>
-	</table>
 	<br>
 	<h3>신규 맛집</h3>
 
@@ -68,12 +70,14 @@
 		<thead>
 
 			<th>음식점 이름</th>
+			<th>카테고리</th>
 			<th>지역</th>
 			<th>추천수</th>
 		</thead>
 
 		<tr th:each="eatery : ${selectAll}">
 			<td th:text="${eatery.name}"></td>
+			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>
@@ -81,6 +85,7 @@
 		</tr>
 		<tr th:each="eatery : ${LatestEateryList}">
 			<td th:text="${eatery.name}"></td>
+			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>
@@ -88,6 +93,7 @@
 		</tr>
 		<tr th:each="eatery : ${RecommendEateryList}">
 			<td th:text="${eatery.name}"></td>
+			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>

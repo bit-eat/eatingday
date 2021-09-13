@@ -33,9 +33,9 @@
 	<div>
 	<form action="recommend" method="post">
 		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" type="number" style="display: none" readonly>
-		<button type="submit">추천</button>
+		<button type="submit">추천</button> <button>즐겨찾기</button>
 	</form>
-		<button>즐겨찾기</button>
+		
 </div>
 </body>
 </html>
