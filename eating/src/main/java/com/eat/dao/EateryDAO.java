@@ -28,5 +28,7 @@ public interface EateryDAO {
 	List<EateryVO> selectCategoryId(@Param("categoryId") Long category);
 	
 	List<EateryVO> LatestEateryList();
+	
+	List<EateryVO> RecommendEateryList();
 
 }

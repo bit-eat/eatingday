@@ -64,6 +64,7 @@ public class EateryController {
 	@PostMapping("selectEateryList")
 	public String selectEateryList (Model model, String checking) {
 		if(checking.equals("추천순")) {
+			model.addAttribute("RecommendEateryList",eateryservice.RecommendEateryList());
 			return "/eateryMain"; 
 		} else if(checking.equals("최신순")) {
 			model.addAttribute("LatestEateryList",eateryservice.LatestEateryList());

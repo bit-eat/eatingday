@@ -13,5 +13,5 @@ public class EateryVO {
     private String address;
     private String phoneNumber;
     private Area area;
-    
+    private Long recommend;
 }

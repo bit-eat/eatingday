@@ -77,14 +77,21 @@
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>
-			<td></td>
+			<td th:text="${eatery.recommend}"></td>
 		</tr>
 		<tr th:each="eatery : ${LatestEateryList}">
 			<td th:text="${eatery.name}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>
-			<td></td>
+			<td th:text="${eatery.recommend}"></td>
+		</tr>
+		<tr th:each="eatery : ${RecommendEateryList}">
+			<td th:text="${eatery.name}"></td>
+			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
+				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
+				th:text="${area.getKrName}"></td>
+			<td th:text="${eatery.recommend}"></td>
 		</tr>
 	</table>
 	<form action="selectEateryList" method="Post" id="select">

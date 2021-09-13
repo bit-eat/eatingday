@@ -69,6 +69,11 @@ public class EateryServiceImpl implements EateryService {
 	}
 	
 	@Override
+	public List<EateryVO> RecommendEateryList() {
+		// TODO Auto-generated method stub
+		return eaterydao.RecommendEateryList();
+	}
+	@Override
 	public boolean validateDuplicateEatery(EateryVO eatery) {
 		// TODO Auto-generated method stub
 		return false;

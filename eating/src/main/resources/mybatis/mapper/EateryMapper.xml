@@ -12,13 +12,16 @@
 	</insert>
 	<insert id="insertEateryRecommend" parameterType="com.eat.vo.EateryVO">
 		insert into eateryRecommend(eateryid,recommend)
-		values((select id from eatery order by id desc limit 1),0);
+		values((select id from eatery order by id desc limit 1),0)
 	</insert>
 
 	<select id="selectAll" resultType="EateryVO">
-		SELECT e.*, c.name as categoryName FROM eatery as e right join category as c
+		SELECT e.*, c.name as categoryName, r.recommend FROM eatery as e 
+		right join category as c
 		on e.categoryId = c.id
-		where c.id = e.categoryId
+		right join eateryrecommend as r
+		on e.id = r.eateryid
+		where c.id = e.categoryId 
 
 	</select>
 
@@ -42,6 +45,15 @@
 	<select id="LatestEateryList" resultType="com.eat.vo.EateryVO">
 		select * FROM eatery
 		ORDER BY id DESC
+	</select>
+	
+	<select id="RecommendEateryList" resultType="com.eat.vo.EateryVO">
+		 SELECT e.*, c.name as categoryName, r.recommend FROM eatery as e
+        right join category as c
+      on e.categoryId = c.id
+        right join eateryrecommend as r
+        on e.id = r.eateryid
+      where c.id = e.categoryId
 	</select>
 
 	<update id="updateEatery" parameterType="com.eat.vo.EateryVO">

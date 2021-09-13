@@ -27,6 +27,8 @@ public interface EateryService {
    
    public List<EateryVO> LatestEateryList();
    
+   public List<EateryVO> RecommendEateryList();
+   
    public boolean validateDuplicateEatery(EateryVO eatery);
    
 }
