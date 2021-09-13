@@ -13,10 +13,14 @@ public interface MemberService {
 	void updateMember(MemberVO membervo); // 회원수정
 
 	void deleteMember(MemberVO membervo); // 회원탈퇴
+	
+	void admindelete(MemberVO membervo); // 관리자 회원 삭제
 
 	MemberVO selectMember(String userName, String phoneNumber);
 
 	int logincheck(@Param("userId") String userId, @Param("userPw") String userPw); // 로그인
+
+	int admincheck(@Param("userId") String userId, @Param("userPw") String userPw); //관리자 로그인
 
 	List<MemberVO> selectAll();
 
@@ -33,4 +37,5 @@ public interface MemberService {
 
 	boolean validateDuplicateMember(MemberVO membervo); // 중복검사
 
+	public void delete(String no);
 }

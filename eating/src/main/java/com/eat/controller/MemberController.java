@@ -2,13 +2,17 @@ package com.eat.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eat.dao.EateryBookmarkDAO;
 import com.eat.service.MemberService;
 import com.eat.vo.MemberVO;
 
@@ -17,6 +21,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberservice;
+
+	@Autowired
+	private EateryBookmarkDAO eateryBookmarkdao;
 
 	@GetMapping("/Login") // 로그인
 	public void Login() {
@@ -72,6 +79,17 @@ public class MemberController {
 		}
 	}
 
+	@PostMapping("admincheck") // 관리자 로그인
+	public String admincheck(Model model, String userId, String userPw) {
+		model.addAttribute("admincheck", memberservice.admincheck(userId, userPw));
+		int check = memberservice.admincheck(userId, userPw);
+		if (check == 1) {
+			return "redirect:/memberList";
+		} else {
+			return "/adminlogin";
+		}
+	}
+
 	@GetMapping("update") // 수정(개인정보수정)
 	public String update(MemberVO membervo) {
 		System.out.println(membervo);
@@ -96,6 +114,12 @@ public class MemberController {
 		return "/Login";
 	}
 
+	@GetMapping("admindelete") // 관리자 회원삭제
+	public String admindelete(MemberVO membervo) {
+		memberservice.admindelete(membervo);
+		return "/memberList";
+	}
+
 	@GetMapping("/adminlogin") // 관리자 로그인
 	public String adminLogin(MemberVO membervo) {
 		System.out.println(membervo);
@@ -108,6 +132,16 @@ public class MemberController {
 		List<MemberVO> memberList = memberservice.selectAll();
 		System.out.println(memberList.size());
 	}
-	
+
+	@RequestMapping(value = "/admindelete")
+	public String ajaxTest(HttpServletRequest request) {
+
+		String[] ajaxMsg = request.getParameterValues("valueArr");
+		int size = ajaxMsg.length;
+		for (int i = 0; i < size; i++) {
+			memberservice.delete(ajaxMsg[i]);
+		}
+		return "redirect:/memberList";
+	}
 
 }
