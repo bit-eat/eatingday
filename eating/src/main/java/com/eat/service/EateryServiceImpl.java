@@ -2,6 +2,7 @@ package com.eat.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,14 +53,20 @@ public class EateryServiceImpl implements EateryService {
 	}
 
 	@Override
-	public List<EateryVO> selectCategoryId(Long categoryId) {
+	public List<EateryVO> selectCategoryName(String categoryName) {
 		// TODO Auto-generated method stub
-		return eaterydao.selectCategoryId(categoryId);
+		return eaterydao.selectCategoryRecommend(categoryName);
 	}
 
 	@Override
 	public List<EateryVO> selectArea(String area) {
 		// TODO Auto-generated method stub
+		Area[] areas = Area.values();
+		for(Area area1 : areas) {
+			if(area1.getKrName().equals(area)) {
+				area = area1.name();
+			}
+		}
 		return eaterydao.selectArea(area);
 	}
 	
@@ -79,8 +86,21 @@ public class EateryServiceImpl implements EateryService {
 		return false;
 	}
 
+	@Override
+	public List<EateryVO> selectAreaRecommend(String area) {
+		Area[] areas = Area.values();
+		for(Area area1 : areas) {
+			if(area1.getKrName().equals(area)) {
+				area = area1.name();
+			}
+		}
+		return eaterydao.selectAreaRecommend(area);
+	}
 
-
-
+	@Override
+	public List<EateryVO> selectCategoryRecommend(String categoryName) {
+		
+		return eaterydao.selectCategoryRecommend(categoryName);
+	}
 
 }

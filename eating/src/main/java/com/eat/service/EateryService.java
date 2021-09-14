@@ -21,7 +21,7 @@ public interface EateryService {
    
    public List<EateryVO> selectName(@Param("name")String name);
    
-   public List<EateryVO> selectCategoryId(@Param("categoryId")Long categoryId);
+   public List<EateryVO> selectCategoryName(@Param("categoryName")String categoryName);
    
    public List<EateryVO> selectArea(@Param("area")String area);
    
@@ -30,5 +30,11 @@ public interface EateryService {
    public List<EateryVO> RecommendEateryList();
    
    public boolean validateDuplicateEatery(EateryVO eatery);
+   
+   List<EateryVO> selectAreaRecommend(@Param("area") String area);
+   
+   List<EateryVO> selectCategoryRecommend(@Param("categoryName")String categoryName);
+
+
    
 }

@@ -11,7 +11,8 @@
 			<th>지역</th>
 			<th>음식점 설명</th>
 			<th>카테고리</th>
-
+			<th>추천수</th>
+			
 		</thead>
 
 		<tr th:each="eatery : ${selectAll }">
@@ -19,6 +20,7 @@
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}" th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}" th:text="${area.getKrName}"></td>
 			<td th:text="${eatery.content}"></td>
 			<td th:text="${eatery.categoryName}"></td>
+			<td th:text="${eatery.recommend}"></td>
 		</tr>
 
 	</table>
