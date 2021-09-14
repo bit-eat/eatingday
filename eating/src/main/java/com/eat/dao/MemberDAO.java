@@ -33,10 +33,9 @@ public interface MemberDAO {
 
 	MemberVO selectOne(@Param("id") Long id);
 
-	List<MemberVO> selectGrade(@Param("grade") String grade);
+	List<MemberVO> selectGrade(@Param("grade") String grade);  //관리자만
 
 	MemberVO selectMemberId(@Param("userId") String userId);
 
-	public void delete(String no);
-
+	void deletecheck(@Param("id")List<Long> id);   //관리가 회원 관리
 }

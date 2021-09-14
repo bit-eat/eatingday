@@ -16,10 +16,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void insertMember(MemberVO membervo) { // 아이디 중복 검사
-		if (validateDuplicateMember(membervo)) {
-			memberdao.insertMember(membervo);
-		}
-		throw new IllegalStateException("이미 존재하는 아이디입니다.");
+		memberdao.insertMember(membervo);
 	}
 
 	@Override
@@ -31,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteMember(MemberVO membervo) { // 회원탈퇴
 		memberdao.deleteMember(membervo);
 	}
-	
+
 	@Override
 	public void admindelete(MemberVO membervo) { // 회원탈퇴
 		memberdao.deleteMember(membervo);
@@ -93,9 +90,10 @@ public class MemberServiceImpl implements MemberService {
 
 		return memberdao.admincheck(userId, userPw);
 	}
-	
+
 	@Override
-	public void delete(String no) {
-		memberdao.delete(no);
+	public void deletecheck(List<Long> id) { // 관리자 회원 관리
+		memberdao.deletecheck(id);
 	}
+
 }
