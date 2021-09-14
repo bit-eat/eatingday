@@ -33,5 +33,7 @@ public interface EateryDAO {
 
 	List<EateryVO> selectAreaRecommend(@Param("area") String area);
 	
-	List<EateryVO> selectCategoryRecommend(@Param("categoryname") String categoryName);
+	List<EateryVO> selectCategoryRecommend(@Param("categoryName") String categoryName);
+	
+	List<EateryVO> selectRecommend();
 }

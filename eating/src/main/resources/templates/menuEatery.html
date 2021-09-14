@@ -3,13 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>메뉴별 맛집 페이지</title>
-
 </head>
-
 <body>
 
 	<h3>메뉴</h3>
-
 	<form action="menuEatery" method="post" id="selectCategoryName">
 		<table border="1">
 			<tr>
@@ -42,7 +39,7 @@
 			<th>추천수</th>
 		</thead>
 		
-		<tr th:each="eatery : ${selectAll}">
+		<tr th:each="eatery : ${selectRecommend}">
 			<td th:text="${eatery.name}"></td>
 			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
