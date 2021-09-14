@@ -5,87 +5,106 @@
 
 <mapper namespace="com.eat.dao.MemberDAO">
 
-	<!--  -->
+	<!-- -->
 	<select id="selectMember" parameterType="String"
 		resultType="MemberVO">
-		select * from member where userName=#{userName} and phoneNumber=#{phoneNumber}
+		select * from member where userName=#{userName} and
+		phoneNumber=#{phoneNumber}
 	</select>
-	
-	
+
+
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="com.eat.vo.MemberVO"
 		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		insert into member(userId,userPw,userName,phoneNumber)
-		values(#{userId},#{userPw},#{userName},#{phoneNumber})
+		insert into
+		member(userId,userPw,userName,phoneNumber,grade)
+		values(#{userId},#{userPw},#{userName},#{phoneNumber},0)
 	</insert>
 
 
 	<!-- 회원탈퇴 -->
 	<delete id="deleteMember" parameterType="com.eat.vo.MemberVO">
-		DELETE FROM member WHERE userId=#{userId} and userPw=#{userPw}
+		DELETE FROM member WHERE
+		userId=#{userId} and userPw=#{userPw}
 	</delete>
-	
+
 	<!-- 관리자 회원 삭제 -->
 	<delete id="admindelete" parameterType="com.eat.vo.MemberVO">
-		DELETE FROM member WHERE userId=#{userId} and userPw=#{userPw}
+		DELETE FROM member WHERE
+		userId=#{userId} and userPw=#{userPw}
 	</delete>
-	
-	
+
+
 	<!-- 개인정보수정 -->
 	<delete id="updateMember" parameterType="com.eat.vo.MemberVO">
-		UPDATE member SET userPw=#{userPw}, phoneNumber=#{phoneNumber}
-		WHERE userId=1 and userName=1
+		UPDATE member SET
+		userPw=#{userPw}, phoneNumber=#{phoneNumber}
+		WHERE userId=1 and
+		userName=1
 	</delete>
 
 
 	<!-- 로그인 -->
 	<select id="logincheck" parameterType="String" resultType="int">
 		SELECT count(*) FROM member
-		WHERE userId = #{userId} and userPw = #{userPw}
+		WHERE userId = #{userId} and userPw =
+		#{userPw}
 	</select>
-	
+
 	<!-- 관리자 로그인 -->
 	<select id="admincheck" parameterType="String" resultType="int">
-	SELECT count(*) FROM member
-	WHERE grade=1 and userId=#{userId} and userPw=#{userPw}
+		SELECT count(*) FROM member
+		WHERE grade=1 and userId=#{userId} and userPw=#{userPw}
 	</select>
 
 
-	<!--  -->
+	<!-- -->
 	<select id="selectOne" parameterType="Long">
-		SELECT * FROM member WHERE id=#{id}
+		SELECT * FROM member WHERE
+		id=#{id}
 	</select>
 
 
-	<!--  -->
-	<select id="selectMemberId" parameterType="String" resultType="com.eat.vo.MemberVO">
+	<!-- -->
+	<select id="selectMemberId" parameterType="String"
+		resultType="com.eat.vo.MemberVO">
 		SELECT * FROM member WHERE userId = #{userId}
 	</select>
-	
+
 
 
 	<!-- 회원목록 다가져오기 -->
 	<select id="selectAll" resultType="com.eat.vo.MemberVO">
 		SELECT * FROM member
-		where grade=0
+		where
+		grade=0
 	</select>
 
 
 	<!-- 아이디찾기 -->
 	<select id="findId" parameterType="String" resultType="MemberVO">
-		SELECT * FROM member WHERE userName = #{userName} and phoneNumber=#{phoneNumber}
+		SELECT *
+		FROM member WHERE userName = #{userName} and
+		phoneNumber=#{phoneNumber}
 	</select>
 
 
 	<!-- 비밀번호찾기 -->
 	<select id="findPw" parameterType="String" resultType="MemberVO">
-		SELECT * FROM member WHERE userName=#{userName} and phoneNumber=#{phoneNumber} and #{userId}
+		SELECT *
+		FROM member WHERE userName=#{userName} and phoneNumber=#{phoneNumber}
+		and #{userId}
 	</select>
-	
-	<!-- 즐겨찾기 -->
-<!-- 	<select id="favorite" parameterType="com.eat.vo.eatryVO" resultType="String">
-		SELECT * FROM eatery WHERE name=#{name} and area=#{area}
-	</select> -->
+
+	<!-- 회원관리 -->
+	<delete id="deletecheck" parameterType="java.util.List">    
+		DELETE FROM member
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(id = #{id})
+		</foreach>
+	</delete>
 
 
 </mapper>

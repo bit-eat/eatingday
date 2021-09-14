@@ -29,47 +29,47 @@ public class MemberController {
 	public void Login() {
 	}
 
-	@GetMapping("/mypage") // 로그인
+	@GetMapping("/mypage")    // 마이페이지
 	public void mypage() {
 	}
 
-	@GetMapping("/register") // 회원가입
-	public String register() {
+	@GetMapping("/register") 
+	public String register() {       // 회원가입창띄우기
 		return "register";
 	}
 
-	@PostMapping("insertMember") // 회원가입
-	public String insertMember(MemberVO membervo) {
+	@PostMapping("insertMember") 
+	public String insertMember(MemberVO membervo) {        // 회원가입
 		System.out.println(membervo);
 		memberservice.insertMember(membervo);
 		return "/Login";
 	}
 
-	@GetMapping("/findid") // 아이디찾기
+	@GetMapping("/findid")           // 아이디찾기
 	public String findid() {
 		return "/findid";
 	}
 
-	@PostMapping("findId") // 아이디찾기
-	public void findId(Model model, @RequestParam("userName") String userName,
+	@PostMapping("findId")             // 아이디찾기
+	public void findId(Model model, @RequestParam("userName") String userName, 
 			@RequestParam("phoneNumber") String phoneNumber) {
 		model.addAttribute("findId", memberservice.findId(userName, phoneNumber));
 		System.out.println(model);
 	}
 
-	@GetMapping("/findpw") // 비밀번호찾기
-	public String findpw() {
+	@GetMapping("/findpw") 
+	public String findpw() {       // 비밀번호찾기
 		return "/findpw";
 	}
 
-	@PostMapping("/findPw") // 비밀번호찾기
+	@PostMapping("/findPw")                   // 비밀번호찾기
 	public void findPw(Model model, @RequestParam("userName") String userName, @RequestParam("userId") String userId,
 			@RequestParam("phoneNumber") String phoneNumber) {
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
 
-	@PostMapping("logincheck") // 로그인 완료 ->메인페이지로 띄우기
-	public String logincheck(Model model, String userId, String userPw) {
+	@PostMapping("logincheck") 
+	public String logincheck(Model model, String userId, String userPw) {           // 로그인 완료 ->메인페이지로 띄우기
 		model.addAttribute("logincheck", memberservice.logincheck(userId, userPw));
 		int check = memberservice.logincheck(userId, userPw);
 		if (check == 1) {
@@ -79,8 +79,8 @@ public class MemberController {
 		}
 	}
 
-	@PostMapping("admincheck") // 관리자 로그인
-	public String admincheck(Model model, String userId, String userPw) {
+	@PostMapping("admincheck") 
+	public String admincheck(Model model, String userId, String userPw) {                  // 관리자 로그인 
 		model.addAttribute("admincheck", memberservice.admincheck(userId, userPw));
 		int check = memberservice.admincheck(userId, userPw);
 		if (check == 1) {
@@ -90,8 +90,8 @@ public class MemberController {
 		}
 	}
 
-	@GetMapping("update") // 수정(개인정보수정)
-	public String update(MemberVO membervo) {
+	@GetMapping("update")
+	public String update(MemberVO membervo) {     // 수정(개인정보수정)
 		System.out.println(membervo);
 		memberservice.updateMember(membervo);
 		return "update";
@@ -103,8 +103,8 @@ public class MemberController {
 		memberservice.updateMember(membervo);
 	}
 
-	@GetMapping("/delete") // 회원탈퇴 ,페이지 불러오기
-	public String delete() {
+	@GetMapping("/delete") 
+	public String delete() {   // 회원탈퇴 ,페이지 불러오기
 		return "delete";
 	}
 
@@ -114,34 +114,20 @@ public class MemberController {
 		return "/Login";
 	}
 
-	@GetMapping("admindelete") // 관리자 회원삭제
-	public String admindelete(MemberVO membervo) {
-		memberservice.admindelete(membervo);
-		return "/memberList";
-	}
-
-	@GetMapping("/adminlogin") // 관리자 로그인
-	public String adminLogin(MemberVO membervo) {
+	@GetMapping("/adminlogin") 
+	public String adminLogin(MemberVO membervo) {   // 관리자 로그인
 		System.out.println(membervo);
 		return "/adminlogin";
 	}
 
-	@GetMapping("/memberList") // 회원관리
-	public void selectAll(Model model) {
+	@GetMapping("/memberList") 
+	public void selectAll(Model model) {   // 회원 목록 불러오기
 		model.addAttribute("selectAll", memberservice.selectAll());
-		List<MemberVO> memberList = memberservice.selectAll();
-		System.out.println(memberList.size());
 	}
 
-	@RequestMapping(value = "/admindelete")
-	public String ajaxTest(HttpServletRequest request) {
-
-		String[] ajaxMsg = request.getParameterValues("valueArr");
-		int size = ajaxMsg.length;
-		for (int i = 0; i < size; i++) {
-			memberservice.delete(ajaxMsg[i]);
-		}
+	@PostMapping("deletecheck") // 관리자 회원 관리
+	public String deletecheck(@RequestParam("id") List<Long> id) {
+		memberservice.deletecheck(id);
 		return "redirect:/memberList";
 	}
-
 }

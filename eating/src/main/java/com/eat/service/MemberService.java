@@ -22,11 +22,11 @@ public interface MemberService {
 
 	int admincheck(@Param("userId") String userId, @Param("userPw") String userPw); //관리자 로그인
 
-	List<MemberVO> selectAll();
+	List<MemberVO> selectAll();  //사용자 목록 다 가져오기
 
 	MemberVO selectOne(Long id);
 
-	List<MemberVO> selectGrade(String grade);
+	List<MemberVO> selectGrade(String grade);  //관리자
 
 	List<MemberVO> selectMemberId(Long id);
 
@@ -37,5 +37,5 @@ public interface MemberService {
 
 	boolean validateDuplicateMember(MemberVO membervo); // 중복검사
 
-	public void delete(String no);
+	void deletecheck(@Param("id")List<Long> id);   //관리자 회원 관리
 }
