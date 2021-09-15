@@ -6,7 +6,7 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
-// 수정, 확인 버튼/ 이름, 전화번호, 등급 수정
+// 수정, 확인 버튼
 	function btn(test){
 		var check = $("[name='update']").val();
 		var update = document.getElementById(test.getAttribute('id')).getAttribute('id') ;
@@ -15,25 +15,55 @@
 		if(check=="수정"){
 			document.getElementById(update+"").style.display = "none";
 			document.getElementById(updateok+"").style.display = "block";
-			$("#name").attr('readonly', false);
-			$("#phoneNumber").attr('readonly', false);
-			$("#grade").attr('readonly', false);
+			var inputName = "#name"+update;
+			var inputPhone = "#phoneNumber"+update;
+			var inputGarde = "#grade"+update;
+			$(inputName).attr('readonly', false);
+			$(inputPhone).attr('readonly', false);
+			$(inputGarde).attr('readonly', false);
 		}
 	}
 	
+	// 이름, 전화번호, 등급 수정
 	function btn2(test){
 		var check = $("[name='updateok']").val();
 		var updateok = document.getElementById(test.getAttribute('id')).getAttribute('id') ;
 		var update = Number(updateok)-10;
 	
 		if(check=="확인"){
+			var inputName = "#name"+update;
+			var inputPhone = "#phoneNumber"+update;
+			var inputGarde = "#grade"+update;
+			$(inputName).attr('readonly', true);
+			$(inputPhone).attr('readonly', true);
+			$(inputGarde).attr('readonly', true);
+			
+			var checkBtn = $("input[id="+updateok+"]");
+				
+			var tr = checkBtn.parent().parent();
+			var td = tr.children();
+			
+			var id = td.eq(0).find('input').val();
+			var userid = td.eq(1).text();
+			var userpw = td.eq(2).text();
+			var name = td.eq(3).find('input').val();
+			var phone = td.eq(4).find('input').val();
+			var grade = td.eq(5).find('input').val();
+							
+			$('input[id=id]').val(id);
+			$('input[id=userId]').val(userid);
+			$('input[id=userPw]').val(userpw);
+			$('input[id=userName]').val(name);
+			$('input[id=phoneNumber]').val(phone);
+			$('input[id=grade]').val(grade);
+			$("#updateMemberList").attr("action","updateMemberList");
+			$("#updateMemberList").submit();
+			
 			document.getElementById(updateok+"").style.display = "none";
 			document.getElementById(update+"").style.display = "block";
-			$("#name").attr('readonly', true);
-			$("#phoneNumber").attr('readonly', true);
-			$("#grade").attr('readonly', true);
 		}
 	}
+
 
 	// 체크박스
 	$(document).ready(function() {
@@ -108,15 +138,14 @@
 
 					<!-- 이름, 전화번호, 등급 수정 -->
 					<td>
-						<input type="text" id="name" class="name" name="name" th:value="${member.userName}" readonly>
+						<input type="text" th:id="name+${index.count}" class="name" name="name" th:value="${member.userName}" readonly>
 					</td>
 					<td>
-						<input type="text" id="phoneNumber" class="phoneNumber" name="phoneNumber" th:value="${member.phoneNumber}" readonly>
+						<input type="text" th:id="phoneNumber+${index.count}" class="phoneNumber" name="phoneNumber" th:value="${member.phoneNumber}" readonly>
 					</td>
 					<td>
-						<input type="text" id="grade" class="grade" name="grade" th:value="${member.grade}" readonly>
+						<input type="text" th:id="grade+${index.count}" class="grade" name="grade" th:value="${member.grade}" readonly>
 					</td>
-					
 					
 					<!-- 수정, 확인 버튼 -->
 					<td>
@@ -127,6 +156,15 @@
 			</table>
 			<button id="submitForm">삭제</button>
 		</form>
+		<form method="post" id="updateMemberList">
+			<input type="hidden" id="id" name="id">
+			<input type="hidden" id="userId" name="userId">
+			<input type="hidden" id="userPw" name="userPw">
+			<input type="hidden" id="userName" name="userName">
+			<input type="hidden" id="phoneNumber" name="phoneNumber">
+			<input type="hidden" id="grade" name="grade">
+		</form>
+	
 	</div>
 </body>
 

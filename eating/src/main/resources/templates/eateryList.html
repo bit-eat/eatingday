@@ -3,26 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <title>eateryList</title>
+<script>
+	// 체크박스
+	$(document).ready(function() {
+		$("#submitForm").on("click", function() {
+			var param = new Array;
+			$(".chkclass:checked").each(function() {
+				param.push($("#id").val())
+			});
+			$("#form").attr("action", "deletecheck");
+			$("#form").submit();
+		});
+	});
+
+	$(function() {
+		var chkObj = document.getElementsByName("id");
+		var rawCnt = chkObj.length;
+
+		$("input[name='allCheck']").click(function() {
+			var chk_listArr = $("input[name='id']");
+			for (var i = 0; i < chk_listArr.length; i++) {
+				chk_listArr[i].checked = this.checked;
+			}
+		});
+		$("input[name='id']").click(function() {
+			if ($("input[name='id']:checked").length == rowCnt) {
+				$("input[name='allCheck']")[0].checked = true;
+			} else {
+				$("input[name='allCheck']")[0].checked = false;
+			}
+		});
+	});
+
+	var checkRows = $("[name='allCheck']:checked");
+	for (var i = checkRows.length - 1; i > -1; i--) {
+		checkRows.eq(i).closest('tr').remove();
+	}
+
+</script>
 </head>
 <body>
-	<table border="1">
-		<thead>
-			<th>음식점 이름</th>
-			<th>지역</th>
-			<th>음식점 설명</th>
-			<th>카테고리</th>
-			<th>추천수</th>
-			
-		</thead>
+	<h1>음식점 게시판</h1>
 
-		<tr th:each="eatery : ${selectAll }">
-			<td th:text="${eatery.name}"></td>
-			<td th:each=" area : ${T(com.eat.vo.Area).values()}" th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}" th:text="${area.getKrName}"></td>
-			<td th:text="${eatery.content}"></td>
-			<td th:text="${eatery.categoryName}"></td>
-			<td th:text="${eatery.recommend}"></td>
-		</tr>
+	<div>
+		<form id=form action="eateryList" method="post">
+			<table border="1">
+				<thead>
+					<tr>
+						<th scope="col"><input id="allcheck" type="checkbox" name="allCheck"></th>
+						<th>상호명</th>
+						<th>내용</th>
+						<th>주소</th>
+						<th>전화번호</th>
+						<th>카테고리</th>
+						<th>추천수</th>
+					</tr>
+				</thead>
 
-	</table>
+				<tr th:each="eatery, index : ${selectAll}">
+				
+					<!-- 체크박스 -->
+					<td class="header" width="30">
+						<div class="chkclass">
+							<input name="id" type="checkbox" id="id" class="id" th:value="${eatery.id}">
+						</div>
+					</td>
+
+					<!-- 상호명, 내용, 주소, 전화번호, 카테고리 -->
+					<td>
+						<input type="text" th:id="${eatery.name}" class="name" name="name" th:value="${eatery.name}" readonly>
+					</td>
+					<td>
+						<input type="text" th:id="${eatery.content}" class="content" name="content" th:value="${eatery.content}" readonly>
+					</td>
+					<td>
+						<input type="text" th:id="${eatery.address}" class="address" name="address" th:value="${eatery.address}" readonly>
+					</td>
+					<td>
+						<input type="text" th:id="${eatery.phoneNumber}" class="phoneNumber" name="phoneNumber" th:value="${eatery.phoneNumber}" readonly>
+					</td>
+					<td>
+						<input type="text" th:id="${eatery.category}" class="category" name="category" th:value="${eatery.category}" readonly>
+					</td>
+					<td>
+						<input type="text" th:id="${}" class="" name="" th:value="${}" readonly>
+					</td>
+				</tr>
+			</table>
+			<button onclick="location.href='/insert'">등록</button>
+			<button id="submitForm">삭제</button>
+		</form>
 </body>
 </html>

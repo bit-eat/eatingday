@@ -133,10 +133,15 @@ public class MemberController {
 		return "/favorite";
 	}
 	
-	@PostMapping("memberList") //멤버리스트 수정
+	@PostMapping("updateMemberList") //멤버리스트 수정
 	public String updatememberList(MemberVO membervo) {
 		System.out.println(membervo);
-		memberservice.updateMember(membervo);
+		memberservice.updateMemberList(membervo);
 		return "redirect:/memberList";
 	}
-}
+
+	@GetMapping("eateryList")
+		public String eateryList() {
+			return "/eateryList";
+		}
+	}

@@ -38,4 +38,6 @@ public interface MemberDAO {
 	MemberVO selectMemberId(@Param("userId") String userId);
 
 	void deletecheck(@Param("id")List<Long> id);   //관리가 회원 관리
+	
+	void updateMemberList(MemberVO membervo);  //관리자 회원 수정
 }

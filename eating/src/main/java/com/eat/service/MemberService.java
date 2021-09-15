@@ -38,4 +38,6 @@ public interface MemberService {
 	boolean validateDuplicateMember(MemberVO membervo); // 중복검사
 
 	void deletecheck(@Param("id")List<Long> id);   //관리자 회원 관리
+	
+	void updateMemberList(MemberVO membervo);  //관리자 회원 수정
 }

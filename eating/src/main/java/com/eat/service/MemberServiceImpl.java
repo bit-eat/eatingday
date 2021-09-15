@@ -95,5 +95,10 @@ public class MemberServiceImpl implements MemberService {
 	public void deletecheck(List<Long> id) { // 관리자 회원 관리
 		memberdao.deletecheck(id);
 	}
+	
+	@Override
+	public void updateMemberList(MemberVO membervo) {  //관리자 회원 수정
+		memberdao.updateMemberList(membervo);
+	}
 
 }
