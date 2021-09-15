@@ -5,8 +5,39 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+
+// 수정, 확인 버튼/ 이름, 전화번호, 등급 수정
+	function btn(test){
+		var check = $("[name='update']").val();
+		var update = document.getElementById(test.getAttribute('id')).getAttribute('id') ;
+		var updateok = Number(update)+10;
+	
+		if(check=="수정"){
+			document.getElementById(update+"").style.display = "none";
+			document.getElementById(updateok+"").style.display = "block";
+			$("#name").attr('readonly', false);
+			$("#phoneNumber").attr('readonly', false);
+			$("#grade").attr('readonly', false);
+		}
+	}
+	
+	function btn2(test){
+		var check = $("[name='updateok']").val();
+		var updateok = document.getElementById(test.getAttribute('id')).getAttribute('id') ;
+		var update = Number(updateok)-10;
+	
+		if(check=="확인"){
+			document.getElementById(updateok+"").style.display = "none";
+			document.getElementById(update+"").style.display = "block";
+			$("#name").attr('readonly', true);
+			$("#phoneNumber").attr('readonly', true);
+			$("#grade").attr('readonly', true);
+		}
+	}
+
+	// 체크박스
 	$(document).ready(function() {
-		$("#submitFrm").on("click", function() {
+		$("#submitForm").on("click", function() {
 			var param = new Array;
 			$(".chkclass:checked").each(function() {
 				param.push($("#id").val())
@@ -15,11 +46,7 @@
 			$("#form").submit();
 		});
 	});
-	$(document).ready(function() {
-		$("#update").on("click", function() {
-			style 
-		});
-	});
+
 	$(function() {
 		var chkObj = document.getElementsByName("id");
 		var rawCnt = chkObj.length;
@@ -42,20 +69,20 @@
 	var checkRows = $("[name='allCheck']:checked");
 	for (var i = checkRows.length - 1; i > -1; i--) {
 		checkRows.eq(i).closest('tr').remove();
-
 	}
+
 </script>
 </head>
 <body>
+
 	<h1>회원 목록</h1>
 
 	<div>
-		<form id=form method="post">
+		<form id=form action="memberList" method="post">
 			<table border="1">
 				<thead>
 					<tr>
-						<th scope="col"><input id="allcheck" type="checkbox"
-							name="allCheck"></th>
+						<th scope="col"><input id="allcheck" type="checkbox" name="allCheck"></th>
 						<th>사용자아이디</th>
 						<th>비밀번호</th>
 						<th>이름</th>
@@ -65,33 +92,42 @@
 					</tr>
 				</thead>
 
-				<tr th:each="member : ${selectAll}">
+				<tr th:each="member, index : ${selectAll}">
+				
+					<!-- 체크박스 -->
 					<td class="header" width="30">
 						<div class="chkclass">
-							<input name="id" type="checkbox" id="id" class="id"
-								th:value="${member.id}">
+							<input name="id" type="checkbox" id="id" class="id" th:value="${member.id}">
 						</div>
 					</td>
-					<td name="userId" th:text="${member.userId}"
-						th:value="${member.userId}"></td>
-					<td name="userPw" th:text="${member.userPw}"
-						th:value="${member.userPw}"></td>
+					
+					<!-- 사용자아이디, 비밀번호 -->
+					<td name="userId" th:text="${member.userId}" th:value="${member.userId}"></td>
+					<td name="userPw" th:text="${member.userPw}" th:value="${member.userPw}"></td>
 
-					<td><input name="userName" th:value="${member.userName}"
-						readonly></td>
-					<td><input name="phoneNumber" th:value="${member.phoneNumber}"
-						readonly></td>
-					<td><input name="grade" th:value="${member.grade}" readonly></td>
+
+					<!-- 이름, 전화번호, 등급 수정 -->
 					<td>
-						<input type="button" id="update" name="update" value="수정" onclick="" />
-						<input type="button" id="updateok" name="updateok"  style="display: none;" value="확인" />
+						<input type="text" id="name" class="name" name="name" th:value="${member.userName}" readonly>
+					</td>
+					<td>
+						<input type="text" id="phoneNumber" class="phoneNumber" name="phoneNumber" th:value="${member.phoneNumber}" readonly>
+					</td>
+					<td>
+						<input type="text" id="grade" class="grade" name="grade" th:value="${member.grade}" readonly>
+					</td>
+					
+					
+					<!-- 수정, 확인 버튼 -->
+					<td>
+						<input type="button" th:id="${index.count}" name="update" onclick="btn(this)" value="수정"/>
+						<input type="button" th:id="${index.count}+10" name="updateok" onclick="btn2(this)" style="display: none;" value="확인" />
 					</td>
 				</tr>
 			</table>
-			<button id="submitFrm">삭제</button>
+			<button id="submitForm">삭제</button>
 		</form>
 	</div>
-
 </body>
 
 </html>

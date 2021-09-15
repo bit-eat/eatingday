@@ -2,14 +2,11 @@ package com.eat.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eat.dao.EateryBookmarkDAO;
@@ -128,6 +125,18 @@ public class MemberController {
 	@PostMapping("deletecheck") // 관리자 회원 관리
 	public String deletecheck(@RequestParam("id") List<Long> id) {
 		memberservice.deletecheck(id);
+		return "redirect:/memberList";
+	}
+	
+	@GetMapping("favorite")   //즐겨찾기 페이지
+	public String favorite() {
+		return "/favorite";
+	}
+	
+	@PostMapping("memberList") //멤버리스트 수정
+	public String updatememberList(MemberVO membervo) {
+		System.out.println(membervo);
+		memberservice.updateMember(membervo);
 		return "redirect:/memberList";
 	}
 }

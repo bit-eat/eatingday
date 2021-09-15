@@ -5,7 +5,7 @@
 
 <mapper namespace="com.eat.dao.MemberDAO">
 
-	<!-- -->
+	<!--  -->
 	<select id="selectMember" parameterType="String"
 		resultType="MemberVO">
 		select * from member where userName=#{userName} and
@@ -36,12 +36,11 @@
 
 
 	<!-- 개인정보수정 -->
-	<delete id="updateMember" parameterType="com.eat.vo.MemberVO">
+	<update id="updateMember" parameterType="com.eat.vo.MemberVO">
 		UPDATE member SET
 		userPw=#{userPw}, phoneNumber=#{phoneNumber}
-		WHERE userId=1 and
-		userName=1
-	</delete>
+		WHERE userId=1 and userName=1
+	</update>
 
 
 	<!-- 로그인 -->
