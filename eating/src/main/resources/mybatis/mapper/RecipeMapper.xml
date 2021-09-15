@@ -27,7 +27,7 @@
     </select>
 
     <select id="selectIngredient" parameterType="String" resultType="com.eat.vo.RecipeVO">
-        SELECT * FROM recipe WHERE ingrdient like CONCAT('%',#{ingredient},'%')
+        SELECT * FROM recipe WHERE ingredient like CONCAT('%',#{ingredient},'%')
     </select>
 
     <select id="selectCategoryId" parameterType="Long" resultType="com.eat.vo.RecipeVO">

@@ -1,10 +1,7 @@
 package com.eat.service;
 
 
-import com.eat.vo.People;
-import com.eat.vo.RecipeContentVO;
-import com.eat.vo.RecipeTagVO;
-import com.eat.vo.RecipeVO;
+import com.eat.vo.*;
 
 import java.util.List;
 
@@ -12,23 +9,28 @@ public interface RecipeService {
 
     Long saveRecipe(RecipeVO recipe);
     void saveContent(Long id, RecipeContentVO content);
-    void updateRecipe(RecipeVO recipe);
-    void updateContent(RecipeContentVO content);
-    void updateTag(RecipeTagVO tag);
+    void tempSaveContent(Long id, String content);
+    void updateRecipe(Long recipeId, String name, String thumb, String ingredient, People p,
+                      String originTag, String content);
     void deleteRecipe(Long id);
 
     RecipeVO selectOne(Long id);
     List<RecipeVO> selectAll();
 
+    List<RecipeVO> selectStatus(SearchStatus status, String name);
+
     List<RecipeVO> selectName(String name);
     List<RecipeVO> selectPeople(People p);
     List<RecipeVO> selectIngredient(String ingredient);
+    List<RecipeVO> selectTag(String tagName);
 
     List<RecipeVO> selectMember(String memberId);
     List<RecipeVO> selectCategory(String category);
-    List<RecipeVO> selectTag(String tagName);
 
     void manufactureTag(Long recipeId, String originTag);
+    String combineTag(Long recipeId);
+
+    RecipeContentVO selectContent(Long recipeId);
 
 
 

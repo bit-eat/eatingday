@@ -5,6 +5,7 @@ import com.eat.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,26 +27,72 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
+    public void tempSaveContent(Long id, String content) {
+        RecipeContentVO recipeContentVO = new RecipeContentVO();
+        recipeContentVO.setRecipeId(id);
+        recipeContentVO.setContent(content);
+        recipeContentVO.setTurn(0);
+        contentDAO.insertRecipeContent(recipeContentVO);
+    }
+
+    @Override
     public void saveContent(Long id, RecipeContentVO content) {
         content.setRecipeId(id);
         contentDAO.insertRecipeContent(content);
     }
 
-
     @Override
-    public void updateRecipe(RecipeVO recipe) {
-        recipeDAO.updateRecipe(recipe);
+    public List<RecipeVO> selectStatus(SearchStatus status, String name) {
+
+        if(status == SearchStatus.TAG && name != null){
+           return selectTag(name);
+        }else if(status == SearchStatus.INGREDIENT && name != null){
+            return selectIngredient(name);
+        }else if(status == SearchStatus.NAME && name != null)
+            return selectName(name);
+
+        return selectAll();
     }
 
     @Override
-    public void updateContent(RecipeContentVO content) {
-        contentDAO.updateRecipeContent(content);
+    public void updateRecipe(Long recipeId, String name, String thumb, String ingredient, People p,
+                             String originTag, String content) {
+        RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
+        recipeVO.setThumb("/img/" + thumb);
+        recipeVO.setName(name);
+        recipeVO.setIngredient(ingredient);
+        recipeVO.setPeople(p);
+        recipeVO.setModifyDate(LocalDateTime.now());
+        recipeDAO.updateRecipe(recipeVO);
+
+        RecipeContentVO recipeContentVO = contentDAO.selectOne(recipeId,0);
+
+
+        if(recipeContentVO == null){
+            RecipeContentVO contentVo = new RecipeContentVO();
+            contentVo.setRecipeId(recipeId);
+            contentVo.setContent(content);
+            contentDAO.insertRecipeContent(contentVo);
+        }else {
+        recipeContentVO.setContent(content);
+        contentDAO.updateRecipeContent(recipeContentVO);
+        }
+
+
+        String manufactTag = originTag.replace(" ","");
+        String tagList[] = manufactTag.split("#");
+
+        int max = 11;
+
+        if(!(tagList.length > max))
+            max = tagList.length;
+
+        for(int i=1;i<max; i++){
+            tagDAO.updateTagByRecipe(recipeId,tagList[i]);
+        }
+
     }
 
-    @Override
-    public void updateTag(RecipeTagVO tag) {
-        tagDAO.updateRecipeTag(tag);
-    }
 
     @Override
     public void deleteRecipe(Long id) {
@@ -122,5 +169,21 @@ public class RecipeServiceImpl implements RecipeService{
            tagDAO.insertRecipeTag(tagVO);
        }
 
+    }
+
+    @Override
+    public String combineTag(Long recipeId) {
+        List<RecipeTagVO> recipeTagVOList = tagDAO.selectByRecipe(recipeId);
+        String tag = "";
+        for(RecipeTagVO t : recipeTagVOList){
+            tag += "#" + t.getName() + " ";
+        }
+
+        return tag;
+    }
+
+    @Override
+    public RecipeContentVO selectContent(Long recipeId) {
+        return contentDAO.selectOne(recipeId, 0);
     }
 }

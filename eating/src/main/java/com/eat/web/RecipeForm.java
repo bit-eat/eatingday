@@ -18,4 +18,6 @@ public class RecipeForm {
     private LocalDateTime modifyDate;
     private String originTag;
 
+    private String content;
+
 }
