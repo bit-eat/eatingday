@@ -18,5 +18,4 @@ public class EateryBookmarkController {
 		model.addAttribute("selectEateryBookmark",eateryBookmarkdao.selectEateryBookmark(id));
 		return "/eateryBookmarkList";
 	}
-
 }

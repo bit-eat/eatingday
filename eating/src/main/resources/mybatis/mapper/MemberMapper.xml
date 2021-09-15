@@ -5,7 +5,7 @@
 
 <mapper namespace="com.eat.dao.MemberDAO">
 
-	<!-- -->
+	<!--  -->
 	<select id="selectMember" parameterType="String"
 		resultType="MemberVO">
 		select * from member where userName=#{userName} and
@@ -28,6 +28,7 @@
 		userId=#{userId} and userPw=#{userPw}
 	</delete>
 
+
 	<!-- 관리자 회원 삭제 -->
 	<delete id="admindelete" parameterType="com.eat.vo.MemberVO">
 		DELETE FROM member WHERE
@@ -36,12 +37,11 @@
 
 
 	<!-- 개인정보수정 -->
-	<delete id="updateMember" parameterType="com.eat.vo.MemberVO">
+	<update id="updateMember" parameterType="com.eat.vo.MemberVO">
 		UPDATE member SET
 		userPw=#{userPw}, phoneNumber=#{phoneNumber}
-		WHERE userId=1 and
-		userName=1
-	</delete>
+		WHERE userId=1 and userName=1
+	</update>
 
 
 	<!-- 로그인 -->
@@ -105,6 +105,18 @@
 			(id = #{id})
 		</foreach>
 	</delete>
-
+	
+	<!-- 관리자 회원 수정 -->
+	<update id="updateMemberList" parameterType="com.eat.vo.MemberVO">
+		UPDATE member SET
+		userName=#{userName}, phoneNumber=#{phoneNumber}, grade=#{grade}
+		WHERE userId=#{userId} and userPw=#{userPw}
+	</update>
+	
+	<!-- 음식점 게시판 -->
+	<select id="eateryList" parameterType="com.eat.vo.eateryVO">
+		SELECT id,name,content,
+	</select>
+	
 
 </mapper>
