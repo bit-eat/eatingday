@@ -1,8 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <title>맛집 상세 페이지</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$("#recommend").on("click",function(){
+		$("#check").attr("action", "recommend");
+		$("#check").submit();
+		document.getElementById("recommend").style.display = "none";
+		document.getElementById("unrecommend").style.display = "block";
+	});
+	
+	$("#unrecommend").on("click",function(){
+		$("#check").attr("action", "unrecommend");
+		$("#check").submit();
+		document.getElementById("unrecommend").style.display = "none";
+		document.getElementById("recommend").style.display = "block";
+	});
+</script>
 </head>
 <body>
 
@@ -10,13 +26,14 @@
 
 	<table border="1">
 		<thead>
+		<tr>
 			<th>음식점 이름</th>
 			<th>카테고리</th>
 			<th>지역</th>
 			<th>주소</th>
 			<th>전화</th>
 			<th>음식점 설명</th>
-			
+		</tr>	
 
 		</thead>
 
@@ -28,15 +45,24 @@
 			<td th:text="${eatery.phoneNumber}"></td>
 			<td th:text="${eatery.content}"></td>
 		</tr>
-
+		<tr th:each="eatery : ${selectId }">
+			<td th:text="${eatery.name}"></td>
+			<td th:text="${eatery.categoryName}"></td>
+			<td th:each=" area : ${T(com.eat.vo.Area).values()}" th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}" th:text="${area.getKrName}"></td>
+			<td th:text="${eatery.address}"></td>
+			<td th:text="${eatery.phoneNumber}"></td>
+			<td th:text="${eatery.content}"></td>
+		</tr>
 	</table>
 	<br>
 	<div>
-	<form action="recommend" method="post">
-		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" type="number" style="display: none" readonly>
-		<button type="submit">추천</button> <button>즐겨찾기</button>
-	</form>
-		
+	<form id="check" method="post">
+		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+	<button  id="recommend" >추천</button> 
+	<button id="unrecommend" style="display: none">추천취소</button> 
+	</form> 
+	
+	
 </div>
 </body>
 </html>

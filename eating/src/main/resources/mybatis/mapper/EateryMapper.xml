@@ -49,6 +49,15 @@
 		e.name like CONCAT('%',#{name},'%')
 	</select>
 
+<select id="selectId" parameterType="Long"
+		resultType="com.eat.vo.EateryVO">
+		SELECT e.*, c.name as categoryName FROM eatery as e right
+		join category as c
+		on e.categoryId = c.id
+		where c.id = e.categoryId and
+		e.id = #{id}
+	</select>
+
 	<select id="selectArea" parameterType="String"
 		resultType="com.eat.vo.EateryVO">
 		SELECT e.*, c.name as categoryName, r.recommend FROM eatery
@@ -65,11 +74,13 @@
 	<select id="selectAreaRecommend" parameterType="String"
 		resultType="com.eat.vo.EateryVO">
 		SELECT e.*, c.name as
-		categoryName, r.recommend FROM eatery as e
+		categoryName, r.recommend FROM eatery
+		as e
 		right join category as c
 		on e.categoryId =
 		c.id
-		right join eateryrecommend as r
+		right join
+		eateryrecommend as r
 		on e.id = r.eateryid
 		where area =
 		#{area} order by
@@ -85,7 +96,7 @@
 		right join
 		eateryrecommend as r
 		on e.id = r.eateryid
-		where c.name = #{categoryName} 
+		where c.name = #{categoryName}
 		order by recommend desc
 	</select>
 
@@ -98,7 +109,7 @@
 		right join
 		eateryrecommend as r
 		on e.id = r.eateryid
-		where c.name = #{categoryName} 
+		where c.name = #{categoryName}
 		order by id desc
 	</select>
 
@@ -145,6 +156,14 @@
 		update
 		eateryRecommend
 		set recommend = recommend+1
+		where eateryid = #{id}
+	</update>
+
+	<!-- 추천 취소 -->
+	<update id="updateEateryUnrecommend" parameterType="Long">
+		update
+		eateryRecommend
+		set recommend = recommend-1
 		where eateryid = #{id}
 	</update>
 

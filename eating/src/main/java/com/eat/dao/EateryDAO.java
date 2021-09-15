@@ -11,6 +11,7 @@ import java.util.List;
 public interface EateryDAO {
 
 	void insertEatery(EateryVO eateryvo);
+	
 	void insertEateryRecommend(EateryVO eateryvo);
 	
 	void updateEatery(EateryVO eateryvo);
@@ -18,9 +19,13 @@ public interface EateryDAO {
 	void updateEateryRecommend(@Param("id") Long id);
 
 	void deleteEatery(@Param("id") Long id);
+	
+	void updateEateryUnrecommend(@Param("id") Long id);
 
 	List<EateryVO> selectAll();
 
+	List<EateryVO> selectId(@Param("id")Long id);
+	
 	List<EateryVO> selectName(@Param("name") String name);
 
 	List<EateryVO> selectArea(@Param("area") String area);

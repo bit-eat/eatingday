@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<title>Eatery Bookmark List</title>
+<title>EateryBookmark List</title>
 </head>
 <body>
 <div id="content">
@@ -10,13 +10,14 @@
 
 		<table border="1">
 		<thead>
+		<tr>
 			<th>음식점 이름</th>
 			<th>카테고리</th>
 			<th>지역</th>
 			<th>주소</th>
 			<th>전화</th>
 			<th>음식점 설명</th>
-			
+		</tr>
 		</thead>
 
 		<tr th:each="eatery : ${selectEateryBookmark}">

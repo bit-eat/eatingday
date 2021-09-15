@@ -8,8 +8,8 @@ import com.eat.vo.Area;
 import com.eat.vo.EateryVO;
 
 public interface EateryService {
+	
    public void insertEatery(EateryVO eatery);
-   
    
    public void updateEatery(EateryVO eatery);
    
@@ -17,9 +17,13 @@ public interface EateryService {
    
    public void deleteEatery(Long id);
    
+   void updateEateryUnrecommend(@Param("id") Long id);
+   
    public List<EateryVO> selectAll();
    
    public List<EateryVO> selectName(@Param("name")String name);
+   
+   public List<EateryVO> selectId(@Param("id") Long id);
    
    public List<EateryVO> selectCategoryName(@Param("categoryName")String categoryName);
    

@@ -39,7 +39,13 @@ public class EateryServiceImpl implements EateryService {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public void updateEateryUnrecommend(Long id) {
+		// TODO Auto-generated method stub
+		eaterydao.updateEateryUnrecommend(id);
+	}
+	
 	@Override
 	public List<EateryVO> selectAll() {
 		// TODO Auto-generated method stub
@@ -51,7 +57,13 @@ public class EateryServiceImpl implements EateryService {
 		// TODO Auto-generated method stub
 		return eaterydao.selectName(name);
 	}
-
+	
+	@Override
+	public List<EateryVO> selectId(Long id) {
+		// TODO Auto-generated method stub
+		return eaterydao.selectId(id);
+	}
+	
 	@Override
 	public List<EateryVO> selectCategoryName(String categoryName) {
 		// TODO Auto-generated method stub

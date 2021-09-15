@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <title>맛집 메인 페이지</title>
-
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("td[name='name']").on("click", function() {
+			var name = $(this).closest('td').attr('value') + "";
+			$('input[id=name]').val(name);
+			$("#detail").attr("action", "detail");
+			$("#detail").submit();
+		});
+	});
+</script>
 </head>
 
 <body>
@@ -65,18 +75,22 @@
 
 	<br>
 	<h3>신규 맛집</h3>
-
+	<form method="post" id="detail">
+		<input type="hidden" id="name" name="name">
+	</form>
 	<table border="1">
 		<thead>
-
-			<th>음식점 이름</th>
-			<th>카테고리</th>
-			<th>지역</th>
-			<th>추천수</th>
+			<tr>
+				<th>음식점 이름</th>
+				<th>카테고리</th>
+				<th>지역</th>
+				<th>추천수</th>
+			</tr>
 		</thead>
 
 		<tr th:each="eatery : ${selectAll}">
-			<td th:text="${eatery.name}" onClick="location.href='detail'"></td>
+			<td th:text="${eatery.name}" id="name" name="name"
+				th:value="${eatery.name}"></td>
 			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
@@ -84,7 +98,8 @@
 			<td th:text="${eatery.recommend}"></td>
 		</tr>
 		<tr th:each="eatery : ${LatestEateryList}">
-			<td th:text="${eatery.name}"></td>
+			<td th:text="${eatery.name}" name="name"
+			th:value="${eatery.name}"></td>
 			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
@@ -92,7 +107,8 @@
 			<td th:text="${eatery.recommend}"></td>
 		</tr>
 		<tr th:each="eatery : ${RecommendEateryList}">
-			<td th:text="${eatery.name}"></td>
+			<td th:text="${eatery.name}" name="name"
+			th:value="${eatery.name}"></td>
 			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"

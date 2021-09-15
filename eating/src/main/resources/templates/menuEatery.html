@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <title>메뉴별 맛집 페이지</title>
@@ -33,10 +33,12 @@
 	<table border="1">
 		<thead>
 			<h3>메뉴별 인기 맛집</h3>
+			<tr>
 			<th>음식점 이름</th>
 			<th>카테고리</th>
 			<th>지역</th>
 			<th>추천수</th>
+			</tr>
 		</thead>
 		
 		<tr th:each="eatery : ${selectRecommend}">
@@ -61,10 +63,12 @@
 	<table border="1">
 		<thead>
 			<h3>메뉴별 맛집</h3>
+			<tr>
 			<th>음식점 이름</th>
 			<th>카테고리</th>
 			<th>지역</th>
 			<th>추천수</th>
+			</tr>
 		</thead>
 
 		<tr th:each="eatery : ${selectAll}">
