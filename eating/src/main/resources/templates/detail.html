@@ -30,6 +30,7 @@
 		</tr>
 
 	</table>
+	<br>
 	<div>
 	<form action="recommend" method="post">
 		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" type="number" style="display: none" readonly>

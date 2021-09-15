@@ -44,7 +44,7 @@
 			<th>추천수</th>
 		</thead>
 
-		<tr th:each="eatery : ${selectAll}">
+		<tr th:each="eatery : ${selectRecommend}">
 			<td th:text="${eatery.name}"></td>
 			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"

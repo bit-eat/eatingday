@@ -22,8 +22,8 @@ public class EateryController {
 	@Autowired
 	private CategoryDAO categorydao;
 
-	@GetMapping("/eateryTest")
-	public void eateryTest(Model model) {
+	@GetMapping("/eateryList")
+	public void eateryList(Model model) {
 		model.addAttribute("selectAll", eateryservice.selectAll());
 		System.out.println(model);
 	}
@@ -37,12 +37,12 @@ public class EateryController {
 	@PostMapping("/insertEatery")
 	public String insertEatery(EateryVO eateryvo) {
 		eateryservice.insertEatery(eateryvo);
-		return "redirect:/eateryTest";
+		return "redirect:/eateryList";
 	}
 
 	@GetMapping("/detail")
-	public String detail(Model model) {
-		String name = "유가";
+	public String detail(Model model, String name) {
+		
 		model.addAttribute("selectName", eateryservice.selectName(name));
 		return "/detail";
 	}
@@ -74,13 +74,21 @@ public class EateryController {
 	}
 
 	@GetMapping("/menuEatery")
-	public void menu(Model model, String categoryname) {
+	public void menuEateryMain(Model model) {
 		model.addAttribute("selectAll", eateryservice.selectAll());
+		model.addAttribute("selectRecommend", eateryservice.selectRecommend());
 	}
-
+	
+	@GetMapping("selectMenuEatery")
+	public String menuEateryMain(Model model, @RequestParam("categoryName") String categoryName) {
+		
+		model.addAttribute("selectCategoryName", eateryservice.selectCategoryName(categoryName));
+		model.addAttribute("selectRecommendCategory", eateryservice.selectCategoryRecommend(categoryName));
+		return "/menuEatery";
+	}
 	@PostMapping("menuEatery")
 	public String menuEatery(Model model, String categoryName) {
-		model.addAttribute("selectCategoryRecommend", eateryservice.selectCategoryRecommend(categoryName));
+		model.addAttribute("selectRecommendCategory", eateryservice.selectCategoryRecommend(categoryName));
 		model.addAttribute("selectCategoryName", eateryservice.selectCategoryName(categoryName));
 		return "/menuEatery";
 	}
@@ -88,11 +96,20 @@ public class EateryController {
 	@GetMapping("/areaEatery")
 	public void areaEateryMain(Model model) {
 		model.addAttribute("selectAll", eateryservice.selectAll());
+		model.addAttribute("selectRecommend", eateryservice.selectRecommend());
 	}
 
+	@GetMapping("selectAreaEatery")
+	public String areaEateryMain(Model model,@RequestParam("area") String area) {
+		
+		model.addAttribute("selectArea", eateryservice.selectArea(area));
+		model.addAttribute("selectRecommendArea", eateryservice.selectAreaRecommend(area));
+		return "/areaEatery";
+	}
+	
 	@PostMapping("areaEatery")
 	public String areaEatery(Model model, String area) {
-		model.addAttribute("selectAreaRecommend", eateryservice.selectAreaRecommend(area));
+		model.addAttribute("selectRecommendArea", eateryservice.selectAreaRecommend(area));
 		model.addAttribute("selectArea", eateryservice.selectArea(area));
 		return "/areaEatery";
 	}

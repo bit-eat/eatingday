@@ -35,6 +35,7 @@ public interface EateryService {
    
    List<EateryVO> selectCategoryRecommend(@Param("categoryName")String categoryName);
 
+   public List<EateryVO> selectRecommend();
 
    
 }

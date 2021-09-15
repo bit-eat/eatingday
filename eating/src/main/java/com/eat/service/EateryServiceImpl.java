@@ -55,7 +55,7 @@ public class EateryServiceImpl implements EateryService {
 	@Override
 	public List<EateryVO> selectCategoryName(String categoryName) {
 		// TODO Auto-generated method stub
-		return eaterydao.selectCategoryRecommend(categoryName);
+		return eaterydao.selectCategoryName(categoryName);
 	}
 
 	@Override
@@ -101,6 +101,12 @@ public class EateryServiceImpl implements EateryService {
 	public List<EateryVO> selectCategoryRecommend(String categoryName) {
 		
 		return eaterydao.selectCategoryRecommend(categoryName);
+	}
+
+	@Override
+	public List<EateryVO> selectRecommend() {
+		// TODO Auto-generated method stub
+		return eaterydao.selectRecommend();
 	}
 
 }
