@@ -113,10 +113,5 @@
 		WHERE userId=#{userId} and userPw=#{userPw}
 	</update>
 	
-	<!-- 음식점 게시판 -->
-	<select id="eateryList" parameterType="com.eat.vo.eateryVO">
-		SELECT id,name,content,
-	</select>
-	
 
 </mapper>

@@ -139,9 +139,5 @@ public class MemberController {
 		memberservice.updateMemberList(membervo);
 		return "redirect:/memberList";
 	}
-
-	@GetMapping("eateryList")
-		public String eateryList() {
-			return "/eateryList";
-		}
+	
 	}
