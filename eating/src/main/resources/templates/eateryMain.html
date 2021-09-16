@@ -5,14 +5,15 @@
 <title>맛집 메인 페이지</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-	$(document).ready(function() {
-		$("td[name='name']").on("click", function() {
-			var name = $(this).closest('td').attr('value') + "";
-			$('input[id=name]').val(name);
-			$("#detail").attr("action", "detail");
-			$("#detail").submit();
-		});
+$(document).ready(function() {
+	$("td[name='name']").on("click", function() {
+		var name = $(this).closest('td').attr('value') + "";
+		$('input[id=name]').val(name);
+		$("#detail").attr("action", "detail");
+		$("#detail").submit();
 	});
+});
+		
 </script>
 </head>
 
@@ -98,8 +99,7 @@
 			<td th:text="${eatery.recommend}"></td>
 		</tr>
 		<tr th:each="eatery : ${LatestEateryList}">
-			<td th:text="${eatery.name}" name="name"
-			th:value="${eatery.name}"></td>
+			<td th:text="${eatery.name}" name="name" th:value="${eatery.name}"></td>
 			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
@@ -107,8 +107,7 @@
 			<td th:text="${eatery.recommend}"></td>
 		</tr>
 		<tr th:each="eatery : ${RecommendEateryList}">
-			<td th:text="${eatery.name}" name="name"
-			th:value="${eatery.name}"></td>
+			<td th:text="${eatery.name}" name="name" th:value="${eatery.name}"></td>
 			<td th:text="${eatery.categoryName}"></td>
 			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
