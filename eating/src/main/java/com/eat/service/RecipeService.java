@@ -8,6 +8,8 @@ import com.eat.vo.RecipeVO;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface RecipeService {
 
     Long saveRecipe(RecipeVO recipe);
@@ -29,5 +31,5 @@ public interface RecipeService {
     List<RecipeVO> selectCategory(String category);
     List<RecipeVO> selectTag(String tagName);
 
-
+    void adminRecipedelete(@Param("id")List<Long> id);   //관리자 음식점 게시판 삭제
 }

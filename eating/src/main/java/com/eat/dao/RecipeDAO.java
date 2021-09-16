@@ -24,5 +24,5 @@ public interface RecipeDAO {
     void updateRecipe(RecipeVO recipe);
     void deleteRecipe(@Param("id") Long id);
 
-
+	void adminRecipedelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
 }

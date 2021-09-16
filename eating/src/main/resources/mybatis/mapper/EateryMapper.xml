@@ -26,7 +26,7 @@
 		e.categoryId = c.id
 		right join eateryrecommend as r
 		on e.id = r.eateryid
-		where c.id = e.categoryId order by id desc
+		where c.id = e.categoryId order by id asc
 	</select>
 
 	<select id="selectRecommend" resultType="EateryVO">
@@ -166,5 +166,18 @@
 		set recommend = recommend-1
 		where eateryid = #{id}
 	</update>
+	
+	
+	
+		<!-- 관리자 음식점 삭제 -->
+	<delete id="adminEaterydelete" parameterType="java.util.List">    
+		DELETE FROM eatery
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(id = #{id})
+		</foreach>
+	</delete>
+	
 
 </mapper>

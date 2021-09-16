@@ -121,4 +121,11 @@ public class EateryServiceImpl implements EateryService {
 		return eaterydao.selectRecommend();
 	}
 
+	@Override
+	public void adminEaterydelete(List<Long> id) {  //관리자 음식점 게시판 삭제
+		// TODO Auto-generated method stub
+		eaterydao.adminEaterydelete(id);
+	}
+	
+	
 }

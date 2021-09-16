@@ -10,15 +10,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eat.dao.EateryBookmarkDAO;
+import com.eat.service.EateryService;
 import com.eat.service.MemberService;
+import com.eat.service.RecipeService;
 import com.eat.vo.MemberVO;
 
 @Controller
 public class MemberController {
 
 	@Autowired
+	private RecipeService recipeservice;
+	
+	@Autowired
 	private MemberService memberservice;
-
+	
+	@Autowired
+	private EateryService eateryservice;
+	
 	@Autowired
 	private EateryBookmarkDAO eateryBookmarkdao;
 
@@ -122,7 +130,7 @@ public class MemberController {
 		model.addAttribute("selectAll", memberservice.selectAll());
 	}
 
-	@PostMapping("deletecheck") // 관리자 회원 관리
+	@PostMapping("deletecheck") // 관리자 회원 관리 삭제
 	public String deletecheck(@RequestParam("id") List<Long> id) {
 		memberservice.deletecheck(id);
 		return "redirect:/memberList";
@@ -140,4 +148,27 @@ public class MemberController {
 		return "redirect:/memberList";
 	}
 	
+	@GetMapping("adminEateryList")   //관리자 음식점 게시판
+	public String adminEateryList(Model model){
+		model.addAttribute("selectAll", eateryservice.selectAll());
+		return "/adminEateryList";
 	}
+	
+	@PostMapping("adminEaterydelete")   //관리자 음식점 게사판 삭제
+	public String adminEaterydelete(@RequestParam("id") List<Long> id) {
+		eateryservice.adminEaterydelete(id);
+		return "redirect:/adminEateryList";
+	}
+	
+	@GetMapping("adminRecipeList")   //관리자 레시피 게시판
+	public String adminRecipeList(Model model){
+		model.addAttribute("selectAll", recipeservice.selectAll());
+		return "/adminRecipeList";
+	}
+	
+	@PostMapping("adminRecipedelete")   //관리자 레시피 게시판 삭제
+	public String adminRecipedelete(@RequestParam("id") List<Long> id) {
+		recipeservice.adminRecipedelete(id);
+		return "redirect:/adminRecipeList";
+	}
+}

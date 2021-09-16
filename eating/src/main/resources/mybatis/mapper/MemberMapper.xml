@@ -113,5 +113,23 @@
 		WHERE userId=#{userId} and userPw=#{userPw}
 	</update>
 	
-
+	<!-- 관리자 음식점 게시판 -->
+	<select id="adminEateryList" parameterType="com.eat.vo.EateryVO" resultType="String">
+		select e.id, e.name, e.content, e.phoneNumber, e.address, e.category, c.name as categoryName from eatery as e
+		right join category as c
+		on e.category=c.id
+		right join
+		eateryrecommend as r
+		on e.id = r.eateryid
+	</select>
+	
+	<!-- 관리자 레시피 게시판 -->
+	<select id="adminRecipeList" parameterType="com.eat.vo.RecipeVO" resultType="String">
+		select r.id, r.name, r.content, r.recommend, r.createDate, r.memberid, c.name as categoryName from recipe as r
+		right join category as c
+		on r.category=r.id
+		
+		
+	</select>
+	
 </mapper>
