@@ -14,7 +14,6 @@
         right join category as c on s.categoryId = c.id 
         where c.id = s.categoryId ORDER BY date
     </select>
-   
 
 	<select id="selectDietList" parameterType="com.eat.vo.DietVO" resultType="com.eat.vo.DietVO">
 		select s.*,  c.name as "categoryName" from suggestion as s 

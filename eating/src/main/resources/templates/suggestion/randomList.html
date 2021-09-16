@@ -40,14 +40,12 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T">
 					<th>요리이름</th>
 					<th>카테고리</th>
 					<th>재료</th>
-					<th>날짜</th>
 				</tr>
 			</thead>
 			<tr th:each="recipe : ${showRecipe}">
 				<td th:text="${recipe.name}"></td>
 				<td th:text="${recipe.categoryName}"></td>
 				<td th:text="${recipe.ingredient}"></td>
-				<td th:text="${recipe.createDate}"></td>
 			</tr>
 		</table>
 		</div>
