@@ -174,6 +174,10 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public String combineTag(Long recipeId) {
         List<RecipeTagVO> recipeTagVOList = tagDAO.selectByRecipe(recipeId);
+
+        if(recipeTagVOList == null)
+            return "";
+
         String tag = "";
         for(RecipeTagVO t : recipeTagVOList){
             tag += "#" + t.getName() + " ";
