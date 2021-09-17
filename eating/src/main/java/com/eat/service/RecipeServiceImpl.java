@@ -1,15 +1,11 @@
 package com.eat.service;
 
-import com.eat.dao.RecipeContentDAO;
-import com.eat.dao.RecipeDAO;
-import com.eat.dao.RecipeTagDAO;
-import com.eat.vo.People;
-import com.eat.vo.RecipeContentVO;
-import com.eat.vo.RecipeTagVO;
-import com.eat.vo.RecipeVO;
+import com.eat.dao.*;
+import com.eat.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +17,22 @@ public class RecipeServiceImpl implements RecipeService{
     private final RecipeDAO recipeDAO;
     private final RecipeContentDAO contentDAO;
     private final RecipeTagDAO tagDAO;
+    private final CategoryDAO categoryDAO;
+    private final MemberDAO memberDAO;
 
     @Override
     public Long saveRecipe(RecipeVO recipe) {
         recipeDAO.insertRecipe(recipe);
         return recipe.getId();
+    }
+
+    @Override
+    public void tempSaveContent(Long id, String content) {
+        RecipeContentVO recipeContentVO = new RecipeContentVO();
+        recipeContentVO.setRecipeId(id);
+        recipeContentVO.setContent(content);
+        recipeContentVO.setTurn(0);
+        contentDAO.insertRecipeContent(recipeContentVO);
     }
 
     @Override
@@ -35,25 +42,57 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public void saveTag(Long id, RecipeTagVO tag) {
-        tag.setRecipeId(id);
-        tagDAO.insertRecipeTag(tag);
+    public List<RecipeVO> selectStatus(SearchStatus status, String name) {
+
+        if(status == SearchStatus.TAG && name != null){
+           return selectTag(name);
+        }else if(status == SearchStatus.INGREDIENT && name != null){
+            return selectIngredient(name);
+        }else if(status == SearchStatus.NAME && name != null)
+            return selectName(name);
+
+        return selectAll();
     }
 
     @Override
-    public void updateRecipe(RecipeVO recipe) {
-        recipeDAO.updateRecipe(recipe);
+    public void updateRecipe(Long recipeId, String name, String thumb, String ingredient, People p,
+                             String originTag, String content) {
+        RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
+        recipeVO.setThumb("/img/" + thumb);
+        recipeVO.setName(name);
+        recipeVO.setIngredient(ingredient);
+        recipeVO.setPeople(p);
+        recipeVO.setModifyDate(LocalDateTime.now());
+        recipeDAO.updateRecipe(recipeVO);
+
+        RecipeContentVO recipeContentVO = contentDAO.selectOne(recipeId,0);
+
+
+        if(recipeContentVO == null){
+            RecipeContentVO contentVo = new RecipeContentVO();
+            contentVo.setRecipeId(recipeId);
+            contentVo.setContent(content);
+            contentDAO.insertRecipeContent(contentVo);
+        }else {
+        recipeContentVO.setContent(content);
+        contentDAO.updateRecipeContent(recipeContentVO);
+        }
+
+
+        String manufactTag = originTag.replace(" ","");
+        String tagList[] = manufactTag.split("#");
+
+        int max = 11;
+
+        if(!(tagList.length > max))
+            max = tagList.length;
+
+        for(int i=1;i<max; i++){
+            tagDAO.updateTagByRecipe(recipeId,tagList[i]);
+        }
+
     }
 
-    @Override
-    public void updateContent(RecipeContentVO content) {
-        contentDAO.updateRecipeContent(content);
-    }
-
-    @Override
-    public void updateTag(RecipeTagVO tag) {
-        tagDAO.updateRecipeTag(tag);
-    }
 
     @Override
     public void deleteRecipe(Long id) {
@@ -83,17 +122,22 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     public List<RecipeVO> selectIngredient(String ingredient) {
-        return null;
+        return recipeDAO.selectIngredient(ingredient);
     }
 
     @Override
-    public List<RecipeVO> selectUser(String userId) {
-        return null;
+    public List<RecipeVO> selectMember(String memberId) {
+        MemberVO memberVO = memberDAO.selectName(memberId);
+        List<RecipeVO> recipeList = recipeDAO.selectMemberId(memberVO.getId());
+        return recipeList;
     }
 
     @Override
     public List<RecipeVO> selectCategory(String category) {
-        return null;
+        CategoryVO categoryVO = categoryDAO.selectName(category);
+        List<RecipeVO> recipeList = recipeDAO.selectCategoryId(categoryVO.getId());
+
+        return recipeList;
     }
 
     @Override
@@ -113,6 +157,44 @@ public class RecipeServiceImpl implements RecipeService{
 		// TODO Auto-generated method stub
 		recipeDAO.adminRecipedelete(id);
 	}
-    
-   
+
+    @Override
+    public void manufactureTag(Long recipeId, String originTag) {
+        String manufactTag = originTag.replace(" ","");
+        String tagList[] = manufactTag.split("#");
+
+        int max = 11;
+
+        if(!(tagList.length > max))
+            max = tagList.length;
+
+       for(int i=1;i<max; i++){
+           RecipeTagVO tagVO = new RecipeTagVO();
+           tagVO.setRecipeId(recipeId);
+           tagVO.setName(tagList[i]);
+           tagDAO.insertRecipeTag(tagVO);
+       }
+
+    }
+
+    @Override
+    public String combineTag(Long recipeId) {
+        List<RecipeTagVO> recipeTagVOList = tagDAO.selectByRecipe(recipeId);
+
+        if(recipeTagVOList == null)
+            return "";
+
+        String tag = "";
+        for(RecipeTagVO t : recipeTagVOList){
+            tag += "#" + t.getName() + " ";
+        }
+
+        return tag;
+    }
+
+    @Override
+    public RecipeContentVO selectContent(Long recipeId) {
+        return contentDAO.selectOne(recipeId, 0);
+    }
+
 }

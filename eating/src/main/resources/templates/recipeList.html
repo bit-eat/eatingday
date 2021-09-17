@@ -1,29 +1,66 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
+
+<th:block layout:fragment="content">
 <div class="container">
   <div>
+    <div>
+      <form th:object="${recipeSearch}" class="form-inline">
+        <div class="form-group mb-2">
+          <input type="text" th:field="*{searchName}" class="form-control" placeholder="검색단어 입력"/>
+        </div>
+        <div class="form-group mx-sm-1 mb-2">
+          <select th:field="*{status}" class="form-control">
+            <option value="">검색 종류</option>
+            <option th:each="status : ${T(com.eat.vo.SearchStatus).values()}"
+                    th:value="${status}"
+                    th:text="${status}">option
+            </option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-check" onclick="location.href='index.html'">메인 화면</button>
+        <button type="submit" class="btn btn-primary mb-2">검색</button>
+      </form>
+    </div>
+
     <table class="table table-striped">
       <thead>
       <tr>
-        <th>번호</th>
+        <th>#</th>
+        <th>회원 아이디</th>
+        <th>썸네일 주소</th>
         <th>요리이름</th>
-        <th>요리재료</th>
-        <th>요리인원</th>
-        <th>작성시각</th>
+        <th>재료 목록</th>
+        <th>추천인원</th>
+        <th>작성일자</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="recipeList : ${recipeList}">
-        <td th:text="${recipeList.id}"></td>
-        <td th:text="${recipeList.name}"></td>
-        <td th:text="${recipeList.ingredient}"></td>
-        <td th:text="${recipeList.people}"></td>
-        <td th:text="${recipeList.createDate}"></td>
+      <tr th:each="recipe : ${recipeList}">
+        <td th:text="${recipe.id}"></td>
+        <td th:text="${recipe.memberId}"></td>
+        <td th:text="${recipe.thumb}"></td>
+        <td th:text="${recipe.name}"></td>
+        <td th:text="${recipe.ingredient}"></td>
+        <td th:text="${recipe.people}"></td>
+        <td th:text="${recipe.createDate}"></td>
+        <td>
+          <a href="#" th:href="@{recipe/{id}/detail (id=${recipe.id})}" class="btn btn-info">상세</a>
+        </td>
+        <td>
+          <a href="#" th:href="@{recipe/{id}/edit (id=${recipe.id})}" class="btn btn-info">수정</a>
+        </td>
+        <td>
+          <a href="#" th:href="'javascript:cancel('+${recipe.id}+')'" class="btn btn-danger">삭제</a>
+        </td>
       </tr>
+
       </tbody>
     </table>
   </div>
 </div>
-</body>
+</th:block>
 </html>
