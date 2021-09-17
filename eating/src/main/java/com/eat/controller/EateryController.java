@@ -47,6 +47,7 @@ public class EateryController {
 		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
+		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
 		model.addAttribute("selectName", eateryservice.selectName(name));
 		return "/detail";
 	}
@@ -57,13 +58,13 @@ public class EateryController {
 		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
+		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
 		model.addAttribute("selectName",eateryservice.selectName(name));
 		return "/detail";
 	}
 
 	@PostMapping("recommend")
 	public String Recommend(Model model,Long id,Long memberid,String name) {
-		System.out.println("re id :"+id+" re name :"+name);
 		memberid = (long) 1;
 		eateryservice.insertMemberRecommend(id, memberid);
 		eateryservice.updateEateryRecommend(id);
@@ -71,12 +72,12 @@ public class EateryController {
 		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
+		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
 		model.addAttribute("selectId",eateryservice.selectId(id));
 		return "/detail";
 	}
 	@PostMapping("unrecommend")
 	public String Unrecommend(Model model,Long id, Long memberid, String name) {
-		System.out.println("ur id :"+id+" ur memberid :"+memberid+" ur name :"+name);
 		memberid = (long) 1;
 		eateryservice.updateEateryUnrecommend(id);
 		eateryservice.deleteMemberRecommend(id,memberid);
@@ -84,6 +85,34 @@ public class EateryController {
 		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
+		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
+		model.addAttribute("selectName",eateryservice.selectName(name));
+		return "/detail";
+	}
+	@PostMapping("bookmark")
+	public String Bookmark(Model model,Long id,Long memberid,String name) {
+		System.out.println("re id :"+id+" re name :"+name);
+		memberid = (long) 1;
+		eateryservice.insertEateryBookmark(id, memberid);
+		EateryVO eateryvo = new EateryVO();
+		eateryvo.setMemberId((long) 1);
+		eateryvo.setName(name);
+		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
+		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
+		model.addAttribute("selectName",eateryservice.selectName(name));
+		
+		return "/detail";
+	}
+	@PostMapping("unbookmark")
+	public String UnBookmark(Model model,Long id, Long memberid, String name) {
+		System.out.println("ur id :"+id+" ur memberid :"+memberid+" ur name :"+name);
+		memberid = (long) 1;
+		eateryservice.deleteEateryBookmark(id,memberid);
+		EateryVO eateryvo = new EateryVO();
+		eateryvo.setMemberId((long) 1);
+		eateryvo.setName(name);
+		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
+		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
 		model.addAttribute("selectName",eateryservice.selectName(name));
 		return "/detail";
 	}
