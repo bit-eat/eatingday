@@ -77,18 +77,11 @@
 					<td>
 						<input type="text" th:id="name+${index.count}" class="name" name="name" th:value="${recipe.name}" readonly>
 					</td>
-					<td>
-						<input type="text" th:id="content+${index.count}" class="content" name="content" th:value="${recipe.content}" readonly>
-					</td>
+					
 					<td>
 						<input type="text" th:id="createDate+${index.count}" class="createDate" name="createDate" th:value="${recipe.createDate}" readonly>
 					</td>
-					<td>
-						<input type="text" th:id="memberid+${index.count}" class="memberid" name="memberid" th:value="${recipe.memberid}" readonly>
-					</td>
-					<td>
-						<input type="text" th:id="categoryid+${index.count}" class="categoryid" name="categoryid" th:value="${recipe.categoryid}" readonly>
-					</td>
+					
 					<td>
 						<input type="text" th:id="recommend+${index.count}" class="recommend" name="recommend" th:value="${recipe.recommend}" readonly>
 					</td>		
@@ -96,7 +89,7 @@
 			</table>
 			<button id="submitfrm">삭제</button>
 		</form>
-			<button onclick="location.href='/createRecipeForm'">등록</button>
+			<button onclick="location.href='/recipe/new'">등록</button>
 
 	
 	</div>
