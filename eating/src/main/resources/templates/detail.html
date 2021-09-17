@@ -5,19 +5,32 @@
 <title>맛집 상세 페이지</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-	$("#recommend").on("click",function(){
-		$("#check").attr("action", "recommend");
-		$("#check").submit();
-		document.getElementById("recommend").style.display = "none";
-		document.getElementById("unrecommend").style.display = "block";
+$(document).ready(function() {
+	
+	var checking = $("input[id='checkid']").val();
+	
+	
+	
+	$("input[id='recommend']").on("click",function(){
+		$("#checkrecommend").submit();
+		$("input[id='recommend']").hide();
+		$("input[id='unrecommend']").show();
 	});
 	
-	$("#unrecommend").on("click",function(){
-		$("#check").attr("action", "unrecommend");
-		$("#check").submit();
-		document.getElementById("unrecommend").style.display = "none";
-		document.getElementById("recommend").style.display = "block";
+	$("input[id='unrecommend']").on("click",function(){
+		$("#checkunrecommend").submit();
+		$("input[id='recommend']").show();
+		$("input[id='unrecommend']").hide();
 	});
+
+	if(checking==1){
+		$("input[id='recommend']").hide();
+		$("input[id='unrecommend']").show();
+	} else if(checking==0){
+		$("input[id='recommend']").show();
+		$("input[id='unrecommend']").hide();
+	}
+});
 	
 </script>
 </head>
@@ -38,37 +51,51 @@
 
 		</thead>
 
-		<tr th:each="eatery : ${selectName }">
-			<td th:text="${eatery.name}"></td>
-			<td th:text="${eatery.categoryName}"></td>
-			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
+		<tr th:each="eatery : ${selectName}">
+			<td id="name" name="name" th:text="${eatery.name}"></td>
+			<td id="category" name="category" th:text="${eatery.categoryName}"></td>
+			<td id="area" name="area" th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>
-			<td th:text="${eatery.address}"></td>
-			<td th:text="${eatery.phoneNumber}"></td>
-			<td th:text="${eatery.content}"></td>
+			<td id="address" name="address" th:text="${eatery.address}"></td>
+			<td id="phone" name="phone" th:text="${eatery.phoneNumber}"></td>
+			<td id="content" name="content" th:text="${eatery.content}"></td>
 		</tr>
-		<tr th:each="eatery : ${selectId }">
-			<td th:text="${eatery.name}"></td>
-			<td th:text="${eatery.categoryName}"></td>
-			<td th:each=" area : ${T(com.eat.vo.Area).values()}"
+		<tr th:each="eatery : ${selectId}">
+			<td id="name2" name="name2" th:text="${eatery.name}"></td>
+			<td id="category2" name="category2" th:text="${eatery.categoryName}"></td>
+			<td id="area2" name="area2" th:each=" area : ${T(com.eat.vo.Area).values()}"
 				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
 				th:text="${area.getKrName}"></td>
-			<td th:text="${eatery.address}"></td>
-			<td th:text="${eatery.phoneNumber}"></td>
-			<td th:text="${eatery.content}"></td>
+			<td id="address2" name="address2" th:text="${eatery.address}"></td>
+			<td id="phone2" name="phone2" th:text="${eatery.phoneNumber}"></td>
+			<td id="content2" name="content2" th:text="${eatery.content}"></td>
 		</tr>
 	</table>
 	<br>
 	<div>
-		<form id="check" method="post">
-			<input th:each="eatery : ${selectName}" name="id"
-				th:value="${eatery.id}" style="display: none" readonly>
-			<button id="recommend">추천</button>
-			<button id="unrecommend" style="display: none">추천취소</button>
-			<input type="button" onClick="bookmark()" value="즐겨찾기">
-		</form>
-
+	<input id="checkid" type="hidden" th:value="${checkid}">
+	<form id="detailmain" method="get">
+		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>		
+		<input th:each="eatery : ${selectName}" name="name" th:value="${eatery.name}" style="display: none" readonly>		
+	</form>
+	
+	<form id="checkrecommend" action="recommend" method="post">
+		<!-- <input>  멤버 id 받는 부분 필요--> 
+		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectName}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input type="button" id="recommend" value="추천"> 
+	</form> 
+	<form id="checkunrecommend" action="unrecommend" method="post">
+		<!-- <input>  멤버 id 받는 부분 필요--> 
+		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectName}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="memberid" th:value="${eatery.memberId}" style="display: none" readonly>
+		<input type="button" id="unrecommend" style="display: none" value="추천취소"> 
+	</form> 
+	
 
 	</div>
 </body>

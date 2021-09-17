@@ -22,6 +22,11 @@ public interface EateryDAO {
 	
 	void updateEateryUnrecommend(@Param("id") Long id);
 
+	int checkid(EateryVO eateryvo);
+	
+	void deleteMemberRecommend(@Param("id") Long id,@Param("memberId") Long memberid);
+	void insertMemberRecommend(@Param("id") Long id,@Param("memberId") Long memberid);
+	
 	List<EateryVO> selectAll();
 
 	List<EateryVO> selectId(@Param("id")Long id);

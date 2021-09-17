@@ -12,6 +12,7 @@
 		values(#{name},
 		#{content},#{area},#{categoryId})
 	</insert>
+
 	<insert id="insertEateryRecommend"
 		parameterType="com.eat.vo.EateryVO">
 		insert into eateryRecommend(eateryid,recommend)
@@ -49,13 +50,15 @@
 		e.name like CONCAT('%',#{name},'%')
 	</select>
 
-<select id="selectId" parameterType="Long"
+	<select id="selectId" parameterType="Long"
 		resultType="com.eat.vo.EateryVO">
-		SELECT e.*, c.name as categoryName FROM eatery as e right
-		join category as c
+		SELECT e.*, c.name as categoryName , mr.memberId
+		FROM eatery as e
+		right join category as c
 		on e.categoryId = c.id
-		where c.id = e.categoryId and
-		e.id = #{id}
+		right join memberrecommend as mr
+		on e.id = mr.eateryId
+		where c.id = e.categoryId and e.id = #{id};
 	</select>
 
 	<select id="selectArea" parameterType="String"
@@ -159,6 +162,13 @@
 		where eateryid = #{id}
 	</update>
 
+	<insert id="insertMemberRecommend" parameterType="Long">
+		insert into
+		memberrecommend
+		(eateryid, memberid)
+		values(#{id},#{memberId})
+	</insert>
+
 	<!-- 추천 취소 -->
 	<update id="updateEateryUnrecommend" parameterType="Long">
 		update
@@ -166,11 +176,25 @@
 		set recommend = recommend-1
 		where eateryid = #{id}
 	</update>
-	
-	
-	
-		<!-- 관리자 음식점 삭제 -->
-	<delete id="adminEaterydelete" parameterType="java.util.List">    
+
+	<delete id="deleteMemberRecommend" parameterType="EateryVO">
+		delete from
+		memberrecommend
+		where eateryid=#{id} and memberid=#{memberId}
+	</delete>
+
+
+	<select id="checkid" parameterType="EateryVO" resultType="int">
+		select
+		count(*) as count from memberrecommend as mr
+		right join eatery as e
+		on
+		e.id = mr.eateryId
+		where e.name=#{name} and mr.memberid=#{memberId}
+	</select>
+
+	<!-- 관리자 음식점 삭제 -->
+	<delete id="adminEaterydelete" parameterType="java.util.List">
 		DELETE FROM eatery
 		WHERE
 		<foreach collection="id" item="id" open="" close=""
@@ -178,6 +202,6 @@
 			(id = #{id})
 		</foreach>
 	</delete>
-	
+
 
 </mapper>

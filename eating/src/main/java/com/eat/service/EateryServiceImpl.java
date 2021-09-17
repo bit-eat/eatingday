@@ -126,6 +126,23 @@ public class EateryServiceImpl implements EateryService {
 		// TODO Auto-generated method stub
 		eaterydao.adminEaterydelete(id);
 	}
+
+	@Override
+	public int checkid(EateryVO eateryvo) {
+		return eaterydao.checkid(eateryvo);
+	}
+
+	@Override
+	public void deleteMemberRecommend(Long id,Long memberid) {
+		// TODO Auto-generated method stub
+		eaterydao.deleteMemberRecommend(id,memberid);
+	}
+
+	@Override
+	public void insertMemberRecommend(Long id, Long memberid) {
+		// TODO Auto-generated method stub
+		eaterydao.insertMemberRecommend(id,memberid);
+	}
 	
 	
 }
