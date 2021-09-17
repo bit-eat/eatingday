@@ -48,6 +48,9 @@
         <td th:text="${recipe.people}"></td>
         <td th:text="${recipe.createDate}"></td>
         <td>
+          <a href="#" th:href="@{recipe/{id}/detail (id=${recipe.id})}" class="btn btn-info">상세</a>
+        </td>
+        <td>
           <a href="#" th:href="@{recipe/{id}/edit (id=${recipe.id})}" class="btn btn-info">수정</a>
         </td>
         <td>

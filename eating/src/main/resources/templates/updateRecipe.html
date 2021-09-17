@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-
-<head>
-    <title>레시피수정</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/bootstrap.css">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
     <script type="text/javascript" src="/js/recipeTag.js"></script>
-</head>
-
-<body>
+<th:block layout:fragment="content">
 <div class="container">
     <!--  이미지 입력-->
     <form role="form"  th:object="${form}" method="post">
@@ -63,8 +58,5 @@
 <!--
 <div th:replace="/fragments/footer :: footer"/>
 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.js"></script>
-
-</body>
+</th:block>>
 </html>

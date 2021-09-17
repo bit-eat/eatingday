@@ -89,6 +89,30 @@ public class RecipeController {
 
     }
 
+    @GetMapping("recipe/{recipeId}/detail")
+    public String detailRecipe(@PathVariable("recipeId")Long recipeId, Model model){
+        RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
+        String tagList = recipeService.combineTag(recipeId);
+        RecipeContentVO recipeContentVO = recipeService.selectContent(recipeId);
+        String content = "";
+
+        if(recipeContentVO != null)
+            content = recipeContentVO.getContent();
+
+        RecipeForm form = new RecipeForm();
+        form.setThumb(recipeVO.getThumb());
+        form.setName(recipeVO.getName());
+        form.setIngredient(recipeVO.getIngredient());
+        form.setPeople(recipeVO.getPeople());
+        form.setOriginTag(tagList);
+        form.setContent(content);
+
+        model.addAttribute("form",form);
+
+        return "recipeDetail";
+
+    }
+
     @PostMapping("recipe/{recipeId}/edit")
     public String updateRecipe(@PathVariable("recipeId")Long recipeId, @ModelAttribute("form") RecipeForm form){
         RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
