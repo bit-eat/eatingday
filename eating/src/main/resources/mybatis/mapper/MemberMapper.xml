@@ -124,12 +124,10 @@
 	</select>
 	
 	<!-- 관리자 레시피 게시판 -->
-	<select id="adminRecipeList" parameterType="Long" resultType="com.eat.vo.RecipeVO">
-		select r.id, r.name, r.content, r.recommend, r.createDate, r.memberid, c.name as categoryName from recipe as r
+	<select id="adminRecipeList" parameterType="com.eat.vo.RecipeVO" resultType="String">
+		select r.id, r.name, r.recommend, r.createDate, r.memberid, c.name as categoryName from recipe as r
 		right join category as c
 		on r.category=r.id
-		
-		
 	</select>
 	
 </mapper>

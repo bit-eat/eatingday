@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eat.dao.EateryBookmarkDAO;
+import com.eat.dao.RecipeBookmarkDAO;
 import com.eat.service.EateryService;
 import com.eat.service.MemberService;
 import com.eat.service.RecipeService;
 import com.eat.vo.MemberVO;
+import com.eat.vo.RecipeBookmarkVO;
+import com.eat.vo.RecipeVO;
 
 @Controller
 public class MemberController {
@@ -26,6 +29,9 @@ public class MemberController {
 	
 	@Autowired
 	private EateryService eateryservice;
+	
+	@Autowired
+	private RecipeBookmarkDAO recipeBookmarkdao;
 	
 	@Autowired
 	private EateryBookmarkDAO eateryBookmarkdao;
@@ -137,7 +143,11 @@ public class MemberController {
 	}
 	
 	@GetMapping("favorite")   //즐겨찾기 페이지
-	public String favorite() {
+	public String favorite(Model model) {
+		model.addAttribute("selectEateryBookmark",eateryBookmarkdao.selectEateryBookmark(1L));
+		
+		List<RecipeBookmarkVO> r=recipeBookmarkdao.selectRecipeBookmark(1L);
+		model.addAttribute("selectRecipeBookmark",recipeBookmarkdao.selectRecipeBookmark(1L));
 		return "/favorite";
 	}
 	

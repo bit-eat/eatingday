@@ -5,13 +5,13 @@
 
 <mapper namespace="com.eat.dao.EateryBookmarkDAO">
 
-<insert id="insertEateryBookmark" parameterType="com.eat.vo.EateryBookmarkVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	<insert id="insertEateryBookmark" parameterType="com.eat.vo.EateryBookmarkVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO 
         eatery_bookmark( memberId, eateryId)
         VALUES( 1, #{eateryId})
     </insert>
 
-<select id="selectEateryBookmark" parameterType="Long" resultType="com.eat.vo.EateryVO">
+	<select id="selectEateryBookmark" parameterType="Long" resultType="com.eat.vo.EateryVO">
         SELECT e.*, c.name as categoryName FROM eatery as e 
         right join category as c on e.categoryId = c.id 
         join eaterybookmark as eb on  e.Id = eb.eateryId
