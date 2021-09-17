@@ -29,7 +29,7 @@ public interface MemberDAO {
 	int admincheck(@Param("userId") String userId, @Param("userPw") String userPw); // 관리자 로그인
 
 	List<MemberVO> findPw(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber, // 비밀번호찾기
-			@Param("userId") String userId);
+						  @Param("userId") String userId);
 
 	MemberVO selectOne(@Param("id") Long id);
 
@@ -38,6 +38,6 @@ public interface MemberDAO {
 	MemberVO selectMemberId(@Param("userId") String userId);
 
 	void deletecheck(@Param("id")List<Long> id);   //관리자 회원 관리
-	
+
 	void updateMemberList(MemberVO membervo);  //관리자 회원 수정
 }
