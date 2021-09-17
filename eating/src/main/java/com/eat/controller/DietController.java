@@ -53,9 +53,17 @@ public class DietController {
 		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
 	}
 
+	@GetMapping("count")
+	public String countDietList(DietVO dietVO,Model model) {
+		model.addAttribute("counting",dietDAO.countDietList(dietVO));
+		System.out.println(model);
+		return "/suggestion/insertDiet";
+	}
+	
 	@PostMapping("/suggestion/insertDiet")
 	public String insertDiet(DietVO dietVO) {
 		dietDAO.insertDiet(dietVO);
+		
 		return "redirect:/suggestion/dietList";
 	}
 	

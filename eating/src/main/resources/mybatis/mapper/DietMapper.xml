@@ -6,7 +6,9 @@
 <mapper namespace="com.eat.dao.DietDAO">
 	<insert id="insertDiet" parameterType="com.eat.vo.DietVO">
 		insert into suggestion(meal, menu, date, memberId, categoryId)
-		values(#{meal}, #{menu}, #{date}, 1, #{categoryId})
+		select #{meal}, #{menu}, #{date}, 1, #{categoryId} from dual
+		where 1 > (select count(*) from suggestion
+					where date = #{date} and meal=#{meal})
 	</insert>
 	
 	<select id="showDietList" resultType="com.eat.vo.DietVO">
@@ -29,5 +31,6 @@
     <delete id="deleteDiet" parameterType="com.eat.vo.DietVO">
         DELETE FROM suggestion WHERE date =#{date} and meal=#{meal}
     </delete>
+
 	
 </mapper>

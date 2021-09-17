@@ -3,6 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$(document).ready(function() {
+		document.getElementById("insertDietOpen").onclick = function() {
+			document.getElementById("modalInsert").style.display = "block";
+		}
+		document.getElementById("insertModalClose").onclick = function() {
+			document.getElementById("modalInsert").style.display = "none";
+		}
+		
+		document.getElementById("updateDietOpen").onclick = function() {
+			document.getElementById("modalUpdate").style.display = "block";
+		}
+		document.getElementById("updateModalClose").onclick = function() {
+			document.getElementById("modalUpdate").style.display = "none";
+		}
+		
+		document.getElementById("deleteDietOpen").onclick = function() {
+			document.getElementById("modalDelete").style.display = "block";
+		}
+		document.getElementById("deleteModalClose").onclick = function() {
+			document.getElementById("modalDelete").style.display = "none";
+		}
+	});
+	</script>
 <style>
 #modalInsert, #modalUpdate, #modalDelete {
 	display: none;
@@ -88,14 +113,16 @@
 		
 	</div>
 
-
+	<div id="countingDiv">
+		<input id="count" name="count" th:each="suggestion:${counting}" type="text" th:value="${suggestion.count}" readonly>
+	</div>
 
 	<!-- insert modal 시작 -->
 	<div id="modalInsert">
 		<div class="modal_content">
 				
 			<h2>식단 등록</h2>
-			<form action="/suggestion/insertDiet" method="post" autocomplete="off">
+			<form id="insertform" action="/suggestion/insertDiet" method="post" autocomplete="off">
 				<!-- 날짜 -->
 				<label for="date">날짜</label><input id="date" name="date" type="date" value="#strings.toString(date)"> <br> 
 				
@@ -115,7 +142,7 @@
 				<label for="menu">메 뉴</label><input id="menu" name="menu" type="text"><br>
 								
 				<!-- 버튼 -->
-				<input type="submit"><input type="reset">
+				<input  type="submit" value="등록"><input type="reset">
 				<button type="button" id="insertModalClose">닫기 창</button>
 			</form>
 		</div>
@@ -195,30 +222,8 @@
 
 
 	<!-- 스크립트 -->
-	<script type="text/javascript">
-
-		document.getElementById("insertDietOpen").onclick = function() {
-			document.getElementById("modalInsert").style.display = "block";
-		}
-		document.getElementById("insertModalClose").onclick = function() {
-			document.getElementById("modalInsert").style.display = "none";
-		}
-		
-		document.getElementById("updateDietOpen").onclick = function() {
-			document.getElementById("modalUpdate").style.display = "block";
-		}
-		document.getElementById("updateModalClose").onclick = function() {
-			document.getElementById("modalUpdate").style.display = "none";
-		}
-		
-		document.getElementById("deleteDietOpen").onclick = function() {
-			document.getElementById("modalDelete").style.display = "block";
-		}
-		document.getElementById("deleteModalClose").onclick = function() {
-			document.getElementById("modalDelete").style.display = "none";
-		}
-		
-	</script>
+	
+	
 
 
 </body>
