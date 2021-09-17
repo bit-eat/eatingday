@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<th:block th:replace="/fragments/layout :: header"></th:block>
+<!-- 부트스트랩 헤더-->
+<th:block th:replace="/fragments/header :: header"></th:block>
 
 <body id="page-top">
-<div id="wrapper">
-    <div id="content">
 <!--        공통메뉴바-->
-        <th:block th:replace="/fragments/top :: topbar"></th:block>
+        <th:block th:replace="/fragments/topbar :: topbar"></th:block>
 
 <!--        각자페이지부분-->
         <th:block layout:fragment="content"></th:block>
@@ -14,11 +13,9 @@
 
 <!--    공통푸터-->
     <th:block th:replace="/fragments/footer" :: footer></th:block>
-    </div>
-</div>
 
 <!--공통스크립트-->
-<th:block th:replace="/fragments/"
+<th:block th:replace="/fragments/script" :: script></th:block>
 </body>
 
 </html>
