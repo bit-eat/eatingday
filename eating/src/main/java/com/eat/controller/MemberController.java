@@ -13,7 +13,7 @@ public class MemberController {
 	
 	@GetMapping("/member")
 	public String Test() {
-		return "dietMain";
+		return "/suggestion/dietMain";
 	}
 	
 	@Autowired
