@@ -42,30 +42,52 @@ public class EateryController {
 
 	@GetMapping("/detail")
 	public String detailMain(Model model,String name, Long id) {
+		System.out.println("dm id :"+id+" dm name :"+name);
+		EateryVO eateryvo = new EateryVO();
+		eateryvo.setMemberId((long) 1);
+		eateryvo.setName(name);
+		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("selectName", eateryservice.selectName(name));
-		model.addAttribute("selectId",eateryservice.selectId(id));
 		return "/detail";
 	}
 
 	@PostMapping("detail")
 	public String detail(Model model,String name) {
+		EateryVO eateryvo = new EateryVO();
+		eateryvo.setMemberId((long) 1);
+		eateryvo.setName(name);
+		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("selectName",eateryservice.selectName(name));
 		return "/detail";
 	}
 
 	@PostMapping("recommend")
-	public String Recommend(Model model,Long id) {
+	public String Recommend(Model model,Long id,Long memberid,String name) {
+		System.out.println("re id :"+id+" re name :"+name);
+		memberid = (long) 1;
+		eateryservice.insertMemberRecommend(id, memberid);
 		eateryservice.updateEateryRecommend(id);
+		EateryVO eateryvo = new EateryVO();
+		eateryvo.setMemberId((long) 1);
+		eateryvo.setName(name);
+		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("selectId",eateryservice.selectId(id));
-		return "redirect:/detail";
+		return "/detail";
 	}
 	@PostMapping("unrecommend")
-	public String Unrecommend(Model model,Long id) {
-		System.out.println(id);
+	public String Unrecommend(Model model,Long id, Long memberid, String name) {
+		System.out.println("ur id :"+id+" ur memberid :"+memberid+" ur name :"+name);
+		memberid = (long) 1;
 		eateryservice.updateEateryUnrecommend(id);
-		model.addAttribute("selectId",eateryservice.selectId(id));
-		return "redirect:/detail";
+		eateryservice.deleteMemberRecommend(id,memberid);
+		EateryVO eateryvo = new EateryVO();
+		eateryvo.setMemberId((long) 1);
+		eateryvo.setName(name);
+		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
+		model.addAttribute("selectName",eateryservice.selectName(name));
+		return "/detail";
 	}
+	
 	@GetMapping("/eateryMain")
 	public void eateryMain(Model model, String area) {
 		model.addAttribute("selectAll", eateryservice.selectAll());

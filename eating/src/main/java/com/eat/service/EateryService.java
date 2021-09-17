@@ -19,6 +19,10 @@ public interface EateryService {
    
    void updateEateryUnrecommend(@Param("id") Long id);
    
+   int checkid(EateryVO eateryvo);
+   void deleteMemberRecommend(@Param("id") Long id,@Param("memberId") Long memberid);
+   void insertMemberRecommend(@Param("id") Long id,@Param("memberId") Long memberid);
+      
    public List<EateryVO> selectAll();
    
    public List<EateryVO> selectName(@Param("name")String name);
