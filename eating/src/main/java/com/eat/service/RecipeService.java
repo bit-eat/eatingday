@@ -26,7 +26,6 @@ public interface RecipeService {
     List<RecipeVO> selectIngredient(String ingredient);
     List<RecipeVO> selectTag(String tagName);
 
-    List<RecipeVO> selectMember(String memberId);
     List<RecipeVO> selectCategory(String category);
 
     void manufactureTag(Long recipeId, String originTag);

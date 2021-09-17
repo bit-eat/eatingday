@@ -126,13 +126,6 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public List<RecipeVO> selectMember(String memberId) {
-        MemberVO memberVO = memberDAO.selectName(memberId);
-        List<RecipeVO> recipeList = recipeDAO.selectMemberId(memberVO.getId());
-        return recipeList;
-    }
-
-    @Override
     public List<RecipeVO> selectCategory(String category) {
         CategoryVO categoryVO = categoryDAO.selectName(category);
         List<RecipeVO> recipeList = recipeDAO.selectCategoryId(categoryVO.getId());
