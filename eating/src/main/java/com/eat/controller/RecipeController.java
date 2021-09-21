@@ -50,7 +50,7 @@ public class RecipeController {
         recipeService.manufactureTag(recipeId, recipeForm.getOriginTag());
         recipeService.tempSaveContent(recipeId,recipeForm.getContent());
 
-        return "redirect:/";
+        return "redirect:/recipe/" + recipeId + "/detail";
     }
 
     @GetMapping(value="/recipeList")
