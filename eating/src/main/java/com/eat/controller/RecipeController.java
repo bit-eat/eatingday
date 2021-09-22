@@ -89,7 +89,7 @@ public class RecipeController {
 
     }
 
-    @PostMapping("recipe/{recipeId}/detail")
+    @GetMapping("recipe/{recipeId}/detail")
     public String detailRecipe(Model model , @PathVariable("recipeId")Long recipeId){
         RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
         String tagList = recipeService.combineTag(recipeId);
