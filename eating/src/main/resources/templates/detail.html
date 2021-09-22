@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-<meta charset="UTF-8">
-<title>맛집 상세 페이지</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -57,8 +56,8 @@ $(document).ready(function() {
 });
 	
 </script>
-</head>
-<body>
+<th:block layout:fragment="content">
+<div class="container">
 
 	<h3>상세 페이지</h3>
 
@@ -113,8 +112,9 @@ $(document).ready(function() {
 		<input th:each="eatery : ${selectId}" name="id" th:value="${eatery.id}" style="display: none" readonly>
 		<input th:each="eatery : ${selectId}" name="name" th:value="${eatery.name}" style="display: none" readonly>
 		<input th:each="eatery : ${selectId}" name="memberid" th:value="${eatery.memberId}" style="display: none" readonly>
-		<input type="button" id="recommend" value="추천"> 
+		<input type="button" id="recommend" class="btn btn-secondary" value="추천"> 
 	</form> 
+	
 	<form id="checkunrecommend" action="unrecommend" method="post">
 		<!-- <input>  멤버 id 받는 부분 필요--> 
 		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>
@@ -123,7 +123,7 @@ $(document).ready(function() {
 		<input th:each="eatery : ${selectId}" name="id" th:value="${eatery.id}" style="display: none" readonly>
 		<input th:each="eatery : ${selectId}" name="name" th:value="${eatery.name}" style="display: none" readonly>
 		<input th:each="eatery : ${selectId}" name="memberid" th:value="${eatery.memberId}" style="display: none" readonly>
-		<input type="button" id="unrecommend" style="display: none" value="추천취소"> 
+		<input type="button" id="unrecommend" style="display: none" class="btn btn-secondary" value="추천취소"> 
 	</form> 
 	
 	<form id="checkbookmark" action="bookmark" method="post">
@@ -134,7 +134,7 @@ $(document).ready(function() {
 		<input th:each="eatery : ${selectId}" name="id" th:value="${eatery.id}" style="display: none" readonly>
 		<input th:each="eatery : ${selectId}" name="name" th:value="${eatery.name}" style="display: none" readonly>
 		<input th:each="eatery : ${selectId}" name="memberid" th:value="${eatery.memberId}" style="display: none" readonly>
-		<input type="button" id="bookmark" value="즐겨찾기"> 
+		<input type="button" id="bookmark" class="btn btn-secondary" value="즐겨찾기"> 
 	</form> 
 	<form id="checkunbookmark" action="unbookmark" method="post">
 		<!-- <input>  멤버 id 받는 부분 필요--> 
@@ -144,9 +144,10 @@ $(document).ready(function() {
 		<input th:each="eatery : ${selectId}" name="id" th:value="${eatery.id}" style="display: none" readonly>
 		<input th:each="eatery : ${selectId}" name="name" th:value="${eatery.name}" style="display: none" readonly>
 		<input th:each="eatery : ${selectId}" name="memberid" th:value="${eatery.memberId}" style="display: none" readonly>
-		<input type="button" id="unbookmark" style="display: none" value="즐겨찾기취소"> 
+		<input type="button" id="unbookmark" style="display: none" class="btn btn-secondary" value="즐겨찾기취소"> 
 	</form> 
 
 	</div>
-</body>
+	</div>
+</th:block>
 </html>

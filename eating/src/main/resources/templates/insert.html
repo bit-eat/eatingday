@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-<meta charset="UTF-8">
-<title>맛집등록 페이지</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
 
-</head>
-<body>
+<th:block layout:fragment="content">
+<div class="container">
+
 	<h3>맛집 등록</h3>
 
 	<form action="/insertEatery" method="post">
@@ -50,10 +50,11 @@
 		</div>
 		</table>
 		<div>
-			<input type="submit" value="등록">
-			<input type="reset" value="초기화">
-			<input type="button" value="취소" onClick="location.href='/eateryList'">
+			<input type="submit" class="btn btn-secondary" value="등록">
+			<input type="reset" class="btn btn-secondary" value="초기화">
+			<input type="button" class="btn btn-secondary" value="취소" onClick="location.href='/eateryList'">
 		</div>
 	</form>
-</body>
+</div>
+</th:block>
 </html>
