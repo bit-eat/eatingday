@@ -24,7 +24,7 @@ public class EateryServiceImpl implements EateryService {
 	}
 	
 	@Override
-	public void updateEatery(EateryVO eatery) {
+	public void updateEatery(EateryVO eateryvo) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -35,15 +35,15 @@ public class EateryServiceImpl implements EateryService {
 	}
 	
 	@Override
-	public void deleteEatery(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void updateEateryUnrecommend(Long id) {
 		// TODO Auto-generated method stub
 		eaterydao.updateEateryUnrecommend(id);
+	}
+	
+	@Override
+	public void deleteEatery(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override
@@ -131,6 +131,12 @@ public class EateryServiceImpl implements EateryService {
 	public int checkid(EateryVO eateryvo) {
 		return eaterydao.checkid(eateryvo);
 	}
+	
+	@Override
+	public int checkingid(EateryVO eateryvo) {
+		// TODO Auto-generated method stub
+		return eaterydao.checkingid(eateryvo);
+	}
 
 	@Override
 	public void deleteMemberRecommend(Long id,Long memberid) {
@@ -147,7 +153,7 @@ public class EateryServiceImpl implements EateryService {
 	@Override
 	public void deleteEateryBookmark(Long id, Long memberid) {
 		// TODO Auto-generated method stub
-		eaterydao.insertEateryBookmark(id,memberid);
+		eaterydao.deleteEateryBookmark(id,memberid);
 	}
 
 	@Override
@@ -156,11 +162,6 @@ public class EateryServiceImpl implements EateryService {
 		eaterydao.insertEateryBookmark(id,memberid);
 	}
 
-	@Override
-	public int checkingid(EateryVO eateryvo) {
-		// TODO Auto-generated method stub
-		return eaterydao.checkingid(eateryvo);
-	}
 	
 	
 }

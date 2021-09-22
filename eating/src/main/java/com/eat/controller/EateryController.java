@@ -79,8 +79,8 @@ public class EateryController {
 	@PostMapping("unrecommend")
 	public String Unrecommend(Model model,Long id, Long memberid, String name) {
 		memberid = (long) 1;
-		eateryservice.updateEateryUnrecommend(id);
 		eateryservice.deleteMemberRecommend(id,memberid);
+		eateryservice.updateEateryUnrecommend(id);
 		EateryVO eateryvo = new EateryVO();
 		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);

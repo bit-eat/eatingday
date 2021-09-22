@@ -18,9 +18,9 @@ public interface EateryDAO {
 
 	void updateEateryRecommend(@Param("id") Long id);
 
-	void deleteEatery(@Param("id") Long id);
-
 	void updateEateryUnrecommend(@Param("id") Long id);
+	
+	void deleteEatery(@Param("id") Long id);
 
 	int checkid(EateryVO eateryvo);
 	
