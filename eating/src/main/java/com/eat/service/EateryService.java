@@ -9,15 +9,15 @@ import com.eat.vo.EateryVO;
 
 public interface EateryService {
 
-	public void insertEatery(EateryVO eatery);
+	void insertEatery(EateryVO eatery);
 
-	public void updateEatery(EateryVO eatery);
+	void updateEatery(EateryVO eatery);
 
 	void updateEateryRecommend(@Param("id") Long id);
-
-	public void deleteEatery(Long id);
-
+	
 	void updateEateryUnrecommend(@Param("id") Long id);
+
+	void deleteEatery(Long id);
 
 	int checkid(EateryVO eateryvo);
 	
@@ -31,27 +31,27 @@ public interface EateryService {
 
 	void insertEateryBookmark(@Param("id") Long id, @Param("memberId") Long memberid);
 
-	public List<EateryVO> selectAll();
+	List<EateryVO> selectAll();
 
-	public List<EateryVO> selectName(@Param("name") String name);
+	List<EateryVO> selectName(@Param("name") String name);
 
-	public List<EateryVO> selectId(@Param("id") Long id);
+	List<EateryVO> selectId(@Param("id") Long id);
 
-	public List<EateryVO> selectCategoryName(@Param("categoryName") String categoryName);
+	List<EateryVO> selectCategoryName(@Param("categoryName") String categoryName);
 
-	public List<EateryVO> selectArea(@Param("area") String area);
+	List<EateryVO> selectArea(@Param("area") String area);
 
-	public List<EateryVO> LatestEateryList();
+	List<EateryVO> LatestEateryList();
 
-	public List<EateryVO> RecommendEateryList();
+	List<EateryVO> RecommendEateryList();
 
-	public boolean validateDuplicateEatery(EateryVO eatery);
+	boolean validateDuplicateEatery(EateryVO eatery);
 
 	List<EateryVO> selectAreaRecommend(@Param("area") String area);
 
 	List<EateryVO> selectCategoryRecommend(@Param("categoryName") String categoryName);
 
-	public List<EateryVO> selectRecommend();
+	List<EateryVO> selectRecommend();
 
 	void adminEaterydelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
 
