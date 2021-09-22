@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO> findId(String userName, String phoneNumber) { // 아이디찾기
+	public MemberVO findId(String userName, String phoneNumber) { // 아이디찾기
 		return memberdao.findId(userName, phoneNumber);
 	}
 
@@ -76,7 +76,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<MemberVO> findPw(String userName, String phoneNumber, String userId) { // 비밀번호찾기
-		return memberdao.findPw(userName, userId, phoneNumber);
+		return memberdao.findPw(userName,phoneNumber, userId );
 	}
 
 	@Override

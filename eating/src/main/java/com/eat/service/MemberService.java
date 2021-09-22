@@ -31,7 +31,7 @@ public interface MemberService {
 
 	List<MemberVO> selectMemberId(Long id);
 
-	List<MemberVO> findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
+	MemberVO findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
 
 	List<MemberVO> findPw(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber, // 비밀번호찾기
 			@Param("userId") String userId);

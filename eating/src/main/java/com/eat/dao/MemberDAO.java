@@ -23,7 +23,7 @@ public interface MemberDAO {
 
 	List<MemberVO> selectAll(); // 모든 회원 목록
 
-	List<MemberVO> findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
+	MemberVO findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
 
 	int logincheck(@Param("userId") String userId, @Param("userPw") String userPw); // 로그인
 
