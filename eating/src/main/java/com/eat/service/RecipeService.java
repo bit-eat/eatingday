@@ -42,5 +42,5 @@ public interface RecipeService {
     RecipeContentVO selectContent(Long recipeId);
 
 
-    void adminRecipedelete(@Param("id")List<Long> id);   //관리자 음식점 게시판 삭제
+   
 }

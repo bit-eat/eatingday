@@ -5,51 +5,195 @@
 
 <mapper namespace="com.eat.dao.MemberDAO">
 
-	
 
-	<insert id="insertMember" parameterType="com.eat.vo.MemberVO">
+
+		<!--  -->
+	<select id="selectMember" parameterType="String"
+		resultType="MemberVO">
+		select * from member where userName=#{userName} and
+		phoneNumber=#{phoneNumber}
+	</select>
+
+
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="com.eat.vo.MemberVO"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 		insert into
 		member(userId,userPw,userName,phoneNumber,grade)
-		values(#{userId}),#{userPw},#{userName},#{phoneNumber},#{grade})
+		values(#{userId},#{userPw},#{userName},#{phoneNumber},0)
 	</insert>
 
-	<update id="updateMember" parameterType="com.eat.vo.MemberVO">
-		UPDATE member SET userPw
-		= #{userPw}, userName=#{userName},
-		phoneNumber=#{phoneNumber}
-		WHERE id
-		=#{id}
-	</update>
 
-	<delete id="deleteMember" parameterType="Long">
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember" parameterType="com.eat.vo.MemberVO">
 		DELETE FROM member WHERE
-		id=#{id}
+		userId=#{userId} and userPw=#{userPw}
 	</delete>
 
+
+	<!-- 관리자 회원 삭제 -->
+	<delete id="admindelete" parameterType="com.eat.vo.MemberVO">
+		DELETE FROM member WHERE
+		userId=#{userId} and userPw=#{userPw}
+	</delete>
+
+
+	<!-- 개인정보수정 -->
+	<update id="updateMember" parameterType="com.eat.vo.MemberVO">
+		UPDATE member SET
+		userPw=#{userPw}, phoneNumber=#{phoneNumber}
+		WHERE userId=1 and userName=1
+	</update>
+
+
+	<!-- 로그인 -->
+	<select id="logincheck" parameterType="String" resultType="int">
+		SELECT count(*) FROM member
+		WHERE userId = #{userId} and userPw =
+		#{userPw}
+	</select>
+
+	<!-- 관리자 로그인 -->
+	<select id="admincheck" parameterType="String" resultType="int">
+		SELECT count(*) FROM member
+		WHERE grade=1 and userId=#{userId} and userPw=#{userPw}
+	</select>
+
+
+	<!-- -->
 	<select id="selectOne" parameterType="Long">
 		SELECT * FROM member WHERE
-		id = #{id}
+		id=#{id}
 	</select>
 
-	<select id="selectMemberId" parameterType="Long">
+
+	<!-- -->
+	<select id="selectMemberId" parameterType="String"
+		resultType="com.eat.vo.MemberVO">
+		SELECT * FROM member WHERE userId = #{userId}
+	</select>
+
+
+
+	<!-- 회원목록 다가져오기 -->
+	<select id="selectAll" resultType="com.eat.vo.MemberVO">
 		SELECT * FROM member
-		WHERE id = #{id}
-	</select>
-
-	<select id="selectName" parameterType="String">
-		SELECT * FROM member
-		WHERE userid = #{userId}
-	</select>
-
-	<select id="selectGrade" parameterType="String">
-		SELECT * FROM member
-		WHERE id = #{grade}
-	</select>
-
-	<select id="selectAll" resultType="MemberVO">
-		SELECT * FROM member
+		where
+		grade=0
 	</select>
 
 
+	<!-- 아이디찾기 -->
+	<select id="findId" parameterType="String" resultType="MemberVO">
+		SELECT *
+		FROM member WHERE userName = #{userName} and
+		phoneNumber=#{phoneNumber}
+	</select>
+
+
+	<!-- 비밀번호찾기 -->
+	<select id="findPw" parameterType="String" resultType="MemberVO">
+		SELECT *
+		FROM member WHERE userName=#{userName} and phoneNumber=#{phoneNumber}
+		and userId=#{userId}
+	</select>
+
+	<!-- 회원관리 -->
+	<delete id="deletecheck" parameterType="java.util.List">    
+		DELETE FROM member
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(id = #{id})
+		</foreach>
+	</delete>
+	
+	<!-- 관리자 회원 수정 -->
+	<update id="updateMemberList" parameterType="com.eat.vo.MemberVO">
+		UPDATE member SET
+		userName=#{userName}, phoneNumber=#{phoneNumber}, grade=#{grade}
+		WHERE userId=#{userId} and userPw=#{userPw}
+	</update>
+	
+	<!-- 관리자 음식점 게시판 -->
+	<select id="adminEateryList" parameterType="com.eat.vo.EateryVO" resultType="String">
+		select e.id, e.name, e.content, e.phoneNumber, e.address, e.category, c.name as categoryName from eatery as e
+		right join category as c
+		on e.category=c.id
+		right join
+		eateryrecommend as r
+		on e.id = r.eateryid
+	</select>
+	
+	<select id="adminRecipeList" parameterType="com.eat.vo.RecipeVO" resultType="String">
+		select r.id, r.name, r.recommend, r.createDate, r.memberid, c.name as categoryName from recipe as r
+		right join category as c
+		on r.category=r.id
+		
+		
+	</select>
+	
+	<!-- 관리자 음식점 삭제 -->
+	<delete id="adminEateryDelete" parameterType="java.util.List">
+		DELETE FROM eatery
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(id = #{id})
+		</foreach>
+	</delete>
+	
+		<!-- 관리자 음식점 삭제 -->
+	<delete id="adminEateryRecommendDelete" parameterType="java.util.List">
+		DELETE FROM eateryrecommend
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(eateryid = #{id})
+		</foreach>
+	</delete>
+	
+		<!-- 관리자 음식점 삭제 -->
+	<delete id="adminEateryBookmarkDelete" parameterType="java.util.List">
+		DELETE FROM eaterybookmark
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(eateryid = #{id})
+		</foreach>
+	</delete>
+	
+		<!-- 관리자 음식점 삭제 -->
+	<delete id="adminMemberRecommendDelete" parameterType="java.util.List">
+		DELETE FROM eaterybookmark
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(eateryid = #{id})
+		</foreach>
+	</delete>
+	
+	    <!-- 관리자 레시피 삭제 -->
+	<delete id="adminRecipedelete" parameterType="java.util.List">    
+		DELETE FROM recipe
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(id = #{id})
+		</foreach>
+	</delete>
+	
+	    <!-- 관리자 레시피 삭제 -->
+	<delete id="adminRecipeBookmarkDelete" parameterType="java.util.List">    
+		DELETE FROM recipebookmark
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(recipeid = #{id})
+		</foreach>
+	</delete>
+	
+	
+	
 
 </mapper>

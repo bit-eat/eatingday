@@ -76,6 +76,7 @@ public class MemberController {
 	@PostMapping("/findPw")                   // 비밀번호찾기
 	public void findPw(Model model, @RequestParam("userName") String userName, @RequestParam("userId") String userId,
 			@RequestParam("phoneNumber") String phoneNumber) {
+		System.out.println(phoneNumber);
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
 
@@ -166,7 +167,7 @@ public class MemberController {
 	
 	@PostMapping("adminEaterydelete")   //관리자 음식점 게사판 삭제
 	public String adminEaterydelete(@RequestParam("id") List<Long> id) {
-		eateryservice.adminEaterydelete(id);
+		memberservice.adminEaterydelete(id);
 		return "redirect:/adminEateryList";
 	}
 	
@@ -178,7 +179,7 @@ public class MemberController {
 	
 	@PostMapping("adminRecipedelete")   //관리자 레시피 게시판 삭제
 	public String adminRecipedelete(@RequestParam("id") List<Long> id) {
-		recipeservice.adminRecipedelete(id);
+		memberservice.adminRecipedelete(id);
 		return "redirect:/adminRecipeList";
 	}
 }

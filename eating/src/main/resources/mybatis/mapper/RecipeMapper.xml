@@ -85,15 +85,6 @@
         DELETE FROM recipe WHERE id =#{id}
     </delete>
     
-    		<!-- 관리자 음식점 삭제 -->
-	<delete id="adminRecipedelete" parameterType="java.util.List">    
-		DELETE FROM recipe
-		WHERE
-		<foreach collection="id" item="id" open="" close=""
-			separator="or">
-			(id = #{id})
-		</foreach>
-	</delete>
 
 
 </mapper>

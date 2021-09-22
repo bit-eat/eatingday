@@ -17,16 +17,16 @@ public class CategoryController {
 	@Autowired
 	private CategoryDAO categoryDAO;
 	
-	public void insertCategory(CategoryVO CategoryVO) {
-		
-	}
-	public void updateCategory(CategoryVO CategoryVO) {
-		
-	};
-	public void deleteCategory(Long id) {
-		
-	};
-	
+//	public void insertCategory(CategoryVO CategoryVO) {
+//		
+//	}
+//	public void updateCategory(CategoryVO CategoryVO) {
+//		
+//	};
+//	public void deleteCategory(Long id) {
+//		
+//	};
+//	
 	
 //	
 //	@GetMapping("/")

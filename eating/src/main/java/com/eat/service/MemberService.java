@@ -8,6 +8,7 @@ import com.eat.vo.MemberVO;
 
 public interface MemberService {
 
+
 	void insertMember(MemberVO membervo); // 회원가입
 
 	void updateMember(MemberVO membervo); // 회원수정
@@ -30,7 +31,7 @@ public interface MemberService {
 
 	List<MemberVO> selectMemberId(Long id);
 
-	List<MemberVO> findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
+	MemberVO findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
 
 	List<MemberVO> findPw(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber, // 비밀번호찾기
 			@Param("userId") String userId);
@@ -40,4 +41,8 @@ public interface MemberService {
 	void deletecheck(@Param("id")List<Long> id);   //관리자 회원 관리
 	
 	void updateMemberList(MemberVO membervo);  //관리자 회원 수정
+	
+	void adminEaterydelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+	
+	 void adminRecipedelete(@Param("id")List<Long> id);   //관리자 음식점 게시판 삭제
 }

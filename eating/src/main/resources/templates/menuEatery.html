@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-<meta charset="UTF-8">
-<title>메뉴별 맛집 페이지</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
 
-	<h3>메뉴</h3>
+<th:block layout:fragment="content">
+<div class="container">
+
 	<form action="menuEatery" method="post" id="selectCategoryName">
 		<table border="1">
 			<tr>
 				<th colspan="3">메뉴</th>
 			</tr>
 			<tr>
-				<td><input type="submit" name="categoryName" value="한식"></td>
-				<td><input type="submit" name="categoryName" value="중식"></td>
-				<td><input type="submit" name="categoryName" value="일식"></td>
+				<td><input type="submit" class="btn btn-secondary" name="categoryName" value="한식"></td>
+				<td><input type="submit" class="btn btn-secondary" name="categoryName" value="중식"></td>
+				<td><input type="submit" class="btn btn-secondary" name="categoryName" value="일식"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="categoryName" value="양식"></td>
-				<td><input type="submit" name="categoryName" value="분식"></td>
-				<td><input type="submit" name="categoryName" value="패스트푸드"></td>
+				<td><input type="submit" class="btn btn-secondary" name="categoryName" value="양식"></td>
+				<td><input type="submit" class="btn btn-secondary" name="categoryName" value="분식"></td>
+				<td><input type="submit" class="btn btn-secondary" name="categoryName" value="패스트푸드"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="categoryName" value="베이커리"></td>
-				<td><input type="submit" name="categoryName" value="치킨"></td>
-				<td><input type="submit" name="categoryName" value="기타"></td>
+				<td><input type="submit" class="btn btn-secondary" name="categoryName" value="베이커리"></td>
+				<td><input type="submit" class="btn btn-secondary" name="categoryName" value="치킨"></td>
+				<td><input type="submit" class="btn btn-secondary" name="categoryName" value="기타"></td>
 			</tr>
 		</table>
 	</form>
@@ -88,5 +87,6 @@
 			<td th:text="${eatery.recommend}"></td>
 		</tr>
 	</table>
-</body>
+</div>
+</th:block>
 </html>

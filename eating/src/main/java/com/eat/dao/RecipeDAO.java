@@ -33,4 +33,5 @@ public interface RecipeDAO {
     RecipeVO recommendCheck(@Param("recipeId") Long recipeId ,@Param("memberId") Long memberId);
 
 	void adminRecipedelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
+
 }

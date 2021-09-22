@@ -18,6 +18,7 @@ public class RecipeVO {
     private LocalDateTime modifyDate;
     private Long categoryId;
     private Long memberId;
+    private String categoryName;
 
 
 }

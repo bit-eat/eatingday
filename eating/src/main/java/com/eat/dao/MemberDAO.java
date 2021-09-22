@@ -10,6 +10,7 @@ import com.eat.vo.MemberVO;
 @Mapper
 public interface MemberDAO {
 
+
 	void insertMember(MemberVO membervo); // (생성)회원가입
 
 	void updateMember(MemberVO membervo); // (수정)개인정보수정
@@ -22,7 +23,7 @@ public interface MemberDAO {
 
 	List<MemberVO> selectAll(); // 모든 회원 목록
 
-	List<MemberVO> findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
+	MemberVO findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
 
 	int logincheck(@Param("userId") String userId, @Param("userPw") String userPw); // 로그인
 
@@ -40,4 +41,12 @@ public interface MemberDAO {
 	void deletecheck(@Param("id")List<Long> id);   //관리자 회원 관리
 
 	void updateMemberList(MemberVO membervo);  //관리자 회원 수정
+	
+	void adminRecipedelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
+	void adminRecipeBookmarkDelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
+	
+	void adminEaterydelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+	void adminEateryRecommenddelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+	void adminEateryBookmarkdelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+	void adminMemberRecommenddelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
 }
