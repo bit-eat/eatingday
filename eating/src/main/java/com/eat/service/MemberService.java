@@ -8,6 +8,7 @@ import com.eat.vo.MemberVO;
 
 public interface MemberService {
 
+
 	void insertMember(MemberVO membervo); // 회원가입
 
 	void updateMember(MemberVO membervo); // 회원수정

@@ -10,6 +10,7 @@ import com.eat.vo.MemberVO;
 @Mapper
 public interface MemberDAO {
 
+
 	void insertMember(MemberVO membervo); // (생성)회원가입
 
 	void updateMember(MemberVO membervo); // (수정)개인정보수정

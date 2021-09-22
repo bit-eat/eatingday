@@ -32,11 +32,14 @@ public class DietController {
 	DietDAO dietDAO; 
 	
 	@Autowired
-	private CategoryDAO categoryDAO;
+	CategoryDAO categoryDAO;
+
+	@GetMapping("/suggestion/ladder")
+	public String ladder() {
+		return "/suggestion/ladder";
+	}
 	
-	
-	
-	@PostMapping("selectDietList")
+	@PostMapping("/suggestion/selectDietList")
 	public String selectDietList(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern="yyyy-MM-dd")LocalDate date,
 								@RequestParam("date2")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern="yyyy-MM-dd")LocalDate date2, Model model) {
 		model.addAttribute( "selectDietList"  , dietDAO.selectDietList(date, date2));
@@ -47,24 +50,30 @@ public class DietController {
 	@GetMapping("/suggestion/dietList")
 	public void showDietList(Model model){
 		model.addAttribute( "showDietList"  , dietDAO.showDietList());
-		System.out.println(model);
 		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
 	}
 
-	@PostMapping("insertDiet")
+	@GetMapping("count")
+	public String countDietList(DietVO dietVO,Model model) {
+		model.addAttribute("counting",dietDAO.countDietList(dietVO));
+		System.out.println(model);
+		return "/suggestion/insertDiet";
+	}
+	
+	@PostMapping("/suggestion/insertDiet")
 	public String insertDiet(DietVO dietVO) {
-		System.out.println(dietVO);
 		dietDAO.insertDiet(dietVO);
+		
 		return "redirect:/suggestion/dietList";
 	}
 	
-	@PostMapping("updateDiet")
+	@PostMapping("/suggestion/updateDiet")
 	public String updateDiet(DietVO dietVO) {
 		dietDAO.updateDiet(dietVO);
 		return "redirect:/suggestion/dietList";
 	};
 	
-	@PostMapping("deleteDiet")
+	@PostMapping("/suggestion/deleteDiet")
 	public String deleteDiet(DietVO dietVO) {
 		dietDAO.deleteDiet(dietVO);
 		return "redirect:/suggestion/dietList";

@@ -5,6 +5,7 @@
 
 <mapper namespace="com.eat.dao.EateryDAO">
 
+
 	<insert id="insertEatery" parameterType="com.eat.vo.EateryVO">
 		insert into
 		eatery(name,
@@ -234,6 +235,5 @@
 			(id = #{id})
 		</foreach>
 	</delete>
-
 
 </mapper>
