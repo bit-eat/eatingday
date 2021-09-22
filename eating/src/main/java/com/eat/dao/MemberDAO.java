@@ -41,4 +41,12 @@ public interface MemberDAO {
 	void deletecheck(@Param("id")List<Long> id);   //관리자 회원 관리
 
 	void updateMemberList(MemberVO membervo);  //관리자 회원 수정
+	
+	void adminRecipedelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
+	void adminRecipeBookmarkDelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
+	
+	void adminEaterydelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+	void adminEateryRecommenddelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+	void adminEateryBookmarkdelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+	void adminMemberRecommenddelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
 }

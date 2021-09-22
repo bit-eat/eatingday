@@ -102,4 +102,20 @@ public class MemberServiceImpl implements MemberService {
 		memberdao.updateMemberList(membervo);
 	}
 
+
+	@Override
+	public void adminEaterydelete(List<Long> id) {  //관리자 음식점 게시판 삭제
+		// TODO Auto-generated method stub
+		memberdao.adminEateryBookmarkdelete(id);
+		memberdao.adminEateryRecommenddelete(id);
+		memberdao.adminMemberRecommenddelete(id);
+		memberdao.adminEaterydelete(id);
+	}
+	
+	@Override
+	public void adminRecipedelete(List<Long> id) {  //관리자 레시피 게시판 삭제
+		// TODO Auto-generated method stub
+		memberdao.adminRecipeBookmarkDelete(id);
+		memberdao.adminRecipedelete(id);
+	}
 }

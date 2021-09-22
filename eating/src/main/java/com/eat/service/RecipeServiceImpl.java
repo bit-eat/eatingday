@@ -145,11 +145,7 @@ public class RecipeServiceImpl implements RecipeService{
         return recipeList;
     }
 
-	@Override
-	public void adminRecipedelete(List<Long> id) {  //관리자 레시피 게시판 삭제
-		// TODO Auto-generated method stub
-		recipeDAO.adminRecipedelete(id);
-	}
+
 
     @Override
     public void manufactureTag(Long recipeId, String originTag) {
