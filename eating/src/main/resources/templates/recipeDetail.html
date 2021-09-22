@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{fragments/layout}">
-<script type="text/javascript" src="/js/recipe.js"></script>
-<script type="text/javascript" src="/js/recommend.js"></script>
+
 <th:block layout:fragment="content">
     <div class="container">
         <form role="form"  th:object="${form}" method="post">
@@ -42,8 +41,12 @@
             </div>
 
             <br/><br/>
-                <input type="button" id="recommend" class="btn btn-secondary" style="float: right" value="추천">
-                <input type="button" id="bookmark" class="btn btn-secondary" style="float: right" value="북마크">
+            <div id="recommend">
+                <input type="button" class="btn btn-secondary" style="float: right" th:if="${checkId}" th:text="추천하기">
+            <input type="button" class="btn btn-secondary" style="float: right" th:unless="${checkId}" th:text="추천취소">
+            </div>
+                <input type="button" id="bookmark" class="btn btn-secondary" style="float: right"
+                       value="북마크">
         </form>
 
         <br/>
