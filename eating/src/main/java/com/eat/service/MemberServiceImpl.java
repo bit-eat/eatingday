@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO> findId(String userName, String phoneNumber) { // 아이디찾기
+	public MemberVO findId(String userName, String phoneNumber) { // 아이디찾기
 		return memberdao.findId(userName, phoneNumber);
 	}
 
@@ -76,7 +76,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<MemberVO> findPw(String userName, String phoneNumber, String userId) { // 비밀번호찾기
-		return memberdao.findPw(userName, userId, phoneNumber);
+		return memberdao.findPw(userName,phoneNumber, userId );
 	}
 
 	@Override
@@ -102,4 +102,20 @@ public class MemberServiceImpl implements MemberService {
 		memberdao.updateMemberList(membervo);
 	}
 
+
+	@Override
+	public void adminEaterydelete(List<Long> id) {  //관리자 음식점 게시판 삭제
+		// TODO Auto-generated method stub
+		memberdao.adminEateryBookmarkdelete(id);
+		memberdao.adminEateryRecommenddelete(id);
+		memberdao.adminMemberRecommenddelete(id);
+		memberdao.adminEaterydelete(id);
+	}
+	
+	@Override
+	public void adminRecipedelete(List<Long> id) {  //관리자 레시피 게시판 삭제
+		// TODO Auto-generated method stub
+		memberdao.adminRecipeBookmarkDelete(id);
+		memberdao.adminRecipedelete(id);
+	}
 }

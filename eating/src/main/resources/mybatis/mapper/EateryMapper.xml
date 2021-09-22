@@ -226,14 +226,6 @@
 		eb.memberid=#{memberId}
 	</select>
 
-	<!-- 관리자 음식점 삭제 -->
-	<delete id="adminEaterydelete" parameterType="java.util.List">
-		DELETE FROM eatery
-		WHERE
-		<foreach collection="id" item="id" open="" close=""
-			separator="or">
-			(id = #{id})
-		</foreach>
-	</delete>
+	
 
 </mapper>
