@@ -93,11 +93,40 @@ public class RecipeServiceImpl implements RecipeService{
 
     }
 
-
     @Override
     public void deleteRecipe(Long id) {
         //태그-컨텐츠 cascade 잡아놨으나 수정 필요한지 확인
         recipeDAO.deleteRecipe(id);
+    }
+
+    @Override //이미 등록되어있는지 확인 true면 없는상태
+    public boolean recommendCheck(Long recipeId, Long memberId) {
+        RecipeVO recipeVO = recipeDAO.recommendCheck(recipeId, memberId);
+        if(recipeVO == null)
+            return true;
+        return false;
+    }
+
+    @Override
+    public void addRecommend(Long recipeId, Long memberId) {
+        if(recommendCheck(recipeId,memberId))
+            recipeDAO.addRecommend(recipeId);
+    }
+
+    @Override
+    public void removeRecommend(Long recipeId, Long memberId) {
+        if(!recommendCheck(recipeId,memberId))
+            recipeDAO.removeRecommend(recipeId);
+    }
+
+    @Override
+    public Long insertRecipeBookmark(Long recipeId, Long memberId) {
+        return recipeDAO.insertRecipeBookmark(recipeId,memberId);
+    }
+
+    @Override
+    public void deleteRecipeBookmark(Long recipeId, Long memberId) {
+        recipeDAO.deleteRecipeBookmark(recipeId,memberId);
     }
 
     @Override

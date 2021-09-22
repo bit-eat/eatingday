@@ -24,5 +24,13 @@ public interface RecipeDAO {
     void updateRecipe(RecipeVO recipe);
     void deleteRecipe(@Param("id") Long id);
 
+    void addRecommend(@Param("id") Long recipeId);
+    void removeRecommend(@Param("id") Long recipeId);
+
+    Long insertRecipeBookmark(@Param("recipeId")Long recipeId, @Param("memberId")Long memberId);
+    void deleteRecipeBookmark(@Param("recipeId")Long recipeId, @Param("memberId")Long memberId);
+
+    RecipeVO recommendCheck(@Param("recipeId") Long recipeId ,@Param("memberId") Long memberId);
+
 	void adminRecipedelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
 }

@@ -65,14 +65,3 @@ function cancel(id) {
     form.submit();
 }
 
-$("input[id='recommend']").on("click", function (){
-    $("#checkrecommend").submit();
-    $("input[id='recommend']").hide();
-    $("input[id='unrecommend']").show();
-});
-
-$("input[id='unrecommend']").on("click",function(){
-    $("#checkunrecommend").submit();
-    $("input[id='recommend']").show();
-    $("input[id='unrecommend']").hide();
-});
