@@ -10,10 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,13 +36,16 @@ public class RecipeController {
     }
 
     @PostMapping(value="/recipe/new")
-    public String create(@Validated RecipeForm recipeForm){
+    @ResponseBody
+    public String create(@Validated RecipeForm recipeForm, @RequestPart("file") MultipartFile file){
         RecipeVO recipe = new RecipeVO();
         recipe.setThumb("/img/" + recipeForm.getThumb());
         recipe.setName(recipeForm.getName());
         recipe.setIngredient(recipeForm.getIngredient());
         recipe.setPeople(recipeForm.getPeople());
         recipe.setCreateDate(LocalDateTime.now());
+
+        System.out.println("originName : " + file.getOriginalFilename());
 
         Long recipeId = recipeService.saveRecipe(recipe);
         recipeService.manufactureTag(recipeId, recipeForm.getOriginTag());

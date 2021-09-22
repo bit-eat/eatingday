@@ -3,6 +3,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{fragments/layout}">
 
+<script type="text/javascript" src="/js/recipe.js"></script>
+
 <th:block layout:fragment="content">
 <div class="container">
 <!--  이미지 입력-->
@@ -16,7 +18,8 @@
     <img src="https://via.placeholder.com/800x450.png"
          style="width: 50%;margin-left: auto; margin-right: auto; display: block;"
          id="preview-image" alt="섬네일 이미지">
-    <input style="display: block" th:field="*{thumb}" type="file" id="input-image" onchange="readImage(this)">
+    <input style="display: block" name="file" type="file" id="input-image"
+           enctype="multipart/form-data" onchange="readImage(this)">
     </div>
   </div>
 
