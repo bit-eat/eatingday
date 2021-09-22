@@ -331,7 +331,7 @@ $(function(){
          for(var y =0; y < heightNode-1; y++){
             html += '<tr>';
             for(var x =0; x <widthNode-1 ; x++){
-                html += '<td style="width:98px; height:25px; border-left:2px solid #ddd; border-right:2px solid #ddd;"></td>';
+                html += '<td style="width:100px; height:25px; border-left:2px solid #ddd; border-right:2px solid #ddd;"></td>';
             }
             html += '</tr>';
         }
