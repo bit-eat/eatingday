@@ -36,6 +36,11 @@
 		WHERE id = #{id}
 	</select>
 
+	<select id="selectName" parameterType="String">
+		SELECT * FROM member
+		WHERE userid = #{userId}
+	</select>
+
 	<select id="selectGrade" parameterType="String">
 		SELECT * FROM member
 		WHERE id = #{grade}

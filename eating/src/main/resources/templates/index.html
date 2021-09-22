@@ -1,10 +1,9 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
-    <title>메인페이지</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
+
+<th:block layout:fragment="content">
 <div class="container" align="center">
     <div class="page-header">
         <p/>
@@ -13,9 +12,10 @@
 
         <h5>회원 기능</h5>
         <p>
-            <a class="btn btn-primary" href="/members/new">회원 가입</a>
-            <a class="btn btn-primary" href="/member">회원 목록</a>
-            <a class="btn btn-primary" href="/category">카테고리 관리</a>
+            <a class="btn btn-primary" href="/register">회원 가입</a>
+            <a class="btn btn-primary" href="/Login">로그인</a>
+            <a class="btn btn-primary" href="/memberList">회원 목록</a>
+            <a class="btn btn-primary" href="/mypage">마이페이지</a>
         </p>
          <h5>식단 기능</h5>
         <p>
@@ -26,18 +26,18 @@
         </p>
          <h5>맛집 기능</h5>
         <p>
-            <a class="btn btn-primary" href="/eatery">맛집 등록</a>
-            <a class="btn btn-primary" href="/detail">맛집 목록</a>
-            <a class="btn btn-primary" href="/menu">메뉴 등록</a>
-            <a class="btn btn-primary" href="/menuList">메뉴 목록</a>
+        	<a class="btn btn-primary" href="/eateryMain">맛집 메인</a>
+            <a class="btn btn-primary" href="/insert">맛집 등록</a>
+            <a class="btn btn-primary" href="/detail">맛집 상세</a>
+            <a class="btn btn-primary" href="/menuEatery">메뉴별 맛집</a>
+            <a class="btn btn-primary" href="/areaEatery">지역별 맛집</a>
         </p>
             <h5>레시피 기능</h5>
         <p>
             <a class="btn btn-primary" href="/recipe/new">레시피 등록</a>
             <a class="btn btn-primary" href="/recipeList">레시피 목록</a>
         </p>
-    </div>
-    <div th:replace="fragments/footer :: footer" />
-</div> <!-- /container -->
-</body>
+</div><!-- /container -->
+
+</th:block>
 </html>

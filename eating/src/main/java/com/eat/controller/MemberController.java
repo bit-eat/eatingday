@@ -1,5 +1,7 @@
 package com.eat.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,71 +9,176 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.eat.dao.EateryBookmarkDAO;
+import com.eat.dao.RecipeBookmarkDAO;
+import com.eat.service.EateryService;
 import com.eat.service.MemberService;
+import com.eat.service.RecipeService;
+import com.eat.vo.MemberVO;
+import com.eat.vo.RecipeBookmarkVO;
+import com.eat.vo.RecipeVO;
 
 @Controller
 public class MemberController {
 
-	@GetMapping("/member")
-	public String Test() {
-		return "dietMain";
-	}
-
+	@Autowired
+	private RecipeService recipeservice;
+	
 	@Autowired
 	private MemberService memberservice;
-	// private MemberDAO memberdao;
+	
+	@Autowired
+	private EateryService eateryservice;
+	
+	@Autowired
+	private RecipeBookmarkDAO recipeBookmarkdao;
+	
+	@Autowired
+	private EateryBookmarkDAO eateryBookmarkdao;
 
-
-	public void insertMember(MemberService memberservice) {
+	@GetMapping("/Login") // 로그인
+	public void Login() {
 	}
 
-	public void updateMember(MemberService memberservice) {
+	@GetMapping("/mypage")    // 마이페이지
+	public void mypage() {
 	}
 
-	public void deleteMember(MemberService memberservice) {
-	}
-
-	/*
-	 * @RequestMapping(value ="/login",method=RequestMethod.POST) public String
-	 * login(MemberVO vo,Model model) { System.out.println("vo="+vo); //MemberVO
-	 * membervo = MemberService(vo.getUserId(),vo.getUserPw()); return "test.html";
-	 * }
-	 */
-
-	@GetMapping("/Login")
-	public void selectAll(Model model) {
-		System.out.println(memberservice.selectAll());
-		model.addAttribute("selectAll", memberservice.selectAll());
-		if (model == null) {
-			model.addAttribute("loginMessage", "아이디 혹은 비밀번호가 일치하지 않습니다.");
-
-		}
-	}
-
-	@GetMapping("/adminlogin")
-	public void selectGrade(Model model) {
-		System.out.println(memberservice.selectGrade("grade"));
-		model.addAttribute("selectGrade", memberservice.selectGrade("grade"));
-	}
-
-	@GetMapping("/register")
-	public String register() {
+	@GetMapping("/register") 
+	public String register() {       // 회원가입창띄우기
 		return "register";
 	}
-	@GetMapping("/findid")
-	public String findid(){
+
+	@PostMapping("insertMember") 
+	public String insertMember(MemberVO membervo) {        // 회원가입
+		System.out.println(membervo);
+		memberservice.insertMember(membervo);
+		return "/Login";
+	}
+
+	@GetMapping("/findid")           // 아이디찾기
+	public String findid() {
 		return "/findid";
 	}
-	
-	@PostMapping("findId")
-	public void findId(Model model, @RequestParam("userName")String userName,@RequestParam("phoneNumber") String phoneNumber) {
-		model.addAttribute("findId",memberservice.findId(userName, phoneNumber));
+
+	@PostMapping("findId")             // 아이디찾기
+	public void findId(Model model, @RequestParam("userName") String userName, 
+			@RequestParam("phoneNumber") String phoneNumber) {
+		model.addAttribute("findId", memberservice.findId(userName, phoneNumber));
 		System.out.println(model);
 	}
 
-	@GetMapping("/findpw")
-	public String findpw() {
-		return "findpw";
+	@GetMapping("/findpw") 
+	public String findpw() {       // 비밀번호찾기
+		return "/findpw";
+	}
+
+	@PostMapping("/findPw")                   // 비밀번호찾기
+	public void findPw(Model model, @RequestParam("userName") String userName, @RequestParam("userId") String userId,
+			@RequestParam("phoneNumber") String phoneNumber) {
+		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
+	}
+
+	@PostMapping("logincheck") 
+	public String logincheck(Model model, String userId, String userPw) {           // 로그인 완료 ->메인페이지로 띄우기
+		model.addAttribute("logincheck", memberservice.logincheck(userId, userPw));
+		int check = memberservice.logincheck(userId, userPw);
+		if (check == 1) {
+			return "redirect:/";
+		} else {
+			return "/Login";
+		}
+	}
+
+	@PostMapping("admincheck") 
+	public String admincheck(Model model, String userId, String userPw) {                  // 관리자 로그인 
+		model.addAttribute("admincheck", memberservice.admincheck(userId, userPw));
+		int check = memberservice.admincheck(userId, userPw);
+		if (check == 1) {
+			return "redirect:/memberList";
+		} else {
+			return "/adminlogin";
+		}
+	}
+
+	@GetMapping("update")
+	public String update(MemberVO membervo) {     // 수정(개인정보수정)
+		System.out.println(membervo);
+		memberservice.updateMember(membervo);
+		return "update";
+	}
+
+	@PostMapping("update")
+	public void updateMember(MemberVO membervo) { // 수정(개인정보수정)
+		System.out.println(membervo);
+		memberservice.updateMember(membervo);
+	}
+
+	@GetMapping("/delete") 
+	public String delete() {   // 회원탈퇴 ,페이지 불러오기
+		return "delete";
+	}
+
+	@PostMapping("/delete")
+	public String deleteMember(MemberVO membervo) { // 삭제(회원탈퇴) , 정보전달 받은거 처리하기
+		memberservice.deleteMember(membervo);
+		return "/Login";
+	}
+
+	@GetMapping("/adminlogin") 
+	public String adminLogin(MemberVO membervo) {   // 관리자 로그인
+		System.out.println(membervo);
+		return "/adminlogin";
+	}
+
+	@GetMapping("/memberList") 
+	public void selectAll(Model model) {   // 회원 목록 불러오기
+		model.addAttribute("selectAll", memberservice.selectAll());
+	}
+
+	@PostMapping("deletecheck") // 관리자 회원 관리 삭제
+	public String deletecheck(@RequestParam("id") List<Long> id) {
+		memberservice.deletecheck(id);
+		return "redirect:/memberList";
 	}
 	
+	@GetMapping("favorite")   //즐겨찾기 페이지
+	public String favorite(Model model) {
+		model.addAttribute("selectEateryBookmark",eateryBookmarkdao.selectEateryBookmark(1L));
+		
+		List<RecipeBookmarkVO> r=recipeBookmarkdao.selectRecipeBookmark(1L);
+		model.addAttribute("selectRecipeBookmark",recipeBookmarkdao.selectRecipeBookmark(1L));
+		return "/favorite";
+	}
+	
+	@PostMapping("updateMemberList") //멤버리스트 수정
+	public String updatememberList(MemberVO membervo) {
+		System.out.println(membervo);
+		memberservice.updateMemberList(membervo);
+		return "redirect:/memberList";
+	}
+	
+	@GetMapping("adminEateryList")   //관리자 음식점 게시판
+	public String adminEateryList(Model model){
+		model.addAttribute("selectAll", eateryservice.selectAll());
+		return "/adminEateryList";
+	}
+	
+	@PostMapping("adminEaterydelete")   //관리자 음식점 게사판 삭제
+	public String adminEaterydelete(@RequestParam("id") List<Long> id) {
+		eateryservice.adminEaterydelete(id);
+		return "redirect:/adminEateryList";
+	}
+	
+	@GetMapping("adminRecipeList")   //관리자 레시피 게시판
+	public String adminRecipeList(Model model){
+		model.addAttribute("selectAll", recipeservice.selectAll());
+		return "/adminRecipeList";
+	}
+	
+	@PostMapping("adminRecipedelete")   //관리자 레시피 게시판 삭제
+	public String adminRecipedelete(@RequestParam("id") List<Long> id) {
+		recipeservice.adminRecipedelete(id);
+		return "redirect:/adminRecipeList";
+	}
 }

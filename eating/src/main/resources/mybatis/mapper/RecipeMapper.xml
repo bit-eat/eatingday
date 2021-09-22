@@ -27,11 +27,15 @@
     </select>
 
     <select id="selectIngredient" parameterType="String" resultType="com.eat.vo.RecipeVO">
-        SELECT * FROM recipe WHERE ingrdient like CONCAT('%',#{ingredient},'%')
+        SELECT * FROM recipe WHERE ingredient like CONCAT('%',#{ingredient},'%')
     </select>
 
-    <select id="selectCategory" parameterType="String" resultType="com.eat.vo.RecipeVO">
-        SELECT * FROM recipe WHERE category = #{category}
+    <select id="selectCategoryId" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipe WHERE categoryid = #{categoryId}
+    </select>
+
+    <select id="selectMemberId" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipe WHERE memberid = #{memberId}
     </select>
 
     <update id="updateRecipe" parameterType="com.eat.vo.RecipeVO">
@@ -42,6 +46,16 @@
     <delete id="deleteRecipe" parameterType="Long">
         DELETE FROM recipe WHERE id =#{id}
     </delete>
+    
+    		<!-- 관리자 음식점 삭제 -->
+	<delete id="adminRecipedelete" parameterType="java.util.List">    
+		DELETE FROM recipe
+		WHERE
+		<foreach collection="id" item="id" open="" close=""
+			separator="or">
+			(id = #{id})
+		</foreach>
+	</delete>
 
 
 </mapper>

@@ -12,7 +12,11 @@ public interface CategoryDAO {
 	public void insertCategory(CategoryVO categoryVO);
 	public void updateCategory(CategoryVO categoryVO);
 	public void deleteCategory(Long id);
-	
+
+	CategoryVO selectName(@Param("name")String name);
+	CategoryVO selectId(@Param("id")Long id);
+
+
 	List<CategoryVO> categoryList();
 	
 }

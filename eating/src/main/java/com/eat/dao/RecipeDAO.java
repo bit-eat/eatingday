@@ -18,11 +18,11 @@ public interface RecipeDAO {
     List<RecipeVO> selectName(@Param("name") String name);
     List<RecipeVO> selectPeople(@Param("people") People p);
     List<RecipeVO> selectIngredient(@Param("ingredient") String ingredient);
-    List<RecipeVO> selectCategory(@Param("category") String category);
-
+    List<RecipeVO> selectCategoryId(@Param("category") Long categoryId);
+    List<RecipeVO> selectMemberId(@Param("member")Long memberId);
 
     void updateRecipe(RecipeVO recipe);
     void deleteRecipe(@Param("id") Long id);
 
-
+	void adminRecipedelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
 }

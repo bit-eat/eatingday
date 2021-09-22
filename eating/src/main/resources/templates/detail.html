@@ -1,60 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <title>맛집 상세 페이지</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function() {
+	
+	var check = $("input[id='checkid']").val();
+	var checking = $("input[id='checkingid']").val();
+	
+	//추천
+	$("input[id='recommend']").on("click",function(){
+		$("#checkrecommend").submit();
+		$("input[id='recommend']").hide();
+		$("input[id='unrecommend']").show();
+	});
+	
+	$("input[id='unrecommend']").on("click",function(){
+		$("#checkunrecommend").submit();
+		$("input[id='recommend']").show();
+		$("input[id='unrecommend']").hide();
+	});
+	
+	//즐겨찾기
+	$("input[id='bookmark']").on("click",function(){
+		$("#checkbookmark").submit();
+		$("input[id='bookmark']").hide();
+		$("input[id='unbookmark']").show();
+	});
+	
+	$("input[id='unbookmark']").on("click",function(){
+		$("#checkunbookmark").submit();
+		$("input[id='bookmark']").show();
+		$("input[id='unbookmark']").hide();
+	});
+	
+	//추천,즐겨찾기
+	if(check==1){
+		$("input[id='recommend']").hide();
+		$("input[id='unrecommend']").show();
+	
+	} else if(check==0){
+		$("input[id='recommend']").show();
+		$("input[id='unrecommend']").hide();
+
+	}
+	if(checking==1){
+		$("input[id='bookmark']").hide();
+		$("input[id='unbookmark']").show();
+		
+	} else if(checking==0){
+		$("input[id='bookmark']").show();
+		$("input[id='unbookmark']").hide();
+	}
+});
+	
+</script>
 </head>
 <body>
-   <thead>
-      <tr>
-         <th>음식점 이름</th> <input type="text" name="eateryName" size="10" value="" maxlength="7"> <br>
-         <th>지역</th>
-         <select name="Area">
-    <option value="">선택</option>
-    <option value="인천">인천</option>
-    <option value="강북">강북</option>
-    <option value="강남">강남</option>
-    <option value="경남">경남</option>
-    <option value="강원">강원</option>
-    <option value="충청">충청</option>
-    <option value="대전">대전</option>
-    <option value="전라">전라</option>
-    <option value="광주">광주</option>
-    <option value="대구">대구</option>
-    <option value="울산">울산</option>
-    <option value="부산">부산</option>  
-    <option value="경상">경상</option> 
-       </select> <br>
-         <th>메뉴 카테고리</th>
-        <select name="Menu">
-    <option value="">선택</option>
-    <option value="한식">한식</option>
-    <option value="양식">양식</option>
-    <option value="일식">일식</option>
-    <option value="중식">중식</option>
-    <option value="패스트푸드">패스트푸드</option>
-    <option value="베이커리">베이커리</option>
-    <option value="퓨전푸드">퓨전푸드</option>
-    <option value="뷔페">뷔페</option>
-    <option value="카페/주점">카페/주점</option>
-      </select> <br>
-      </tr>
-      </thead>
-       <tr th:each ="eatery : ${selectAll }">         
-         <td th:text="${eatery.name}"></td>
-         <td th:text="${eatery.area}"></td>
-         <td th:text="${eatery.category}"></td>
-      </tr>
-      
-<button>추천</button>
-<button>즐겨찾기</button>
-<br>
-<thead>
-<tr>
-<th>음식점 설명</th><br>
-<input type="text" name="eateryContent" size="70" value="" maxlength="500">
-</tr>
-</thead>
 
+	<h3>상세 페이지</h3>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th>음식점 이름</th>
+				<th>카테고리</th>
+				<th>지역</th>
+				<th>주소</th>
+				<th>전화</th>
+				<th>음식점 설명</th>
+			</tr>
+
+		</thead>
+
+		<tr th:each="eatery : ${selectName}">
+			<td id="name" name="name" th:text="${eatery.name}"></td>
+			<td id="category" name="category" th:text="${eatery.categoryName}"></td>
+			<td id="area" name="area" th:each=" area : ${T(com.eat.vo.Area).values()}"
+				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
+				th:text="${area.getKrName}"></td>
+			<td id="address" name="address" th:text="${eatery.address}"></td>
+			<td id="phone" name="phone" th:text="${eatery.phoneNumber}"></td>
+			<td id="content" name="content" th:text="${eatery.content}"></td>
+		</tr>
+		<tr th:each="eatery : ${selectId}">
+			<td id="name2" name="name2" th:text="${eatery.name}"></td>
+			<td id="category2" name="category2" th:text="${eatery.categoryName}"></td>
+			<td id="area2" name="area2" th:each=" area : ${T(com.eat.vo.Area).values()}"
+				th:if="${#strings.toString(eatery.area)}==${#strings.toString(area.name())}"
+				th:text="${area.getKrName}"></td>
+			<td id="address2" name="address2" th:text="${eatery.address}"></td>
+			<td id="phone2" name="phone2" th:text="${eatery.phoneNumber}"></td>
+			<td id="content2" name="content2" th:text="${eatery.content}"></td>
+		</tr>
+	</table>
+	<br>
+	<div>
+	<input id="checkid" type="hidden" th:value="${checkid}">
+	<input id="checkingid" type="hidden" th:value="${checkingid}">
+	<form id="detailmain" method="get">
+		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>		
+		<input th:each="eatery : ${selectName}" name="name" th:value="${eatery.name}" style="display: none" readonly>		
+	</form>
+	
+	<form id="checkrecommend" action="recommend" method="post">
+		<!-- <input>  멤버 id 받는 부분 필요--> 
+		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectName}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input  name="memberid" th:value="${checkingid}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="memberid" th:value="${eatery.memberId}" style="display: none" readonly>
+		<input type="button" id="recommend" value="추천"> 
+	</form> 
+	<form id="checkunrecommend" action="unrecommend" method="post">
+		<!-- <input>  멤버 id 받는 부분 필요--> 
+		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectName}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input  name="memberid" th:value="${checkingid}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="memberid" th:value="${eatery.memberId}" style="display: none" readonly>
+		<input type="button" id="unrecommend" style="display: none" value="추천취소"> 
+	</form> 
+	
+	<form id="checkbookmark" action="bookmark" method="post">
+		<!-- <input>  멤버 id 받는 부분 필요--> 
+		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectName}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input  name="memberid" th:value="${checkingid}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="memberid" th:value="${eatery.memberId}" style="display: none" readonly>
+		<input type="button" id="bookmark" value="즐겨찾기"> 
+	</form> 
+	<form id="checkunbookmark" action="unbookmark" method="post">
+		<!-- <input>  멤버 id 받는 부분 필요--> 
+		<input th:each="eatery : ${selectName}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectName}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input  name="memberid" th:value="${checkingid}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="id" th:value="${eatery.id}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="name" th:value="${eatery.name}" style="display: none" readonly>
+		<input th:each="eatery : ${selectId}" name="memberid" th:value="${eatery.memberId}" style="display: none" readonly>
+		<input type="button" id="unbookmark" style="display: none" value="즐겨찾기취소"> 
+	</form> 
+
+	</div>
 </body>
 </html>

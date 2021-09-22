@@ -1,6 +1,5 @@
 package com.eat.controller;
 
-import com.eat.dao.RecipeDAO;
 import com.eat.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,11 @@ public class HomeController {
     @GetMapping("/")
     public String home(){
         return "index";
+    }
+
+    @GetMapping("/main")
+    public String test(){
+        return "main";
     }
 
 

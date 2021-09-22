@@ -7,11 +7,12 @@ public class EateryVO {
 	
     private Long id;
     private Long categoryId;
+    private Long memberId;
+    private String categoryName;
     private String name;
     private String content;
     private String address;
     private String phoneNumber;
     private Area area;
-    private String categoryName;
-    
+    private Long recommend;
 }

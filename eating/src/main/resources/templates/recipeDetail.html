@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
+<script type="text/javascript" src="/js/recipeTag.js"></script>
+<th:block layout:fragment="content">
+    <div class="container">
+        <form role="form"  th:object="${form}" method="post">
+
+            <div class="img-container">
+                <div id="downLoad-img">
+                    <img th:src="*{thumb}"
+                         style="width: 50%;margin-left: auto; margin-right: auto; display: block;"
+                         id="preview-image">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label th:for="name" class="form-label mt-4">이름</label>
+                <input th:value="*{name}" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+                <label th:for="ingredient" class="form-label mt-4">요리재료</label>
+                <input type="text" th:value="*{ingredient}" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+                <label th:for="people" class="form-label mt-4">요리인원</label>
+                <input type="text" th:value="*{people}" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+                <lable th:for="originTag" class="form-label mt-r">태그</lable>
+                <input type="text" th:value="*{originTag}" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+                <lable th:for="recipeTag" class="form-label mt-r">레시피</lable>
+                <input type="text" th:value="*{content}" class="form-control" style="height: 300px;" disabled />
+            </div>
+
+            <button type="submit" class="btn btn-secondary" style="float: right">북마크</button>
+
+           </form>
+        <br/>
+
+    </div>
+</th:block>
+</html>

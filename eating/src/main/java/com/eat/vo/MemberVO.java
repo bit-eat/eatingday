@@ -1,13 +1,10 @@
 package com.eat.vo;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 
 public class MemberVO {
-
 
 	private Long id;
 	private String userId;
@@ -17,4 +14,6 @@ public class MemberVO {
 	private String grade;
 	private Data regisDate;
 	private Data modifiDate;
+	
+	
 }
