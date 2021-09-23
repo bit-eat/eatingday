@@ -1,0 +1,19 @@
+.container {
+	text-align:center;
+}
+
+ h1 {
+	margin: 100px;
+}
+
+.update {
+	margin: 10px;
+}
+
+.delete{
+	margin: 10px;
+}
+
+.favorite{
+	margin: 10px;
+}

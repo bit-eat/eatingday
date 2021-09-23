@@ -6,32 +6,37 @@
 <title>비밀번호찾기</title>
 
 <th:block layout:fragment="content">
+<link rel="stylesheet" type="text/css" href="/css/findpw.css"/>
     <div class="container">
-
 	<h3>비밀번호찾기</h3>
 
 	<form action="findPw" method="post">
-		<div>
+		<div class="userName">
 			<label>이름</label> <input for="userName" id="userName" name="userName"
 				type="text">
 		</div>
 
-		<div>
+		<div class="id">
 			<label>아이디</label> <input for="userId" id="userId" name="userId"
 				type="text">
 		</div>
 
-		<div>
+		<div class="phoneNumber">
 			<label>전화번호</label> <input for="phoneNumber" id="phoneNumber"
 				name="phoneNumber" type="text">
 		</div>
-		<input type="submit" value="비밀번호찾기">
+		<input type="submit" value="비밀번호찾기"><input type="reset" value="취소하기">
 	</form>
 
+	<div class="pw">
 	<label>비밀번호</label>
 	<input th:each="member : ${findPw}" th:value="${member.userPw}"
 		type="text" readonly>
 
     </div>
+    </div>
+    
+    </body>
+    
 </th:block>
 </html>
