@@ -18,8 +18,8 @@
     <img src="https://via.placeholder.com/800x450.png"
          style="width: 50%;margin-left: auto; margin-right: auto; display: block;"
          id="preview-image" alt="섬네일 이미지">
-    <input style="display: block" name="file" type="file" id="input-image"
-           enctype="multipart/form-data" onchange="readImage(this)">
+    <input style="display: block" name="file" type="file" id="input-image" th:field="*{thumb}"
+            onchange="readImage(this)">
     </div>
   </div>
 

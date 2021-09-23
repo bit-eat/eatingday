@@ -43,8 +43,11 @@ public class RecipeController {
     }
 
     @PostMapping(value="/recipe/new")
-    @ResponseBody
-    public String create(@Validated RecipeForm recipeForm, @RequestPart("file") MultipartFile file){
+    public String create(@Validated RecipeForm recipeForm, HttpSession httpSession){
+
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+        System.out.println("유저아이디 : " + memberVO.getUserId());
 
         RecipeVO recipe = new RecipeVO();
         recipe.setThumb("/img/" + recipeForm.getThumb());
@@ -52,8 +55,7 @@ public class RecipeController {
         recipe.setIngredient(recipeForm.getIngredient());
         recipe.setPeople(recipeForm.getPeople());
         recipe.setCreateDate(LocalDateTime.now());
-
-        System.out.println("originName : " + file.getOriginalFilename());
+        recipe.setMemberId(memberVO.getId());
 
         Long recipeId = recipeService.saveRecipe(recipe);
         recipeService.manufactureTag(recipeId, recipeForm.getOriginTag());

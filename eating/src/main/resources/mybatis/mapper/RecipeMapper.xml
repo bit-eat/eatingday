@@ -6,8 +6,8 @@
 <mapper namespace="com.eat.dao.RecipeDAO">
 
     <insert id="insertRecipe" parameterType="com.eat.vo.RecipeVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into recipe(name, thumb, ingredient, people, recommend, createDate)
-        values(#{name}, #{thumb},#{ingredient},#{people},#{recommend},#{createDate})
+        insert into recipe(name, thumb, ingredient, people, recommend, createDate, memberId)
+        values(#{name}, #{thumb},#{ingredient},#{people},#{recommend},#{createDate}, #{memberId})
     </insert>
 
     <select id="selectOne" parameterType="Long" resultType="com.eat.vo.RecipeVO">
