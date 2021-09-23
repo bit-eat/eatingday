@@ -1,63 +1,72 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-
-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T">
-<link rel="stylesheet" href="/css/bootstrap.css">
-</head>
-<body>
-	<h1>랜덤 추천</h1>
+	<th:block layout:fragment="content">
+		<div class="container">
+		<link rel="stylesheet" type="text/css" href="/css/randomList.css">
+			<h1>랜덤 추천</h1>
 
-	<!-- 음식점 테이블 시작 -->
-	<div>
-		<div onClick="location.href='#'">
-		<table border="1">
-			<thead>
-				<tr>
-					<th>상호명</th>
-					<th>카테고리</th>
-					<th>전화번호</th>
-				</tr>
-			</thead>
-			<tr th:each="eatery : ${showEatery}">
-				<td th:text="${eatery.name}"></td>
-				<td th:text="${eatery.categoryName}"></td>
-				<td th:text="${eatery.phoneNumber}"></td>
-			</tr>
-		</table>
-		</div>
-		<!-- 음식점 테이블 종료 -->
-		
-		
-		
-		<!-- 레시피 테이블 시작 -->
-		<div onClick="location.href='#'">
-		<table border="1" >
-			<thead>
-				<tr>
-					<th>요리이름</th>
-					<th>카테고리</th>
-					<th>재료</th>
-				</tr>
-			</thead>
-			<tr th:each="recipe : ${showRecipe}">
-				<td th:text="${recipe.name}"></td>
-				<td th:text="${recipe.categoryName}"></td>
-				<td th:text="${recipe.ingredient}"></td>
-			</tr>
-		</table>
-		</div>
-		<!-- 레시피 테이블 종료 -->
-	
-	
-		<!-- 테이블버튼 -->
-		<button type="button" id="reset" style="font-weight: 900" onClick="location.href='/suggestion/randomList'">한 번 더!</button>
-		
-	</div>
-
-
-</body>
-
+			<!-- 음식점 테이블 시작 -->
+			<div class="randombox">
+				<div class="randomEatery" onClick="location.href='#'">
+					<h3>추천 음식점!</h3>
+					<table border="2">
+						<tbody th:each="eatery : ${showEatery}">
+						<tr>
+							<th>이미지</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th>상호명</th>
+							<td th:text="${eatery.name}"></td>
+						</tr>
+						<tr>
+							<th>카테고리</th>
+							<td th:text="${eatery.categoryName}"></td>
+						</tr>
+						<tr>
+							<th>전화번호</th>
+							<td th:text="${eatery.phoneNumber}"></td>
+						</tr>
+						</tbody>
+							
+					</table>
+				</div>
+				<!-- 음식점 테이블 종료 -->
+				
+				
+				
+				<!-- 레시피 테이블 시작 -->
+				<div class="randomRecipe" onClick="location.href='#'">
+				<h3>추천 레시피!</h3>
+					<table border="2" >
+						<tbody th:each="recipe : ${showRecipe}">
+							<tr>
+								<th>요리이름</th>
+								<td th:text="${recipe.name}"></td>
+							</tr>
+							<tr>
+								<th>카테고리</th>
+								<td th:text="${recipe.categoryName}"></td>
+							</tr>
+							<tr>
+								<th>재료</th>
+								<td th:text="${recipe.ingredient}"></td>
+							</tr>
+								
+						</tbody>
+					</table>
+				</div>
+				<!-- 레시피 테이블 종료 -->
+			
+			</div>
+			
+			<!-- 테이블버튼 -->
+			<div class="retry">
+				<button class="btn btn-outline-primary" type="button" id="reset" onClick="location.href='/suggestion/randomList'">한 번 더!</button>
+			</div>
+    	</div>
+	</th:block>
 </html>

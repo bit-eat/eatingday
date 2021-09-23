@@ -1,32 +1,39 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8">
-    <title>test</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-
-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T">
-	<link rel="stylesheet" href="/css/bootstrap.css">
-  </head>
-  <body>
-	<h1>test</h1>
-	hello<br>
-	<table>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>날짜</th>
-				<th>끼니</th>
-				<th>카테고리</th>
-				<th>메뉴</th>
-			</tr>
-		</thead>
-		<tr th:each="suggestion, index : ${showDietList}">
-				<td th:text="${index.count}"></td>
-				<td th:text="${suggestion.date}" id="date"></td>
-				<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
-				<td th:text="${suggestion.categoryName}"></td>
-				<td th:text="${suggestion.menu}"></td>
-			</tr>
-	</table>
-  </body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-
+		ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T">
+<link rel="stylesheet" href="/css/bootstrap.css">
+
+	<th:block layout:fragment="content">
+		<div class="container">
+		<link rel="stylesheet" type="text/css" href="/css/dietMain.css">
+			<h1>식단리스트</h1>
+			<table id="list" border="1">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>날짜</th>
+						<th>끼니</th>
+						<th>카테고리</th>
+						<th>메뉴</th>
+					</tr>
+				</thead>
+				<tr th:each="suggestion, index : ${showDietList}">
+						<td th:text="${index.count}"></td>
+						<td th:text="${suggestion.date}" id="date"></td>
+						<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
+						<td th:text="${suggestion.categoryName}"></td>
+						<td th:text="${suggestion.menu}"></td>
+				</tr>
+			</table>
+			
+			<!-- 이동 버튼 -->
+			<button class="btn btn-outline-primary" type="button" id="insertDietOpen" onclick="location.href='/suggestion/dietList'" style="font-weight: 900;">식단 등록/수정</button>
+			<button class="btn btn-outline-primary"  type="button" id="updateDietOpen" onclick="location.href='/recipe/new'" style="font-weight: 900;">레시피 등록</button>
+			<button class="btn btn-outline-primary"  type="button" id="deleteDietOpen" onclick="location.href='/insert'" style="font-weight: 900;">맛집 등록</button>
+    	</div>
+	</th:block>
 </html>

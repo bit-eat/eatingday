@@ -1,121 +1,61 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-	$(document).ready(function() {
-		document.getElementById("insertDietOpen").onclick = function() {
-			document.getElementById("modalInsert").style.display = "block";
-		}
-		document.getElementById("insertModalClose").onclick = function() {
-			document.getElementById("modalInsert").style.display = "none";
-		}
+<title>식단</title>
+<th:block layout:fragment="content">
+	<div class="container">
+		<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>	
+		<link rel="stylesheet" type="text/css" href="/css/dietList.css">
+		<script type="text/javascript" src="/js/dietList.js"></script>
+			<h1>식단 리스트</h1>
 		
-		document.getElementById("updateDietOpen").onclick = function() {
-			document.getElementById("modalUpdate").style.display = "block";
-		}
-		document.getElementById("updateModalClose").onclick = function() {
-			document.getElementById("modalUpdate").style.display = "none";
-		}
+			<!-- 테이블 시작 -->
+			<div class="date">
+				<form action="selectDietList" method="Post" >
+					<input for="date" type="date" id="date" name="date" value="date"/>
+					<input for="date2" type="date" id="date2" name="date2" value="date2"/>
+					<button class="btn btn-outline-primary" type="submit" id="change">조회</button>
+				</form>
+				<table id="list" border="1">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>날짜</th>
+							<th>끼니</th>
+							<th>카테고리</th>
+							<th>메뉴</th>
+						</tr>
+					</thead>
+					<tr th:each="suggestion, index : ${showDietList}">
+						<td th:text="${index.count}"></td>
+						<td th:text="${suggestion.date}" id="date"></td>
+						<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
+						<td th:text="${suggestion.categoryName}"></td>
+						<td th:text="${suggestion.menu}"></td>
+					</tr>
+					<tr th:each="suggestion, index : ${selectDietList}">
+						<td th:text="${index.count}"></td>
+						<td th:text="${suggestion.date}" id="date"></td>
+						<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
+						<td th:text="${suggestion.categoryName}"></td>
+						<td th:text="${suggestion.menu}"></td>
+					</tr>
+				</table>
+				<!-- 테이블 종료 -->
+				
+				<!-- 테이블버튼 -->
+				<button class="btn btn-outline-primary"  type="button" id="insertDietOpen" style="font-weight: 900;">등록</button>
+				<button class="btn btn-outline-primary"  type="button" id="updateDietOpen" style="font-weight: 900;">수정</button>
+				<button class="btn btn-outline-primary"  type="button" id="deleteDietOpen" style="font-weight: 900;">삭제</button>
+				
+				
+			</div>
 		
-		document.getElementById("deleteDietOpen").onclick = function() {
-			document.getElementById("modalDelete").style.display = "block";
-		}
-		document.getElementById("deleteModalClose").onclick = function() {
-			document.getElementById("modalDelete").style.display = "none";
-		}
-	});
-	</script>
-<style>
-#modalInsert, #modalUpdate, #modalDelete {
-	display: none;
-	position: relative;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-	position: relative;
-}
-
-#modalInsert h2, #modalUpdate h2, #modalDelete h2 {
-	margin: 0;
-}
-
-#modalInsert button, #modalUpdate button, #modalDelete button {
-	display: inline-block;
-	width: 100px;
-	margin-left: calc(100% - 100px - 10px);
-}
-
-#modalInsert .modal_content, #modalUpdate .modal_content, #modalDelete .modal_content {
-	width: 500px;
-	margin: 100px auto;
-	padding: 20px 10px;
-	background: #fff;
-	border: 2px solid #666;
-}
-
-#modalInsert .modal_layer, #modalUpdate .modal_layer, #modalDelete .modal_layer {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: -1;
-}
-</style>
-
-</head>
-<body>
-	<h1>식단 리스트</h1>
-
-	<!-- 테이블 시작 -->
-	<div>
-		<form action="selectDietList" method="Post" >
-			<input for="date" type="date" id="date" name="date" value="date"/>
-			<input for="date2" type="date" id="date2" name="date2" value="date2"/>
-			<button type="submit" id="change">조회</button>
-		</form>
-		<table border="1">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>날짜</th>
-					<th>끼니</th>
-					<th>카테고리</th>
-					<th>메뉴</th>
-				</tr>
-			</thead>
-			<tr th:each="suggestion, index : ${showDietList}">
-				<td th:text="${index.count}"></td>
-				<td th:text="${suggestion.date}" id="date"></td>
-				<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
-				<td th:text="${suggestion.categoryName}"></td>
-				<td th:text="${suggestion.menu}"></td>
-			</tr>
-			<tr th:each="suggestion, index : ${selectDietList}">
-				<td th:text="${index.count}"></td>
-				<td th:text="${suggestion.date}" id="date"></td>
-				<td th:each=" meal : ${T(com.eat.vo.Meal).values()}" th:if="${#strings.toString(suggestion.meal)}==${#strings.toString(meal.name())}" th:text="${meal.getKrName}"></td>
-				<td th:text="${suggestion.categoryName}"></td>
-				<td th:text="${suggestion.menu}"></td>
-			</tr>
-		</table>
-		<!-- 테이블 종료 -->
-		
-		<!-- 테이블버튼 -->
-		<button type="button" id="insertDietOpen" style="font-weight: 900;">등록</button>
-		<button type="button" id="updateDietOpen" style="font-weight: 900;">수정</button>
-		<button type="button" id="deleteDietOpen" style="font-weight: 900;">삭제</button>
-		
-		
-	</div>
-
-	<div id="countingDiv">
-		<input id="count" name="count" th:each="suggestion:${counting}" type="text" th:value="${suggestion.count}" readonly>
-	</div>
+			<div id="countingDiv">
+				<input id="count" name="count" th:each="suggestion:${counting}" type="text" th:value="${suggestion.count}" readonly>
+			</div>
 
 	<!-- insert modal 시작 -->
 	<div id="modalInsert">
@@ -218,14 +158,6 @@
 		</div>
 	</div>
 	<!-- delete modal 종료 -->
-
-
-
-	<!-- 스크립트 -->
-	
-	
-
-
-</body>
-
+	</div>
+</th:block>
 </html>

@@ -1,0 +1,27 @@
+table {
+    border: 1;
+}
+
+#insertDietOpen, #updateDietOpen, #deleteDietOpen {
+	text-align: center;
+	display: block;
+	margin: 20px auto;
+	font-size: 17px;
+}
+
+#change {
+	text-align: center;
+	font-weight : 700;
+	font-size: 17px;
+}
+
+h1 {
+	font-weight: 700;
+	text-align: center;
+}
+
+#list {
+	margin : 40px;
+	margin-left: auto;
+	margin-right: auto;
+}
