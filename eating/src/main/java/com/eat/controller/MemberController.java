@@ -183,26 +183,16 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/loginPost", method = RequestMethod.POST)
-	public String loginPost(LoginVO loginVO, HttpSession httpSession, Model model){
+	public String loginPost(LoginVO loginVO, HttpSession httpSession){
 		MemberVO memberVO = memberservice.selectMemberId(loginVO.getMemberId());
-		if(memberVO == null){
-			System.out.println("회원 정보없음");
-			//return;
-		}else  if( !loginVO.getMemberPw().equals(memberVO.getUserPw())) {
-			System.out.println("비밀번호가 일치하지 않습니다");
+		if(memberVO == null || !loginVO.getMemberPw().equals(memberVO.getUserPw())){
+			System.out.println("회원 정보없거나 비밀번호가 일치하지 않습니다.");
+			return "/login";
 		}else{
-			System.out.println("---------- 유저정보 출력 ----------");
-			System.out.println("멤버 아이디 : " + memberVO.getUserId() + " 비밀번호 : " + memberVO.getUserPw() );
 			httpSession.setAttribute("member",memberVO);
-			System.out.println("로그인 성공");
 		}
 
 		return "redirect:/";
-	}
-
-	@GetMapping(value="/loginPost")
-	public String getLogin(Model model){
-		return "/mypage";
 	}
 
 }

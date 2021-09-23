@@ -17,8 +17,6 @@ public class RecipeServiceImpl implements RecipeService{
     private final RecipeDAO recipeDAO;
     private final RecipeContentDAO contentDAO;
     private final RecipeTagDAO tagDAO;
-    private final CategoryDAO categoryDAO;
-    private final MemberDAO memberDAO;
 
     @Override
     public Long saveRecipe(RecipeVO recipe) {
@@ -33,12 +31,6 @@ public class RecipeServiceImpl implements RecipeService{
         recipeContentVO.setContent(content);
         recipeContentVO.setTurn(0);
         contentDAO.insertRecipeContent(recipeContentVO);
-    }
-
-    @Override
-    public void saveContent(Long id, RecipeContentVO content) {
-        content.setRecipeId(id);
-        contentDAO.insertRecipeContent(content);
     }
 
     @Override
@@ -128,6 +120,38 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
+    public boolean recommendCheck(Long recipeId, Long memberId) {
+        RecipeVO recipeVO = recipeDAO.recommendCheck(recipeId, memberId);
+        if(recipeVO == null)
+            return true;
+        return false;
+    }
+
+    @Override
+    public Long insertRecipeRecommend(Long recipeId, Long memberId) {
+        if(recommendCheck(recipeId,memberId)){
+            recipeDAO.addRecommend(recipeId);
+            RecipeBookmarkVO recipeBookmarkVO = new RecipeBookmarkVO();
+            recipeBookmarkVO.setRecipeId(recipeId);
+            recipeBookmarkVO.setMemberId(memberId);
+            return recipeDAO.insertRecipeRecommend(recipeBookmarkVO);
+        }
+        return 0L;
+    }
+
+    @Override
+    public void deleteRecipeRecommend(Long recipeId, Long memberId) {
+
+        if(!recommendCheck(recipeId,memberId)){
+            //있으면
+           recipeDAO.removeRecommend(recipeId);
+           recipeDAO.deleteRecipeRecommend(recipeId,memberId);
+        }
+
+        return;
+    }
+
+    @Override
     public RecipeVO selectOne(Long id) {
         return recipeDAO.selectOne(id);
     }
@@ -142,23 +166,12 @@ public class RecipeServiceImpl implements RecipeService{
         return recipeDAO.selectName(name);
     }
 
-    @Override
-    public List<RecipeVO> selectPeople(People p) {
-        return recipeDAO.selectPeople(p);
-    }
 
     @Override
     public List<RecipeVO> selectIngredient(String ingredient) {
         return recipeDAO.selectIngredient(ingredient);
     }
 
-    @Override
-    public List<RecipeVO> selectCategory(String category) {
-        CategoryVO categoryVO = categoryDAO.selectName(category);
-        List<RecipeVO> recipeList = recipeDAO.selectCategoryId(categoryVO.getId());
-
-        return recipeList;
-    }
 
     @Override
     public List<RecipeVO> selectTag(String tagName) {
@@ -171,7 +184,6 @@ public class RecipeServiceImpl implements RecipeService{
 
         return recipeList;
     }
-
 
 
     @Override

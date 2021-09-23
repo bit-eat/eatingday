@@ -22,16 +22,8 @@
         SELECT * FROM recipe WHERE name like CONCAT('%',#{name},'%')
     </select>
 
-    <select id="selectPeople" parameterType="String" resultType="com.eat.vo.RecipeVO">
-        SELECT * FROM recipe WHERE people =#{people}
-    </select>
-
     <select id="selectIngredient" parameterType="String" resultType="com.eat.vo.RecipeVO">
         SELECT * FROM recipe WHERE ingredient like CONCAT('%',#{ingredient},'%')
-    </select>
-
-    <select id="selectCategoryId" parameterType="Long" resultType="com.eat.vo.RecipeVO">
-        SELECT * FROM recipe WHERE categoryid = #{categoryId}
     </select>
 
     <select id="selectMemberId" parameterType="Long" resultType="com.eat.vo.RecipeVO">
@@ -51,6 +43,14 @@
         where rb.memberid = #{memberId} and rb.recipeid = #{recipeId}
     </select>
 
+    <select id="recommendCheck" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM reciperecommend as rr
+         right join recipe as r
+         on
+         r.id = rr.recipeId
+        where rr.memberid = #{memberId} and rr.recipeid = #{recipeId}
+    </select>
+
 <!--    좋아요는 추가 // 북마크 insert 필요-->
     <update id="addRecommend" parameterType="Long">
         UPDATE recipe SET recommend = recommend + 1
@@ -61,6 +61,15 @@
         UPDATE recipe SET recommend = recommend -1
         WHERE id = #{id}
     </update>
+
+    <insert id="insertRecipeRecommend" parameterType="com.eat.vo.RecipeBookmarkVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into reciperecommend(recipeId, memberId)
+        values(#{recipeId}, #{memberId})
+    </insert>
+
+    <delete id="deleteRecipeRecommend" parameterType="Long">
+        DELETE FROM reciperecommend WHERE memberId =#{memberId} and recipeId = #{recipeId}
+    </delete>
 
     <insert id="insertRecipeBookmark" parameterType="com.eat.vo.RecipeBookmarkVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into recipebookmark(recipeId, memberId)

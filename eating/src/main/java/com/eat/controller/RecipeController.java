@@ -1,6 +1,5 @@
 package com.eat.controller;
 
-import com.eat.dao.RecipeDAO;
 import com.eat.dao.RecipeSearch;
 import com.eat.service.RecipeService;
 import com.eat.vo.MemberVO;
@@ -11,8 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -23,7 +24,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecipeController {
 
-    private final RecipeDAO recipeDAO;
     private final RecipeService recipeService;
 
     @GetMapping("/recipe")
@@ -47,7 +47,6 @@ public class RecipeController {
 
         Object member = httpSession.getAttribute("member");
         MemberVO memberVO = (MemberVO)member;
-        System.out.println("유저아이디 : " + memberVO.getUserId());
 
         RecipeVO recipe = new RecipeVO();
         recipe.setThumb("/img/" + recipeForm.getThumb());
@@ -72,10 +71,8 @@ public class RecipeController {
         if(member == null){
             System.out.println("회원정보없음");
             return "/index";
-        }else{
-        MemberVO memberVo = (MemberVO)member;
-        System.out.println(memberVo.getUserId());
         }
+
         return "/recipeList";
     }
 
@@ -110,7 +107,7 @@ public class RecipeController {
 
     @GetMapping("recipe/{recipeId}/detail")
     public String detailRecipe(Model model , @PathVariable("recipeId")Long recipeId, HttpSession httpSession){
-        RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
+        RecipeVO recipeVO = recipeService.selectOne(recipeId);
         String tagList = recipeService.combineTag(recipeId);
         RecipeContentVO recipeContentVO = recipeService.selectContent(recipeId);
         String content = "";
@@ -139,7 +136,6 @@ public class RecipeController {
             model.addAttribute("bookMark", "북마크취소");
         }
 
-
         return "recipeDetail";
     }
 
@@ -157,7 +153,7 @@ public class RecipeController {
 
     @PostMapping("recipe/{recipeId}/edit")
     public String updateRecipe(@PathVariable("recipeId")Long recipeId, @ModelAttribute("form") RecipeForm form){
-        RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
+        RecipeVO recipeVO = recipeService.selectOne(recipeId);
         String originImg = recipeVO.getThumb().substring(5);
 
         if(form.getThumb() != "")
