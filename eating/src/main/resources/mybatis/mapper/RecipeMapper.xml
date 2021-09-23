@@ -39,12 +39,12 @@
     </select>
 
     <select id="selectBookmark" parameterType="Long" resultType="Long">
-        select id from recipe_bookmark
+        select id from recipebookmark
         WHERE memberId =#{memberId} and recipeId = #{recipeId}
     </select>
 
     <select id="bookmarkCheck" parameterType="Long" resultType="com.eat.vo.RecipeVO">
-        SELECT * FROM recipe_bookmark as rb
+        SELECT * FROM recipebookmark as rb
         right join recipe as r
         on
         r.id = rb.recipeId
@@ -63,12 +63,12 @@
     </update>
 
     <insert id="insertRecipeBookmark" parameterType="com.eat.vo.RecipeBookmarkVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into recipe_bookmark(recipeId, memberId)
+        insert into recipebookmark(recipeId, memberId)
         values(#{recipeId}, #{memberId})
     </insert>
 
     <delete id="deleteRecipeBookmark" parameterType="Long">
-        DELETE FROM recipe_bookmark WHERE memberId =#{memberId} and recipeId = #{recipeId}
+        DELETE FROM recipebookmark WHERE memberId =#{memberId} and recipeId = #{recipeId}
     </delete>
 
 
