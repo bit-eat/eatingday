@@ -47,6 +47,12 @@ public class DietController {
 		return "/suggestion/dietList";
 	}
 	
+	@GetMapping("/suggestion/dietMain")
+	public void showDietListMain(Model model){
+		model.addAttribute( "showDietList"  , dietDAO.showDietList());
+		model.addAttribute( "categoryList"  , categoryDAO.categoryList());
+	}
+	
 	@GetMapping("/suggestion/dietList")
 	public void showDietList(Model model){
 		model.addAttribute( "showDietList"  , dietDAO.showDietList());
