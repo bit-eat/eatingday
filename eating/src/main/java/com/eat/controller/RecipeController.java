@@ -3,6 +3,7 @@ package com.eat.controller;
 import com.eat.dao.RecipeDAO;
 import com.eat.dao.RecipeSearch;
 import com.eat.service.RecipeService;
+import com.eat.vo.MemberVO;
 import com.eat.vo.RecipeContentVO;
 import com.eat.vo.RecipeVO;
 import com.eat.web.RecipeForm;
@@ -13,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -55,9 +57,17 @@ public class RecipeController {
     }
 
     @GetMapping(value="/recipeList")
-    public String recipeList(@ModelAttribute("recipeSearch")RecipeSearch recipeSearch, Model model){
+    public String recipeList(@ModelAttribute("recipeSearch")RecipeSearch recipeSearch, Model model, HttpSession httpSession){
         List<RecipeVO> recipeList = recipeService.selectStatus(recipeSearch.getStatus(), recipeSearch.getSearchName());
         model.addAttribute("recipeList", recipeList);
+        Object member = httpSession.getAttribute("member");
+        if(member == null){
+            System.out.println("회원정보없음");
+            return "/index";
+        }else{
+        MemberVO memberVo = (MemberVO)member;
+        System.out.println(memberVo.getUserId());
+        }
         return "/recipeList";
     }
 

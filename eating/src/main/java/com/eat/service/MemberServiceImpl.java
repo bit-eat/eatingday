@@ -61,8 +61,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberVO> selectMemberId(Long id) {
-		return null;
+	public MemberVO selectMemberId(String memberId) {
+		return memberdao.selectMemberId(memberId);
 	}
 
 	@Override

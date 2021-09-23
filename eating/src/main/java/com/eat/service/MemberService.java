@@ -29,7 +29,7 @@ public interface MemberService {
 
 	List<MemberVO> selectGrade(String grade);  //관리자
 
-	List<MemberVO> selectMemberId(Long id);
+	MemberVO selectMemberId(String memberId);
 
 	MemberVO findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
 

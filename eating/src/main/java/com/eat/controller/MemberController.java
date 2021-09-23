@@ -1,43 +1,36 @@
 package com.eat.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.eat.dao.EateryBookmarkDAO;
 import com.eat.dao.RecipeBookmarkDAO;
 import com.eat.service.EateryService;
 import com.eat.service.MemberService;
 import com.eat.service.RecipeService;
+import com.eat.vo.LoginVO;
 import com.eat.vo.MemberVO;
 import com.eat.vo.RecipeBookmarkVO;
-import com.eat.vo.RecipeVO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class MemberController {
 
-	@Autowired
-	private RecipeService recipeservice;
-	
-	@Autowired
-	private MemberService memberservice;
-	
-	@Autowired
-	private EateryService eateryservice;
-	
-	@Autowired
-	private RecipeBookmarkDAO recipeBookmarkdao;
-	
-	@Autowired
-	private EateryBookmarkDAO eateryBookmarkdao;
+
+	private final RecipeService recipeservice;
+	private final MemberService memberservice;
+	private final EateryService eateryservice;
+	private final RecipeBookmarkDAO recipeBookmarkdao;
+	private final EateryBookmarkDAO eateryBookmarkdao;
 
 	@GetMapping("/Login") // 로그인
-	public void Login() {
+	public String Login() {
+		return "/login";
 	}
 
 	@GetMapping("/mypage")    // 마이페이지
@@ -80,16 +73,16 @@ public class MemberController {
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
 
-	@PostMapping("logincheck") 
-	public String logincheck(Model model, String userId, String userPw) {           // 로그인 완료 ->메인페이지로 띄우기
-		model.addAttribute("logincheck", memberservice.logincheck(userId, userPw));
-		int check = memberservice.logincheck(userId, userPw);
-		if (check == 1) {
-			return "redirect:/";
-		} else {
-			return "/Login";
-		}
-	}
+//	@PostMapping("/loginCheck")
+//	public String logincheck(Model model, String userId, String userPw) {           // 로그인 완료 ->메인페이지로 띄우기
+//		model.addAttribute("member", memberservice.logincheck(userId, userPw));
+//		int check = memberservice.logincheck(userId, userPw);
+//		if (check == 1) {
+//			return "redirect:/";
+//		} else {
+//			return "/Login";
+//		}
+//	}
 
 	@PostMapping("admincheck") 
 	public String admincheck(Model model, String userId, String userPw) {                  // 관리자 로그인 
@@ -182,4 +175,34 @@ public class MemberController {
 		memberservice.adminRecipedelete(id);
 		return "redirect:/adminRecipeList";
 	}
+
+	@RequestMapping(value="/loginCheck", method = RequestMethod.GET)
+	public String loginGET(Model model){
+		model.addAttribute("loginVO", new LoginVO());
+		return "/login";
+	}
+
+	@RequestMapping(value="/loginPost", method = RequestMethod.POST)
+	public String loginPost(LoginVO loginVO, HttpSession httpSession, Model model){
+		System.out.println("loginPost"+loginVO);
+		MemberVO memberVO = memberservice.selectMemberId(loginVO.getMemberId());
+		if(memberVO == null){
+			System.out.println("회원 정보없음");
+			//return;
+		}else  if( !loginVO.getMemberPw().equals(memberVO.getUserPw())) {
+			System.out.println("xxxxx");
+		}else{
+			System.out.println("---------- 유저정보 출력 ----------");
+			System.out.println("멤버 아이디 : " + memberVO.getUserId() + " 비밀번호 : " + memberVO.getUserPw() );
+			httpSession.setAttribute("member",memberVO);
+		}
+
+		return "redirect:/";
+	}
+
+	@GetMapping(value="/loginPost")
+	public String getLogin(Model model){
+		return "/mypage";
+	}
+
 }
