@@ -14,6 +14,7 @@ public class RecipeForm {
     private String thumb;
     private String ingredient;
     private People people;
+    private int recommend;
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
     private String originTag;

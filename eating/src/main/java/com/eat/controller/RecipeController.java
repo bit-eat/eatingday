@@ -89,8 +89,8 @@ public class RecipeController {
 
     }
 
-    @GetMapping("recipe/{recipeId}/detail")
-    public String detailRecipe(@PathVariable("recipeId")Long recipeId, Model model){
+    @PostMapping("recipe/{recipeId}/detail")
+    public String detailRecipe(Model model , @PathVariable("recipeId")Long recipeId){
         RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
         String tagList = recipeService.combineTag(recipeId);
         RecipeContentVO recipeContentVO = recipeService.selectContent(recipeId);
@@ -104,10 +104,14 @@ public class RecipeController {
         form.setName(recipeVO.getName());
         form.setIngredient(recipeVO.getIngredient());
         form.setPeople(recipeVO.getPeople());
+        form.setRecommend(recipeVO.getRecommend());
+
         form.setOriginTag(tagList);
         form.setContent(content);
 
         model.addAttribute("form",form);
+        model.addAttribute("checkId", recipeService.recommendCheck(recipeId, 1L));
+
 
         return "recipeDetail";
 

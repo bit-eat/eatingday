@@ -2,6 +2,8 @@ package com.eat.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,15 +82,24 @@ public class MemberController {
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
 
-	@PostMapping("logincheck") 
-	public String logincheck(Model model, String userId, String userPw) {           // 로그인 완료 ->메인페이지로 띄우기
-		model.addAttribute("logincheck", memberservice.logincheck(userId, userPw));
+	@PostMapping("/Login") // 로그인
+	public String Login(HttpSession session,String userId,String userPw,Long id) {
 		int check = memberservice.logincheck(userId, userPw);
-		if (check == 1) {
+		if(check==1) {
+			session.setAttribute("loginCheck", true);
+			session.setAttribute("userId", userId);
+			session.setAttribute("member", memberservice.selectMemberId(userId));
 			return "redirect:/";
 		} else {
 			return "/Login";
 		}
+	}
+	
+	@GetMapping("/LogOut") // 로그아웃
+	public String LogOut(HttpSession session) {
+			session.setAttribute("loginCheck", null);
+			session.setAttribute("userId", null);
+			return "/Login";
 	}
 
 	@PostMapping("admincheck") 
@@ -103,10 +114,9 @@ public class MemberController {
 	}
 
 	@GetMapping("update")
-	public String update(MemberVO membervo) {     // 수정(개인정보수정)
-		System.out.println(membervo);
-		memberservice.updateMember(membervo);
-		return "update";
+	public void update(HttpSession session,Model model) {     // 수정(개인정보수정)
+		String userId = (String) session.getAttribute("userId");
+		model.addAttribute("selectOne",memberservice.selectOne(userId));
 	}
 
 	@PostMapping("update")
@@ -114,6 +124,7 @@ public class MemberController {
 		System.out.println(membervo);
 		memberservice.updateMember(membervo);
 	}
+
 
 	@GetMapping("/delete") 
 	public String delete() {   // 회원탈퇴 ,페이지 불러오기
@@ -144,11 +155,11 @@ public class MemberController {
 	}
 	
 	@GetMapping("favorite")   //즐겨찾기 페이지
-	public String favorite(Model model) {
-		model.addAttribute("selectEateryBookmark",eateryBookmarkdao.selectEateryBookmark(1L));
+	public String favorite(Model model,HttpSession session) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		model.addAttribute("selectEateryBookmark",eateryBookmarkdao.selectEateryBookmark(member.getId()));
 		
-		List<RecipeBookmarkVO> r=recipeBookmarkdao.selectRecipeBookmark(1L);
-		model.addAttribute("selectRecipeBookmark",recipeBookmarkdao.selectRecipeBookmark(1L));
+		model.addAttribute("selectRecipeBookmark",recipeBookmarkdao.selectRecipeBookmark(member.getId()));
 		return "/favorite";
 	}
 	

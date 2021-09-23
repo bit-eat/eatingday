@@ -11,11 +11,12 @@
 					where date = #{date} and meal=#{meal})
 	</insert>
 	
-	<select id="showDietList" resultType="com.eat.vo.DietVO">
+	<select id="showDietList" resultType="com.eat.vo.DietVO" parameterType="Long">
         select s.*,  c.name as "categoryName" from suggestion as s 
         right join category as c on s.categoryId = c.id 
-        where c.id = s.categoryId ORDER BY date
+        where c.id = s.categoryId and memberId = #{id} ORDER BY date
     </select>
+    
 
 	<select id="selectDietList" parameterType="com.eat.vo.DietVO" resultType="com.eat.vo.DietVO">
 		select s.*,  c.name as "categoryName" from suggestion as s 

@@ -1,0 +1,20 @@
+.container {
+	text-align:center;
+}
+
+#eateryContent{
+	margin:22px;
+}
+
+#recipeContent{
+	margin:22px;
+}
+.eatery{
+	margin : auto;
+	width:30%;
+}
+
+.recipe{
+	margin : auto;
+	width:30%;
+}

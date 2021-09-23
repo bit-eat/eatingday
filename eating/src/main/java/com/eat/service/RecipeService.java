@@ -16,6 +16,14 @@ public interface RecipeService {
                       String originTag, String content);
     void deleteRecipe(Long id);
 
+    boolean recommendCheck(Long recipeId, Long memberId);
+
+    void addRecommend(Long recipeId, Long memberId);
+    void removeRecommend(Long recipeId, Long memberId);
+
+    Long insertRecipeBookmark(Long recipeId, Long memberId);
+    void deleteRecipeBookmark(Long recipeId, Long memberId);
+
     RecipeVO selectOne(Long id);
     List<RecipeVO> selectAll();
 
