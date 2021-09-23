@@ -4,53 +4,16 @@
       layout:decorator="~{fragments/layout}">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
 
-
-	// 체크박스
-	$(document).ready(function() {
-		$("#submitfrm").on("click", function() {
-			var param = new Array;
-			$(".chkclass:checked").each(function() {
-				param.push($("#id").val())
-			});
-			$("#form").attr("action", "adminRecipedelete");
-			$("#form").submit();
-		});
-	});
-
-	$(function() {
-		var chkObj = document.getElementsByName("id");
-		var rawCnt = chkObj.length;
-
-		$("input[name='allCheck']").click(function() {
-			var chk_listArr = $("input[name='id']");
-			for (var i = 0; i < chk_listArr.length; i++) {
-				chk_listArr[i].checked = this.checked;
-			}
-		});
-		$("input[name='id']").click(function() {
-			if ($("input[name='id']:checked").length == rowCnt) {
-				$("input[name='allCheck']")[0].checked = true;
-			} else {
-				$("input[name='allCheck']")[0].checked = false;
-			}
-		});
-	});
-
-	var checkRows = $("[name='allCheck']:checked");
-	for (var i = checkRows.length - 1; i > -1; i--) {
-		checkRows.eq(i).closest('tr').remove();
-	}
-
-</script>
 <th:block layout:fragment="content">
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/adminRecipeList.css"/>
+<script type="text/javascript" src="/js/adminRecipeList.js"></script>
 	<div class="container">
 
 	<h1>레시피 게시판</h1>
 
-	<div>
+	<div class="recipe" >
 		<form id=form action="" method="post">
 			<table border="1">
 				<thead>
@@ -88,12 +51,14 @@
 					</td>		
 				</tr>
 			</table>
+			<div class="button">
 			<button id="submitfrm">삭제</button>
 		</form>
 			<button onclick="location.href='/recipe/new'">등록</button>
 
 	
 	</div>
+    </div>
     </div>
 </th:block>
 

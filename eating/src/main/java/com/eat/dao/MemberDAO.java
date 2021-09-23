@@ -10,7 +10,6 @@ import com.eat.vo.MemberVO;
 @Mapper
 public interface MemberDAO {
 
-
 	void insertMember(MemberVO membervo); // (생성)회원가입
 
 	void updateMember(MemberVO membervo); // (수정)개인정보수정
@@ -30,23 +29,27 @@ public interface MemberDAO {
 	int admincheck(@Param("userId") String userId, @Param("userPw") String userPw); // 관리자 로그인
 
 	List<MemberVO> findPw(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber, // 비밀번호찾기
-						  @Param("userId") String userId);
+			@Param("userId") String userId);
 
-	MemberVO selectOne(@Param("id") Long id);
+	List<MemberVO> selectGrade(@Param("grade") String grade); // 관리자만
 
-	List<MemberVO> selectGrade(@Param("grade") String grade);  //관리자만
+	MemberVO selectOne(@Param("userId") String userId);
 
 	MemberVO selectMemberId(@Param("userId") String userId);
 
-	void deletecheck(@Param("id")List<Long> id);   //관리자 회원 관리
+	void deletecheck(@Param("id") List<Long> id); // 관리자 회원 관리
 
-	void updateMemberList(MemberVO membervo);  //관리자 회원 수정
-	
-	void adminRecipedelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
-	void adminRecipeBookmarkDelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
-	
+	void updateMemberList(MemberVO membervo); // 관리자 회원 수정
+
+	void adminRecipedelete(@Param("id") List<Long> id); // 관리자 레시피 게시판 관리
+
+	void adminRecipeBookmarkDelete(@Param("id") List<Long> id); // 관리자 레시피 게시판 관리
+
 	void adminEaterydelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+
 	void adminEateryRecommenddelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+
 	void adminEateryBookmarkdelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+
 	void adminMemberRecommenddelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
 }

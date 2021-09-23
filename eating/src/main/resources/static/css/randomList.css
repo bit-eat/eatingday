@@ -1,0 +1,45 @@
+h1 {
+	text-align: center;
+	font-weight: 800;
+}
+
+h3 {
+	font-weight: 600;
+}
+
+table {
+	margin: auto;
+	text-align: center;
+}
+
+.container {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.randombox {
+	display: inline-block;
+	text-align: center;
+}
+
+.randomEatery {
+	float: left;
+	margin: 150px;
+}
+
+.randomRecipe {
+	float: left;
+	margin: 150px;
+}
+
+.retry {
+	margin: 0 auto;
+	text-align: center;
+}
+
+
+#reset {
+	font-size: 17px;
+	font-weight : 700;
+	text-align: center;
+}

@@ -1,0 +1,15 @@
+.container {
+	text-align:center;
+}
+
+ h1 {
+	margin: 100px;
+}
+
+.eatery {
+	margin:auto;
+	width:90%;
+}
+.button{
+	float:left;
+}

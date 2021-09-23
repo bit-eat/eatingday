@@ -75,14 +75,16 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/member">MyPage</a>
+                                            <a class="nav-link" href="/mypage">MyPage</a>
                                         </li>
 
                                         <li class="nav-item" >
+
                                            	<a class="nav-link" 
 												th:text="${session.userId} ? 'LogOut' :'Login'"
                                            		th:href="${session.userId} ? '/LogOut' : '/Login'"></a>
                                            						
+
                                         </li>
                                     </ul>
                                     <form class="d-flex"style="position: relative; left: 80%;">
