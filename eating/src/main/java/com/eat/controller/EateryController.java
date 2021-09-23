@@ -4,6 +4,9 @@ import com.eat.dao.CategoryDAO;
 import com.eat.service.EateryService;
 import com.eat.vo.Area;
 import com.eat.vo.EateryVO;
+import com.eat.vo.MemberVO;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,10 +44,13 @@ public class EateryController {
 	}
 
 	@GetMapping("/detail")
-	public String detailMain(Model model,String name, Long id) {
-		System.out.println("dm id :"+id+" dm name :"+name);
+	public String detailMain(Model model,String name,HttpSession session) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		EateryVO eateryvo = new EateryVO();
-		eateryvo.setMemberId((long) 1);
+		if(member.getId().equals(null)) {
+			member.setId((long) 99999);
+		} 
+		eateryvo.setMemberId(member.getId());
 		eateryvo.setName(name);
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
@@ -53,66 +59,75 @@ public class EateryController {
 	}
 
 	@PostMapping("detail")
-	public String detail(Model model,String name) {
+	public String detail(Model model,String name,HttpSession session) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		EateryVO eateryvo = new EateryVO();
-		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);
+		if(null!=member) {
+		eateryvo.setMemberId(member.getId());
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
+		}
 		model.addAttribute("selectName",eateryservice.selectName(name));
 		return "/detail";
 	}
 
 	@PostMapping("recommend")
-	public String Recommend(Model model,Long id,Long memberid,String name) {
-		memberid = (long) 1;
-		eateryservice.insertMemberRecommend(id, memberid);
-		eateryservice.updateEateryRecommend(id);
+	public String Recommend(Model model,Long id,HttpSession session,String name) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		EateryVO eateryvo = new EateryVO();
-		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);
+		if(null!=member) {
+		eateryservice.insertMemberRecommend(id, member.getId());
+		eateryservice.updateEateryRecommend(id);
+		eateryvo.setMemberId(member.getId());
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
+		}
 		model.addAttribute("selectId",eateryservice.selectId(id));
 		return "/detail";
 	}
 	@PostMapping("unrecommend")
-	public String Unrecommend(Model model,Long id, Long memberid, String name) {
-		memberid = (long) 1;
-		eateryservice.deleteMemberRecommend(id,memberid);
-		eateryservice.updateEateryUnrecommend(id);
+	public String Unrecommend(Model model,Long id, HttpSession session, String name) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		EateryVO eateryvo = new EateryVO();
-		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);
+		if(null!=member) {
+		eateryservice.deleteMemberRecommend(id,member.getId());
+		eateryservice.updateEateryUnrecommend(id);
+		eateryvo.setMemberId(member.getId());
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
+		}
 		model.addAttribute("selectName",eateryservice.selectName(name));
 		return "/detail";
 	}
 	@PostMapping("bookmark")
-	public String Bookmark(Model model,Long id,Long memberid,String name) {
-		System.out.println("re id :"+id+" re name :"+name);
-		memberid = (long) 1;
-		eateryservice.insertEateryBookmark(id, memberid);
+	public String Bookmark(Model model,Long id,HttpSession session,String name) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		EateryVO eateryvo = new EateryVO();
-		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);
+		if(!member.equals(null)) {
+		eateryservice.insertEateryBookmark(id, member.getId());
+		eateryvo.setMemberId(member.getId());
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
+		}
 		model.addAttribute("selectName",eateryservice.selectName(name));
 		
 		return "/detail";
 	}
 	@PostMapping("unbookmark")
-	public String UnBookmark(Model model,Long id, Long memberid, String name) {
-		System.out.println("ur id :"+id+" ur memberid :"+memberid+" ur name :"+name);
-		memberid = (long) 1;
-		eateryservice.deleteEateryBookmark(id,memberid);
+	public String UnBookmark(Model model,Long id, HttpSession session, String name) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		EateryVO eateryvo = new EateryVO();
-		eateryvo.setMemberId((long) 1);
 		eateryvo.setName(name);
+		if(null!=member) {	
+		eateryservice.deleteEateryBookmark(id,member.getId());
+		eateryvo.setMemberId(member.getId());
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
+		}
 		model.addAttribute("selectName",eateryservice.selectName(name));
 		return "/detail";
 	}

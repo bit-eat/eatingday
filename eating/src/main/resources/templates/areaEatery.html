@@ -4,6 +4,8 @@
       layout:decorator="~{fragments/layout}">
 
 <th:block layout:fragment="content">
+
+
 <div class="container">
 
 	<form action="areaEatery" method="post" id="selectArea">
@@ -37,7 +39,7 @@
 	<br>
 	<table border="1">
 		<thead>
-		
+		<br>
 			<h3>지역별 인기 맛집</h3>
 			<tr>
 			<th>음식점 이름</th>
@@ -63,11 +65,12 @@
 				th:text="${area.getKrName}"></td>
 			<td th:text="${eatery.recommend}"></td>
 		</tr>
-
+		
 	</table>
 	<br>
 	<table border="1">
 		<thead>
+		
 			<h3>지역별 맛집</h3>
 			<tr>
 			<th>음식점 이름</th>
@@ -94,6 +97,6 @@
 			<td th:text="${eatery.recommend}"></td>
 		</tr>
 	</table>
-</div>
+	</div>
 </th:block>
 </html>

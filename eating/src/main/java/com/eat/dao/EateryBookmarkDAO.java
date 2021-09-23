@@ -19,4 +19,5 @@ public interface EateryBookmarkDAO {
     
     void deleteEateryBookmark(@Param("id") Long id);
 
+    
 }

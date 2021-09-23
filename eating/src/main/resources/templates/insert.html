@@ -1,60 +1,78 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="~{fragments/layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{fragments/layout}">
 
 <th:block layout:fragment="content">
-<div class="container">
+	<div class="container">
+		<style type="text/css">
+table {
+	margin: auto;
+	text-align: center;
+}
+</style>
+		<h3>
+			<center>맛집 등록</center>
+		</h3>
 
-	<h3>맛집 등록</h3>
+		<form action="/insertEatery" method="post">
 
-	<form action="/insertEatery" method="post">
-		<div>
-		<table with=1000 border="1" cellpadding=5>
+			<table with=1000 border="1" cellpadding=5>
 
-			<tr>
-				<td colspan="2">
-					<div style="text-align: center;">
-						<input type="button" value="이미지">
-					</div>
-				</td>
+				<tr>
+					<td colspan="2">
+						<div style="text-align: center;">
+							<input type="button" value="이미지">
+						</div>
+					</td>
 
-			</tr>
-			<tr>
-				<th>음식점 이름</th>
-				<td><input type="text" name="name"></td>
-			</tr>
+				</tr>
+				<tr>
+					<th>음식점 이름</th>
+					<td><input type="text" name="name"></td>
+				</tr>
+				
+				<tr>
+					<th>음식점 주소</th>
+					<td><input type="text" name="address"></td>
+				</tr>
+				
+				<tr>
+					<th>음식점 전화번호</th>
+					<td><input type="text" name="phoneNumber"></td>
+				</tr>
 
-			<tr>
-				<th>지역</th>
-				<td><select for="area" th:name="area">
-						<option th:each=" area : ${T(com.eat.vo.Area).values()}"
-							th:text="${area.getKrName()}" th:value="${area.name()}" />
-				</select> <br></td>
-			</tr>
+				<tr>
+					<th>지역</th>
+					<td><select for="area" th:name="area">
+							<option th:each=" area : ${T(com.eat.vo.Area).values()}"
+								th:text="${area.getKrName()}" th:value="${area.name()}" />
+					</select> <br></td>
+				</tr>
 
-			<tr>
-				<th>카테고리</th>
-				<td><select for="categoryId" th:name="categoryId">
-						<option th:each="category,index : ${categoryList}"
-							th:if="${category.id==index.count}" th:text="${category.name}"
-							id="categoryId" th:value="${category.id}" />
-				</select> <br></td>
-			</tr>
+				<tr>
+					<th>카테고리</th>
+					<td><select for="categoryId" th:name="categoryId">
+							<option th:each="category,index : ${categoryList}"
+								th:if="${category.id==index.count}" th:text="${category.name}"
+								id="categoryId" th:value="${category.id}" />
+					</select> <br></td>
+				</tr>
 
-			<tr>
-				<th>음식점 설명</th>
-				<td><textarea name="content"
-						style="width: 100px; height: 300px;"></textarea></td>
-			</tr>
-		</div>
-		</table>
-		<div>
-			<input type="submit" class="btn btn-secondary" value="등록">
-			<input type="reset" class="btn btn-secondary" value="초기화">
-			<input type="button" class="btn btn-secondary" value="취소" onClick="location.href='/eateryList'">
-		</div>
-	</form>
-</div>
+				<tr>
+					<th>음식점 설명</th>
+					<td><textarea name="content"
+							style="width: 100px; height: 300px;"></textarea></td>
+				</tr>
+				</div>
+			</table>
+			<div style="text-align: center">
+				<br> <input type="submit" class="btn btn-secondary" value="등록">
+				<input type="reset" class="btn btn-secondary" value="초기화"> <input
+					type="button" class="btn btn-secondary" value="취소"
+					onClick="location.href='/eateryList'">
+			</div>
+		</form>
+	</div>
 </th:block>
 </html>
