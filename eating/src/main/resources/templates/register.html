@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html xmlns:th ="http://www.thymeLeaf.org">
-	<head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
 	<meta charset="UTF-8">
 	<title>회원가입 </title>
-	</head>
-	<body>
+	
+	<th:block layout:fragment="content">
+    <div class="container">
+	
 	<h3>회원가입</h3>
 	
 	<form action ="insertMember" method="post">
@@ -26,5 +29,6 @@
 	</div>	
 	<input type ="submit" value="가입하기">
 	</form>
-	</body>
+	    </div>
+</th:block>
 </html>

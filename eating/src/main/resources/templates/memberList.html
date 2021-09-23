@@ -1,6 +1,7 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeLeaf.org">
-<head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -102,8 +103,8 @@
 	}
 
 </script>
-</head>
-<body>
+<th:block layout:fragment="content">
+	<div class="container">
 
 	<h1>회원 목록</h1>
 
@@ -166,6 +167,7 @@
 		</form>
 	
 	</div>
-</body>
+    </div>
+</th:block>
 
 </html>

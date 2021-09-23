@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html xmlns:th ="http://www.thymeLeaf.org">
-	<head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	</head>
-	<body>
+	
+	<th:block layout:fragment="content">
+    <div class="container">
+	
 		<h1>마이페이지</h1>
 		
 		<div class="update">
@@ -18,5 +21,7 @@
 		<div class="favorite">
 			<a href="/favorite">즐겨찾기</a>
 		</div>
-	</body>
+	    </div>
+</th:block>
+
 </html>

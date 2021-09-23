@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html xmlns:th ="http://www.thymeLeaf.org">
-	<head>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{fragments/layout}">
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	</head>
-	<body>
+	
+	<th:block layout:fragment="content">
+    <div class="container">
 	
 	<h3>개인정보수정</h3>
 
@@ -21,6 +23,8 @@
 		<input type="submit" value="수정하기">
 	</form>
 	
+	    </div>
+</th:block>
 	
-	</body>
+	
 </html>
