@@ -41,13 +41,13 @@
                                         </li>
 
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/diet"
+                                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/suggestion/dietMain"
                                                role="button" aria-haspopup="true" aria-expanded="false">Suggestion</a>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="/diet">식단 메인</a>
+                                                <a class="dropdown-item" href="/suggestion/dietList">식단</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="/items/new">식단 등록</a>
-                                                <a class="dropdown-item" href="/dietList">식단 목록</a>
+                                                <a class="dropdown-item" href="/suggestion/randomList">랜덤 추천</a>
+                                                <a class="dropdown-item" href="/suggestion/ladder">사다리타기</a>
                                             </div>
                                         </li>
 
@@ -57,7 +57,6 @@
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="/eateryMain">맛집 메인</a>
                                                 <a class="dropdown-item" href="/insert">맛집 등록</a>
-                                                <a class="dropdown-item" href="/detail">맛집 상세</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="/menuEatery">메뉴별 맛집</a>
                                                 <a class="dropdown-item" href="/areaEatery">지역별 맛집</a>
@@ -79,10 +78,12 @@
                                             <a class="nav-link" href="/member">MyPage</a>
                                         </li>
 
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/members/new">Login</a>
+                                        <li class="nav-item" >
+                                           	<a class="nav-link" 
+												th:text="${session.userId} ? 'LogOut' :'Login'"
+                                           		th:href="${session.userId} ? '/LogOut' : '/Login'"></a>
+                                           						
                                         </li>
-
                                     </ul>
                                     <form class="d-flex"style="position: relative; left: 80%;">
                                         <input class="form-control me-sm-2" type="text" placeholder="Search" >
