@@ -38,17 +38,13 @@
         SELECT * FROM recipe WHERE memberid = #{memberId}
     </select>
 
-<!--    좋아요를 눌렀는지 체크 : recommend + recipe해서 memberId를 보내고 받은 memberId가 reciperecommend에 있는경우 recipeVO를 반환-->
-    <select id="recommendCheck" parameterType="Long" resultType="com.eat.vo.RecipeVO">
-        SELECT * from reciperecommend as rr
-        right join recipe as r
-        on
-        r.id = rr.recipeId
-        where rr.memberid = #{memberId} and rr.recipeid = #{recipeId}
+    <select id="selectBookmark" parameterType="Long" resultType="Long">
+        select id from recipe_bookmark
+        WHERE memberId =#{memberId} and recipeId = #{recipeId}
     </select>
 
-    <select id="recipeBookmark" parameterType="Long" resultType="com.eat.vo.RecipeVO">
-        SELECT * FROM recipebookmark as rb
+    <select id="bookmarkCheck" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipe_bookmark as rb
         right join recipe as r
         on
         r.id = rb.recipeId
@@ -66,7 +62,7 @@
         WHERE id = #{id}
     </update>
 
-    <insert id="insertRecipeBookmark" parameterType="Long" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="insertRecipeBookmark" parameterType="com.eat.vo.RecipeBookmarkVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into recipe_bookmark(recipeId, memberId)
         values(#{recipeId}, #{memberId})
     </insert>

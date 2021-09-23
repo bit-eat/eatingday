@@ -99,33 +99,31 @@ public class RecipeServiceImpl implements RecipeService{
         recipeDAO.deleteRecipe(id);
     }
 
-    @Override //이미 등록되어있는지 확인 true면 없는상태
-    public boolean recommendCheck(Long recipeId, Long memberId) {
-        RecipeVO recipeVO = recipeDAO.recommendCheck(recipeId, memberId);
+    @Override // 없으면 true 있으면 false
+    public boolean bookmarkCheck(Long recipeId, Long memberId) {
+        RecipeVO recipeVO = recipeDAO.bookmarkCheck(recipeId, memberId);
         if(recipeVO == null)
             return true;
         return false;
     }
 
     @Override
-    public void addRecommend(Long recipeId, Long memberId) {
-        if(recommendCheck(recipeId,memberId))
-            recipeDAO.addRecommend(recipeId);
-    }
-
-    @Override
-    public void removeRecommend(Long recipeId, Long memberId) {
-        if(!recommendCheck(recipeId,memberId))
-            recipeDAO.removeRecommend(recipeId);
-    }
-
-    @Override
     public Long insertRecipeBookmark(Long recipeId, Long memberId) {
-        return recipeDAO.insertRecipeBookmark(recipeId,memberId);
+        if(bookmarkCheck(recipeId,memberId)){
+            RecipeBookmarkVO bookmarkVO = new RecipeBookmarkVO();
+            bookmarkVO.setMemberId(memberId);
+            bookmarkVO.setRecipeId(recipeId);
+            return recipeDAO.insertRecipeBookmark(bookmarkVO);
+        }
+
+        return recipeDAO.selectBookmark(recipeId,memberId);
     }
 
     @Override
     public void deleteRecipeBookmark(Long recipeId, Long memberId) {
+        if(bookmarkCheck(recipeId,memberId)){
+            return;
+        }
         recipeDAO.deleteRecipeBookmark(recipeId,memberId);
     }
 

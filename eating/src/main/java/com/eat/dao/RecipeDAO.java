@@ -1,6 +1,7 @@
 package com.eat.dao;
 
 import com.eat.vo.People;
+import com.eat.vo.RecipeBookmarkVO;
 import com.eat.vo.RecipeVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,10 +28,11 @@ public interface RecipeDAO {
     void addRecommend(@Param("id") Long recipeId);
     void removeRecommend(@Param("id") Long recipeId);
 
-    Long insertRecipeBookmark(@Param("recipeId")Long recipeId, @Param("memberId")Long memberId);
+    Long insertRecipeBookmark(RecipeBookmarkVO bookmarkVO);
     void deleteRecipeBookmark(@Param("recipeId")Long recipeId, @Param("memberId")Long memberId);
 
-    RecipeVO recommendCheck(@Param("recipeId") Long recipeId ,@Param("memberId") Long memberId);
+    Long selectBookmark(@Param("recipeId") Long recipeId ,@Param("memberId") Long memberId);
+    RecipeVO bookmarkCheck(@Param("recipeId") Long recipeId ,@Param("memberId") Long memberId);
 
 	void adminRecipedelete(@Param("id")List<Long> id);   //관리자 레시피 게시판 관리
 

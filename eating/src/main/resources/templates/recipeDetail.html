@@ -5,7 +5,7 @@
 
 <th:block layout:fragment="content">
     <div class="container">
-        <form role="form"  th:object="${form}" method="post">
+        <form role="form" action ="favorite" th:object="${form}" method="post">
 
             <div class="img-container">
                 <div id="downLoad-img">
@@ -41,15 +41,10 @@
             </div>
 
             <br/><br/>
-            <div id="recommend">
-                <input type="button" class="btn btn-secondary" style="float: right" th:if="${checkId}" th:text="추천하기">
-            <input type="button" class="btn btn-secondary" style="float: right" th:unless="${checkId}" th:text="추천취소">
-            </div>
-                <input type="button" id="bookmark" class="btn btn-secondary" style="float: right"
-                       value="북마크">
+               <input type="submit" id="bookmark" class="btn btn-secondary" style="float: right" th:value="${bookMark}">
         </form>
 
-        <br/>
+        <br/><br/><br/>
 
     </div>
 </th:block>

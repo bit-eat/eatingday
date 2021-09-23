@@ -32,7 +32,12 @@ public class RecipeController {
     }
 
     @GetMapping(value="/recipe/new")
-    public String createRecipe(Model model){
+    public String createRecipe(Model model, HttpSession httpSession){
+        Object member = httpSession.getAttribute("member");
+        if(member==null){
+            System.out.println("회원정보 없음");
+            return "redirect:/";
+        }
         model.addAttribute("recipeForm", new RecipeForm());
         return "/createRecipeForm";
     }
@@ -40,6 +45,7 @@ public class RecipeController {
     @PostMapping(value="/recipe/new")
     @ResponseBody
     public String create(@Validated RecipeForm recipeForm, @RequestPart("file") MultipartFile file){
+
         RecipeVO recipe = new RecipeVO();
         recipe.setThumb("/img/" + recipeForm.getThumb());
         recipe.setName(recipeForm.getName());
@@ -101,7 +107,7 @@ public class RecipeController {
     }
 
     @GetMapping("recipe/{recipeId}/detail")
-    public String detailRecipe(Model model , @PathVariable("recipeId")Long recipeId){
+    public String detailRecipe(Model model , @PathVariable("recipeId")Long recipeId, HttpSession httpSession){
         RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
         String tagList = recipeService.combineTag(recipeId);
         RecipeContentVO recipeContentVO = recipeService.selectContent(recipeId);
@@ -121,11 +127,30 @@ public class RecipeController {
         form.setContent(content);
 
         model.addAttribute("form",form);
-        model.addAttribute("checkId", recipeService.recommendCheck(recipeId, 1L));
+
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+        if(recipeService.bookmarkCheck(recipeId,memberVO.getId())){
+            //없는상태
+            model.addAttribute("bookMark","북마크");
+        }else {
+            model.addAttribute("bookMark", "북마크취소");
+        }
 
 
         return "recipeDetail";
+    }
 
+    @PostMapping("recipe/{recipeId}/favorite")
+    public String bookMarkRecipe(@PathVariable("recipeId") Long recipeId, HttpSession httpSession){
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+        if(recipeService.bookmarkCheck(recipeId,memberVO.getId())){
+            recipeService.insertRecipeBookmark(recipeId,memberVO.getId());
+        }else
+            recipeService.deleteRecipeBookmark(recipeId,memberVO.getId());
+
+        return "redirect:/recipe/" + recipeId + "/detail";
     }
 
     @PostMapping("recipe/{recipeId}/edit")
