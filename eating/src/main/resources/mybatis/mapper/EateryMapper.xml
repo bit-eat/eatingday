@@ -166,10 +166,10 @@
 	</update>
 
 	<insert id="insertMemberRecommend" parameterType="Long">
-		insert into
-		memberrecommend
-		(eateryid, memberid)
-		values(#{id},#{memberId})
+		insert into memberrecommend(eateryid, memberid)
+		select #{id},#{memberId} from dual
+		where 1>(select count(*) from memberrecommend
+				where eateryid=#{id} and memberid=#{memberId})
 	</insert>
 
 	<!-- 추천 취소 -->

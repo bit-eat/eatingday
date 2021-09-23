@@ -38,6 +38,44 @@
         SELECT * FROM recipe WHERE memberid = #{memberId}
     </select>
 
+<!--    좋아요를 눌렀는지 체크 : recommend + recipe해서 memberId를 보내고 받은 memberId가 reciperecommend에 있는경우 recipeVO를 반환-->
+    <select id="recommendCheck" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+        SELECT * from reciperecommend as rr
+        right join recipe as r
+        on
+        r.id = rr.recipeId
+        where rr.memberid = #{memberId} and rr.recipeid = #{recipeId}
+    </select>
+
+    <select id="recipeBookmark" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipebookmark as rb
+        right join recipe as r
+        on
+        r.id = rb.recipeId
+        where rb.memberid = #{memberId} and rb.recipeid = #{recipeId}
+    </select>
+
+<!--    좋아요는 추가 // 북마크 insert 필요-->
+    <update id="addRecommend" parameterType="Long">
+        UPDATE recipe SET recommend = recommend + 1
+        WHERE id =#{id}
+    </update>
+
+    <update id="removeRecommend" parameterType="Long">
+        UPDATE recipe SET recommend = recommend -1
+        WHERE id = #{id}
+    </update>
+
+    <insert id="insertRecipeBookmark" parameterType="Long" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into recipe_bookmark(recipeId, memberId)
+        values(#{recipeId}, #{memberId})
+    </insert>
+
+    <delete id="deleteRecipeBookmark" parameterType="Long">
+        DELETE FROM recipe_bookmark WHERE memberId =#{memberId} and recipeId = #{recipeId}
+    </delete>
+
+
     <update id="updateRecipe" parameterType="com.eat.vo.RecipeVO">
         UPDATE recipe SET name =#{name}, thumb =#{thumb}, ingredient=#{ingredient}, people=#{people},modifydate=now()
         WHERE id =#{id}
