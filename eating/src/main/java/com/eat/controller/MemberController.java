@@ -99,6 +99,7 @@ public class MemberController {
 	public String LogOut(HttpSession session) {
 		session.setAttribute("loginCheck", null);
 		session.setAttribute("userId", null);
+		session.removeAttribute("member");
 		return "/Login";
 	}
 

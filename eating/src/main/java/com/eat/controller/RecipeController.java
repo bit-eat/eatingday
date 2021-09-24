@@ -33,6 +33,10 @@ public class RecipeController {
 
     @GetMapping(value="/recipe/new")
     public String createRecipe(Model model, HttpSession httpSession){
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+        if(memberVO == null)
+            return "/login";
 
         model.addAttribute("recipeForm", new RecipeForm());
         return "/createRecipeForm";
@@ -61,6 +65,12 @@ public class RecipeController {
 
     @GetMapping(value="/recipeList")
     public String recipeList(@ModelAttribute("recipeSearch")RecipeSearch recipeSearch, Model model, HttpSession httpSession){
+
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+        if(memberVO == null)
+            return "/login";
+
         List<RecipeVO> recipeList = recipeService.selectStatus(recipeSearch.getStatus(), recipeSearch.getSearchName());
         model.addAttribute("recipeList", recipeList);
 
