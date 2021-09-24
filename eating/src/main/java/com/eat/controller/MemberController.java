@@ -178,7 +178,7 @@ public class MemberController {
 
 	@PostMapping("adminEaterydelete")   //관리자 음식점 게사판 삭제
 	public String adminEaterydelete(@RequestParam("id") List<Long> id) {
-		memberservice.adminEaterydelete(id);
+		memberservice.adminEateryDelete(id);
 		return "redirect:/adminEateryList";
 	}
 

@@ -103,12 +103,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void adminEaterydelete(List<Long> id) { // 관리자 음식점 게시판 삭제
+	public void adminEateryDelete(List<Long> id) { // 관리자 음식점 게시판 삭제
 		// TODO Auto-generated method stub
-		memberdao.adminEateryBookmarkdelete(id);
-		memberdao.adminEateryRecommenddelete(id);
-		memberdao.adminMemberRecommenddelete(id);
-		memberdao.adminEaterydelete(id);
+		memberdao.adminEateryBookmarkDelete(id);
+		memberdao.adminEateryRecommendDelete(id);
+		memberdao.adminMemberRecommendDelete(id);
+		memberdao.adminEateryDelete(id);
 	}
 
 	@Override
