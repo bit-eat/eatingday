@@ -7,43 +7,34 @@
 
 
 	<insert id="insertEatery" parameterType="com.eat.vo.EateryVO">
-		insert into
-		eatery(name,
-		content, area, categoryId)
-		values(#{name},
-		#{content},#{area},#{categoryId})
+		insert into eatery(name, content, area, categoryId)
+		values(#{name},#{content},#{area},#{categoryId})
 	</insert>
 
-	<insert id="insertEateryRecommend"
-		parameterType="com.eat.vo.EateryVO">
+	<insert id="insertEateryRecommend" parameterType="com.eat.vo.EateryVO">
 		insert into eateryRecommend(eateryid,recommend)
 		values((select id from eatery order by id desc limit 1),0)
 	</insert>
 
 	<select id="selectAll" resultType="EateryVO">
-		SELECT e.*, c.name as
-		categoryName, r.recommend FROM eatery as e
+		SELECT e.*, c.name as categoryName, r.recommend FROM eatery as e
 		right join category as c
-		on
-		e.categoryId = c.id
+		on e.categoryId = c.id
 		right join eateryrecommend as r
 		on e.id = r.eateryid
 		where c.id = e.categoryId order by id asc
 	</select>
 
 	<select id="selectRecommend" resultType="EateryVO">
-		SELECT e.*, c.name as
-		categoryName, r.recommend FROM eatery as e
+		SELECT e.*, c.name as categoryName, r.recommend FROM eatery as e
 		right join category as c
-		on
-		e.categoryId = c.id
+		on e.categoryId = c.id
 		right join eateryrecommend as r
 		on e.id = r.eateryid
 		where c.id = e.categoryId order by recommend desc
 	</select>
 
-	<select id="selectName" parameterType="String"
-		resultType="com.eat.vo.EateryVO">
+	<select id="selectName" parameterType="String" resultType="com.eat.vo.EateryVO">
 		SELECT e.*, c.name as categoryName FROM eatery as e right
 		join category as c
 		on e.categoryId = c.id
@@ -51,116 +42,84 @@
 		e.name like CONCAT('%',#{name},'%')
 	</select>
 
-	<select id="selectId" parameterType="Long"
-		resultType="com.eat.vo.EateryVO">
-		SELECT e.*, c.name as categoryName , mr.memberId
-		FROM eatery
-		as e
+	<select id="selectId" parameterType="Long" resultType="com.eat.vo.EateryVO">
+		SELECT e.*, c.name as categoryName , mr.memberId FROM eatery as e
 		right join category as c
 		on e.categoryId = c.id
-		right join
-		memberrecommend as mr
+		right join memberrecommend as mr
 		on e.id = mr.eateryId
-		where c.id = e.categoryId
-		and e.id = #{id};
+		where c.id = e.categoryId and e.id = #{id};
 	</select>
 
-	<select id="selectArea" parameterType="String"
-		resultType="com.eat.vo.EateryVO">
-		SELECT e.*, c.name as categoryName, r.recommend FROM eatery
-		as e
+	<select id="selectArea" parameterType="String" resultType="com.eat.vo.EateryVO">
+		SELECT e.*, c.name as categoryName, r.recommend FROM eatery	as e
 		right join category as c
 		on e.categoryId = c.id
-		right join
-		eateryrecommend as r
+		right join eateryrecommend as r
 		on e.id = r.eateryid
-		WHERE area = #{area} order by
-		id desc
+		WHERE area = #{area} order by id desc
 	</select>
 
-	<select id="selectAreaRecommend" parameterType="String"
-		resultType="com.eat.vo.EateryVO">
-		SELECT e.*, c.name as
-		categoryName, r.recommend FROM eatery
-		as e
-		right join category as c
-		on e.categoryId =
-		c.id
-		right join
-		eateryrecommend as r
-		on e.id = r.eateryid
-		where area =
-		#{area} order by
-		recommend desc
-	</select>
-
-	<select id="selectCategoryRecommend" parameterType="String"
-		resultType="com.eat.vo.EateryVO">
-		SELECT e.*, c.name as categoryName, r.recommend FROM eatery
-		as e
+	<select id="selectAreaRecommend" parameterType="String"	resultType="com.eat.vo.EateryVO">
+		SELECT e.*, c.name as categoryName, r.recommend FROM eatery	as e
 		right join category as c
 		on e.categoryId = c.id
-		right join
-		eateryrecommend as r
+		right join eateryrecommend as r
 		on e.id = r.eateryid
-		where c.name = #{categoryName}
-		order by recommend desc
+		where area = #{area} order by recommend desc
 	</select>
 
-	<select id="selectCategoryName" parameterType="String"
-		resultType="com.eat.vo.EateryVO">
-		SELECT e.*, c.name as categoryName, r.recommend FROM eatery
-		as e
+	<select id="selectCategoryRecommend" parameterType="String" resultType="com.eat.vo.EateryVO">
+		SELECT e.*, c.name as categoryName, r.recommend FROM eatery	as e
 		right join category as c
 		on e.categoryId = c.id
-		right join
-		eateryrecommend as r
+		right join eateryrecommend as r
 		on e.id = r.eateryid
-		where c.name = #{categoryName}
-		order by id desc
+		where c.name = #{categoryName} order by recommend desc
+	</select>
+
+	<select id="selectCategoryName" parameterType="String" resultType="com.eat.vo.EateryVO">
+		SELECT e.*, c.name as categoryName, r.recommend FROM eatery	as e
+		right join category as c
+		on e.categoryId = c.id
+		right join eateryrecommend as r
+		on e.id = r.eateryid
+		where c.name = #{categoryName} order by id desc
 	</select>
 
 	<select id="LatestEateryList" resultType="com.eat.vo.EateryVO">
-		SELECT e.*, c.name as
-		categoryName, r.recommend FROM eatery as e
+		SELECT e.*, c.name as categoryName, r.recommend FROM eatery as e
 		right join category as c
-		on
-		e.categoryId = c.id
+		on e.categoryId = c.id
 		right join eateryrecommend as r
 		on e.id = r.eateryid
 		where c.id = e.categoryId ORDER BY id DESC
 
 	</select>
 
-	<select id="RecommendEateryList"
-		resultType="com.eat.vo.EateryVO">
-		SELECT e.*, c.name as categoryName, r.recommend FROM eatery
-		as e
+	<select id="RecommendEateryList" resultType="com.eat.vo.EateryVO">
+		SELECT e.*, c.name as categoryName, r.recommend FROM eatery as e
 		right join category as c
 		on e.categoryId = c.id
-		right join
-		eateryrecommend as r
+		right join eateryrecommend as r
 		on e.id = r.eateryid
 		where c.id = e.categoryId
 		ORDER BY recommend DESC
 	</select>
 
 	<update id="updateEatery" parameterType="com.eat.vo.EateryVO">
-		UPDATE eatery SET name
-		=#{name}, content =#{content}, address=#{address},
-		phoneNumber=#{phoneNumber}, area=#{area}
+		UPDATE eatery SET name=#{name}, content =#{content},
+						  address=#{address}, phoneNumber=#{phoneNumber}, area=#{area}
 		WHERE id =#{id}
 	</update>
 
 	<delete id="deleteEatery" parameterType="Long">
-		DELETE FROM eatery WHERE
-		id =#{id}
+		DELETE FROM eatery WHERE id =#{id}
 	</delete>
 
 	<!-- 추천수 증가 -->
 	<update id="updateEateryRecommend" parameterType="Long">
-		update
-		eateryRecommend
+		update eateryRecommend
 		set recommend = recommend+1
 		where eateryid = #{id}
 	</update>
@@ -174,24 +133,20 @@
 
 	<!-- 추천 취소 -->
 	<update id="updateEateryUnrecommend" parameterType="Long">
-		update
-		eateryRecommend
+		update eateryRecommend
 		set recommend = recommend-1
 		where eateryid = #{id}
 	</update>
 
 	<delete id="deleteMemberRecommend" parameterType="EateryVO">
-		delete from
-		memberrecommend
+		delete from memberrecommend
 		where eateryid=#{id} and memberid=#{memberId}
 	</delete>
 
 	<!-- 즐겨찾기 추가 -->
 
 	<insert id="insertEateryBookmark" parameterType="Long">
-		insert into
-		eaterybookmark
-		(eateryid, memberid)
+		insert into eaterybookmark(eateryid, memberid)
 		select #{id}, #{memberId} from dual
 		where NOT EXISTS (select eateryid, memberid from eaterybookmark
 		where memberId=#{memberId} and eateryId= #{id})
@@ -200,30 +155,22 @@
 	<!-- 즐겨찾기 취소 -->
 
 	<delete id="deleteEateryBookmark" parameterType="EateryVO">
-		delete from
-		eaterybookmark
+		delete from	eaterybookmark
 		where eateryid=#{id} and memberid=#{memberId}
 	</delete>
 
 	<select id="checkid" parameterType="EateryVO" resultType="int">
-		select
-		count(*) as count from memberrecommend as mr
+		select count(*) as count from memberrecommend as mr
 		right join eatery as e
-		on
-		e.id = mr.eateryId
+		on e.id = mr.eateryId
 		where e.name=#{name} and mr.memberid=#{memberId}
 	</select>
 
-	<select id="checkingid" parameterType="EateryVO"
-		resultType="int">
-		select
-		count(*) as count from eaterybookmark as eb
-		right join
-		eatery as e
-		on
-		e.id = eb.eateryId
-		where e.name=#{name} and
-		eb.memberid=#{memberId}
+	<select id="checkingid" parameterType="EateryVO" resultType="int">
+		select count(*) as count from eaterybookmark as eb
+		right join eatery as e
+		on e.id = eb.eateryId
+		where e.name=#{name} and eb.memberid=#{memberId}
 	</select>
 
 	

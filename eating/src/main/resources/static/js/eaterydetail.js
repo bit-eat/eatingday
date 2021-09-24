@@ -14,13 +14,12 @@ $(document).ready(function() {
       $("input[id='unrecommend']").hide();
    }
 
-   
    if(checking==3){
       $("input[id='bookmark']").hide();
       $("input[id='unbookmark']").hide();
    } else if(checking==1){
-      $("input[id='recommend']").hide();
-      $("input[id='unrecommend']").show();
+      $("input[id='bookmark']").hide();
+      $("input[id='unbookmark']").show();
    } else if(checking==0){
       $("input[id='bookmark']").show();
       $("input[id='unbookmark']").hide();
@@ -37,7 +36,6 @@ $(document).ready(function() {
       $("input[id='recommend']").show();
       $("input[id='unrecommend']").hide();
    });
-   
    //즐겨찾기
    $("input[id='bookmark']").on("click",function(){
       $("#checkbookmark").submit();
@@ -50,6 +48,4 @@ $(document).ready(function() {
       $("input[id='bookmark']").show();
       $("input[id='unbookmark']").hide();
    });
-   
-   
 });
