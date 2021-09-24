@@ -18,7 +18,7 @@ public interface DietDAO {
 	public void insertDiet(DietVO dietVO);
 	public void updateDiet(DietVO dietVO);
 	public void deleteDiet(DietVO dietVO);
-	public List<DietVO> showDietList();
-	public List<DietVO> selectDietList(@Param("date")LocalDate date,@Param("date2")LocalDate date2);
+	public List<DietVO> showDietList(@Param("memberId")Long memberid);
+	public List<DietVO> selectDietList(@Param("date")LocalDate date,@Param("date2")LocalDate date2,@Param("memberId")Long memberId);
 	public int countDietList(DietVO dietVO);
 }

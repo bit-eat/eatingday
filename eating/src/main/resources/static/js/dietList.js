@@ -19,5 +19,8 @@
 		document.getElementById("deleteModalClose").onclick = function() {
 			document.getElementById("modalDelete").style.display = "none";
 		}
+		
+		
+		
 	});
 	

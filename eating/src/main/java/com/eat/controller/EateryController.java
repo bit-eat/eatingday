@@ -47,13 +47,13 @@ public class EateryController {
 	public String detailMain(Model model,String name,HttpSession session) {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		EateryVO eateryvo = new EateryVO();
-		if(member.getId().equals(null)) {
-			member.setId((long) 99999);
-		} 
-		eateryvo.setMemberId(member.getId());
 		eateryvo.setName(name);
+		if(null!=member) {
+			eateryvo.setMemberId(member.getId());
+		eateryvo.setMemberId(member.getId());
 		model.addAttribute("checkid",eateryservice.checkid(eateryvo));
 		model.addAttribute("checkingid",eateryservice.checkingid(eateryvo));
+		}
 		model.addAttribute("selectName", eateryservice.selectName(name));
 		return "/detail";
 	}
