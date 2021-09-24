@@ -7,21 +7,29 @@
 
 	<insert id="insertRecipeBookmark" parameterType="com.eat.vo.RecipeBookmarkVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO 
-        recipe_bookmark( memberId, recipeId)
+        recipebookmark( memberId, recipeId)
         VALUES( 1, #{recipeId})
     </insert>
 
-	<select id="selectRecipeBookmark" parameterType="Long" resultType="com.eat.vo.RecipeVO">
-        SELECT e.*, c.name as categoryName FROM recipe as e 
-        right join category as c on e.categoryId = c.id 
-        join recipebookmark as eb on  e.Id = eb.recipeId
-        where c.id = e.categoryId 
-        	and eb.memberId=#{id}
+<!--	<select id="selectRecipeBookmark" parameterType="Long" resultType="com.eat.vo.RecipeVO">-->
+<!--        SELECT e.*, c.name as categoryName FROM recipe as e -->
+<!--        right join category as c on e.categoryId = c.id -->
+<!--        join recipebookmark as eb on  e.Id = eb.recipeId-->
+<!--        where c.id = e.categoryId -->
+<!--        	and eb.memberId=#{id}-->
+<!--    </select>-->
+
+    <select id="selectRecipeBookmark" parameterType="Long" resultType="com.eat.vo.RecipeVO">
+        SELECT * FROM recipebookmark as rb
+        right join recipe as r
+         on
+        r.id = rb.recipeId
+        where rb.memberid = #{id}
     </select>
 
 
     <delete id="deleteRecipeBookmark" parameterType="Long">
-        DELETE FROM recipe_bookmark 
+        DELETE FROM recipebookmark
         WHERE id =#{id}
     </delete>
 
