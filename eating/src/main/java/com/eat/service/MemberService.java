@@ -41,7 +41,7 @@ public interface MemberService {
 
 	void updateMemberList(MemberVO membervo); // 관리자 회원 수정
 
-	void adminEaterydelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+	void adminEateryDelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
 
-	void adminRecipedelete(@Param("id") List<Long> id); // 관리자 음식점 게시판 삭제
+	void adminRecipedelete(@Param("id") List<Long> id); // 관리자 게시판 삭제
 }
