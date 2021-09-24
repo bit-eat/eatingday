@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService {
 	MemberDAO memberdao;
 
 	@Override
-	public void insertMember(MemberVO membervo) { // 아이디 중복 검사
+	public void insertMember(MemberVO membervo) { // 회원가입
 		memberdao.insertMember(membervo);
 	}
 

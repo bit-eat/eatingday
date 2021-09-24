@@ -38,9 +38,7 @@ public class MemberController {
 	@Autowired
 	private EateryBookmarkDAO eateryBookmarkdao;
 
-	@GetMapping("/Login") // 로그인
-	public void Login() {
-	}
+
 
 	@GetMapping("/mypage")    // 마이페이지
 	public void mypage() {
@@ -81,7 +79,11 @@ public class MemberController {
 		System.out.println(phoneNumber);
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
-
+	
+	@GetMapping("/Login") // 로그인
+	public void Login() {
+	}
+	
 	@PostMapping("/Login") // 로그인
 	public String Login(HttpSession session,String userId,String userPw,Long id) {
 		int check = memberservice.logincheck(userId, userPw);
