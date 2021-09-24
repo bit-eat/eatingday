@@ -1,37 +1,40 @@
 $(document).ready(function() {
 
-    var check = $("input[id='checkid']").val();
-    var checking = $("input[id='checkingid']").val();
     const btnRecommend = document.getElementById('recommend');
     const btnBookmark = document.getElementById('bookmark');
 
-    //추천
-    $("input[id='recommend']").on("click", function () {
-        $("#checkrecommend").submit();
-        btnRecommend.value="추천 취소";
-    });
-
-    $("input[id='unrecommend']").on("click", function () {
-        $("#checkunrecommend").submit();
-        btnRecommend.value="추천하기";
-    });
-
-    //즐겨찾기
-    $("input[id='bookmark']").on("click", function () {
+    //
+    // $("#bookmark").click(function (){
+    //     if($(this).attr('value') == '북마크'){
+    //         btnBookmark.value='북마크취소';
+    //     }else {
+    //         btnBookmark.value='북마크';
+    //     };
+    // };
+    $("input[id='bookmark']").on("click",function(){
         $("#checkbookmark").submit();
-        btnBookmark.value = "즐겨찾기 취소";
+        $("input[id='bookmark']").hide();
+        $("input[id='unbookmark']").show();
     });
 
-    $("input[id='unbookmark']").on("click", function () {
+    $("input[id='unbookmark']").on("click",function(){
         $("#checkunbookmark").submit();
-        btnBookmark.value = "즐겨찾기 추가";
+        $("input[id='bookmark']").show();
+        $("input[id='unbookmark']").hide();
     });
-    if(check == true){
-        // 없는상태 //
-
-    } else{
-       // 있는상태 //
-
+    function bookmark(){
+        if($(this).attr('value') == '북마크'){
+            btnBookmark.value='북마크취소';
+        }else {
+            btnBookmark.value='북마크';
+        };
     }
+    // function bookmark(id) {
+    //     var form = document.createElement("form");
+    //     form.setAttribute("method", "post");
+    //     form.setAttribute("action", "/recipe/" + id + "/favorite");
+    //     document.body.appendChild(form);
+    //     form.submit();
+    // }
 
 });

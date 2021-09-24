@@ -25,16 +25,16 @@ public class MemberController {
 
 	@Autowired
 	private RecipeService recipeservice;
-	
+
 	@Autowired
 	private MemberService memberservice;
-	
+
 	@Autowired
 	private EateryService eateryservice;
-	
+
 	@Autowired
 	private RecipeBookmarkDAO recipeBookmarkdao;
-	
+
 	@Autowired
 	private EateryBookmarkDAO eateryBookmarkdao;
 
@@ -44,12 +44,12 @@ public class MemberController {
 	public void mypage() {
 	}
 
-	@GetMapping("/register") 
+	@GetMapping("/register")
 	public String register() {       // 회원가입창띄우기
 		return "register";
 	}
 
-	@PostMapping("insertMember") 
+	@PostMapping("insertMember")
 	public String insertMember(MemberVO membervo) {        // 회원가입
 		System.out.println(membervo);
 		memberservice.insertMember(membervo);
@@ -62,20 +62,20 @@ public class MemberController {
 	}
 
 	@PostMapping("findId")             // 아이디찾기
-	public void findId(Model model, @RequestParam("userName") String userName, 
-			@RequestParam("phoneNumber") String phoneNumber) {
+	public void findId(Model model, @RequestParam("userName") String userName,
+					   @RequestParam("phoneNumber") String phoneNumber) {
 		model.addAttribute("findId", memberservice.findId(userName, phoneNumber));
 		System.out.println(model);
 	}
 
-	@GetMapping("/findpw") 
+	@GetMapping("/findpw")
 	public String findpw() {       // 비밀번호찾기
 		return "/findpw";
 	}
 
 	@PostMapping("/findPw")                   // 비밀번호찾기
 	public void findPw(Model model, @RequestParam("userName") String userName, @RequestParam("userId") String userId,
-			@RequestParam("phoneNumber") String phoneNumber) {
+					   @RequestParam("phoneNumber") String phoneNumber) {
 		System.out.println(phoneNumber);
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
@@ -96,16 +96,17 @@ public class MemberController {
 			return "/Login";
 		}
 	}
-	
+
 	@GetMapping("/LogOut") // 로그아웃
 	public String LogOut(HttpSession session) {
-			session.setAttribute("loginCheck", null);
-			session.setAttribute("userId", null);
-			return "/Login";
+		session.setAttribute("loginCheck", null);
+		session.setAttribute("userId", null);
+		session.removeAttribute("member");
+		return "/Login";
 	}
 
-	@PostMapping("admincheck") 
-	public String admincheck(Model model, String userId, String userPw) {                  // 관리자 로그인 
+	@PostMapping("admincheck")
+	public String admincheck(Model model, String userId, String userPw) {                  // 관리자 로그인
 		model.addAttribute("admincheck", memberservice.admincheck(userId, userPw));
 		int check = memberservice.admincheck(userId, userPw);
 		if (check == 1) {
@@ -128,7 +129,7 @@ public class MemberController {
 	}
 
 
-	@GetMapping("/delete") 
+	@GetMapping("/delete")
 	public String delete() {   // 회원탈퇴 ,페이지 불러오기
 		return "delete";
 	}
@@ -139,13 +140,13 @@ public class MemberController {
 		return "/Login";
 	}
 
-	@GetMapping("/adminlogin") 
+	@GetMapping("/adminlogin")
 	public String adminLogin(MemberVO membervo) {   // 관리자 로그인
 		System.out.println(membervo);
 		return "/adminlogin";
 	}
 
-	@GetMapping("/memberList") 
+	@GetMapping("/memberList")
 	public void selectAll(Model model) {   // 회원 목록 불러오기
 		model.addAttribute("selectAll", memberservice.selectAll());
 	}
@@ -155,41 +156,41 @@ public class MemberController {
 		memberservice.deletecheck(id);
 		return "redirect:/memberList";
 	}
-	
+
 	@GetMapping("favorite")   //즐겨찾기 페이지
 	public String favorite(Model model,HttpSession session) {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		model.addAttribute("selectEateryBookmark",eateryBookmarkdao.selectEateryBookmark(member.getId()));
-		
+
 		model.addAttribute("selectRecipeBookmark",recipeBookmarkdao.selectRecipeBookmark(member.getId()));
 		return "/favorite";
 	}
-	
+
 	@PostMapping("updateMemberList") //멤버리스트 수정
 	public String updatememberList(MemberVO membervo) {
 		System.out.println(membervo);
 		memberservice.updateMemberList(membervo);
 		return "redirect:/memberList";
 	}
-	
+
 	@GetMapping("adminEateryList")   //관리자 음식점 게시판
 	public String adminEateryList(Model model){
 		model.addAttribute("selectAll", eateryservice.selectAll());
 		return "/adminEateryList";
 	}
-	
+
 	@PostMapping("adminEaterydelete")   //관리자 음식점 게사판 삭제
 	public String adminEaterydelete(@RequestParam("id") List<Long> id) {
 		memberservice.adminEateryDelete(id);
 		return "redirect:/adminEateryList";
 	}
-	
+
 	@GetMapping("adminRecipeList")   //관리자 레시피 게시판
 	public String adminRecipeList(Model model){
 		model.addAttribute("selectAll", recipeservice.selectAll());
 		return "/adminRecipeList";
 	}
-	
+
 	@PostMapping("adminRecipedelete")   //관리자 레시피 게시판 삭제
 	public String adminRecipedelete(@RequestParam("id") List<Long> id) {
 		memberservice.adminRecipedelete(id);

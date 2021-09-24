@@ -1,8 +1,8 @@
 package com.eat.controller;
 
-import com.eat.dao.RecipeDAO;
 import com.eat.dao.RecipeSearch;
 import com.eat.service.RecipeService;
+import com.eat.vo.MemberVO;
 import com.eat.vo.RecipeContentVO;
 import com.eat.vo.RecipeVO;
 import com.eat.web.RecipeForm;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,7 +24,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecipeController {
 
-    private final RecipeDAO recipeDAO;
     private final RecipeService recipeService;
 
     @GetMapping("/recipe")
@@ -32,19 +32,29 @@ public class RecipeController {
     }
 
     @GetMapping(value="/recipe/new")
-    public String createRecipe(Model model){
+    public String createRecipe(Model model, HttpSession httpSession){
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+        if(memberVO == null)
+            return "/login";
+
         model.addAttribute("recipeForm", new RecipeForm());
         return "/createRecipeForm";
     }
 
     @PostMapping(value="/recipe/new")
-    public String create(@Validated RecipeForm recipeForm){
+    public String create(@Validated RecipeForm recipeForm, HttpSession httpSession){
+
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+
         RecipeVO recipe = new RecipeVO();
         recipe.setThumb("/img/" + recipeForm.getThumb());
         recipe.setName(recipeForm.getName());
         recipe.setIngredient(recipeForm.getIngredient());
         recipe.setPeople(recipeForm.getPeople());
         recipe.setCreateDate(LocalDateTime.now());
+        recipe.setMemberId(memberVO.getId());
 
         Long recipeId = recipeService.saveRecipe(recipe);
         recipeService.manufactureTag(recipeId, recipeForm.getOriginTag());
@@ -54,9 +64,16 @@ public class RecipeController {
     }
 
     @GetMapping(value="/recipeList")
-    public String recipeList(@ModelAttribute("recipeSearch")RecipeSearch recipeSearch, Model model){
+    public String recipeList(@ModelAttribute("recipeSearch")RecipeSearch recipeSearch, Model model, HttpSession httpSession){
+
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+        if(memberVO == null)
+            return "/login";
+
         List<RecipeVO> recipeList = recipeService.selectStatus(recipeSearch.getStatus(), recipeSearch.getSearchName());
         model.addAttribute("recipeList", recipeList);
+
         return "/recipeList";
     }
 
@@ -89,9 +106,14 @@ public class RecipeController {
 
     }
 
-    @PostMapping("recipe/{recipeId}/detail")
-    public String detailRecipe(Model model , @PathVariable("recipeId")Long recipeId){
-        RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
+    @GetMapping("recipe/{recipeId}/detail")
+    public String detailRecipe(Model model , @PathVariable("recipeId")Long recipeId, HttpSession httpSession){
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+        if(memberVO == null)
+            return "redirect:/";
+
+        RecipeVO recipeVO = recipeService.selectOne(recipeId);
         String tagList = recipeService.combineTag(recipeId);
         RecipeContentVO recipeContentVO = recipeService.selectContent(recipeId);
         String content = "";
@@ -110,16 +132,33 @@ public class RecipeController {
         form.setContent(content);
 
         model.addAttribute("form",form);
-        model.addAttribute("checkId", recipeService.recommendCheck(recipeId, 1L));
 
+
+        if(recipeService.bookmarkCheck(recipeId,memberVO.getId())){
+            //없는상태
+            model.addAttribute("bookMark","북마크");
+        }else {
+            model.addAttribute("bookMark", "북마크취소");
+        }
 
         return "recipeDetail";
+    }
 
+    @PostMapping("recipe/{recipeId}/favorite")
+    public String bookMarkRecipe(@PathVariable("recipeId") Long recipeId, HttpSession httpSession){
+        Object member = httpSession.getAttribute("member");
+        MemberVO memberVO = (MemberVO)member;
+        if(recipeService.bookmarkCheck(recipeId,memberVO.getId())){
+            recipeService.insertRecipeBookmark(recipeId,memberVO.getId());
+        }else
+            recipeService.deleteRecipeBookmark(recipeId,memberVO.getId());
+
+        return "redirect:/recipe/" + recipeId + "/detail";
     }
 
     @PostMapping("recipe/{recipeId}/edit")
     public String updateRecipe(@PathVariable("recipeId")Long recipeId, @ModelAttribute("form") RecipeForm form){
-        RecipeVO recipeVO = recipeDAO.selectOne(recipeId);
+        RecipeVO recipeVO = recipeService.selectOne(recipeId);
         String originImg = recipeVO.getThumb().substring(5);
 
         if(form.getThumb() != "")

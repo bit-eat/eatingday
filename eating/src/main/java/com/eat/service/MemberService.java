@@ -33,7 +33,7 @@ public interface MemberService {
 	MemberVO findId(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber); // 아이디찾기
 
 	List<MemberVO> findPw(@Param("userName") String userName, @Param("phoneNumber") String phoneNumber, // 비밀번호찾기
-			@Param("userId") String userId);
+						  @Param("userId") String userId);
 
 	boolean validateDuplicateMember(MemberVO membervo); // 중복검사
 

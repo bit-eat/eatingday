@@ -6,29 +6,29 @@
 <mapper namespace="com.eat.dao.RecipeContentDAO">
 
     <insert id="insertRecipeContent" parameterType="com.eat.vo.RecipeContentVO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO recipe_content(img, content, turn, recipeId)
+        INSERT INTO recipecontent(img, content, turn, recipeId)
         VALUES(#{img}, #{content}, #{turn}, #{recipeId})
     </insert>
 
     <select id="selectOne" parameterType="map" resultType="com.eat.vo.RecipeContentVO">
-        SELECT * FROM recipe_content WHERE recipeId = #{recipeId} and turn =#{turn}
+        SELECT * FROM recipecontent WHERE recipeId = #{recipeId} and turn =#{turn}
     </select>
 
     <select id="selectByRecipe" resultType="RecipeContentVO">
-        SELECT * FROM recipe_content WHERE recipeId = #{recipeId} ORDER BY turn ASC
+        SELECT * FROM recipecontent WHERE recipeId = #{recipeId} ORDER BY turn ASC
     </select>
 
     <update id="updateRecipeContent" parameterType="com.eat.vo.RecipeContentVO">
-        UPDATE recipe_content SET img = #{img}, content = #{content}, turn = #{turn}
+        UPDATE recipecontent SET img = #{img}, content = #{content}, turn = #{turn}
         WHERE id =#{id}
     </update>
 
     <delete id="deleteTurn" parameterType="map">
-        DELETE FROM recipe_content WHERE recipeId = #{recipeId} AND turn =#{turn}
+        DELETE FROM recipecontent WHERE recipeId = #{recipeId} AND turn =#{turn}
     </delete>
 
     <delete id="deleteRecipeContent" parameterType="Long">
-        DELETE FROM recipe_content WHERE id =#{id}
+        DELETE FROM recipecontent WHERE id =#{id}
     </delete>
 
 </mapper>
