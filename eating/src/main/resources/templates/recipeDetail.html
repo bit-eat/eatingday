@@ -2,17 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{fragments/layout}">
-<script type="text/javascript" src="/js/recipe.js"></script>
-<script type="text/javascript" src="/js/recommend.js"></script>
+
 <th:block layout:fragment="content">
     <div class="container">
-        <form role="form"  th:object="${form}" method="post">
+        <form role="form" action ="favorite" th:object="${form}" method="post">
 
             <div class="img-container">
                 <div id="downLoad-img">
                     <img th:src="*{thumb}"
-                         style="width: 50%;margin-left: auto; margin-right: auto; display: block;"
-                         id="preview-image">
+                         style="margin-left: auto; margin-right: auto; display: block;"
+                         id="preview-image"
+                    width="700" height="450">
                 </div>
             </div>
 
@@ -42,11 +42,14 @@
             </div>
 
             <br/><br/>
-                <input type="button" id="recommend" class="btn btn-secondary" style="float: right" value="추천">
-                <input type="button" id="bookmark" class="btn btn-secondary" style="float: right" value="북마크">
+            <a href="/recipeList">
+                <button type="button" id="goList" class="btn btn-secondary" style="float: left"> 리스트로</button>
+            </a>
+            <input type="submit" id="bookmark" class="btn btn-secondary" style="float: right" th:value="${bookMark}">
+
         </form>
 
-        <br/>
+        <br/><br/><br/>
 
     </div>
 </th:block>

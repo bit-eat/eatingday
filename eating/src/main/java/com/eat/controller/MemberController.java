@@ -1,45 +1,36 @@
 package com.eat.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.eat.dao.EateryBookmarkDAO;
 import com.eat.dao.RecipeBookmarkDAO;
 import com.eat.service.EateryService;
 import com.eat.service.MemberService;
 import com.eat.service.RecipeService;
+import com.eat.vo.LoginVO;
 import com.eat.vo.MemberVO;
 import com.eat.vo.RecipeBookmarkVO;
-import com.eat.vo.RecipeVO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class MemberController {
 
-	@Autowired
-	private RecipeService recipeservice;
-	
-	@Autowired
-	private MemberService memberservice;
-	
-	@Autowired
-	private EateryService eateryservice;
-	
-	@Autowired
-	private RecipeBookmarkDAO recipeBookmarkdao;
-	
-	@Autowired
-	private EateryBookmarkDAO eateryBookmarkdao;
+
+	private final RecipeService recipeservice;
+	private final MemberService memberservice;
+	private final EateryService eateryservice;
+	private final RecipeBookmarkDAO recipeBookmarkdao;
+	private final EateryBookmarkDAO eateryBookmarkdao;
 
 	@GetMapping("/Login") // 로그인
-	public void Login() {
+	public String Login() {
+		return "/login";
 	}
 
 	@GetMapping("/mypage")    // 마이페이지
@@ -82,25 +73,16 @@ public class MemberController {
 		model.addAttribute("findPw", memberservice.findPw(userName, phoneNumber, userId));
 	}
 
-	@PostMapping("/Login") // 로그인
-	public String Login(HttpSession session,String userId,String userPw,Long id) {
-		int check = memberservice.logincheck(userId, userPw);
-		if(check==1) {
-			session.setAttribute("loginCheck", true);
-			session.setAttribute("userId", userId);
-			session.setAttribute("member", memberservice.selectMemberId(userId));
-			return "redirect:/";
-		} else {
-			return "/Login";
-		}
-	}
-	
-	@GetMapping("/LogOut") // 로그아웃
-	public String LogOut(HttpSession session) {
-			session.setAttribute("loginCheck", null);
-			session.setAttribute("userId", null);
-			return "/Login";
-	}
+//	@PostMapping("/loginCheck")
+//	public String logincheck(Model model, String userId, String userPw) {           // 로그인 완료 ->메인페이지로 띄우기
+//		model.addAttribute("member", memberservice.logincheck(userId, userPw));
+//		int check = memberservice.logincheck(userId, userPw);
+//		if (check == 1) {
+//			return "redirect:/";
+//		} else {
+//			return "/Login";
+//		}
+//	}
 
 	@PostMapping("admincheck") 
 	public String admincheck(Model model, String userId, String userPw) {                  // 관리자 로그인 
@@ -114,9 +96,10 @@ public class MemberController {
 	}
 
 	@GetMapping("update")
-	public void update(HttpSession session,Model model) {     // 수정(개인정보수정)
-		String userId = (String) session.getAttribute("userId");
-		model.addAttribute("selectOne",memberservice.selectOne(userId));
+	public String update(MemberVO membervo) {     // 수정(개인정보수정)
+		System.out.println(membervo);
+		memberservice.updateMember(membervo);
+		return "update";
 	}
 
 	@PostMapping("update")
@@ -124,7 +107,6 @@ public class MemberController {
 		System.out.println(membervo);
 		memberservice.updateMember(membervo);
 	}
-
 
 	@GetMapping("/delete") 
 	public String delete() {   // 회원탈퇴 ,페이지 불러오기
@@ -155,11 +137,11 @@ public class MemberController {
 	}
 	
 	@GetMapping("favorite")   //즐겨찾기 페이지
-	public String favorite(Model model,HttpSession session) {
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		model.addAttribute("selectEateryBookmark",eateryBookmarkdao.selectEateryBookmark(member.getId()));
+	public String favorite(Model model) {
+		model.addAttribute("selectEateryBookmark",eateryBookmarkdao.selectEateryBookmark(1L));
 		
-		model.addAttribute("selectRecipeBookmark",recipeBookmarkdao.selectRecipeBookmark(member.getId()));
+		List<RecipeBookmarkVO> r=recipeBookmarkdao.selectRecipeBookmark(1L);
+		model.addAttribute("selectRecipeBookmark",recipeBookmarkdao.selectRecipeBookmark(1L));
 		return "/favorite";
 	}
 	
@@ -193,4 +175,24 @@ public class MemberController {
 		memberservice.adminRecipedelete(id);
 		return "redirect:/adminRecipeList";
 	}
+
+	@RequestMapping(value="/loginCheck", method = RequestMethod.GET)
+	public String loginGET(Model model){
+		model.addAttribute("loginVO", new LoginVO());
+		return "/login";
+	}
+
+	@RequestMapping(value="/loginPost", method = RequestMethod.POST)
+	public String loginPost(LoginVO loginVO, HttpSession httpSession){
+		MemberVO memberVO = memberservice.selectMemberId(loginVO.getMemberId());
+		if(memberVO == null || !loginVO.getMemberPw().equals(memberVO.getUserPw())){
+			System.out.println("회원 정보없거나 비밀번호가 일치하지 않습니다.");
+			return "/login";
+		}else{
+			httpSession.setAttribute("member",memberVO);
+		}
+
+		return "redirect:/";
+	}
+
 }

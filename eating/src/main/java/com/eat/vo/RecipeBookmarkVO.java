@@ -6,6 +6,6 @@ import lombok.Data;
 public class RecipeBookmarkVO {
    private Long id;
    private Long memberId;
-   private Long eateryId;
+   private Long recipeId;
    
 }
