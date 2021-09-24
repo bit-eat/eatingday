@@ -50,19 +50,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO selectOne(Long id) {
-		return null;
-	}
-
-	@Override
 	public List<MemberVO> selectGrade(String grade) {
 
 		return null;
 	}
 
 	@Override
-	public MemberVO selectMemberId(String memberId) {
-		return memberdao.selectMemberId(memberId);
+	public MemberVO selectOne(String userId) {
+		return memberdao.selectOne(userId);
+	}
+
+	@Override
+	public MemberVO selectMemberId(String userId) {
+		return memberdao.selectMemberId(userId);
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<MemberVO> findPw(String userName, String phoneNumber, String userId) { // 비밀번호찾기
-		return memberdao.findPw(userName,phoneNumber, userId );
+		return memberdao.findPw(userName, phoneNumber, userId);
 	}
 
 	@Override
@@ -98,22 +98,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updateMemberList(MemberVO membervo) {  //관리자 회원 수정
+	public void updateMemberList(MemberVO membervo) { // 관리자 회원 수정
 		memberdao.updateMemberList(membervo);
 	}
 
-
 	@Override
-	public void adminEaterydelete(List<Long> id) {  //관리자 음식점 게시판 삭제
+	public void adminEaterydelete(List<Long> id) { // 관리자 음식점 게시판 삭제
 		// TODO Auto-generated method stub
 		memberdao.adminEateryBookmarkdelete(id);
 		memberdao.adminEateryRecommenddelete(id);
 		memberdao.adminMemberRecommenddelete(id);
 		memberdao.adminEaterydelete(id);
 	}
-	
+
 	@Override
-	public void adminRecipedelete(List<Long> id) {  //관리자 레시피 게시판 삭제
+	public void adminRecipedelete(List<Long> id) { // 관리자 레시피 게시판 삭제
 		// TODO Auto-generated method stub
 		memberdao.adminRecipeBookmarkDelete(id);
 		memberdao.adminRecipedelete(id);
