@@ -40,6 +40,8 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>레시피 관련 기능 - CRUD기능</li>
 <li>레시피 즐겨찾기 - 검색기능</li>
 <li>레시피 태그별 검색</li>
+<li>View - BootStrap 적용</li>
+<li>Thymeleaf Layout</li>
 </ul>
 </div>
 </details><br>
@@ -54,6 +56,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>클래스 다이어그램 / 시퀀스 다이어그램 / UI스토리보드 작성</li>
 <li>멤버/어드민 관련 기능 - CRUD기능</li>
 <li>HttpSession을 통한 로그인 유지</li>
+<li>View - BootStrap 적용</li>
 </ul>
 </div>
 </details><br>
@@ -69,6 +72,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>유즈케이스 다이어그램 작성</li>
 <li>음식점 관련 기능 - CRUD기능</li>
 <li>음식점 즐겨찾기 - 검색기능</li>
+<li>View - BootStrap 적용</li>
 </ul>
 </div>
 </details> <br>
@@ -83,6 +87,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>클래스 다이어그램 / 시퀀스 다이어그램 / UI스토리보드 작성</li>
 <li>식단 관련 기능 - CRUD기능</li>
 <li>식단 추천기능 - API사용</li>
+<li>View - BootStrap 적용</li>
 </ul>
 </div>
 </details><br>
@@ -100,6 +105,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>식단 추천기능 - API사용</li>
 <li>음식점 즐겨찾기 - 검색기능</li>
 <li>HttpSession을 통한 로그인 유지</li>
+<li>View - BootStrap 적용</li>
 </ul>
 </div>
 </details><br>
@@ -133,7 +139,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 ## 📌Preview
 ### Main
 ![main](https://github.com/bit-eat/eatingday/blob/main/img/view0.PNG)
-<img src="./img/view0.PNG" width="600px">
+
 ### Member
 
 ### Diet
