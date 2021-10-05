@@ -113,20 +113,20 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 ------------------------------------------------------------
 ## 🖥️ Stack
 ### FRONT-END
-![HTML5](https://img.shields.io/badge/View-HTML-orange?style=flat-square&logo=HTML5)
-![JavaScript](https://img.shields.io/badge/View-JavaScript-yellow?style=flat-square&logo=javascript)
-![CSS3](https://img.shields.io/badge/View-CSS3-blue?style=flat-square&logo=CSS3) 
-![BootStrap](https://img.shields.io/badge/View-Bootstrap-7952B3?style=flat-square&logo=Bootstrap) 
-![Thymeleaf](https://img.shields.io/badge/View-Thymeleaf-006009?style=flat-square&logo=Thymeleaf) 
+![HTML5](https://img.shields.io/badge/View-HTML-orange?style=for-the-badge&logo=HTML5)
+![JavaScript](https://img.shields.io/badge/View-JavaScript-yellow?style=for-the-badge&logo=javascript)
+![CSS3](https://img.shields.io/badge/View-CSS3-blue?style=for-the-badge&logo=CSS3) 
+![BootStrap](https://img.shields.io/badge/View-Bootstrap-7952B3?style=for-the-badge&logo=Bootstrap) 
+![Thymeleaf](https://img.shields.io/badge/View-Thymeleaf-006009?style=for-the-badge&logo=Thymeleaf) 
 
 ### BACK-END
-![Java](https://img.shields.io/badge/Language-java-blue?style=flat-square&logo=java)
-![SpringBoot](https://img.shields.io/badge/Framework-SpringBoot-green?style=flat-square&logo=SpringBoot)
-![Gradle](https://img.shields.io/badge/BuildTool-Gradle-navy?style=flat-square&logo=Gradle)
+![Java](https://img.shields.io/badge/Language-java-blue?style=for-the-badge&logo=java)
+![SpringBoot](https://img.shields.io/badge/Framework-SpringBoot-green?style=for-the-badge&logo=SpringBoot)
+![Gradle](https://img.shields.io/badge/BuildTool-Gradle-navy?style=for-the-badge&logo=Gradle)
 
 ### DB
-![MySQL](https://img.shields.io/badge/Database-MySQL-blue?style=flat-square&logo=MySQL)
-![MyBatis](https://img.shields.io/badge/ORM-MyBatis-black?style=flat-square)    
+![MySQL](https://img.shields.io/badge/Database-MySQL-blue?style=for-the-badge&logo=MySQL)
+![MyBatis](https://img.shields.io/badge/ORM-MyBatis-black?style=for-the-badge)    
 
 ![Stack](https://github.com/bit-eat/eatingday/blob/main/img/stack.PNG)
 
