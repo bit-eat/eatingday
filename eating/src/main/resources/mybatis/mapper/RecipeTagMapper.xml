@@ -38,9 +38,11 @@
         DELETE FROM recipetag WHERE id =#{id}
     </delete>
 
-    <delete id="deleteTagByRecipe" parameterType="map">
-        DELETE FROM recipetag WHERE recipeId = #{recipeId} AND name = #{name}
+    <delete id="deleteTagByRecipeId" parameterType="long">
+        DELETE FROM recipetag WHERE recipeId = #{recipeId}
     </delete>
+
+
 
 
 

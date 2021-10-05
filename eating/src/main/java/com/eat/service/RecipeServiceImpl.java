@@ -70,6 +70,7 @@ public class RecipeServiceImpl implements RecipeService{
         contentDAO.updateRecipeContent(recipeContentVO);
         }
 
+        tagDAO.deleteTagByRecipeId(recipeId);
 
         String manufactTag = originTag.replace(" ","");
         String tagList[] = manufactTag.split("#");
@@ -80,7 +81,10 @@ public class RecipeServiceImpl implements RecipeService{
             max = tagList.length;
 
         for(int i=1;i<max; i++){
-            tagDAO.updateTagByRecipe(recipeId,tagList[i]);
+            RecipeTagVO tagVO = new RecipeTagVO();
+            tagVO.setRecipeId(recipeId);
+            tagVO.setName(tagList[i]);
+            tagDAO.insertRecipeTag(tagVO);
         }
 
     }

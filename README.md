@@ -25,6 +25,8 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 
 ------------------------------------------------------------
 ## 📋 Roles
+토글키를 클릭하여 상세 내역을 확인할 수 있습니다.
+
 <details>
 <summary><b>Recipe</b> | 은명진 </summary>
 <div markdown="1">
@@ -120,9 +122,23 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 ![MySQL](https://img.shields.io/badge/Database-MySQL-blue?style=flat-square&logo=MySQL)
 ![MyBatis](https://img.shields.io/badge/ORM-MyBatis-black?style=flat-square)    
 
-![Stack](https://github.com/bit-eat/eatingday/blob/main/files/stack.PNG)
+![Stack](https://github.com/bit-eat/eatingday/blob/main/img/stack.PNG)
 
 -----------------------------------------------------------
 
 ## 🔅ERD
-![ERD](https://github.com/bit-eat/eatingday/blob/main/files/ERD.png)
+![ERD](https://github.com/bit-eat/eatingday/blob/main/img/ERD.png)
+
+-----------------------------------------------------------
+## 📌Preview
+### Main
+<img src="./img/view0.png" width="400">
+
+### Member
+
+### Diet
+
+### Eatery
+
+### Recipe
+<img src="./img/view5.png" width="400">

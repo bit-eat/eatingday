@@ -20,7 +20,7 @@ public interface RecipeTagDAO {
     void updateTagByRecipe(@Param("recipeId")Long recipeId, @Param("name") String name);
 
     void deleteTag(@Param("id") Long id);
-    void deleteTagByRecipe(@Param("recipeId") Long recipeId, @Param("name") String name);
+    void deleteTagByRecipeId(@Param("recipeId") Long recipeId);
 
 
 }
