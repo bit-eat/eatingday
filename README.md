@@ -132,8 +132,8 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 -----------------------------------------------------------
 ## 📌Preview
 ### Main
-![main](https://github.com/bit-eat/eatingday/blob/main/img/view0.PNG){: width="600"}
-
+![main](https://github.com/bit-eat/eatingday/blob/main/img/view0.PNG)
+<img src="./img/view0.PNG" width="600px">
 ### Member
 
 ### Diet
@@ -141,4 +141,4 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 ### Eatery
 
 ### Recipe
-![recipe](https://github.com/bit-eat/eatingday/blob/main/img/view5.PNG){: width="600"}
+![recipe](https://github.com/bit-eat/eatingday/blob/main/img/view5.PNG)
