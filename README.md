@@ -1,30 +1,125 @@
-# eatingday
+# What Should We EAT?
     
-#### 역할분담
-+ 식단관리 : 최규, 천상환
-+ 회원관리/관리자 : 김세은
-+ 레시피 관리 : 은명진
-+ 맛집 관리 : 김민주
+## 🔎 About   
 
+오늘 뭐먹지? 🤔 남녀노소 구분없이 매일 한번쯤 하는 고민!   
+저희 프로젝트는 아주 평범하고, 일상적인 고민에서 시작했습니다.   
 
--------------------------------------------------------
+오늘 뭘 먹을까 하는 고민부터    
+자신이 그날 먹은 것을 기록하는 ```식단관리``` 기능,   
+ 나만의 맛집을 추천하고 공유하는 ```맛집추천``` 기능,    
+ 많은사람과 나만의 레시피를 공유할 수 있는 ```레시피공유``` 기능과 함께 오늘의 식사를 함께하세요!   
 
-#### 규칙
-1. git
-    - 작업은 기본 각자 브랜치에서.
-    - ```master``` 브랜치는 초기 상태와 완성후에만 사용
-    - 아무 오류가 없고 돌아가는데에 문제가 없는 작업 파일만 ```feature``` 브랜치에 푸시.
-    - ```feature``` 브랜치에는 push후 반드시 팀원들에게 알릴 것.
-    - 연관된 클래스 문제로 자주 push, pull을 사용해야하는 경우 ```test``` 브랜치를 사용
-    - 푸시 잘못했을 경우에는 빠르게 이야기 하고 푸쉬 되돌리기로 되돌릴 것.(그러나 파일이 엉킬 수 있으므로 가능한 실수하지 않도록 조심)
-    - 커밋 메세지는 자세히 작성할것
-      - 첫번째 줄 : 변경된 부분과 클래스 (ex. VO - recipeVO)
-      - 두번째 줄 : 어떤 기능이 추가/변경 되었는지.
-  
-2. package
-   - ```VO```  ```DAO``` ```Service``` ```Controller``` 를 베이스로 각 패키지 안에 본인의 담당패키지를 추가해서 작성 (ex. User, Recipe, Eatery)
-   - 클래스명은 길어지더라도 절대로 이니셜로 줄이지 말고 가능한 자세하게 적을것. 길어져서 글자가 눈에 잘 들어오지 않는경우 대문자로 구분(EateryBookmarkVO)
-   - DAO의 클래스 CRUD중 C는 ```insert```, R은 ```select```, U는 ```update```, D는 ```delete``` 로 메소드명 시작 부분을 통일
-   - 테이블명은 ERD와 동일하게 작성
-   - 외래키의 _id는 Id로 수정하여 작성
-   - VO의 변수는 erd를 기본으로 할 것 수정내용이 있으면 팀원들과 반드시 공유를 할 것.
+-----------------------------------------------------------
+## 💡 Info   
+Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
+
+[발표자료](https://github.com/bit-eat/eatingday/blob/main/files/%EC%B5%9C%EC%A2%85%20%EB%B0%9C%ED%91%9C.pdf) | [팀 회의록](https://docs.google.com/spreadsheets/d/1LeM_IagiekV9kY9VN-xtP1_7qThGiwvBIRPWcRB2h9A/edit?usp=sharing)
+
+### Project Member 
+![Leader](https://img.shields.io/badge/Leader-%EC%9D%80%EB%AA%85%EC%A7%84-green.svg?style=flat)
+![Member](https://img.shields.io/badge/Member-%EA%B9%80%EC%84%B8%EC%9D%80-yellow.svg?style=flat)
+![Member](https://img.shields.io/badge/Member-%EA%B9%80%EB%AF%BC%EC%A3%BC-ff69b4.svg?style=flat)
+![Member](https://img.shields.io/badge/Member-%EC%B5%9C%20%EA%B7%9C-violet.svg?style=flat)
+![Member](https://img.shields.io/badge/Member-%EC%B2%9C%EC%83%81%ED%99%98-blue.svg?style=flat)   
+
+------------------------------------------------------------
+## 📋 Roles
+<details>
+<summary><b>Recipe</b> | 은명진 </summary>
+<div markdown="1">
+<a href ="https://github.com/devLayla"> <img src="https://img.shields.io/badge/GitHub-%EC%9D%80%EB%AA%85%EC%A7%84-green.svg?style=flat-square"></a> <br>
+<h3>Contributions</h3>
+<ul>
+<li>아이디어 기획 / 제안</li>
+<li>일정관리 / 간트차트 작성</li>
+<li>클래스 다이어그램 / 시퀀스 다이어그램 / UI스토리보드 작성</li>
+<li>ERD 작성</li>
+<li>레시피 관련 기능 - CRUD기능</li>
+<li>레시피 즐겨찾기 - 검색기능</li>
+<li>레시피 태그별 검색</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary><b>Member</b> | 김세은 </summary>
+<div markdown="1">
+<a href ="https://github.com/seeun0724"> <img src="https://img.shields.io/badge/GitHub-%EA%B9%80%EC%84%B8%EC%9D%80-yellow.svg?style=flat-square"></a> <br>
+<h3>Contributions</h3>
+<ul>
+<li>아이디어 기획 / 제안</li>
+<li>클래스 다이어그램 / 시퀀스 다이어그램 / UI스토리보드 작성</li>
+<li>멤버/어드민 관련 기능 - CRUD기능</li>
+<li>HttpSession을 통한 로그인 유지</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary><b>Eatery</b> | 김민주 </summary>
+<div markdown="1">
+<a href ="https://github.com/minju8134"> <img src="https://img.shields.io/badge/Eatery-%EA%B9%80%EB%AF%BC%EC%A3%BC-ff69b4.svg?style=flat-square"></a> <br>
+<h3>Contributions</h3>
+<ul>
+<li>아이디어 기획 / 제안</li>
+<li>클래스 다이어그램 / 시퀀스 다이어그램 / UI스토리보드 작성</li>
+<li>유즈케이스 다이어그램 작성</li>
+<li>음식점 관련 기능 - CRUD기능</li>
+<li>음식점 즐겨찾기 - 검색기능</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary><b>Diet</b> | 최 규 </summary>
+<div markdown="1">
+<a href ="https://github.com/kyuchoi1231"> <img src="https://img.shields.io/badge/Diet-%EC%B5%9C%20%EA%B7%9C-violet.svg?style=flat-square"></a> <br>
+<h3>Contributions</h3>
+<ul>
+<li>아이디어 기획 / 제안</li>
+<li>클래스 다이어그램 / 시퀀스 다이어그램 / UI스토리보드 작성</li>
+<li>식단 관련 기능 - CRUD기능</li>
+<li>식단 추천기능 - API사용</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary><b>Diet</b> | 천상환 </summary>
+<div markdown="1">
+<a href ="https://github.com/MtDeodeok"> <img src="https://img.shields.io/badge/Diet-%EC%B2%9C%EC%83%81%ED%99%98-blue.svg?style=flat-square"></a> <br>
+<h3>Contributions</h3>
+<ul>
+<li>아이디어 기획 / 제안</li>
+<li>클래스 다이어그램 / 시퀀스 다이어그램 / UI스토리보드 작성</li>
+<li>회의록 작성</li>
+<li>식단 관련 기능 - CRUD기능</li>
+<li>식단 추천기능 - API사용</li>
+<li>음식점 즐겨찾기 - 검색기능</li>
+<li>HttpSession을 통한 로그인 유지</li>
+</ul>
+</div>
+</details>
+
+------------------------------------------------------------
+## 🖥️ Stack
+### FRONT-END
+![HTML5](https://img.shields.io/badge/View-HTML-orange?style=flat-square&logo=HTML5)
+![JavaScript](https://img.shields.io/badge/View-JavaScript-yellow?style=flat-square&logo=javascript)
+![CSS3](https://img.shields.io/badge/View-CSS3-blue?style=flat-square&logo=CSS3) 
+![BootStrap](https://img.shields.io/badge/View-Bootstrap-7952B3?style=flat-square&logo=Bootstrap) 
+![Thymeleaf](https://img.shields.io/badge/View-Thymeleaf-006009?style=flat-square&logo=Thymeleaf) 
+
+### BACK-END
+![Java](https://img.shields.io/badge/Language-java-blue?style=flat-square&logo=java)
+![SpringBoot](https://img.shields.io/badge/Framework-SpringBoot-green?style=flat-square&logo=SpringBoot)
+![Gradle](https://img.shields.io/badge/BuildTool-Gradle-navy?style=flat-square&logo=Gradle)
+
+### DB
+![MySQL](https://img.shields.io/badge/Database-MySQL-blue?style=flat-square&logo=MySQL)
+![MyBatis](https://img.shields.io/badge/ORM-MyBatis-black?style=flat-square)    
+
+-----------------------------------------------------------
+
+## 🔅ERD

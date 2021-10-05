@@ -16,38 +16,58 @@ CREATE TABLE `category` (
 );
 
 CREATE TABLE `recipe` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `thumb` VARCHAR(45) NULL DEFAULT 'null',
-  `ingredient` VARCHAR(45) NOT NULL,
-  `people` VARCHAR(45) NOT NULL,
-  `recommend` INT NULL DEFAULT 0,
-  `createDate` DATE NULL DEFAULT NULL,
-  `modifyDate` DATE NULL DEFAULT NULL, 
-  `categoryid` INT NULL,
-  `memberid` INT NULL,
-  FOREIGN KEY (`categoryid`) REFERENCES `category`(`id`) ON DELETE SET NULL,
-  FOREIGN KEY (`memberid`) REFERENCES `member`(`id`)  ON DELETE CASCADE,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `thumb` varchar(45) DEFAULT 'null',
+  `ingredient` varchar(45) NOT NULL,
+  `people` varchar(45) NOT NULL,
+  `recommend` int(11) DEFAULT 0,
+  `createDate` date DEFAULT NULL,
+  `modifyDate` date DEFAULT NULL,
+  `categoryid` int(11) DEFAULT NULL,
+  `memberid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `categoryid` (`categoryid`),
+  KEY `memberid` (`memberid`),
+  CONSTRAINT `recipe_ibfk_1` FOREIGN KEY (`categoryid`) REFERENCES `category` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `recipe_ibfk_2` FOREIGN KEY (`memberid`) REFERENCES `member` (`id`) ON DELETE CASCADE
+) 
 
-CREATE TABLE `recipe_content` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `img` VARCHAR(45) NULL DEFAULT 'null',
-  `content` VARCHAR(45) NULL DEFAULT 'null',
-  `turn` INT NULL,
-  `recipeid` INT NOT NULL,
-  FOREIGN KEY (`recipeid`) REFERENCES `recipe`(`id`) ON DELETE CASCADE,
+CREATE TABLE `recipetag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `recipeid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `recipeid` (`recipeid`),
+  CONSTRAINT `recipetag_ibfk_1` FOREIGN KEY (`recipeid`) REFERENCES `recipe` (`id`) ON DELETE CASCADE
+)
 
-CREATE TABLE `recipe_tag` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `recipeid` INT NOT NULL,
- FOREIGN KEY (`recipeid`) REFERENCES `recipe`(`id`) ON DELETE CASCADE,
+CREATE TABLE `recipebookmark` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `memberId` int(11) NOT NULL,
+  `recipeId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+  KEY `recipebookmark_ibfk_1` (`memberId`),
+  KEY `recipebookmark_ibfk_2` (`recipeId`),
+  CONSTRAINT `recipebookmark_ibfk_1` FOREIGN KEY (`memberId`) REFERENCES `member` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `recipebookmark_ibfk_2` FOREIGN KEY (`recipeId`) REFERENCES `recipe` (`id`) ON DELETE CASCADE
+) 
+
+CREATE TABLE `recipecontent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `img` varchar(45) DEFAULT 'null',
+  `content` varchar(45) DEFAULT 'null',
+  `turn` int(11) DEFAULT NULL,
+  `recipeid` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `recipeid` (`recipeid`),
+  CONSTRAINT `recipecontent_ibfk_1` FOREIGN KEY (`recipeid`) REFERENCES `recipe` (`id`) ON DELETE CASCADE
+)
+
+
 
 CREATE TABLE `eatery` (
   `id` int NOT NULL,
