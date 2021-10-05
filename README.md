@@ -30,7 +30,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <details>
 <summary><b>Recipe</b> | 은명진 </summary>
 <div markdown="1"><br>
-<a href ="https://github.com/devLayla"> <img src="https://img.shields.io/badge/GitHub-%EC%9D%80%EB%AA%85%EC%A7%84-green.svg?style=flat-square"></a> <br>팀장 :: Recipe 기능 담당
+<a href ="https://github.com/devLayla"> <img src="https://img.shields.io/badge/GitHub-%EC%9D%80%EB%AA%85%EC%A7%84-green.svg?style=for-the-badge"></a>
 <h3>Contributions</h3>
 <ul>
 <li>아이디어 기획 / 제안</li>
@@ -49,7 +49,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <details>
 <summary><b>Member</b> | 김세은 </summary>
 <div markdown="1"><br>
-<a href ="https://github.com/seeun0724"> <img src="https://img.shields.io/badge/GitHub-%EA%B9%80%EC%84%B8%EC%9D%80-yellow.svg?style=flat-square"></a> <br>팀원 :: Member 기능 담당
+<a href ="https://github.com/seeun0724"> <img src="https://img.shields.io/badge/GitHub-%EA%B9%80%EC%84%B8%EC%9D%80-yellow.svg?style=for-the-badge"></a>
 <h3>Contributions</h3>
 <ul>
 <li>아이디어 기획 / 제안</li>
@@ -64,7 +64,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <details>
 <summary><b>Eatery</b> | 김민주 </summary>
 <div markdown="1"><br>
-<a href ="https://github.com/minju8134"> <img src="https://img.shields.io/badge/Eatery-%EA%B9%80%EB%AF%BC%EC%A3%BC-ff69b4.svg?style=flat-square"></a> <br>팀원 :: Eatery 기능 담당
+<a href ="https://github.com/minju8134"> <img src="https://img.shields.io/badge/GitHub-%EA%B9%80%EB%AF%BC%EC%A3%BC-ff69b4.svg?style=for-the-badge"></a>
 <h3>Contributions</h3>
 <ul>
 <li>아이디어 기획 / 제안</li>
@@ -80,7 +80,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <details>
 <summary><b>Diet</b> | 최 규 </summary>
 <div markdown="1"><br>
-<a href ="https://github.com/kyuchoi1231"> <img src="https://img.shields.io/badge/Diet-%EC%B5%9C%20%EA%B7%9C-violet.svg?style=flat-square"></a> <br>팀원 :: Diet 기능 담당
+<a href ="https://github.com/kyuchoi1231"> <img src="https://img.shields.io/badge/GitHub-%EC%B5%9C%20%EA%B7%9C-violet.svg?style=for-the-badge"></a>
 <h3>Contributions</h3>
 <ul>
 <li>아이디어 기획 / 제안</li>
@@ -93,9 +93,9 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 </details><br>
 
 <details>
-<summary><b>Diet</b> | 천상환 </summary>
+<summary><b>Diet & Support</b> | 천상환 </summary>
 <div markdown="1"><br>
-<a href ="https://github.com/MtDeodeok"> <img src="https://img.shields.io/badge/Diet-%EC%B2%9C%EC%83%81%ED%99%98-blue.svg?style=flat-square"></a> <br>팀원 :: Diet 기능 담당 & 팀원 서포트
+<a href ="https://github.com/MtDeodeok"> <img src="https://img.shields.io/badge/GitHub-%EC%B2%9C%EC%83%81%ED%99%98-blue.svg?style=for-the-badge"></a>
 <h3>Contributions</h3>
 <ul>
 <li>아이디어 기획 / 제안</li>
