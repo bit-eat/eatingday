@@ -40,7 +40,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>레시피 태그별 검색</li>
 </ul>
 </div>
-</details>
+</details><br>
 
 <details>
 <summary><b>Member</b> | 김세은 </summary>
@@ -54,7 +54,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>HttpSession을 통한 로그인 유지</li>
 </ul>
 </div>
-</details>
+</details><br>
 
 <details>
 <summary><b>Eatery</b> | 김민주 </summary>
@@ -69,7 +69,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>음식점 즐겨찾기 - 검색기능</li>
 </ul>
 </div>
-</details>
+</details> <br>
 
 <details>
 <summary><b>Diet</b> | 최 규 </summary>
@@ -83,7 +83,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>식단 추천기능 - API사용</li>
 </ul>
 </div>
-</details>
+</details><br>
 
 <details>
 <summary><b>Diet</b> | 천상환 </summary>
@@ -100,7 +100,7 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 <li>HttpSession을 통한 로그인 유지</li>
 </ul>
 </div>
-</details>
+</details><br>
 
 ------------------------------------------------------------
 ## 🖥️ Stack
@@ -120,6 +120,9 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 ![MySQL](https://img.shields.io/badge/Database-MySQL-blue?style=flat-square&logo=MySQL)
 ![MyBatis](https://img.shields.io/badge/ORM-MyBatis-black?style=flat-square)    
 
+![Stack](https://github.com/bit-eat/eatingday/blob/main/files/stack.PNG)
+
 -----------------------------------------------------------
 
 ## 🔅ERD
+![ERD](https://github.com/bit-eat/eatingday/blob/main/files/ERD.png)
