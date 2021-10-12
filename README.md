@@ -143,7 +143,8 @@ Team. 뭐먹지 :: 식단관리 / 맛집추천 / 레시피 공유 Web Site
 ### Member
 
 ### Diet
-
+![Diet](https://github.com/bit-eat/eatingday/blob/main/img/suggestionList.png)
+![Diet](https://github.com/bit-eat/eatingday/blob/main/img/random.png)
 ### Eatery
 ![eatery](https://github.com/bit-eat/eatingday/blob/main/img/view4.png)
 ### Recipe
